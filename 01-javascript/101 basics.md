@@ -1,25 +1,19 @@
 # EXPRESIONES BÁSICAS ********
 
-## -- VARIABLES
+## VARIABLES
 
-/*
-Javascript es un lenguaje dinámico y débilmente tipado, lo que significa que las variables no están
-asociadas a ningún tipo concreto. Por tanto, no tengo que declararlas especificando ningún tipo. 
+Javascript es un **lenguaje dinámico y débilmente tipado**, lo que significa que las variables no están asociadas a ningún tipo concreto. Por tanto, no tengo que declararlas especificando ningún tipo. 
 Puedo asignar el valor que quiera, del tipo que quiera.
 
-Tenemos varios operadores para declarar variables: `let`, `const` y `var`.
-Actualmente `var` está desaconsejado debido a un concepto llamado "Hoisting" que veremos más 
-adelante.
-*/
+Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actualmente `var` está desaconsejado debido a un concepto llamado "Hoisting" que veremos más adelante.
 
-###  *** LET
 
-// Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser 
-// capaces de reasignar su valor
+### LET
+Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser capaces de reasignar su valor
 let a = 3;
 a = 14;
 
-// Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas por coma
+Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas por coma:
 let b = 10, c = "hello";
 
 ### comentarios
