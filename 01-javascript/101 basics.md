@@ -1,6 +1,6 @@
-///-- EXPRESIONES BÁSICAS ************************************************************************
+# EXPRESIONES BÁSICAS ********
 
-///-- VARIABLES
+## -- VARIABLES
 
 /*
 Javascript es un lenguaje dinámico y débilmente tipado, lo que significa que las variables no están
@@ -12,7 +12,7 @@ Actualmente `var` está desaconsejado debido a un concepto llamado "Hoisting" qu
 adelante.
 */
 
-// *** LET
+###  *** LET
 
 // Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser 
 // capaces de reasignar su valor
@@ -22,7 +22,7 @@ a = 14;
 // Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas por coma
 let b = 10, c = "hello";
 
-// comentarios
+### comentarios
 let d = 4; // d value is 4
 
 // Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el 
@@ -30,13 +30,13 @@ let d = 4; // d value is 4
 let a = 3;
 let a = 14; // Error! La variable `a` ya ha sido redeclarada
 
-// comentarios de bloque
+### comentarios de bloque
 /*
 let c = 3;
 let d = 4;
 */
 
-// *** CONST
+### *** CONST
 /*
 Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar.
 Es importante entender que una vez que declaremos la variable no podemos volver a reasignar su valor.
@@ -67,7 +67,7 @@ console.log(a); // Error! Todavía no existe la variable `a`
 let a = 10;
 
 
-///-- TIPOS DE DATOS *****************************************************************************
+##-- TIPOS DE DATOS *****************************************************************************
 
 /*
 Distinguimos 2 grandes grupos de tipos de datos en Javascript:
@@ -77,7 +77,7 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
 7 PRIMITIVOS (2 de nueva incorporación) + OBJETOS
 */
 
-// PRIMITIVOS
+### PRIMITIVOS
 
 /*
 DEFINICIÓN:
@@ -90,7 +90,7 @@ alterado ni modificado (no confundir con reasignar una variable con otro valor).
 - Operador 'typeof'
 */
 
-// string
+#### string
 "hello world" // dobles comillas
 'hello world' // comillas simples
 `hello world` // backticks. Los strings creados con backticks tb se conocen como "template literals"
@@ -111,7 +111,7 @@ const message = `How are you, ${person}?`;
 console.log(message); // "How are you, Edward?"
 
 
-// number
+#### number
 101       // entero positivo
 -200      // entero negativo
 1220.31   // flotante
@@ -126,15 +126,15 @@ NaN       // NotANumber** (de hecho es de tipo número)
  reales (sqrt(-1)), o errores al parsear (parseInt("abc"))
 */
 
-// boolean
+#### boolean
 true
 false
 
-// null
+#### null
 /* ⚠ Primitivo especial de tipo "object". Raiz de la cadena de prototipos */
 null
 
-// undefined
+#### undefined
 undefined
 
 /*
@@ -144,10 +144,10 @@ undefined
  undefined para indicar que algo simplemente no está definido o no tiene un valor.
 */
 
-// symbol
+#### symbol
 /* ⚠ Lo veremos más adelante ya que su uso está muy ligado a los objetos */
 
-// bigint
+#### bigint
 /* ⚠ Nuevo tipo numérico para representar enteros de cualquier tamaño, con cualquier precisión. */
 2n
 BigInt(2)
@@ -161,7 +161,7 @@ console.log(typeof undefined);  // undefined
 console.log(typeof null);       // object** Se entenderá mejor con el modelo prototípico
 
 
-// OBJETOS
+### OBJETOS
 
 /*
 Se utilizan para representar datos estructurados, como los objetos en si mismos o
