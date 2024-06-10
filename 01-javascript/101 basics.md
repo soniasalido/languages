@@ -9,11 +9,13 @@ Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actua
 
 
 ### LET
-Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser capaces de reasignar su valor
+Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser capaces de reasignar su valor.
+
 let a = 3;
 a = 14;
 
 Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas por coma:
+
 let b = 10, c = "hello";
 
 ### comentarios
