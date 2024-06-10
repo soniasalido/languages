@@ -19,8 +19,7 @@ let b = 10, c = "hello";
 ### comentarios
 let d = 4; // d value is 4
 
-// Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el 
-// mismo ámbito. Veremos con más detalle el ámbito más adelante
+Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito. Veremos con más detalle el ámbito más adelante
 let a = 3;
 let a = 14; // Error! La variable `a` ya ha sido redeclarada
 
