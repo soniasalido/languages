@@ -18,12 +18,14 @@ Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas po
 
 let b = 10, c = "hello";
 
-### comentarios
-let d = 4; // d value is 4
+Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito. Veremos con más detalle el ámbito más adelante:
 
-Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito. Veremos con más detalle el ámbito más adelante
 let a = 3;
 let a = 14; // Error! La variable `a` ya ha sido redeclarada
+
+
+### comentarios en línea
+let d = 4; // d value is 4
 
 ### comentarios de bloque
 /*
@@ -31,34 +33,31 @@ let c = 3;
 let d = 4;
 */
 
-### *** CONST
-/*
-Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar.
-Es importante entender que una vez que declaremos la variable no podemos volver a reasignar su valor.
-Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente 
-utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada.
-
-⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo
-lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.
-*/
+### CONST
+Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar. Es importante entender que una vez que declaremos la variable no podemos volver a reasignar su valor.
+Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada.
+⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.
 
 // Esto lanzará un error de ejecución
+
 const a;
 
 // Hay que incluir el valor
+
 const a = 3;
 
 // Reasignar su valor lanzará un error de ejecución
+
 a = 14;
 
-// Al igual que las variables `let` no podemos redeclarar una variable con el mismo nombre en el 
-// mismo ámbito.
+// Al igual que las variables `let` no podemos redeclarar una variable con el mismo nombre en el mismo ámbito.
 const a = 3;
 const a = 14; // Error! La variable `a` ya ha sido redeclarada
 
-// Es importante entender que no podemos utilizar una variable declarada con `let` o `const` antes 
-//de su declaración.
+// Es importante entender que no podemos utilizar una variable declarada con `let` o `const` antes de su declaración.
+
 console.log(a); // Error! Todavía no existe la variable `a`
+
 let a = 10;
 
 
