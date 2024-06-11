@@ -388,22 +388,16 @@ Los operadores unarios son operadores que actúan sobre un solo operando. Estos 
     let c = "3";
     console.log(+c); // 3 (como número)
     ```
-  - Operador de Incremento: ++
-  - Operador de Decremento: --
+  - Operador de Post-Incremento: a++ ⟶ Devuelve el valor original de a. Luego, incrementa el valor de a en 1.
+  - Operador de Pre-Incremento:  ++a ⟶ Incrementa el valor de a en 1. Luego, devuelve el valor incrementado de a.
+  - Operador de Post-Decremento: a-- ⟶ Devuelve el valor original de a. Luego, decrementa el valor de a en 1.
+  - Operador de Pre-Decremento: --a ⟶ Decrementa el valor de a en 1. Luego, devuelve el valor decrementado de a.
   - Operador typeof.
   - Operador delete: Elimina una propiedad de un objeto. No se utiliza para variables o funciones declaradas.
   - Operador void: Evalúa una expresión sin devolver ningún valor.
   - Operador de negación bit a bit: ~
 
-
-En JavaScript, puedes usar a++ (post-incremento) y ++a (pre-incremento). Ambos operadores realizan la misma función fundamental: incrementar el valor de la variable a en 1. Sin embargo, la diferencia radica en cuándo se devuelve el valor incrementado.
-- Post-incremento (a++):
-  - Devuelve el valor original de a.
-  - Luego, incrementa el valor de a en 1.
-- Pre-incremento (++a):
-  - Incrementa el valor de a en 1.
-  - Luego, devuelve el valor incrementado de a.
- 
+Pre-Post incremento: La diferencia radica en cuándo se devuelve el valor incrementado. 
 
 ## 4. Operadores de COMPARACIÓN
 Mayor que, menor que, igualdad, desigualdad
