@@ -1,3 +1,15 @@
+# Funcionamiento de JS
+El esquema general de una página web es un documento HTML donde están las etiquetas HTML, referencias o relaciones a otros documentos, como por ejemplo archivos CSS o archivos javascript.
+
+# Script en línea
+JavaScript en línea, también conocido como JavaScript "inline", se refiere a la práctica de incluir código JavaScript directamente dentro de las etiquetas HTML de una página web. Este código puede estar contenido dentro de un atributo de evento HTML o dentro de una etiqueta <script> dentro del mismo archivo HTML. No es recomendable. Lo ideal es separar el código HTML del código JS. Se evitan problemas de mantenieminto, reutilización, legibilidad y seguridad (se incremente el riesgo de ataques de inyección de código y otros probleas de seguridad).
+
+- Javascript en atributos de eventos HTML:
+  ```
+  <button onclick="alert('Hola, mundo!')">Haz clic aquí</button>
+  ```
+- JavaScript dentro de etiquetas <script> en línea: El código JavaScript se coloca dentro de una etiqueta <script> en el documento HTML:
+
 # EXPRESIONES BÁSICAS ********
 
 ## VARIABLES
