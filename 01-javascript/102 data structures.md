@@ -1,56 +1,76 @@
-///-- OBJETOS ************************************************************************************
+# OBJETOS 
+Una primera forma de verlo, es como una variable especial que puede contener más variables en su interior. De esta forma, tenemos la posibilidad de organizar múltiples variables de la misma temática en el interior de un objeto.
 
-/*
-Datos estructurados siguiendo el formato clave-valor.
-A cada clave o alias lo llamamos propiedad.
-*/
+En muchos lenguajes de programación, para crear un objeto se utiliza la palabra clave new. En Javascript también se puede hacer, pero pospondremos su uso para cuando entremos en el capítulo de Programación orientada a objetos. En Javascript, siempre que podamos, se prefiere utilizar la notación literal, una forma abreviada para crear objetos (u otros tipos de datos que veremos más adelante), sin necesidad de utilizar la palabra new.
 
-// Inicialización de objetos de forma literal, "object literals"
+Los objetos son datos estructurados siguiendo el formato clave-valor. A cada clave o alias lo llamamos propiedad.
+
+## Declaración de un Objeto
+Los literales de los objetos en Javascript son las llaves {}. Inicialización de objetos de forma literal, "object literals"
+```
 const person = { name: "John" }; // {} => inicializador de objetos
+```
 
-// Las propiedades de un objeto también pueden inicializarse a partir de variables existentes
+Las propiedades de un objeto también pueden inicializarse a partir de variables existentes
+```
 const name = "John";
 const person = { name: name };
+```
 
-// Si los nombres de la propiedad y la variable coinciden, se puede expresar de forma corta:
+Si los nombres de la propiedad y la variable coinciden, se puede expresar de forma corta:
+```
 const person = { name };
+```
 
-// Accediendo a propiedades
+Accediendo a propiedades:
+```
 console.log(person.name); // "John"
 console.log(person.lastname); // undefined
+```
 
-// Acceso con corchetes, útil cuando la propiedad nos viene dada por una variable.
+Acceso con corchetes, útil cuando la propiedad nos viene dada por una variable.
+```
 const propName = "name";
 console.log(person[propName]); // John
+```
 
-// *** INCISO: Acceso con corchetes + literal, útil para acceder a propiedades numéricas*****
+**INCISO:** Acceso con corchetes + literal, útil para acceder a propiedades numéricas
+```
 const person = { name, 43: true, "3dots": true };
 console.log(person[43]); // true
 console.log(person["43"]); // true
 console.log(person["3dots"]); // true
-// **********************************************************************************************
+```
 
-// Añadiendo nuevas propiedades
+Añadiendo nuevas propiedades:
+```
 person.lastname = "Smith";
 console.log(person.lastname); // "Smith"
 person[21] = "twenty one";
 console.log(person["21"]); // "twenty one"
+```
 
-// Las propiedades pueden ser a su vez otros objetos que llamaremos objetos anidados
+Las propiedades pueden ser a su vez otros objetos que llamaremos objetos anidados
+```
 person.country = { id: 5, name: "Spain" };
 console.log(person.country); // { id: 5, name: "Spain" }
+```
 
-// Y también pueden ser funciones
+Y también pueden ser funciones
+```
 person.greet = function () {
   console.log("Hello!");
 };
+
 console.log(person.greet); // function() { console.log("Hello!"); }
 person.greet(); // logs "Hello!"
 person["greet"](); // logs "Hello!"
+```
 
-// Iterando por las propiedades
-// ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente
-// numéricas que aparecerán primero por orden ascendente.
+
+Iterando por las propiedades
+⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
+```
 for (const prop in person) {
   console.log(prop, person[prop]); 
 } 
@@ -59,21 +79,26 @@ for (const prop in person) {
 // "greet"     function() { console.log("Hello!"); }
 // "lastname"  "Smith"
 // "country"   {id: 5, name: "Spain"}
+```
 
-// Borrando propiedades
+
+Borrando propiedades
+```
 delete person.lastname;
 console.log(person.lastname); // undefined
 delete person.country.id;
 console.log(person.country); // { name: "Spain" }
+```
 
-// ⚠ Comparando objetos
+⚠ Comparando objetos
+```
 const boy = { age: 15 };
 console.log(boy === { age: 15 }); // ⚠⚠ false. Se comparan REFERENCIAS! NO SE COMPARA CONTENIDO!.
 console.log(boy === boy); // true
 console.log(boy.toString()); // [object Object]
+```
 
-
-///-- ARRAYS *************************************************************************************
+# ARRAYS
 
 /*
 Datos estructurados siguiendo un orden. Cada dato se identifica con un índice que indica su
