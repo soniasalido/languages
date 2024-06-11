@@ -434,34 +434,27 @@ console.log("" - 3);
 ```
 
 ## 3. Operadores LÓGICOS
-
-// && AND
+**&& AND**
+```
 console.log(true && true);    // true
 console.log(true && false);   // false
 console.log(false && true);   // false
 console.log(false && false);  // false
-
-// || OR
+```
+**|| OR**
+```
 console.log(true || true);    // true
 console.log(true || false);   // true
 console.log(false || true);   // true
 console.log(false || false);  // false
-
-/*
-IMPORTANTE. De nuevo, JS puede tener operandos de distinta naturaleza.
-Los operadores && y ||, cuando se usan con operandos no booleanos pueden devolver un resultado no
-booleano, cualquiera: array, objeto ...
-*/
-
-// Por ejemplo:
+```
+IMPORTANTE. De nuevo, JS puede tener operandos de distinta naturaleza. Los operadores && y ||, cuando se usan con operandos no booleanos pueden devolver un resultado no booleano, cualquiera: array, objeto ...
+```
 const a = 3 || 20; // 3.
+```
 
-/*
-Para saber que operando se devuelve, JS tiene que evaluarlos como booleanos ya que los operadores 
-lógicos trabajan con operandos booleanos. En JavaScript, al convertir o evaluar cualquier valor 
-como booleano, pueden suceder 2 cosas, que nos de true o que nos de false. 
-A los valores que nos dan false se le conocen como "falsy values" y son sólamente estos:
-*/
+Para saber que operando se devuelve, JS tiene que evaluarlos como booleanos ya que los operadores lógicos trabajan con operandos booleanos. En JavaScript, al convertir o evaluar cualquier valor como booleano, pueden suceder 2 cosas, que nos de true o que nos de false. A los valores que nos dan false se le conocen como "falsy values" y son sólamente estos:
+```
 0;
 NaN;
 false;
@@ -469,7 +462,9 @@ false;
 null;
 undefined;
 // el resto de valores serán evaluados como "truthy values"
+```
 
+```
 // MAS EJEMPLOS:
 let a;
 a = 3 || 20; // 3. El 3 es el primer valor "truthy" que se encuentra el OR.
@@ -481,7 +476,7 @@ a = Boolean(0 && 20); // false
 a = 2 > 0 && "hello"; // "hello"
 a = 2 < 0 && "hello"; // false
 
-// [copy paste version]
+
 let a;
 a = 3 || 20;
 a = 0 || 20;
@@ -491,20 +486,19 @@ a = 0 && 20;
 a = Boolean(0 && 20);
 a = 2 > 0 && "hello";
 a = 2 < 0 && "hello";
+```
 
-// 4. Operadores BITWISE u operadores de bits
-/*
-No los daremos pero sabed que existen y que son poco frecuentes. Suelen ser utilizados en 
-implementaciones de algoritmos más "a bajo nivel".
+## 4. Operadores BITWISE u operadores de bits
+No los daremos pero sabed que existen y que son poco frecuentes. Suelen ser utilizados en  implementaciones de algoritmos más "a bajo nivel".
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise
-*/
 
 
 
-///-- DIRECTIVAS DE CONTROL **********************************************************************
 
-// if else
+# DIRECTIVAS DE CONTROL
 
+## if else
+```
 // 1 sola rama
 const count = 0;
 if (count === 0) {
@@ -531,9 +525,10 @@ if (count === 0) {
 if (count === 0) console.log("zero");
 else if (count === 1) console.log("one");
 else console.log("more than one");
+```
 
-
-// switch
+## switch
+```
 const pet = "dog";
 switch (pet) {
   case "cat":
@@ -561,7 +556,10 @@ switch (pet) {
     console.log("non-mammal");
 }
 
-// operador ternario
+```
+
+## operador ternario
+```
 const age = 20;
 const status = (age >= 18) ? "adult" : "minor";
 
@@ -570,8 +568,11 @@ const status = age >= 18 ? "adult" : "minor";
 
 // anidamiento de ternarios "ternary nesting"
 const status = age >= 18 ? "adult" : (age >= 14 ? "teen" : "kid");
+```
 
-// bucle "for". ⚠ Importante el uso de `let` aquí
+## bucle "for".
+⚠ Importante el uso de `let` aquí
+```
 const limit = 10;
 for (let i = 0; i < limit; i++) {
   console.log(i);
@@ -581,31 +582,38 @@ for (let i = 0; i < limit; i++) {
 for (let i = 0, limit = 10; i < limit; i++) {
   console.log(i);
 }
+```
 
-// bucle "while"
+## bucle "while"
+```
 const limit = 10;
 let i = 0;
 while (i < limit) {
   console.log(i);
   i++;
 }
+```
 
-// bucle "do while"
+## bucle "do while"
+```
 const limit = 10;
 let i = 0;
 do {
   console.log(i);
   i++;
 } while (i < limit);
+```
 
-// ⚠ for..in que será vista con los objetos
-// ⚠ forEach() se verá con los arrays
-// ⚠ for..of se verá con los arrays
+## ⚠ for..in que será vista con los objetos
+## ⚠ forEach() se verá con los arrays
+## ⚠ for..of se verá con los arrays
 
-// operador coma en expresiones
+## operador coma en expresiones
+```
 const a = (2 + 4, 9);
 console.log(a); // 9
 const b = 3;
 const c = (b += 5, 10);
 console.log(c); // 10
 console.log(b); // 8;
+```
