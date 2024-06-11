@@ -654,3 +654,9 @@ const c = (b += 5, 10);
 console.log(c); // 10
 console.log(b); // 8;
 ```
+El operador coma se utiliza frecuentemente en bucles for para inicializar o actualizar múltiples variables en una sola línea.
+```
+for (let i = 0, j = 10; i < 5; i++, j--) {
+  console.log(i, j);
+}
+```
