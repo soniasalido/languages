@@ -13,6 +13,7 @@ Los objetos son datos estructurados siguiendo el formato clave-valor. A cada cla
 ## Declaración de un Objeto
 Los literales de los objetos en Javascript son las llaves {}. Inicialización de objetos de forma literal, "object literals"
 ```
+let objeto = { clave: "valor" };
 const person = { name: "John" }; // {} => inicializador de objetos
 ```
 
@@ -39,9 +40,18 @@ Podemos acceder a sus propiedades de dos formas diferentes:
     ```
     const propName = "name";
     console.log(person[propName]); // John
+
+    const player = {
+      name: "Manz",
+      life: 99,
+      power: 10,
+    };
+    console.log(player["name"]);  // Muestra "Manz"
     ```
 
 El programador puede utilizar la notación que más le guste. La más utilizada en Javascript suele ser la notación con puntos, mientras que la notación con corchetes se suele conocer en otros lenguajes como «arrays asociativos» o «diccionarios». OJO: Hay ciertos casos en los que sólo se puede utilizar la notación con corchetes, como por ejemplo cuando se utilizan espacios en el nombre de la propiedad. Es imposible hacerlo con la notación con puntos.
+
+**Inciso "" para acceder a una propiedad**: console.log(player[name]);  // Dara ERROR. La notación de corchetes en JavaScript requiere que la clave sea una cadena de texto o una variable que contenga una cadena de texto. Si intentamos acceder a una propiedad de un objeto usando una variable sin comillas alrededor de su nombre, JavaScript buscará una variable con ese nombre. Si no la encuentra, generará un error.
 
 **INCISO:** Acceso con corchetes + literal, útil para acceder a propiedades numéricas
 ```
@@ -60,13 +70,15 @@ person[21] = "twenty one";
 console.log(person["21"]); // "twenty one"
 ```
 
+## Objetos anidados:
 Las propiedades pueden ser a su vez otros objetos que llamaremos objetos anidados
 ```
 person.country = { id: 5, name: "Spain" };
 console.log(person.country); // { id: 5, name: "Spain" }
 ```
 
-Y también pueden ser funciones
+## Y también pueden ser funciones ⟶ Métodos de un Objeto
+Si dentro de una variable del objeto metemos una función (o una variable que contiene una función), tendríamos lo que se denomina un método de un objeto:
 ```
 person.greet = function () {
   console.log("Hello!");
@@ -77,8 +89,9 @@ person.greet(); // logs "Hello!"
 person["greet"](); // logs "Hello!"
 ```
 
+Esto resulta muy similar a un concepto que veremos más adelante llamado Clase. 
 
-Iterando por las propiedades
+## Iterando por las propiedades
 ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
 ```
 for (const prop in person) {
@@ -92,7 +105,7 @@ for (const prop in person) {
 ```
 
 
-Borrando propiedades
+## Borrando propiedades
 ```
 delete person.lastname;
 console.log(person.lastname); // undefined
@@ -100,7 +113,7 @@ delete person.country.id;
 console.log(person.country); // { name: "Spain" }
 ```
 
-⚠ Comparando objetos
+## ⚠ Comparando objetos
 ```
 const boy = { age: 15 };
 console.log(boy === { age: 15 }); // ⚠⚠ false. Se comparan REFERENCIAS! NO SE COMPARA CONTENIDO!.
@@ -108,6 +121,30 @@ console.log(boy === boy); // true
 console.log(boy.toString()); // [object Object]
 ```
 
+
+## El método .toString()
+Simplemente por generar una variable de tipo OBJECT, esa variable «hereda» una serie de métodos que existen en cualquier variable que sea de tipo object. Un buen ejemplo, sería el método .toString(), un método que intenta representar la información de ese objeto en un String.
+
+Si creamos un objeto vacío y ejecutamos dicho método, comprobaremos que ocurre lo siguiente:
+````
+const objeto = {};
+objeto.toString();    // Devuelve "[object Object]"
+                      // (representación textual de un objeto genérico)
+```
+Observa que en ningún momento hemos añadido una función .toString() al objeto, pero aún así existe y la podemos ejecutar. Esto ocurre también con otros tipos de dato que a priori no son object, sino por ejemplo number,  boolean o regexp.
+
+
+
+Al crear una variable de un determinado tipo de dato, la variable será siempre también de tipo object, ya que todas las variables heredan de este tipo de dato. Por lo tanto, nuestra variable tendrá:
+- Los métodos que implementemos nosotros personalmente.
+- Los métodos heredados de su propio tipo de dato.
+- Los métodos heredados del tipo objetct.
+
+
+# FORMATO JSON
+
+
+-------------------------------
 # ARRAYS
 
 /*
