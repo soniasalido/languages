@@ -299,6 +299,13 @@ Se utilizan para representar datos estructurados, como los objetos en si mismos 
 
 
 # OPERADORES 
+Un operador es un símbolo que le indica al compilador que debe realizar una operación específica, que puede ser aritmética, de comparación, lógica, o de otro tipo, sobre uno o más operandos (los valores o variables que intervienen en la operación). 
+- Tipos de operadores:
+  - Aritméticos: Operadores para realizar operaciones matemáticas.
+  - Asignación: Operadores para guardar información en variables.
+  - Unarios: Operadores que se utilizan con un sólo operando.
+  - Comparación: Operadores para realizar comprobaciones.
+  - Binarios: Operadores a bajo nivel (a nivel de bits).
 
 ## 1. Operadores ARITMÉTICOS
 ```
@@ -362,7 +369,43 @@ num **= 10
 console.log(num);
 ```
 
-## 2. Operadores de COMPARACIÓN
+## 2. Operadores de Asignación:
+Asigna un valor a una variable.
+```
+Suma y asignación	a += b	Es equivalente a ⇾ a = a + b.
+Resta y asignación	a -= b	Es equivalente a ⇾ a = a - b.
+Multiplicación y asignación	a *= b	Es equivalente a ⇾ a = a * b.
+División y asignación	a /= b	Es equivalente a ⇾ a = a / b.
+```
+
+
+## 3. Operadores Unarios
+Los operadores unarios son operadores que actúan sobre un solo operando. Estos operadores realizan diversas operaciones como la negación lógica, el incremento o decremento de valores numéricos, y la obtención del tipo de un valor.
+  - Operador Negación lógica: !
+  - Operador Negación: -
+  - Operador de Identidad: Intenta convertir su operando a un número. Si el operando ya es un número, no hace ningún cambio.
+    ```
+    let c = "3";
+    console.log(+c); // 3 (como número)
+    ```
+  - Operador de Incremento: ++
+  - Operador de Decremento: --
+  - Operador typeof.
+  - Operador delete: Elimina una propiedad de un objeto. No se utiliza para variables o funciones declaradas.
+  - Operador void: Evalúa una expresión sin devolver ningún valor.
+  - Operador de negación bit a bit: ~
+
+
+En JavaScript, puedes usar a++ (post-incremento) y ++a (pre-incremento). Ambos operadores realizan la misma función fundamental: incrementar el valor de la variable a en 1. Sin embargo, la diferencia radica en cuándo se devuelve el valor incrementado.
+- Post-incremento (a++):
+  - Devuelve el valor original de a.
+  - Luego, incrementa el valor de a en 1.
+- Pre-incremento (++a):
+  - Incrementa el valor de a en 1.
+  - Luego, devuelve el valor incrementado de a.
+ 
+
+## 4. Operadores de COMPARACIÓN
 Mayor que, menor que, igualdad, desigualdad
 ```
 console.log(3 > 0);   // true
@@ -433,7 +476,7 @@ console.log("num" - 3);
 console.log("" - 3);
 ```
 
-## 3. Operadores LÓGICOS
+## 5. Operadores LÓGICOS
 **&& AND**
 ```
 console.log(true && true);    // true
@@ -488,7 +531,7 @@ a = 2 > 0 && "hello";
 a = 2 < 0 && "hello";
 ```
 
-## 4. Operadores BITWISE u operadores de bits
+## 6. Operadores BITWISE u operadores de bits
 No los daremos pero sabed que existen y que son poco frecuentes. Suelen ser utilizados en  implementaciones de algoritmos más "a bajo nivel".
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise
 
