@@ -27,7 +27,31 @@ JavaScript en línea, también conocido como JavaScript "inline", se refiere a l
   - Si por el contrario, queremos que actúe una vez se haya terminado de cargar la página, la opción de colocarlo justo antes del </body> es la más adecuada. Esta opción es equivalente a usar el atributo **defer** en la etiqueta <script>, sin embargo, esta opción es además compatible con navegadores muy antiguos (IE9 o anteriores) que no soportan defer.
 
 # Script externo  
+Para incluir un fichero JavaScript externo en un documento HTML, se utiliza la etiqueta <script> con el atributo src.
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo de JS Externo</title>
+</head>
+<body>
+    <h1>Hola, mundo!</h1>
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="ruta/al/archivo.js"></script>
+</body>
+</html>
+```
+Orden de Carga: Los scripts externos deben ser colocados preferentemente antes del cierre de la etiqueta </body> para asegurar que el contenido de la página se carga antes de que el script se ejecute.
 
+Defer y Async: Los atributos defer y async pueden ser usados para controlar la ejecución de scripts externos. defer asegura que el script se ejecuta después de que el documento HTML ha sido completamente analizado, mientras que async permite que el script se ejecute tan pronto como esté disponible, lo que puede ser útil para scripts que no dependen del DOM.
+```
+<!-- Script con defer -->
+<script src="ruta/al/archivo.js" defer></script>
+
+<!-- Script con async -->
+<script src="ruta/al/archivo.js" async></script>
+```
 
 # EXPRESIONES BÁSICAS ********
 
