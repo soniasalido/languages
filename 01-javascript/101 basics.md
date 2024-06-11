@@ -22,6 +22,9 @@ JavaScript en línea, también conocido como JavaScript "inline", se refiere a l
   </body>
   </html>
   ```
+  El navegador puede descargar un documento Javascript en cualquier momento de la carga de la página. Por ello necesitamos saber cuál será el momento oportuno para nosotros:
+  - Si queremos que un documento Javascript actúe antes que se muestre la página, la opción de colocarlo en el <head> es la más adecuada.
+  - Si por el contrario, queremos que actúe una vez se haya terminado de cargar la página, la opción de colocarlo justo antes del </body> es la más adecuada. Esta opción es equivalente a usar el atributo defer en la etiqueta <script>, sin embargo, esta opción es además compatible con navegadores muy antiguos (IE9 o anteriores) que no soportan defer.
 
 # Script externo  
 
