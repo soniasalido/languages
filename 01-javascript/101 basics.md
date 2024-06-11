@@ -9,6 +9,22 @@ JavaScript en línea, también conocido como JavaScript "inline", se refiere a l
   <button onclick="alert('Hola, mundo!')">Haz clic aquí</button>
   ```
 - JavaScript dentro de etiquetas <script> en línea: El código JavaScript se coloca dentro de una etiqueta <script> en el documento HTML:
+  ```
+  <html>
+  <head>
+    <title>Título de la página</title>
+    <script>
+      console.log("¡Hola!");
+    </script>
+  </head>
+  <body>
+    <p>Ejemplo de texto.</p>
+  </body>
+  </html>
+  ```
+
+# Script externo  
+
 
 # EXPRESIONES BÁSICAS ********
 
