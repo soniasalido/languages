@@ -290,31 +290,18 @@ BigInt(2)
 ```
 
 
-// operador typeof para primitivos
-console.log(typeof "");         // string
-console.log(typeof 0);          // number
-console.log(typeof 10n);        // bigint
-console.log(typeof false);      // boolean
-console.log(typeof undefined);  // undefined
-console.log(typeof null);       // object** Se entenderá mejor con el modelo prototípico
-
-
 ### OBJETOS
-
-/*
-Se utilizan para representar datos estructurados, como los objetos en si mismos o
-los arrays (que también son objetos en el fondo)
+Se utilizan para representar datos estructurados, como los objetos en si mismos o los arrays (que también son objetos en el fondo)
 
 ⚠ Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo.
 ⚠ Entre otros, las funciones son un tipo especial de objetos y las veremos más adelante.
-⚠ Existen más tipos de estructuras de datos nativas como Map o Set que iremos viendo en sus 
-propias secciones.
-*/
+⚠ Existen más tipos de estructuras de datos nativas como Map o Set que iremos viendo en sus propias secciones.
 
 
-///-- OPERADORES *********************************************************************************
+# OPERADORES 
 
-// 1. Operadores ARITMÉTICOS
+## 1. Operadores ARITMÉTICOS
+```
 console.log(52 + 21); // 73
 console.log("hello " + "world"); // "hello world"
 console.log(10 - 5); // 5
@@ -323,8 +310,9 @@ console.log(9 / 3); // 3
 console.log(15 / 2); // 7.5;
 console.log(15 % 3); // 0 (Módulo o resto)
 console.log(2 ** 3); // 8 (Exponenciación)
+```
 
-// [copy-paste version]
+```
 console.log(52 + 21);
 console.log("hello " + "world");
 console.log(10 - 5);
@@ -354,7 +342,7 @@ console.log(num);   // 2
 num **= 10          // Equivalent to ten times num * num or Math.pow(2, 10)
 console.log(num)    // 1024
 
-// [copy paste version]
+
 let num = 3;
 console.log(num++);
 console.log(num--);
@@ -372,11 +360,11 @@ num %= 3;
 console.log(num);
 num **= 10
 console.log(num);
+```
 
-
-// 2. Operadores de COMPARACIÓN
-// Mayor que, menor que, igualdad, desigualdad
-
+## 2. Operadores de COMPARACIÓN
+Mayor que, menor que, igualdad, desigualdad
+```
 console.log(3 > 0);   // true
 console.log(3 < 0);   // false
 console.log(3 > 3);   // false
@@ -385,7 +373,7 @@ console.log(3 >= 3);  // true
 console.log(3 <= 3);  // true
 console.log(5 == 5);  // true
 
-// [copy paste version]
+
 console.log(3 > 0);
 console.log(3 < 0);
 console.log(3 > 3);
@@ -393,15 +381,21 @@ console.log(3 < 3);
 console.log(3 >= 3);
 console.log(3 <= 3);
 console.log(5 == 5);
+```
 
-// "TYPE COERCION"
-/*
+### TYPE COERCION (Coerción de tipos || conversión implícita/automática):
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
-Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza 
-(distinto tipo). En tal caso, la estrategia que sigue JS es convertir implicitamente uno de los 
-miembros o los dos a un tipo común para poder realizar la comparativa. A esto se le llama
-"type coercion" o "conversión implícita/automática".
-*/
+Type coercion es la conversión automática o implícita de un tipo de dato a otro cuando se realizan operaciones o comparaciones entre valores de diferentes tipos. JavaScript es un lenguaje de tipado dinámico y débil, lo que significa que las variables pueden contener valores de cualquier tipo y que el tipo de una variable puede cambiar durante la ejecución del programa. Para permitir operaciones entre diferentes tipos de datos, JavaScript utiliza la coerción de tipos para convertir los valores a un tipo compatible antes de realizar la operación.
+
+**Tipos de coerción de tipos:**
+- Coerción implícita: Es la conversión automática de tipos que realiza JavaScript sin que el programador lo especifique explícitamente. Ocurre en situaciones como:
+  - Operaciones aritméticas: Cuando se suman un número y una cadena, JavaScript convierte el número en una cadena antes de realizar la concatenación.
+  - Comparaciones: Al comparar valores de diferentes tipos, JavaScript intenta convertirlos a un tipo común antes de realizar la comparación.
+  - Conversiones booleanas: En contextos booleanos, como las condiciones de if, JavaScript convierte los valores a booleanos para determinar su veracidad.
+- Coerción explícita: Es la conversión de tipos que realiza el programador de forma explícita utilizando funciones como Number(), String() o Boolean().
+
+
+```
 console.log(5 == "5");    // true // ⚠ Loose equality. Igualdad débil. (Por type coertion, "5" string se convierte a 5 numero)
 console.log(5 === "5");   // false // ⚠ Strict equality. Igualdad fuerte.
 console.log(5 != 5);      // false
@@ -411,7 +405,6 @@ console.log(5 !== "5");   // true
 console.log(0 == false);  // true. (Por type coercion, false se castea a 0)
 console.log(0 === false); // false. (number != boolean)
 
-// [copy paste version]
 console.log(5 == "5");
 console.log(5 === "5");
 console.log(5 != 5);
@@ -431,15 +424,16 @@ console.log("num" - 3); // NaN. Porque convierte "num" (string) a NaN (número) 
 // ¿Pero y esto otro?
 console.log("" - 3); // -3. Porque convierte "" (string vacio) a 0 (número) y 0 - 3 = -3.
 
-// [copy paste version]
+
 console.log(true + false);
 console.log(true - false);
 console.log("num" + 3);
 console.log(3 + "num");
 console.log("num" - 3);
 console.log("" - 3);
+```
 
-// 3. Operadores LÓGICOS
+## 3. Operadores LÓGICOS
 
 // && AND
 console.log(true && true);    // true
