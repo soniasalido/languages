@@ -5,12 +5,16 @@ En muchos lenguajes de programación, para crear un objeto se utiliza la palabra
 
 Los objetos son datos estructurados siguiendo el formato clave-valor. A cada clave o alias lo llamamos propiedad.
 
+
+
+
 ## Declaración de un Objeto
 Los literales de los objetos en Javascript son las llaves {}. Inicialización de objetos de forma literal, "object literals"
 ```
 const person = { name: "John" }; // {} => inicializador de objetos
 ```
 
+## Propiedades de un Objeto
 Las propiedades de un objeto también pueden inicializarse a partir de variables existentes
 ```
 const name = "John";
@@ -22,17 +26,20 @@ Si los nombres de la propiedad y la variable coinciden, se puede expresar de for
 const person = { name };
 ```
 
-Accediendo a propiedades:
-```
-console.log(person.name); // "John"
-console.log(person.lastname); // undefined
-```
+## Accediendo a propiedades de un objeto:
+Podemos acceder a sus propiedades de dos formas diferentes:
+  - A través de la notación con puntos.
+    ```
+    console.log(person.name); // "John"
+    console.log(person.lastname); // undefined
+    ```
+  - A través de la notación con corchetes, útil cuando la propiedad nos viene dada por una variable.
+    ```
+    const propName = "name";
+    console.log(person[propName]); // John
+    ```
 
-Acceso con corchetes, útil cuando la propiedad nos viene dada por una variable.
-```
-const propName = "name";
-console.log(person[propName]); // John
-```
+El programador puede utilizar la notación que más le guste. La más utilizada en Javascript suele ser la notación con puntos, mientras que la notación con corchetes se suele conocer en otros lenguajes como «arrays asociativos» o «diccionarios». OJO: Hay ciertos casos en los que sólo se puede utilizar la notación con corchetes, como por ejemplo cuando se utilizan espacios en el nombre de la propiedad. Es imposible hacerlo con la notación con puntos.
 
 **INCISO:** Acceso con corchetes + literal, útil para acceder a propiedades numéricas
 ```
@@ -42,7 +49,8 @@ console.log(person["43"]); // true
 console.log(person["3dots"]); // true
 ```
 
-Añadiendo nuevas propiedades:
+## Añadiendo nuevas propiedades:
+También podemos añadir propiedades al objeto después de haberlo creado, y no sólo en el momento de crear el objeto.
 ```
 person.lastname = "Smith";
 console.log(person.lastname); // "Smith"
