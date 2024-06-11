@@ -180,10 +180,10 @@ multiline string`
 **Template Literals**:
 - Los "template literals", también conocidos como "plantillas literales" o "plantillas de cadena", son una característica introducida en ECMAScript 6 (ES6) que proporciona una forma más elegante y poderosa de trabajar con cadenas de texto en JavaScript.
 - Características principales:
-- Delimitadores con acentos graves (backticks):  A diferencia de las comillas simples o dobles tradicionales, los template literals se delimitan con acentos graves ().
-- Cadenas multilínea: Permiten escribir cadenas de texto que abarcan varias líneas sin necesidad de utilizar caracteres de escape como \n.
-- Interpolación de expresiones: Facilitan la inserción dinámica de valores de variables y expresiones directamente en las cadenas utilizando la sintaxis ${expresión}.
-- Etiquetas de plantillas (Tagged templates): Ofrecen una forma avanzada de personalizar el procesamiento de plantillas literales mediante funciones especiales llamadas "etiquetas".
+  - Delimitadores con acentos graves (backticks):  A diferencia de las comillas simples o dobles tradicionales, los template literals se delimitan con acentos graves ().
+  - Cadenas multilínea: Permiten escribir cadenas de texto que abarcan varias líneas sin necesidad de utilizar caracteres de escape como \n.
+  - Interpolación de expresiones: Facilitan la inserción dinámica de valores de variables y expresiones directamente en las cadenas utilizando la sintaxis ${expresión}.
+  - Etiquetas de plantillas (Tagged templates): Ofrecen una forma avanzada de personalizar el procesamiento de plantillas literales mediante funciones especiales llamadas "etiquetas".
 
 
 **Interpolación de expresiones**:
