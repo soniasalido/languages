@@ -71,6 +71,12 @@ ECMAScript es el estándar en el que se basa JavaScript. A lo largo de los años
 - Estas versiones reflejan la evolución continua de ECMAScript para adaptarse a las necesidades modernas de desarrollo web y mejorar la usabilidad, eficiencia y seguridad del lenguaje.
 
 
+## ECMAScript 2023 (ES14)
+- Métodos inmutables para arrays: toSorted, toReversed, with, toSpliced, findLast y findLastIndex.
+- Soporte para comentarios #!: al comienzo de los archivos para facilitar la ejecución de scripts.
+- Uso de símbolos como claves en colecciones débiles: permitiendo una mayor flexibilidad.
+- Especificación: https://tc39.es/ecma262/2023/
+
 ## ECMAScript 2024 (ES15)
 - Pipe Operator: Este operador permitirá encadenar funciones de una manera más legible y funcional, mejorando la claridad del código cuando se aplican múltiples transformaciones a un valor​ (SitePoint)​​ (DEV Community)​.
 - Records y Tuples: Estos son nuevos tipos de datos inmutables. Los Records funcionan como objetos inmutables, mientras que los Tuples son similares a los arrays pero también inmutables. Esta característica facilita la programación funcional y la gestión del estado de manera predecible​ (SitePoint)​​ (Modern CSS WebDev)​.
