@@ -177,6 +177,15 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
 multiline string`
 ```
 
+**Template Literals**:
+- Los "template literals", también conocidos como "plantillas literales" o "plantillas de cadena", son una característica introducida en ECMAScript 6 (ES6) que proporciona una forma más elegante y poderosa de trabajar con cadenas de texto en JavaScript.
+- Características principales:
+- Delimitadores con acentos graves (backticks):  A diferencia de las comillas simples o dobles tradicionales, los template literals se delimitan con acentos graves ().
+- Cadenas multilínea: Permiten escribir cadenas de texto que abarcan varias líneas sin necesidad de utilizar caracteres de escape como \n.
+- Interpolación de expresiones: Facilitan la inserción dinámica de valores de variables y expresiones directamente en las cadenas utilizando la sintaxis ${expresión}.
+- Etiquetas de plantillas (Tagged templates): Ofrecen una forma avanzada de personalizar el procesamiento de plantillas literales mediante funciones especiales llamadas "etiquetas".
+
+
 **Interpolación de expresiones**:
 La interpolación de expresiones en JavaScript, específicamente dentro de plantillas literales (template literals), es una característica poderosa que te permite insertar dinámicamente valores de variables y expresiones directamente en cadenas de texto. Esto hace que el código sea más legible y fácil de mantener. La interpolación se logra utilizando la sintaxis ${...} dentro de las comillas invertidas (backticks) que delimitan una plantilla literal. Cualquier expresión válida de JavaScript colocada dentro de ${...} será evaluada y su resultado se insertará en la cadena.
 ```
