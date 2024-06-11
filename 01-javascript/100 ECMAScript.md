@@ -85,6 +85,7 @@ ECMAScript es el estándar en el que se basa JavaScript. A lo largo de los años
 - Regular Expressions /v Flag: Una mejora en las expresiones regulares que cambiará la sintaxis y semántica para hacerlas más consistentes con otros lenguajes de programación​ (DEV Community)​.
 - Object.groupBy(): Esta función permitirá agrupar objetos basados en una propiedad específica, simplificando la manipulación de colecciones de datos​ (Modern CSS WebDev)​.
 - Promise.withResolvers(): Un nuevo método que proporciona una forma más intuitiva de trabajar con promesas, facilitando la creación y manejo de promesas dentro del código​ (Modern CSS WebDev)​.
+- Especificación: https://www.w3schools.com/js/js_2024.asp
 
 ## Estrategias de programación:
 Generalmente, el programador suele tomar una de las siguientes estrategias «crossbrowser» para asegurarse que el código funcionará en todos los navegadores:
