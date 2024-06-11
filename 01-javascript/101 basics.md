@@ -241,6 +241,7 @@ false
 
 #### Null
 Representa la ausencia intencionada de cualquier valor u objeto. Es usado comúnmente para indicar que una variable debería tener un objeto pero actualmente no tiene ninguno. Null es un primitivo especial de tipo "object" en JavaScript y la raíz de la cadena de prototipos.
+
 **1. null como Primitivo Especial:**
 - Primitivo: En JavaScript, null es uno de los tipos de datos primitivos, junto con undefined, booleanos, números, strings, symbols y BigInts. Los primitivos son valores inmutables y no son objetos.
 - Tipo "object": Sin embargo, cuando utilizas el operador typeof con null, el resultado es "object". Esto es un comportamiento peculiar y considerado un error histórico en el diseño de JavaScript. Cuando se utiliza el operador typeof en null, se obtiene "object". Este comportamiento es considerado un bug del lenguaje, que ha sido mantenido por razones de compatibilidad desde las primeras versiones de JavaScript.
