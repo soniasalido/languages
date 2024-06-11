@@ -78,6 +78,10 @@ Generalmente, el programador suele tomar una de las siguientes estrategias «cro
 - Enfoque Evergreen --	ECMAScript 2024+:	Cómodo. Moderno. No garantiza la compatibilidad en navegadores antiguos.
 - Enfoque Transpilador -- ECMAScript 2024+:	Cómodo. Moderno. Preparado para el futuro. Requiere preprocesado.
 
+Independientemente del enfoque que se decida utilizar, el programador también puede utilizar polyfills o fallbacks para asegurarse de que ciertas características funcionarán en navegadores antiguos. También puede utilizar enfoques mixtos.
+  - Un polyfill no es más que una librería o código Javascript que actúa de «parche» o «relleno» para dotar de una característica que el navegador aún no posee, hasta que una actualización del navegador la implemente.
+  - Un fallback es algo también muy similar: un fragmento de código que el programador prepara para que en el caso de que algo no entre en funcionamiento, se ofrezca una alternativa.
+
 ### Enfoque transpilador
 El programador decide crear código de la última versión de ECMAScript. Para asegurarse de que funcione en todos los navegadores, utiliza un transpilador, que no es más que un sistema que revisa el código y lo traduce de la versión actual de ECMAScript a ECMAScript 5, que es la que leerá el navegador.
 
