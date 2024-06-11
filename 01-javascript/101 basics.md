@@ -241,15 +241,15 @@ false
 
 #### Null
 Representa la ausencia intencionada de cualquier valor u objeto. Es usado comúnmente para indicar que una variable debería tener un objeto pero actualmente no tiene ninguno. Null es un primitivo especial de tipo "object" en JavaScript y la raíz de la cadena de prototipos.
-1. null como Primitivo Especial:
+**1. null como Primitivo Especial:**
 - Primitivo: En JavaScript, null es uno de los tipos de datos primitivos, junto con undefined, booleanos, números, strings, symbols y BigInts. Los primitivos son valores inmutables y no son objetos.
 - Tipo "object": Sin embargo, cuando utilizas el operador typeof con null, el resultado es "object". Esto es un comportamiento peculiar y considerado un error histórico en el diseño de JavaScript. Cuando se utiliza el operador typeof en null, se obtiene "object". Este comportamiento es considerado un bug del lenguaje, que ha sido mantenido por razones de compatibilidad desde las primeras versiones de JavaScript.
   
-2. Raíz de la Cadena de Prototipos:
+**2. Raíz de la Cadena de Prototipos:**
 - Prototipos: JavaScript utiliza un sistema basado en prototipos para la herencia. Cada objeto tiene un prototipo (que también es un objeto) del cual hereda propiedades y métodos.
 - null como Raíz: null es el último eslabón en esta cadena de prototipos. Esto significa que todos los objetos en JavaScript, directa o indirectamente, tienen null como su prototipo final. Cuando buscas una propiedad o método en un objeto y no la encuentras, la búsqueda continúa en su prototipo y así sucesivamente hasta llegar a null. Cada objeto tiene una referencia interna al prototipo ([[Prototype]]), que es otro objeto, y esta cadena termina en null.
 
-¿Por qué es importante?
+**¿Por qué es importante?**
 - Diseño del lenguaje: Comprender este aspecto de null es fundamental para entender el funcionamiento interno de JavaScript y su sistema de prototipos.
 - Comportamiento inesperado: El hecho de que typeof null devuelva "object" puede causar confusión y errores si no se tiene en cuenta.
 - Utilidad: En algunos casos, se puede aprovechar que null es la raíz de la cadena de prototipos para realizar comprobaciones o iteraciones sobre objetos.
