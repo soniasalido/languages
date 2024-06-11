@@ -163,7 +163,7 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
   - Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser alterado ni modificado (no confundir con reasignar una variable con otro valor).
   - Operador 'typeof'.
 
-#### string
+#### String
 ```
 "hello world" // dobles comillas
 'hello world' // comillas simples
@@ -177,12 +177,39 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
 multiline string`
 ```
 
-Interpolación de expresiones (sólo en template literals). Llamaremos "expresión" a cualquier tipo de valor que pueda ser almacenado en una variable. Una expresión puede ser un valor primitivo, objeto, valor devuelto por una función, resultado de una operación, etc.
+**Interpolación de expresiones**:
+La interpolación de expresiones en JavaScript, específicamente dentro de plantillas literales (template literals), es una característica poderosa que te permite insertar dinámicamente valores de variables y expresiones directamente en cadenas de texto. Esto hace que el código sea más legible y fácil de mantener. La interpolación se logra utilizando la sintaxis ${...} dentro de las comillas invertidas (backticks) que delimitan una plantilla literal. Cualquier expresión válida de JavaScript colocada dentro de ${...} será evaluada y su resultado se insertará en la cadena.
 ```
 const person = "Edward";
 const message = `How are you, ${person}?`;
 console.log(message); // "How are you, Edward?"
 ```
+
+**Expresiones**:
+Una expresión en JavaScript es cualquier fragmento de código que produce un valor. Este valor puede ser de cualquier tipo:
+- Valores primitivos: números, cadenas de texto (strings), booleanos (true o false), null, undefined, símbolos (symbols) y BigInts.
+- Objetos: arrays, funciones, objetos literales, expresiones regulares, fechas, etc.
+- Resultados de operaciones: la suma de dos números, la concatenación de cadenas, el valor devuelto por una función, etc.
+```
+5 + 3;               // Expresión aritmética, resultado: 8
+"Hola" + " mundo";   // Expresión de concatenación de cadenas, resultado: "Hola mundo"
+Math.sqrt(16);       // Llamada a función, resultado: 4
+[1, 2, 3];           // Array literal
+x > 5;   
+```
+Llamaremos "expresión" a cualquier tipo de valor que pueda ser almacenado en una variable. Una expresión puede ser un valor primitivo, objeto, valor devuelto por una función, resultado de una operación, etc.
+
+Las expresiones son los bloques de construcción fundamentales de JavaScript. Se utilizan en casi todas partes del lenguaje:
+- Asignación de variables: El valor de una expresión se puede asignar a una variable.
+- Argumentos de funciones: Las expresiones se pasan como argumentos a las funciones.
+- Estructuras de control: Las expresiones se utilizan en condiciones de if, bucles for y while, etc.
+- Operaciones: Las expresiones se combinan con operadores para realizar cálculos y manipulaciones de datos
+
+**Expresiones vs. Sentencias**
+Es importante distinguir entre expresiones y sentencias en JavaScript:
+- Expresiones: Producen un valor.
+- Sentencias: Realizan una acción (declarar una variable, definir una función, controlar el flujo del programa).
+
 
 #### number
 101       // entero positivo
