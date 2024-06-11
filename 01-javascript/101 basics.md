@@ -150,29 +150,21 @@ let a = 10;
 ```
 
 ## TIPOS DE DATOS 
-
-/*
 Distinguimos 2 grandes grupos de tipos de datos en Javascript:
 - Tipos PRIMITIVOS (representan un único dato simple).
 - Tipos estructurales (representan estructuras de datos) u OBJETOS.
 
 7 PRIMITIVOS (2 de nueva incorporación) + OBJETOS
-*/
 
-### PRIMITIVOS
 
-/*
-DEFINICIÓN:
-Aquellos que trae el lenguaje por defecto (built-in). Un tipo primitivo es aquel
-que no es un objeto y por tanto no tiene métodos. Representan datos simples, sencillos.
-
-CARACTERÍSTICAS:
-- Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser
-alterado ni modificado (no confundir con reasignar una variable con otro valor).
-- Operador 'typeof'
-*/
+### 1. PRIMITIVOS
+- DEFINICIÓN: Aquellos que trae el lenguaje por defecto (built-in). Un tipo primitivo es aquel que no es un objeto y por tanto no tiene métodos. Representan datos simples, sencillos.
+- CARACTERÍSTICAS:
+  - Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser alterado ni modificado (no confundir con reasignar una variable con otro valor).
+  - Operador 'typeof'.
 
 #### string
+```
 "hello world" // dobles comillas
 'hello world' // comillas simples
 `hello world` // backticks. Los strings creados con backticks tb se conocen como "template literals"
@@ -183,15 +175,14 @@ alterado ni modificado (no confundir con reasignar una variable con otro valor).
 // string multilínea
 `This is a
 multiline string`
+```
 
-// Interpolación de expresiones (sólo en template literals)
-// ⚠ Llamaremos "expresión" a cualquier tipo de valor que pueda ser almacenado en una variable.
-// Una expresión puede ser un valor primitivo, objeto, valor devuelto por una función, resultado de
-// una operación, etc.
+Interpolación de expresiones (sólo en template literals). Llamaremos "expresión" a cualquier tipo de valor que pueda ser almacenado en una variable. Una expresión puede ser un valor primitivo, objeto, valor devuelto por una función, resultado de una operación, etc.
+```
 const person = "Edward";
 const message = `How are you, ${person}?`;
 console.log(message); // "How are you, Edward?"
-
+```
 
 #### number
 101       // entero positivo
