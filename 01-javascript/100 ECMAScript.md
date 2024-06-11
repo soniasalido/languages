@@ -71,6 +71,15 @@ ECMAScript es el estándar en el que se basa JavaScript. A lo largo de los años
 - Estas versiones reflejan la evolución continua de ECMAScript para adaptarse a las necesidades modernas de desarrollo web y mejorar la usabilidad, eficiencia y seguridad del lenguaje.
 
 
+## ECMAScript 2024 (ES15)
+- Pipe Operator: Este operador permitirá encadenar funciones de una manera más legible y funcional, mejorando la claridad del código cuando se aplican múltiples transformaciones a un valor​ (SitePoint)​​ (DEV Community)​.
+- Records y Tuples: Estos son nuevos tipos de datos inmutables. Los Records funcionan como objetos inmutables, mientras que los Tuples son similares a los arrays pero también inmutables. Esta característica facilita la programación funcional y la gestión del estado de manera predecible​ (SitePoint)​​ (Modern CSS WebDev)​.
+- Temporal API: Una nueva API para manejar fechas y tiempos de manera más efectiva, reemplazando las limitaciones del objeto Date. Esto incluye nuevas formas de crear, manipular y formatear fechas y tiempos​ (DEV Community)​​ (Modern CSS WebDev)​.
+- Decorators: Permiten añadir funcionalidad adicional a clases y métodos de manera más declarativa. Los decorators son una característica ya común en otros lenguajes como Python y TypeScript​ (Modern CSS WebDev)​.
+- Regular Expressions /v Flag: Una mejora en las expresiones regulares que cambiará la sintaxis y semántica para hacerlas más consistentes con otros lenguajes de programación​ (DEV Community)​.
+- Object.groupBy(): Esta función permitirá agrupar objetos basados en una propiedad específica, simplificando la manipulación de colecciones de datos​ (Modern CSS WebDev)​.
+- Promise.withResolvers(): Un nuevo método que proporciona una forma más intuitiva de trabajar con promesas, facilitando la creación y manejo de promesas dentro del código​ (Modern CSS WebDev)​.
+
 ## Estrategias de programación:
 Generalmente, el programador suele tomar una de las siguientes estrategias «crossbrowser» para asegurarse que el código funcionará en todos los navegadores:
 - Enfoque Conservador --	ECMAScript 5:	Incómodo de escribir. Anticuado. Compatible con navegadores nativamente.
