@@ -42,9 +42,9 @@ Para incluir un fichero JavaScript externo en un documento HTML, se utiliza la e
 </body>
 </html>
 ```
-Orden de Carga: Los scripts externos deben ser colocados preferentemente antes del cierre de la etiqueta </body> para asegurar que el contenido de la página se carga antes de que el script se ejecute.
+**Orden de Carga:** Los scripts externos deben ser colocados preferentemente antes del cierre de la etiqueta </body> para asegurar que el contenido de la página se carga antes de que el script se ejecute.
 
-Defer y Async: Los atributos defer y async pueden ser usados para controlar la ejecución de scripts externos. defer asegura que el script se ejecuta después de que el documento HTML ha sido completamente analizado, mientras que async permite que el script se ejecute tan pronto como esté disponible, lo que puede ser útil para scripts que no dependen del DOM.
+**Defer y Async:** Los atributos defer y async pueden ser usados para controlar la ejecución de scripts externos. defer asegura que el script se ejecuta después de que el documento HTML ha sido completamente analizado, mientras que async permite que el script se ejecute tan pronto como esté disponible, lo que puede ser útil para scripts que no dependen del DOM.
 ```
 <!-- Script con defer -->
 <script src="ruta/al/archivo.js" defer></script>
@@ -52,6 +52,37 @@ Defer y Async: Los atributos defer y async pueden ser usados para controlar la e
 <!-- Script con async -->
 <script src="ruta/al/archivo.js" async></script>
 ```
+
+
+# Identificar el tipo de dato de una variable o constante
+- Uso de typeof(): Es un operador esencial que nos permite determinar el tipo de dato de una variable o valor. Esto es crucial en un lenguaje dinámico como JavaScript, donde los tipos pueden cambiar.
+  ```
+  typeof 42;          // "number"
+  typeof "Hola";       // "string"
+  typeof true;         // "boolean"
+  typeof undefined;    // "undefined"
+  typeof null;         // "object" (¡un caso especial!)
+  typeof Math.PI;      // "number"
+  typeof function() {}; // "function"
+  ```
+  - Casos especiales:
+    - null: Aunque null representa la ausencia de valor, typeof null devuelve "object". Esto es un error histórico en JavaScript.
+    - Arrays: typeof [] devuelve "object" porque los arrays son técnicamente objetos en JavaScript.
+    - Funciones: typeof puede distinguir funciones de otros objetos.
+  - Alternativas para estos casos especiales:
+    - Array.isArray(variable): Para determinar específicamente si un valor es un array.
+    - variable instanceof Clase: Para verificar si un objeto es una instancia de una clase específica.
+      
+- Usando constructor.name: Con constructor.name podemos obtener el tipo de constructor que se utiliza. Es una propiedad que nos permite obtener el nombre de la función constructora que se utilizó para crear un objeto. En JavaScript, cada objeto tiene una propiedad implícita llamada constructor. Esta propiedad hace referencia a la función constructora que se utilizó para crear el objeto. A su vez, la propiedad name de la función constructora te da el nombre de dicha función. Esta propiedad también se usa en situaciones donde tenemos múltiples funciones constructoras que crean objetos similares, y constructor.name nos permite diferenciar (Polimorfismo).
+```
+function Persona(nombre) {
+  this.nombre = nombre;
+}
+
+const juan = new Persona("Juan");
+console.log(juan.constructor.name); // Salida: "Persona"
+```
+
 
 # EXPRESIONES BÁSICAS ********
 
@@ -65,44 +96,48 @@ Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actua
 
 ### LET
 Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser capaces de reasignar su valor.
-
+```
 let a = 3;
 a = 14;
+````
 
 Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas por coma:
-
+```
 let b = 10, c = "hello";
+```
 
 Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito. Veremos con más detalle el ámbito más adelante:
-
+```
 let a = 3;
 let a = 14; // Error! La variable `a` ya ha sido redeclarada
-
+```
 
 ### comentarios en línea
+```
 let d = 4; // d value is 4
+```
 
 ### comentarios de bloque
+```
 /*
 let c = 3;
 let d = 4;
 */
+```
 
 ### CONST
-Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar. Es importante entender que una vez que declaremos la variable no podemos volver a reasignar su valor.
+Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar. Es importante entender que **una vez que declaremos la variable no podemos volver a reasignar su valor.**
 Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada.
-⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.
+**⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.**
 
+```
 // Esto lanzará un error de ejecución
-
 const a;
 
 // Hay que incluir el valor
-
 const a = 3;
 
 // Reasignar su valor lanzará un error de ejecución
-
 a = 14;
 
 // Al igual que las variables `let` no podemos redeclarar una variable con el mismo nombre en el mismo ámbito.
@@ -110,13 +145,11 @@ const a = 3;
 const a = 14; // Error! La variable `a` ya ha sido redeclarada
 
 // Es importante entender que no podemos utilizar una variable declarada con `let` o `const` antes de su declaración.
-
 console.log(a); // Error! Todavía no existe la variable `a`
-
 let a = 10;
+```
 
-
-##-- TIPOS DE DATOS *****************************************************************************
+## TIPOS DE DATOS 
 
 /*
 Distinguimos 2 grandes grupos de tipos de datos en Javascript:
