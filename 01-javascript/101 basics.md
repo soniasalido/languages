@@ -163,7 +163,7 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
   - Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser alterado ni modificado (no confundir con reasignar una variable con otro valor).
   - Operador 'typeof'.
 
-#### String
+#### String (Cadenas de Texto)
 ```
 "hello world" // dobles comillas
 'hello world' // comillas simples
@@ -220,46 +220,74 @@ Es importante distinguir entre expresiones y sentencias en JavaScript:
 - Sentencias: Realizan una acción (declarar una variable, definir una función, controlar el flujo del programa).
 
 
-#### number
+#### Number (Números)
+```
 101       // entero positivo
 -200      // entero negativo
 1220.31   // flotante
 1e6       // notación exponencial (1 x 10^6)
 Infinity  // infinito
 NaN       // NotANumber** (de hecho es de tipo número)
-// ⚠ Podemos separar los dígitos con un underscore [_] en cualquier posición para mejorar la 
-// legibilidad.
+```
+⚠ Podemos separar los dígitos con un underscore [_] en cualquier posición para mejorar la legibilidad.
 
-/*
- Indeterminados (0 * Infinity), indefinidos (1 / 0), fuera del conjunto de los
- reales (sqrt(-1)), o errores al parsear (parseInt("abc"))
-*/
+Indeterminados (0 * Infinity), indefinidos (1 / 0), fuera del conjunto de los reales (sqrt(-1)), o errores al parsear (parseInt("abc")).
 
-#### boolean
+#### Boolean (Lógicos)
+```
 true
 false
+```
 
-#### null
-/* ⚠ Primitivo especial de tipo "object". Raiz de la cadena de prototipos */
-null
+#### Null
+Representa la ausencia intencionada de cualquier valor u objeto. Es usado comúnmente para indicar que una variable debería tener un objeto pero actualmente no tiene ninguno. Null es un primitivo especial de tipo "object" en JavaScript y la raíz de la cadena de prototipos.
+1. null como Primitivo Especial:
+- Primitivo: En JavaScript, null es uno de los tipos de datos primitivos, junto con undefined, booleanos, números, strings, symbols y BigInts. Los primitivos son valores inmutables y no son objetos.
+- Tipo "object": Sin embargo, cuando utilizas el operador typeof con null, el resultado es "object". Esto es un comportamiento peculiar y considerado un error histórico en el diseño de JavaScript. Cuando se utiliza el operador typeof en null, se obtiene "object". Este comportamiento es considerado un bug del lenguaje, que ha sido mantenido por razones de compatibilidad desde las primeras versiones de JavaScript.
+  
+2. Raíz de la Cadena de Prototipos:
+- Prototipos: JavaScript utiliza un sistema basado en prototipos para la herencia. Cada objeto tiene un prototipo (que también es un objeto) del cual hereda propiedades y métodos.
+- null como Raíz: null es el último eslabón en esta cadena de prototipos. Esto significa que todos los objetos en JavaScript, directa o indirectamente, tienen null como su prototipo final. Cuando buscas una propiedad o método en un objeto y no la encuentras, la búsqueda continúa en su prototipo y así sucesivamente hasta llegar a null. Cada objeto tiene una referencia interna al prototipo ([[Prototype]]), que es otro objeto, y esta cadena termina en null.
 
-#### undefined
-undefined
+¿Por qué es importante?
+- Diseño del lenguaje: Comprender este aspecto de null es fundamental para entender el funcionamiento interno de JavaScript y su sistema de prototipos.
+- Comportamiento inesperado: El hecho de que typeof null devuelva "object" puede causar confusión y errores si no se tiene en cuenta.
+- Utilidad: En algunos casos, se puede aprovechar que null es la raíz de la cadena de prototipos para realizar comprobaciones o iteraciones sobre objetos.
 
-/*
- ¿null o undefined?
 
- En general, se recomienda utilizar `null` para indicar la ausencia intencional de un valor, y 
- undefined para indicar que algo simplemente no está definido o no tiene un valor.
-*/
 
-#### symbol
+#### Undefined
+Es un tipo de dato primitivo que representa la ausencia de valor.
+- Valor único: undefined es el único valor posible del tipo de dato undefined.
+- Variables no inicializadas: Cuando se declara una variable en JavaScript pero no le asignamos un valor, automáticamente se le asigna el valor undefined.
+- Propiedades inexistentes: Si intentas acceder a una propiedad de un objeto que no existe, obtendrás undefined.
+- Parámetros de funciones no proporcionados: Cuando una función se llama con menos argumentos de los esperados, los parámetros faltantes se establecen en undefined.
+- Retorno implícito de funciones: Si una función no tiene una declaración de retorno explícita, devuelve implícitamente undefined.
+
+
+### null o undefined
+En general, se recomienda utilizar `null` para indicar la ausencia intencional de un valor, y undefined para indicar que algo simplemente no está definido o no tiene un valor.
+- **Cuándo usar undefined:**
+  - Variables no inicializadas: Cuando declaras una variable sin asignarle un valor, JavaScript automáticamente le asigna undefined. Esto indica que la variable existe pero aún no tiene un valor definido.
+  - Propiedades de objetos inexistentes: Si intentas acceder a una propiedad que no existe en un objeto, obtendrás undefined. Esto indica que la propiedad no ha sido definida.
+  - Parámetros de funciones no proporcionados: Cuando llamas a una función sin pasar todos los argumentos esperados, los parámetros faltantes se asignan a undefined. Esto indica que no se proporcionó un valor para ese parámetro.
+  - Retorno implícito de funciones: Si una función no tiene una declaración de retorno explícita, devuelve implícitamente undefined. Esto indica que la función no produjo ningún valor específico para devolver.
+
+- **Cuándo usar null:**
+  - Ausencia intencional de valor: Utiliza null cuando quieres indicar explícitamente que una variable o propiedad no tiene un valor significativo en ese momento. Es una forma de decir "esta variable está vacía a propósito".
+  - Reiniciar variables: Puedes asignar null a una variable para borrar su valor anterior y liberarla de cualquier referencia a objetos.
+  - Valores por defecto: En algunos casos, puedes usar null como valor por defecto para indicar que una variable o parámetro no tiene un valor inicial válido.
+
+#### Symbol
 /* ⚠ Lo veremos más adelante ya que su uso está muy ligado a los objetos */
 
-#### bigint
-/* ⚠ Nuevo tipo numérico para representar enteros de cualquier tamaño, con cualquier precisión. */
+#### Bigint
+⚠ Nuevo tipo numérico para representar enteros de cualquier tamaño, con cualquier precisión. 
+```
 2n
 BigInt(2)
+```
+
 
 // operador typeof para primitivos
 console.log(typeof "");         // string
