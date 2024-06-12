@@ -142,6 +142,42 @@ Al crear una variable de un determinado tipo de dato, la variable será siempre 
 
 
 # FORMATO JSON
+Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
+
+JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
+
+Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
+
+Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
+
+Ejemplo de JSON:
+```
+{
+  "name": "Manz",
+  "life": 3,
+  "totalLife": 6
+  "power": 10,
+  "dead": false,
+  "props": ["invisibility", "coding", "happymood"],
+  "senses": {
+    "vision": 50,
+    "audition": 75,
+    "taste": 40,
+    "touch": 80
+  }
+}
+```
+Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
+- Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
+- Los textos  deben estar entrecomillados con «comillas dobles».
+- Sólo se puede almacenar tipos como , , , ,  o null.
+- Tipos de datos como , ,  u otros, no es posible almacenarlos en un JSON.
+- Tampoco es posible añadir comentarios en un JSON.
+
+
+
+
+
 
 
 -------------------------------
