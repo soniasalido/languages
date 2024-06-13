@@ -205,6 +205,75 @@ user.life;  // 99
 Como se puede ver,  user es un objeto generado a partir del JSON almacenado en la variable  json y podemos consultar sus propiedades y trabajar con ellas sin problemas.
 
 
+## Métodos para convertir objeto a JSON
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  talk: function () {
+    return "Hola!";
+  },
+};
+
+JSON.stringify(user);       // '{"name":"Manz","life":99}'
+```
+
+Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
+
+Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  power: 10,
+};
+
+JSON.stringify(user, ["life"])            // '{"life":99}'
+JSON.stringify(user, ["name", "power"])   // '{"name":"Manz","power":10}'
+JSON.stringify(user, [])                  // '{}'
+JSON.stringify(user, null)                // '{"name":"Manz","life":99,"power":10}'
+```
+Observamos que el penúltimo caso, no se conserva ninguna propiedad, mientras que el último, se conserva todo.
+
+Por último, también podemos añadir un tercer parámetro en el método .stringify() que indicará el número de espacios que quieres usar al crear el String del JSON resultante. Observa que hasta ahora, el String está minificado y aparece todo junto en la misma línea.
+
+
+Veamos lo que ocurre en los siguientes casos:
+```
+const user = {
+  name: "Manz",
+  life: 99
+};
+
+JSON.stringify(user, null, 2);
+// {
+//   "name": "Manz",
+//   "life": 99
+// }
+
+JSON.stringify(user, null, 4);
+// {
+//     "name": "Manz",
+//     "life": 99
+// }
+
+JSON.stringify(user, ["name"], 1);
+// {
+//  "name": "Manz"
+// }
+```
+
+En el primer caso, json2, el resultado se genera indentado a 2 espacios. En el segundo caso, json4, el resultado se genera indentado a 4 espacios. En el tercer y último caso, json1, se filtran las propiedades, dejando sólo "name" y se genera indentando a 1 espacio.
+
+
+## Leyendo JSON externo
+Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, que habría que leer desde nuestro código Javascript. Para ello, hoy en día se suele utilizar la función fetch() para hacer peticiones a sitios que devuelven contenido JSON. También se podría leer ficheros locales con contenido .json. 
+
+
+# Desestructuración de Objetos
+
+
+
 -------------------------------
 # ARRAYS
 
