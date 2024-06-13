@@ -126,7 +126,7 @@ console.log(boy.toString()); // [object Object]
 Simplemente por generar una variable de tipo OBJECT, esa variable «hereda» una serie de métodos que existen en cualquier variable que sea de tipo object. Un buen ejemplo, sería el método .toString(), un método que intenta representar la información de ese objeto en un String.
 
 Si creamos un objeto vacío y ejecutamos dicho método, comprobaremos que ocurre lo siguiente:
-````
+```
 const objeto = {};
 objeto.toString();    // Devuelve "[object Object]"
                       // (representación textual de un objeto genérico)
