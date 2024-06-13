@@ -176,7 +176,7 @@ Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras difer
 - Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
 - Los textos  deben estar entrecomillados con «comillas dobles».
 - Sólo se puede almacenar tipos como string, number, object, array,  boolean o null.
-- Tipos de datos como , ,  u otros, no es posible almacenarlos en un JSON.
+- Tipos de datos como Function, Date, Regexp u otros, no es posible almacenarlos en un JSON.
 - Tampoco es posible añadir comentarios en un JSON.
 
 
