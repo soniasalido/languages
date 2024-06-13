@@ -141,135 +141,6 @@ Al crear una variable de un determinado tipo de dato, la variable será siempre 
 - Los métodos heredados del tipo objetct.
 
 
-# FORMATO JSON
-Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
-
-JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
-
-Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
-
-Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
-
-Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
-
-
-Ejemplo de JSON:
-```
-{
-  "name": "Manz",
-  "life": 3,
-  "totalLife": 6
-  "power": 10,
-  "dead": false,
-  "props": ["invisibility", "coding", "happymood"],
-  "senses": {
-    "vision": 50,
-    "audition": 75,
-    "taste": 40,
-    "touch": 80
-  }
-}
-```
-
-## JSON vs Objetos Javascript
-Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
-- Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
-- Los textos  deben estar entrecomillados con «comillas dobles».
-- Sólo se puede almacenar tipos como string, number, object, array,  boolean o null.
-- Tipos de datos como Function, Date, Regexp u otros, no es posible almacenarlos en un JSON.
-- Tampoco es posible añadir comentarios en un JSON.
-
-
-## Métodos para convertir de Object de Javascript a JSON
-- Parseo (De string a objeto): El método .parse() nos va a permitir pasar el contenido de texto string de un JSON a object. 
-  - Object JSON.parse(str)	⟶ Convierte el texto str (si es un JSON válido) a un objeto y lo devuelve.
-- Convertir a texto (De objeto a string): El método .stringify() nos va a permitir pasar de object de Javascript a contenido de texto string con el JSON en cuestión.
-  - String JSON.stringify(obj) ⟶	Convierte un objeto obj a su representación JSON y la devuelve.
-  - String JSON.stringify(obj, props)	⟶ Idem al anterior, pero filtra y mantiene solo las propiedades del  props.
-  - String JSON.stringify(obj, props, spaces)	⟶ Idem al anterior, pero indenta el JSON a (number) spaces espacios.
-
-
-## Métodos para convertir JSON a objeto
-La acción de convertir JSON a objeto Javascript se le suele denominar parsear. Es una acción que analiza un sting que contiene un JSON válido y devuelve un objeto Javascript con dicha información correctamente estructurada. Para ello, utilizaremos el mencionado método JSON.parse():
-```
-const json = `{
-  "name": "Manz",
-  "life": 99
-}`;
-
-const user = JSON.parse(json);
-
-user.name;  // "Manz"
-user.life;  // 99
-```
-Como se puede ver,  user es un objeto generado a partir del JSON almacenado en la variable  json y podemos consultar sus propiedades y trabajar con ellas sin problemas.
-
-
-## Métodos para convertir objeto a JSON
-```
-const user = {
-  name: "Manz",
-  life: 99,
-  talk: function () {
-    return "Hola!";
-  },
-};
-
-JSON.stringify(user);       // '{"name":"Manz","life":99}'
-```
-
-Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
-
-Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
-```
-const user = {
-  name: "Manz",
-  life: 99,
-  power: 10,
-};
-
-JSON.stringify(user, ["life"])            // '{"life":99}'
-JSON.stringify(user, ["name", "power"])   // '{"name":"Manz","power":10}'
-JSON.stringify(user, [])                  // '{}'
-JSON.stringify(user, null)                // '{"name":"Manz","life":99,"power":10}'
-```
-Observamos que el penúltimo caso, no se conserva ninguna propiedad, mientras que el último, se conserva todo.
-
-Por último, también podemos añadir un tercer parámetro en el método .stringify() que indicará el número de espacios que quieres usar al crear el String del JSON resultante. Observa que hasta ahora, el String está minificado y aparece todo junto en la misma línea.
-
-
-Veamos lo que ocurre en los siguientes casos:
-```
-const user = {
-  name: "Manz",
-  life: 99
-};
-
-JSON.stringify(user, null, 2);
-// {
-//   "name": "Manz",
-//   "life": 99
-// }
-
-JSON.stringify(user, null, 4);
-// {
-//     "name": "Manz",
-//     "life": 99
-// }
-
-JSON.stringify(user, ["name"], 1);
-// {
-//  "name": "Manz"
-// }
-```
-
-En el primer caso, json2, el resultado se genera indentado a 2 espacios. En el segundo caso, json4, el resultado se genera indentado a 4 espacios. En el tercer y último caso, json1, se filtran las propiedades, dejando sólo "name" y se genera indentando a 1 espacio.
-
-
-## Leyendo JSON externo
-Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, que habría que leer desde nuestro código Javascript. Para ello, hoy en día se suele utilizar la función fetch() para hacer peticiones a sitios que devuelven contenido JSON. También se podría leer ficheros locales con contenido .json. 
-
-
 ## Desestructuración de Objetos
 La desestructuración de objetos es, probablemente, una de las estrategias más utilizadas al trabajar en Javascript nativo (o en frameworks como React) debido a que en Javascript se utilizan muchísimo las estructuras de datos de objetos y es muy interesante simplificar lo máximo posible. **Separamos las propiedades name, role y life en variables individuales, «sacándolas» de user.**
 
@@ -378,6 +249,135 @@ Vemos que la diferencia es que, en lugar de hacer el ...user, **utilizamos la fu
 ## Estruturas anidadas
 
 
+
+# FORMATO JSON
+Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
+
+JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
+
+Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
+
+Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
+
+Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
+
+
+Ejemplo de JSON:
+```
+{
+  "name": "Manz",
+  "life": 3,
+  "totalLife": 6
+  "power": 10,
+  "dead": false,
+  "props": ["invisibility", "coding", "happymood"],
+  "senses": {
+    "vision": 50,
+    "audition": 75,
+    "taste": 40,
+    "touch": 80
+  }
+}
+```
+
+---------------------------------------------
+## JSON vs Objetos Javascript
+Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
+- Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
+- Los textos  deben estar entrecomillados con «comillas dobles».
+- Sólo se puede almacenar tipos como string, number, object, array,  boolean o null.
+- Tipos de datos como Function, Date, Regexp u otros, no es posible almacenarlos en un JSON.
+- Tampoco es posible añadir comentarios en un JSON.
+
+
+## Métodos para convertir de Object de Javascript a JSON
+- Parseo (De string a objeto): El método .parse() nos va a permitir pasar el contenido de texto string de un JSON a object. 
+  - Object JSON.parse(str)	⟶ Convierte el texto str (si es un JSON válido) a un objeto y lo devuelve.
+- Convertir a texto (De objeto a string): El método .stringify() nos va a permitir pasar de object de Javascript a contenido de texto string con el JSON en cuestión.
+  - String JSON.stringify(obj) ⟶	Convierte un objeto obj a su representación JSON y la devuelve.
+  - String JSON.stringify(obj, props)	⟶ Idem al anterior, pero filtra y mantiene solo las propiedades del  props.
+  - String JSON.stringify(obj, props, spaces)	⟶ Idem al anterior, pero indenta el JSON a (number) spaces espacios.
+
+
+## Métodos para convertir JSON a objeto
+La acción de convertir JSON a objeto Javascript se le suele denominar parsear. Es una acción que analiza un sting que contiene un JSON válido y devuelve un objeto Javascript con dicha información correctamente estructurada. Para ello, utilizaremos el mencionado método JSON.parse():
+```
+const json = `{
+  "name": "Manz",
+  "life": 99
+}`;
+
+const user = JSON.parse(json);
+
+user.name;  // "Manz"
+user.life;  // 99
+```
+Como se puede ver,  user es un objeto generado a partir del JSON almacenado en la variable  json y podemos consultar sus propiedades y trabajar con ellas sin problemas.
+
+
+## Métodos para convertir objeto a JSON
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  talk: function () {
+    return "Hola!";
+  },
+};
+
+JSON.stringify(user);       // '{"name":"Manz","life":99}'
+```
+
+Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
+
+Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  power: 10,
+};
+
+JSON.stringify(user, ["life"])            // '{"life":99}'
+JSON.stringify(user, ["name", "power"])   // '{"name":"Manz","power":10}'
+JSON.stringify(user, [])                  // '{}'
+JSON.stringify(user, null)                // '{"name":"Manz","life":99,"power":10}'
+```
+Observamos que el penúltimo caso, no se conserva ninguna propiedad, mientras que el último, se conserva todo.
+
+Por último, también podemos añadir un tercer parámetro en el método .stringify() que indicará el número de espacios que quieres usar al crear el String del JSON resultante. Observa que hasta ahora, el String está minificado y aparece todo junto en la misma línea.
+
+
+Veamos lo que ocurre en los siguientes casos:
+```
+const user = {
+  name: "Manz",
+  life: 99
+};
+
+JSON.stringify(user, null, 2);
+// {
+//   "name": "Manz",
+//   "life": 99
+// }
+
+JSON.stringify(user, null, 4);
+// {
+//     "name": "Manz",
+//     "life": 99
+// }
+
+JSON.stringify(user, ["name"], 1);
+// {
+//  "name": "Manz"
+// }
+```
+
+En el primer caso, json2, el resultado se genera indentado a 2 espacios. En el segundo caso, json4, el resultado se genera indentado a 4 espacios. En el tercer y último caso, json1, se filtran las propiedades, dejando sólo "name" y se genera indentando a 1 espacio.
+
+
+## Leyendo JSON externo
+Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, que habría que leer desde nuestro código Javascript. Para ello, hoy en día se suele utilizar la función fetch() para hacer peticiones a sitios que devuelven contenido JSON. También se podría leer ficheros locales con contenido .json. 
 
 -------------------------------
 # ARRAYS
