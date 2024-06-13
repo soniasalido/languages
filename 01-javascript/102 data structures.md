@@ -271,7 +271,31 @@ Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, 
 
 
 # Desestructuración de Objetos
+La desestructuración de objetos es, probablemente, una de las estrategias más utilizadas al trabajar en Javascript nativo (o en frameworks como React) debido a que en Javascript se utilizan muchísimo las estructuras de datos de objetos y es muy interesante simplificar lo máximo posible. **Separamos las propiedades name, role y life en variables individuales, «sacándolas» de user.**
 
+```
+const user = {
+  name: "Manz",
+  role: "streamer",
+  life: 99
+}
+
+const { name, role, life } = user;
+
+console.log(name);
+console.log(role, life);
+```
+
+En lugar de hacer varios console.log() como tenemos en las dos últimas líneas, podemos **«volver a estructurar» en un objeto**, uniendo las diferentes variables en un objeto a la hora de mostrarlo por consola.:
+```
+console.log({ name, role, life });
+```
+
+También es posible **renombrar las propiedades** si lo deseamos:
+```
+const { name, role: type, life } = user;
+console.log({ name, type, life });
+```
 
 
 -------------------------------
