@@ -247,9 +247,85 @@ Vemos que la diferencia es que, en lugar de hacer el ...user, **utilizamos la fu
 
 
 ## Estruturas anidadas
+```
+const user = {
+  name: "Manz",
+  role: "streamer",
+  attributes: {
+    height: 183,
+    favColor: "blueviolet",
+    hairColor: "black"
+  }
+}
+```
+Extraer la propiedad attributes:
+```
+// Extraemos propiedad attributes (objeto con 3 propiedades)
+const { attributes } = user;
+console.log(attributes);
+
+// Extraemos propiedad height (number)
+const { attributes: { height } } = user;
+console.log(height);
+
+// Extraemos propiedad height (number) y la cambiamos por nombre size
+const { attributes: { height: size } } = user;
+console.log(size);
+```
 
 
+## Desestructuración de Objetos (rest)
+```
+const user = {
+  name: "Manz",
+  role: "streamer",
+  life: 99
+}
 
+const { name, ...rest } = user;
+```
+En este caso, la propiedad name la desestructuramos como variable y en el caso de rest la desestructuramos como un objeto que contiene las propiedades role y life.
+
+## Parámetros desestructurados
+La desestructuración de parámetros es algo muy interesante a la hora de simplificar código, ya que podemos separar en variables individuales un objeto que en un ámbito específico es muy complejo de utilizar, y sería mucho más sencillo usarlo como variable.
+```
+const user = {
+  name: "Manz",
+  role: "streamer",
+  life: 99
+}
+
+function show(data) {
+  const stars = "⭐".repeat(data.life / 20);
+  return `Nombre: ${data.name} (${data.role}) ${stars}`;
+}
+
+show(user);   // "Nombre: Manz (streamer) ⭐⭐⭐⭐"
+```
+El punto clave en este ejemplo es el parámetro data de la función show(). Localiza donde se define y donde lo utilizamos en el interior de la función show. Ahora, lo que vamos a hacer es desestructurar los parámetros para que sea más fácil de escribir:
+```
+const user = {
+  name: "Manz",
+  role: "streamer",
+  life: 99
+}
+
+function show({ name, role, life }) {
+  const stars = "⭐".repeat(life / 20);
+  return `Nombre: ${name} (${role}) ${stars}`;
+}
+
+show(user);   // "Nombre: Manz (streamer) ⭐⭐⭐⭐"
+```
+
+Como ves, en lugar de definir data en los parámetros, desestructuramos definiendo sólo las propiedades que vamos a utilizar, en este caso todas, por lo que establecemos { name, role, life }. Luego, en su interior, en lugar de estar indicando el prefijo data. continuamente, hacemos simplemente referencia a la variable.
+
+Si lo necesitasemos, también podríamos usar rest en este caso.
+
+
+**Recuerda que la desestructuración solo funciona para estructuras de datos. Si tienes un objeto que contiene métodos o elementos del DOM, por ejemplo, no se copiarán y lanzará una excepción.**
+
+--------------------------------------------------------------------
 # FORMATO JSON
 Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
 
