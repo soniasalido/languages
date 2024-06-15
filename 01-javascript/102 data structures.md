@@ -440,6 +440,66 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 | Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados <br> ⚠️ No funciones/DOM		| ✅ Sí |
 
 
+```
+// ❌ Esto no realiza una clonación, es una referencia al original
+const copy = data;
+
+// ❌ Sólo superficial (Hay que crear objeto con el mismo tipo)
+const copy = {};
+Object.assign(copy, data);
+
+// ❌ Sólo superficial
+const copy = { ...data };
+```
+
+
+**El ... (spread) o el Object.assign()** pueden interesarnos si necesitamos un mecanismo rápido de clonación, tenemos estructuras de un solo nivel y no nos interesan tipos de datos avanzados, sino datos primitivos.
+
+Ahora veamos las formas donde podemos realizar clonación profunda y copiar los elementos incluso a niveles de profundidad mayores y no sólo el primer nivel (como ocurre en la clonación superficial):
+```
+// ✅ El truco de JSON funciona, ❌ pero estamos limitados a los tipos de JSON
+const string = JSON.stringify(data);
+const copy = JSON.parse(string);
+
+// ✅ Con Lodash, ten en cuenta que necesitaremos descargar/parsear librería externa
+import { cloneDeep } from "lodash-es";
+const copy = cloneDeep(data);
+
+// ✅ Con structuredClone, ciertos tipos (funciones, DOM) devuelven excepción
+const copy = structuredClone(data);
+```
+
+**Como conclusión:**
+- Usa ... (spread) o Object.assign() si trabajas con datos primitivos y un sólo nivel de profundidad.
+- Usa JSON.parse() y JSON.stringify() en el mismo caso. Útil si necesitas navegadores muy antiguos.
+- Usa structuredClone() si quieres un clonado moderno, que soporte diferentes niveles de profundidad.
+- Usa cloneDeep() de Lodash si requieres clonado de funciones y no te supone un coste incluir dependencias externas.
+
+## Resumen donde puedes ver que tipos de datos puede clonar cada uno de los métodos que permiten clonación profunda:
+**Tipos BÁSICOS (primitivos):**
+| Tipo de dato	 | ...spread / Object.assign()  | JSON.parse()	| _.cloneDeep() | structuredClone() |
+| --- | --- | --- | --- | --- |
+| NUMBER | ✅ Sí	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+| STRING | ✅ Sí	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+| BOOLEAN | ✅ Sí	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+| undefined	 | ✅ Sí	 | ⚠️ null	 | ✅ Sí	 | ✅ Sí |
+| null	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+
+**Tipos COMPLEJOS ( NO primitivos):**
+| Tipo de dato	 | ...spread / Object.assign()  | JSON.parse()	| _.cloneDeep() | structuredClone() |
+| --- | --- | --- | --- | --- |
+| ARRAY | ❌ No, referencia	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+| OBJECT | ❌ No, referencia	 | ✅ Sí	 | ✅ Sí	 | ✅ Sí |
+| DATE | ❌ No, referencia	 | ⚠️ string	 | ✅ Sí	 | ✅ Sí |
+| BIGINT | ❌ No, referencia	 | ❌ Devuelve TypeError	 | ✅ Sí	 | ✅ Sí |
+| REGEXP | ❌ No, referencia	 | ⚠️ {} vacío	 | ✅ Sí	 | ✅ Sí |
+| MAP / SET | ❌ No, referencia	 | ⚠️ {} vacío	 | ✅ Sí	 | ✅ Sí |
+| SYMBOL | ❌ No, referencia	 | ✅ Sí	 | ✅ Sí	 | ❌ Devuelve DOMException |
+| FUNCTION / CLASS | 	❌ No, referencia	 | ⚠️ null	 | ✅ Sí	 | ❌ Devuelve DOMException |
+| Elemento del DOM	 | ❌ No, referencia	 | ⚠️ {} vacío	 | ❌ No, referencia	 | ❌ Devuelve DOMException |
+
+
+
 ---------------------------------------------
 ## JSON vs Objetos Javascript
 Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
