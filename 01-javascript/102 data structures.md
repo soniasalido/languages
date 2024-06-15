@@ -1692,3 +1692,16 @@ Los tipos de dato Map son muy similares a los Objetos de Javascript, ya que esto
 | Desempeño de Operaciones	| Optimizado para cadenas	| Mejor para claves de tipos variados | 
 | Tamaño	| No hay método directo	| size | 
 
+
+## Cuando usar Object:
+- Claves de tipo string (o símbolo): Si todas tus claves son strings (o símbolos), un objeto es la opción más natural y sencilla.
+- Acceso rápido a propiedades: Los objetos ofrecen un acceso muy rápido a sus valores a través de la notación de punto (.) o de corchetes ([]).
+- JSON: Si necesitas serializar tus datos en formato JSON, los objetos son la opción ideal, ya que JSON se basa en la estructura de objetos de JavaScript.
+- Prototipos y herencia: Si necesitas utilizar la herencia de prototipos en tus datos, los objetos son la única opción, ya que los mapas no soportan esta característica.
+
+## Cuando usar Map:
+- Claves de cualquier tipo: Si necesitas utilizar claves que no sean strings (o símbolos), como números, booleanos, objetos u otros mapas, entonces debes usar un Map.
+- Orden de inserción: Si el orden en que se insertaron los elementos es importante para tu aplicación, un Map es la mejor opción, ya que mantiene este orden.
+- Tamaño dinámico: Si el número de elementos en tu colección puede variar y necesitas conocer su tamaño exacto en cualquier momento, un Map es más adecuado, ya que proporciona la propiedad size.
+- Iteración: Si necesitas iterar sobre las claves, los valores o las entradas (pares clave-valor) de forma directa y eficiente, un Map ofrece métodos específicos para ello (keys(), values() y entries()).
+
