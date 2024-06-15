@@ -140,14 +140,28 @@ console.log(juan.constructor.name); // Salida: "Persona"
 ```
 
 # Tipos de Notación:
+ En JavaScript, existen varios tipos de notación que se utilizan para representar y trabajar con diferentes tipos de datos y estructuras. 
 | Notación | Descripción |
 | ---- | ----|
-| ; | Finalización de cada línea. No es obligatorio.|
-| . | Se usa en los objetos para acceder a los atributos (propiedades). |
-| [] | Se usa en las listas, arrays, objetos. Se usa para definir y para acceder a una valor dentro de un array. Permite acceder a las propiedades de un objeto utilizando corchetes |
-| () | Se usan para funciones. |
-| {} | Notación literal de objetos, funciones y estructuras de control. |
-| JSON | Notación JSON (JavaScript Object Notation) |
+| 1. Notación Literal: |
+| Números | Se representan directamente con dígitos (ej: 42, 3.14).|
+| Strings | Se encierran entre comillas simples o dobles (ej: "Hola", 'Mundo').|
+| Booleanos | Los valores true y false.|
+| Arrays | Se definen entre corchetes, con elementos separados por comas (ej: [1, 2, 3]).|
+| Objetos| Se definen entre llaves, con pares clave-valor separados por comas (ej: { nombre: "Ana", edad: 30 }).|
+| 2. Notación de Punto (.) |
+| Acceso a propiedades de objetos | Se utiliza para acceder a las propiedades de un objeto (ej: persona.nombre).|
+| Llamada a métodos de objetos | Se utiliza para llamar a los métodos de un objeto (ej: Math.random()).|
+| 3. Notación de Corchetes ([]) |
+| Acceso a elementos de arrays | Se utiliza para acceder a los elementos de un array mediante su índice (ej: numeros[0]).|
+| Acceso a propiedades de objetos con nombres dinámicos | Se utiliza cuando el nombre de la propiedad no se conoce de antemano (ej: persona["nombre"]).|
+| 4. Notación de Plantilla Literal (`) |
+| Strings con expresiones incrustadas | Permite incrustar expresiones de JavaScript dentro de un string utilizando ${...} (ej: const nombre = "Ana"; console.log(Hola, ${nombre}!);).|
+| 5. Notación JSON (JavaScript Object Notation)|
+| Intercambio de datos | Es un formato ligero basado en texto para el intercambio de datos, muy utilizado en aplicaciones web. Se basa en la notación de objetos de JavaScript, pero con algunas restricciones (ej: las claves deben ser strings).|
+| 6. Notación de Finalización de cada líne (;) |
+| Finalización de cada línea. No es obligatorio.| x|
+
 
 
 # EXPRESIONES BÁSICAS ********
