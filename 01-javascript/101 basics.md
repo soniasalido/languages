@@ -149,7 +149,7 @@ console.log(juan.constructor.name); // Salida: "Persona"
 | Booleanos | Los valores true y false.|
 | Arrays | Se definen entre corchetes, con elementos separados por comas (ej: [1, 2, 3]).|
 | Objetos| Se definen entre llaves, con pares clave-valor separados por comas (ej: { nombre: "Ana", edad: 30 }).|
-| 2. Notación de Punto (.) | colspan |
+| 2. Notación de Punto (.) |
 | Acceso a propiedades de objetos | Se utiliza para acceder a las propiedades de un objeto (ej: persona.nombre).|
 | Llamada a métodos de objetos | Se utiliza para llamar a los métodos de un objeto (ej: Math.random()).|
 | 3. Notación de Corchetes ([]) |
