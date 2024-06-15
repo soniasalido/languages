@@ -1496,10 +1496,20 @@ console.log(rest); // [4, 5]
 
 
 ### 4. Rest (Agrupar)
+Ubicación: Se utiliza en la definición de funciones, específicamente en la lista de parámetros.
+
+Función: "Recoge" los argumentos restantes y los agrupa en un array.
+```
+function miFuncion(...args) {
+  console.log(args); // args es un array que contiene todos los argumentos pasados a la función
+}
+
+miFuncion(1, 2, 3, 4); // Output: [1, 2, 3, 4]
+```
 
 
 ### 5. Operador ...
-El operador ... en JavaScript puede significar tanto rest (agrupar) como spread (expandir), dependiendo del contexto en el que se utilice. Aquí te explico cómo distinguir entre estos dos usos:
+El operador ... en JavaScript puede significar tanto rest (agrupar) como spread (expandir), dependiendo del contexto en el que se utilice. 
 
 **1. Rest (Agrupar)**
 El operador ... actúa como rest cuando se utiliza en la declaración de funciones o en la desestructuración de arrays y objetos. En este caso, agrupa múltiples elementos en una sola variable.
@@ -1573,6 +1583,9 @@ El operador ... actúa como spread cuando se utiliza en el contexto de una llama
   - Se utiliza en literales de arrays para expandir un iterable en elementos individuales.
   - Se utiliza en literales de objetos para copiar las properties de un objeto a otro.
 
+**Regla mnemotécnica:**
+- Rest: Piensa en "restar" o "recoger" los argumentos restantes en un array.
+- Spread: Piensa en "esparcir" o "expandir" los elementos de un iterable.
 
 La clave para distinguir entre rest y spread es el contexto en el que se utiliza el operador ....
   
