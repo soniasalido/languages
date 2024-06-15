@@ -13,6 +13,17 @@ El esquema general de una página web es un documento HTML donde están las etiq
   - Deserializar Objetos.
 - Popular: Es el lenguaje más usado del mundo.
 - Clave: Estándar en la web.
+- Tipado en JS:
+  - Tipado dinámico: En JavaScript, las variables pueden contener valores de cualquier tipo sin necesidad de una declaración explícita de tipo.
+  - Tipado débil: JavaScript realiza conversiones automáticas entre tipos cuando es necesario. Este comportamiento se conoce como coerción de tipos (type coercion).
+    ```
+    console.log(1 + '2');     // "12" (Número se convierte en cadena)
+    console.log('5' - 2);     // 3 (Cadena se convierte en número)
+    console.log('5' * '2');   // 10 (Ambas cadenas se convierten en números)
+    console.log(1 == '1');    // true (Comparación con coerción de tipos)
+    console.log(1 === '1');   // false (Comparación estricta sin coerción)
+    ```
+  - Tipado inferido: cuando definimos una variable se define de forma general. El tipo de una variable se define cuando el intérprete, interpreta esa variable.
 
 
 # Script en línea
