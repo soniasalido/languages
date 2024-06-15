@@ -89,6 +89,26 @@ Para incluir un fichero JavaScript externo en un documento HTML, se utiliza la e
 <script src="ruta/al/archivo.js" async></script>
 ```
 
+# Etiqueta noscript
+La etiqueta <noscript> en HTML es una etiqueta especial que se utiliza para proporcionar contenido alternativo para los navegadores web que no tienen JavaScript habilitado o para aquellos en los que el soporte de JavaScript está deshabilitado. Esta etiqueta es útil para mejorar la accesibilidad y la funcionalidad de un sitio web para los usuarios que no pueden o no desean ejecutar JavaScript.
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noscript Example</title>
+</head>
+<body>
+    <h1>Welcome to Our Website</h1>
+    <p>If you can see this message, JavaScript is enabled in your browser.</p>
+    <noscript>
+        <p>JavaScript is disabled in your browser. Please enable JavaScript for the best experience on our site.</p>
+    </noscript>
+</body>
+</html>
+```
+
 
 # Identificar el tipo de dato de una variable o constante
 - Uso de typeof(): Es un operador esencial que nos permite determinar el tipo de dato de una variable o valor. Esto es crucial en un lenguaje dinámico como JavaScript, donde los tipos pueden cambiar.
