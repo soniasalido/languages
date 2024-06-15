@@ -1645,3 +1645,50 @@ console.log(user); // {"name": "Adam", "age": 22}
 user = {}; // TypeError: Assignment to constant variable
 ```
 
+
+# Set - Conjuntos
+Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
+```
+const set = new Set();                    // Set({})               (Conjunto vacío)
+const set = new Set([5, 6, 7, 8, 9]);     // Set({5, 6, 7, 8, 9})  (Conjunto con 5 elementos)
+const set = new Set([5, 5, 7, 8, 9]);     // Set({5, 7, 8, 9})     (Conjunto con 4 elementos)
+
+set.constructor.name;                     // "Set"
+```
+
+# WeakSet
+En JavaScript, WeakSet es una colección de objetos, similar a un conjunto (Set), pero con algunas diferencias importantes que lo hacen más adecuado para ciertos casos de uso relacionados con la gestión de memoria y la eliminación automática de objetos.
+
+# Map
+Los Map en Javascript son estructuras de datos nativas que permiten implementar una estructura de tipo mapa, es decir, una estructuras donde tiene valores guardados a través de una clave para identificarlos. Comúnmente, esto se denomina pares clave-valor.
+
+Un Map es una colección de pares clave-valor, donde cada clave está asociada a un valor único. A diferencia de los objetos simples en JavaScript, donde las claves deben ser strings (o símbolos), en un Map puedes utilizar cualquier tipo de dato como clave, incluyendo números, booleanos, objetos e incluso otros Map.
+
+## Características principales:
+- Claves únicas: Cada clave en un Map debe ser única. Si intentas agregar un valor con una clave existente, el valor anterior será sobrescrito.
+- Orden de inserción: Un Map mantiene el orden de inserción de los elementos. Esto significa que puedes iterar sobre los elementos en el mismo orden en que fueron agregados.
+- Métodos útiles: Los Map ofrecen una variedad de métodos para manipular y acceder a sus elementos, como set(), get(), has(), delete(), size, keys(), values() y entries().
+
+```
+const map = new Map();                                        // Map({}) (Mapa vacío)
+const map = new Map([[1, "uno"]]);                            // Map({ 1=>"uno" })
+const map = new Map([[1, "uno"], [2, "dos"], [3, "tres"]]);   // Map({ 1=>"uno", 2=>"dos", 3=>"tres" })
+
+map.constructor.name;                     // "Map"
+```
+En este ejemplo, creamos un elemento map, que no es más que un mapa de pares clave-valor. El primer map se define como un mapa vacío, el segundo, es un mapa con un solo elemento, y el tercero con 3 elementos. Para inicializar los mapas con datos, se introduce como parámetro un array de entradas (un array de arrays), que en nuestro tercer caso tiene estas combinaciones:
+- Clave: NUMBER 1 => Valor: STRING "uno"
+- Clave: NUMBER 2 => Valor: STRING "dos"
+- Clave: NUMBER 3 => Valor: STRING "tres"
+
+Los tipos de dato Map son muy similares a los Objetos de Javascript, ya que estos últimos se pueden usar como estructuras de diccionario mediante pares clave-valor. Sin embargo, los Object tienen algunas diferencias como que pueden colisionar algunos nombres de claves o que las claves deben ser string o symbol, entre varias otras.
+
+**Comparación de Map con Objetos:**
+| Característica |	Object	| Map |
+| ---- | ---- | ---- |
+| Tipos de Claves	| Strings y Symbols	| Cualquier tipo (incluso objetos) | 
+| Orden de Inserción	| No garantizado	| Garantizado
+| Iteración	| Propiedades enumerables	| Métodos específicos (keys(), values(), entries()) | 
+| Desempeño de Operaciones	| Optimizado para cadenas	| Mejor para claves de tipos variados | 
+| Tamaño	| No hay método directo	| size | 
+
