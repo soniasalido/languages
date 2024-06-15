@@ -430,14 +430,14 @@ Si realizamos una clonación profunda, no tendríamos este problema, se clonarí
 ## Clonando elementos en Javascript
 Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ventajas y desventajas:
 
-| Estrategia	| Clonación superficial |	Clonación profunda | Tipos de datos avanzados	| Nativo | Más info
+| Estrategia | Clonación superficial | Clonación profunda | Tipos de datos avanzados | Nativo | Más info |
 | --- | --- |
-| Asignación =	| ❌ No		| ❌ No		| ❌ No		| ✅ Sí	
-| Usar Object.assign()		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí
-| Usar spread ...		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí		| Copias con spread
-| Serializar con JSON.parse()		| ✅ Sí		| ✅ Sí		| ⚠️ Solo tipos básicos ⚠️ No funciones/DOM		| ✅ Sí		| ![JSON](https://lenguajejs.com/javascript/objetos/desestructuracion-objetos/#haciendo-copias-de-objetos)
-| Usar _.cloneDeep() de Lodash		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No DOM		| ❌ No		| ![cloneDeep](https://lenguajejs.com/javascript/objetos/json/)
-| Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No funciones/DOM		| ✅ Sí
+| Asignación =	| ❌ No		| ❌ No		| ❌ No		| ✅ Sí	|
+| Usar Object.assign()		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí |
+| Usar spread ...		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí		| Copias con spread |
+| Serializar con JSON.parse()		| ✅ Sí		| ✅ Sí		| ⚠️ Solo tipos básicos ⚠️ No funciones/DOM		| ✅ Sí		| [JSON](https://lenguajejs.com/javascript/objetos/desestructuracion-objetos/#haciendo-copias-de-objetos) |
+| Usar _.cloneDeep() de Lodash		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No DOM		| ❌ No		| [cloneDeep](https://lenguajejs.com/javascript/objetos/json/) |
+| Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No funciones/DOM		| ✅ Sí |
 
 
 
