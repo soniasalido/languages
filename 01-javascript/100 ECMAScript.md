@@ -104,3 +104,86 @@ El programador decide crear código de la última versión de ECMAScript. Para a
 La ventaja de este método es que se puede escribir código Javascript moderno y actualizado (con sus ventajas y novedades) y cuando los navegadores soporten completamente esa versión de ECMAScript, sólo tendremos que retirar el transpilador (porque no lo necesitaremos). La desventaja es que hay que preprocesar el código (cada vez que cambie) para hacer la traducción.
 
 Quizás, el enfoque más moderno de los mencionados es utilizar transpiladores. Sistemas como Babel son muy utilizados y se encargan de traducir de ECMAScript 6 a ECMAScript 5.
+
+
+La transpilación es el proceso de convertir el código fuente escrito en un lenguaje de programación a otro lenguaje de programación. En el contexto de JavaScript, la transpilación se refiere generalmente a la conversión de código ECMAScript moderno (como ECMAScript 2023) a una versión más antigua de ECMAScript (como ECMAScript 5) para asegurar la compatibilidad con todos los navegadores, incluyendo aquellos que no soportan las características más recientes del lenguaje.
+
+**¿Por Qué es Necesaria la Transpilación?**
+- Compatibilidad del Navegador: No todos los navegadores soportan las últimas características de ECMAScript. Los navegadores más antiguos o aquellos que no se actualizan frecuentemente pueden no ser compatibles con el código ECMAScript moderno.
+- Uso de Características Modernas: Los desarrolladores quieren aprovechar las nuevas características del lenguaje que hacen que el código sea más limpio, eficiente y mantenible.
+
+
+** Herramientas de Transpilación**
+- Las herramientas de transpilación más comunes en el ecosistema JavaScript son:
+  - Babel: Babel es la herramienta de transpilación más popular en JavaScript. Convierte el código ECMAScript moderno a ECMAScript 5, que es ampliamente soportado por la mayoría de los navegadores.
+  - TypeScript Compiler: TypeScript es un superset de JavaScript que añade tipos estáticos. El compilador de TypeScript también puede transpilar código TypeScript a JavaScript estándar.
+
+
+# Svelte y la traspilación
+Si bien es cierto que Svelte compila el código a JavaScript puro (vanilla JS), lo que mejora significativamente la compatibilidad del código con muchos navegadores, aún hay algunos puntos a considerar para garantizar una compatibilidad completa, especialmente con navegadores más antiguos. Aquí hay algunas aclaraciones y consideraciones:
+
+## Compilación a JavaScript Puro
+Svelte compila los componentes a JavaScript puro optimizado, lo que significa que el código resultante generalmente es compatible con la mayoría de los navegadores modernos. Esto elimina muchas de las preocupaciones típicas de compatibilidad que se encuentran al usar sintaxis y características modernas de JavaScript directamente.
+
+## Consideraciones Adicionales para Compatibilidad
+### 1. Funciones y APIs Modernas:
+- Aunque el código de Svelte se compila a JavaScript puro, si tu código utiliza funciones o APIs modernas de JavaScript (como fetch, Promise, async/await, Map, Set, etc.), estas aún podrían no ser compatibles con navegadores antiguos.
+- Solución: Utilizar polyfills para agregar soporte para estas funciones y APIs en navegadores que no las soportan nativamente.
+```
+// main.js
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import App from './App.svelte';
+
+const app = new App({
+  target: document.body,
+});
+
+export default app;
+```
+### 2. Características de CSS Moderno:
+- Svelte también permite escribir CSS moderno en sus componentes. Si usas características modernas de CSS que no son compatibles con navegadores antiguos, es posible que necesites escribir fallbacks o utilizar herramientas de post-procesamiento de CSS como Autoprefixer.
+- Solución: Configurar herramientas de post-procesamiento de CSS para añadir los prefijos necesarios y asegurar la compatibilidad.
+
+### 3. Transpilación de JavaScript:
+- Svelte en sí no transcompila automáticamente el código JavaScript moderno a versiones más antiguas de ECMAScript. Si utilizas características de ECMAScript 6+ que no son compatibles con todos los navegadores, necesitas una herramienta como Babel para transpilar tu código a una versión compatible.
+- Solución: Configurar Babel en tu proyecto Svelte.
+```
+// svelte.config.js
+import svelte from 'rollup-plugin-svelte';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+
+export default {
+  input: 'src/main.js',
+  output: {
+    format: 'iife',
+    file: 'public/build/bundle.js',
+  },
+  plugins: [
+    svelte(),
+    resolve(),
+    commonjs(),
+    babel({
+      extensions: ['.js', '.mjs', '.html', '.svelte'],
+      exclude: ['node_modules/**'],
+      presets: [
+        ['@babel/preset-env', {
+          targets: '> 0.25%, not dead',
+        }],
+      ],
+    }),
+  ],
+};
+```
+
+## Estrategia Combinada
+Para asegurar la compatibilidad más amplia posible, puedes combinar varias estrategias:
+- Uso de Polyfills: Incluir polyfills para funciones y APIs modernas que puedan no estar soportadas en todos los navegadores.
+- Transpilación con Babel: Utilizar Babel para transpilar el código JavaScript moderno a una versión más antigua y compatible.
+- Post-procesamiento de CSS: Utilizar herramientas como Autoprefixer para asegurar la compatibilidad del CSS.
+- Pruebas Cross-Browser: Realizar pruebas en varios navegadores para identificar cualquier problema de compatibilidad y solucionarlo.
+
+## Conclusión
+Usar Svelte simplifica en gran medida la escritura de aplicaciones web modernas al compilar el código a JavaScript puro, lo que mejora la compatibilidad con navegadores modernos. Sin embargo, para garantizar una compatibilidad completa, especialmente con navegadores más antiguos, es recomendable utilizar polyfills, herramientas de transpilación como Babel y post-procesamiento de CSS. Esto asegura que tu aplicación funcione correctamente en el mayor número posible de navegadores.
