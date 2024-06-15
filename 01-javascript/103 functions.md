@@ -31,6 +31,14 @@ Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recom
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
+## Ámbito variable VAR
+En JavaScript, el ámbito (scope) de las variables declaradas con var se diferencia del ámbito de las variables declaradas con let y const, introducidas en ES6.
+- Las variables declaradas con var tienen ámbito de función. Esto significa que si declaras una variable con var dentro de una función, esa variable es accesible en cualquier parte de esa función, pero no fuera de ella.
+- Confusión por Hoisting: El comportamiento de elevación puede llevar a errores y confusión porque las variables parecen estar disponibles antes de ser declaradas.
+
+Para abordar estas dificultades, ES6 introdujo dos nuevas formas de declarar variables: let y const.
+- let: Las variables declaradas con let tienen ámbito de bloque y no se elevan de la misma manera que var. Esto significa que una variable declarada con let solo es accesible dentro del bloque en el que se declara.
+- const: Las variables declaradas con const también tienen ámbito de bloque y deben ser inicializadas en el momento de su declaración. Además, las variables const no pueden ser reasignadas.
 
 
 ## Definición de Funciones
