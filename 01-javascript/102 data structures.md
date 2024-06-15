@@ -1587,8 +1587,6 @@ El operador ... actúa como spread cuando se utiliza en el contexto de una llama
 - Rest: Piensa en "restar" o "recoger" los argumentos restantes en un array.
 - Spread: Piensa en "esparcir" o "expandir" los elementos de un iterable.
 
-La clave para distinguir entre rest y spread es el contexto en el que se utiliza el operador ....
-  
 
 ## Reestructuración de arrays
 Tenemos un array de 2 elementos [3, 4] y queremos aprovecharlo para crear un nuevo array del 1 al 5. Vamos a hacer uso de la desestructuración para reaprovecharlo:
@@ -1604,74 +1602,34 @@ const complete = [1, 2, pair, 5];     // [1, 2, [3, 4], 5]
 
 En este caso, tendríamos que complete es el nuevo array [1, 2, 3, 4, 5] que buscábamos si usamos la desestructuración, pero ten en cuenta que si no utilizaramos el ... previo al pair, conseguiríamos algo muy diferente: [1, 2, [3, 4], 5].
 
----------------
-// Inicialización de arrays de forma literal.
-const collection = ["hey", "ho", "let's go"]; // [] => Inicializador de arrays
 
 
-// Un array puede contener cualquier tipo de elemento
-const mixedCollection = [1, 2, 3, "Go!", { object: true }];
-
-// *** INCISO: Equivalencia con un objeto ... los arrays SON OBJETOS! ****************************
-const collectionObject = {
-  0: "hey",
-  1: "ho",
-  2: "let's go",
-  length: 3,
-};
-console.log(collection, collectionObject); // Inspeccionar ambas estructuras
-//************************************************************************************************
-
-// Añadiendo elementos al array:
-collection.push("yay!");
-console.log(collection); // ["hey", "ho", "let's go", "yay"]
-collection[4] = "nice";
-console.log(collection); // ["hey", "ho", "let's go", "yay", "nice"]
-console.log(collection.length); // 5
-
-// Sparse array: Solo almacena en memoria los valores que hayan sido asignados. Es posible puesto
-// que los arrays son objetos con claves numéricas, no hay reserva de memoria consecutiva.
-collection[100] = "oops!";
-console.log(collection); // ["hey", "ho", "let's go", "yay", "nice", empty x95, "oops!"]
-console.log(collection.length); // 101
-
-
-// Comparando arrays
-// ⚠ Los arrays son objetos y por tanto implementan la misma comparación que éstos:
+## Comparando arrays
+⚠ Los arrays son objetos y por tanto implementan la misma comparación que éstos:
+```
 const collection = [3];
 console.log(collection === [3]); // false. Different object.
 console.log(collection === collection); // true
 console.log([] == ""); // true (type coertion). [].toString() => "" == ''
+```
 
 
-///-- MUTABILIDAD EN ESTRUCTURAS DE DATOS ********************************************************
+# MUTABILIDAD EN ESTRUCTURAS DE DATOS
+En javascript tenemos, principalmente, dos formas de declarar variables: "let" y "const". Estas 2 formas diferenciadas se entenderán mejor cuando expliquemos una tercera, mediante la keyword "var", que se empleaba de forma primigenia hasta la llegada de "let" y "const".
 
-/*
-En javascript tenemos, principalmente, dos formas de declarar variables: "let" y "const".
-Estas 2 formas diferenciadas se entenderán mejor cuando expliquemos una tercera, mediante la 
-keyword "var", que se empleaba de forma primigenia hasta la llegada de "let" y "const".
+Las diferencias entre ellas tienen más que ver con su ámbito y su capacidad de ser re-declaradas y re-asigandas. Y esto último es muy importante: RE-ASIGNCIÓN.
 
-Las diferencias entre ellas tienen más que ver con su ámbito y su capacidad de ser re-declaradas
-y re-asigandas. Y esto último es muy importante: RE-ASIGNCIÓN.
+UN ERROR COMÚN es pensar que "const" hace "constante" cualquier variable. Es decir, que "const" de algún modo congela el valor que le hayamos asignado, no siendo posible mutarlo en la práctica. PERO ESTO ES FALSO! "const" simplemente significa que la variable NO puede ser RE-ASIGNADA!
 
-UN ERROR COMÚN es pensar que "const" hace "constante" cualquier variable. Es decir, que "const"
-de algún modo congela el valor que le hayamos asignado, no siendo posible mutarlo en la práctica.
-PERO ESTO ES FALSO! "const" simplemente significa que la variable NO puede ser RE-ASIGNADA!
+El motivo principal para pensar así suele venir de los valores primitivos. Al declararlos con "const" solemos pensar: "ya no puedo cambiarlo nunca más". Pero realmente, lo que no podemos es RE-ASIGNAR la variable declarada con "const". Los primitivos ya son no-mutables por naturaleza, "const" no les confiere ningún superpoder para 'congelarse'.
 
-El motivo principal para pensar así suele venir de los valores primitivos. Al declararlos con
-"const" solemos pensar: "ya no puedo cambiarlo nunca más". Pero realmente, lo que no podemos es
-RE-ASIGNAR la variable declarada con "const". Los primitivos ya son no-mutables por naturaleza, 
-"const" no les confiere ningún superpoder para 'congelarse'.
-*/
-
+```
 const primitive = true;
 primitive = false; // TypeError: Assignment to constant variable
+```
 
-/*
-SIN EMBARGO, cuando declaramos con "const" estructuras de datos, si que podemos mutarlas puesto
-que "const" no nos previene de ello, simplemente evita que reasignemos la variable.
-*/
-
+SIN EMBARGO, cuando declaramos con "const" estructuras de datos, si que podemos mutarlas puesto que "const" no nos previene de ello, simplemente evita que reasignemos la variable.
+```
 const list = ["hey", "ho", "let's go"];
 list[2] = "yay";
 console.log(list); // ["hey", "ho", "yay"]
@@ -1685,3 +1643,5 @@ const user = {
 user.age = 22;
 console.log(user); // {"name": "Adam", "age": 22}
 user = {}; // TypeError: Assignment to constant variable
+```
+
