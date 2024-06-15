@@ -435,16 +435,10 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 | Asignación =	| ❌ No		| ❌ No		| ❌ No		| ✅ Sí	|
 | Usar Object.assign()		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí |
 | Usar spread ...		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí		| Copias con spread |
-| Serializar con JSON.parse()		| ✅ Sí		| ✅ Sí		| ⚠️ Solo tipos básicos ⚠️ No funciones/DOM		| ✅ Sí		| [JSON](https://lenguajejs.com/javascript/objetos/desestructuracion-objetos/#haciendo-copias-de-objetos) |
-| Usar _.cloneDeep() de Lodash		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No DOM		| ❌ No		| [cloneDeep](https://lenguajejs.com/javascript/objetos/json/) |
-| Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No funciones/DOM		| ✅ Sí |
+| Serializar con JSON.parse()		| ✅ Sí		| ✅ Sí		| ⚠️ Solo tipos básicos <br> ⚠️ No funciones/DOM		| ✅ Sí		| [JSON](https://lenguajejs.com/javascript/objetos/desestructuracion-objetos/#haciendo-copias-de-objetos) |
+| Usar _.cloneDeep() de Lodash		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados <br> ⚠️ No DOM		| ❌ No		| [cloneDeep](https://lenguajejs.com/javascript/objetos/json/) |
+| Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados <br> ⚠️ No funciones/DOM		| ✅ Sí |
 
-
-
-| Estrategia | Clonación superficial |
-| --- | --- |
-| `git status` | List all *new or modified* files |
-| `git diff` | Show file differences that **haven't been** staged |
 
 ---------------------------------------------
 ## JSON vs Objetos Javascript
