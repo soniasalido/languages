@@ -656,137 +656,7 @@ Agrupar por criterio (legacy)" hace referencia a una técnica de programación u
 
 En el contexto de JavaScript, los métodos .groupBy() son funciones que permiten agrupar elementos de una colección según un criterio definido por una función de agrupamiento. Aunque métodos como Object.groupBy() y Map.groupBy() han sido propuestos para el estándar ECMAScript, aún no forman parte de él, por lo que a menudo se implementan mediante soluciones personalizadas.
 
---------------------------------------------------------------------
-# FORMATO JSON
-Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
-
-JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
-
-Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
-
-Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
-
-Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
-
-
-Ejemplo de JSON:
-```
-{
-  "name": "Manz",
-  "life": 3,
-  "totalLife": 6
-  "power": 10,
-  "dead": false,
-  "props": ["invisibility", "coding", "happymood"],
-  "senses": {
-    "vision": 50,
-    "audition": 75,
-    "taste": 40,
-    "touch": 80
-  }
-}
-```
-
-## JSON vs Objetos Javascript
-Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
-- Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
-- Los textos  deben estar entrecomillados con «comillas dobles».
-- Sólo se puede almacenar tipos como string, number, object, array,  boolean o null.
-- Tipos de datos como Function, Date, Regexp u otros, no es posible almacenarlos en un JSON.
-- Tampoco es posible añadir comentarios en un JSON.
-
-
-## Métodos para convertir de Object de Javascript a JSON
-- Parseo (De string a objeto): El método .parse() nos va a permitir pasar el contenido de texto string de un JSON a object. 
-  - Object JSON.parse(str)	⟶ Convierte el texto str (si es un JSON válido) a un objeto y lo devuelve.
-- Convertir a texto (De objeto a string): El método .stringify() nos va a permitir pasar de object de Javascript a contenido de texto string con el JSON en cuestión.
-  - String JSON.stringify(obj) ⟶	Convierte un objeto obj a su representación JSON y la devuelve.
-  - String JSON.stringify(obj, props)	⟶ Idem al anterior, pero filtra y mantiene solo las propiedades del  props.
-  - String JSON.stringify(obj, props, spaces)	⟶ Idem al anterior, pero indenta el JSON a (number) spaces espacios.
-
-
-## Métodos para convertir JSON a objeto
-La acción de convertir JSON a objeto Javascript se le suele denominar parsear. Es una acción que analiza un sting que contiene un JSON válido y devuelve un objeto Javascript con dicha información correctamente estructurada. Para ello, utilizaremos el mencionado método JSON.parse():
-```
-const json = `{
-  "name": "Manz",
-  "life": 99
-}`;
-
-const user = JSON.parse(json);
-
-user.name;  // "Manz"
-user.life;  // 99
-```
-Como se puede ver,  user es un objeto generado a partir del JSON almacenado en la variable  json y podemos consultar sus propiedades y trabajar con ellas sin problemas.
-
-
-## Métodos para convertir objeto a JSON
-```
-const user = {
-  name: "Manz",
-  life: 99,
-  talk: function () {
-    return "Hola!";
-  },
-};
-
-JSON.stringify(user);       // '{"name":"Manz","life":99}'
-```
-
-Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
-
-Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
-```
-const user = {
-  name: "Manz",
-  life: 99,
-  power: 10,
-};
-
-JSON.stringify(user, ["life"])            // '{"life":99}'
-JSON.stringify(user, ["name", "power"])   // '{"name":"Manz","power":10}'
-JSON.stringify(user, [])                  // '{}'
-JSON.stringify(user, null)                // '{"name":"Manz","life":99,"power":10}'
-```
-Observamos que el penúltimo caso, no se conserva ninguna propiedad, mientras que el último, se conserva todo.
-
-Por último, también podemos añadir un tercer parámetro en el método .stringify() que indicará el número de espacios que quieres usar al crear el String del JSON resultante. Observa que hasta ahora, el String está minificado y aparece todo junto en la misma línea.
-
-
-Veamos lo que ocurre en los siguientes casos:
-```
-const user = {
-  name: "Manz",
-  life: 99
-};
-
-JSON.stringify(user, null, 2);
-// {
-//   "name": "Manz",
-//   "life": 99
-// }
-
-JSON.stringify(user, null, 4);
-// {
-//     "name": "Manz",
-//     "life": 99
-// }
-
-JSON.stringify(user, ["name"], 1);
-// {
-//  "name": "Manz"
-// }
-```
-
-En el primer caso, json2, el resultado se genera indentado a 2 espacios. En el segundo caso, json4, el resultado se genera indentado a 4 espacios. En el tercer y último caso, json1, se filtran las propiedades, dejando sólo "name" y se genera indentando a 1 espacio.
-
-
-## Leyendo JSON externo
-Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, que habría que leer desde nuestro código Javascript. Para ello, hoy en día se suele utilizar la función fetch() para hacer peticiones a sitios que devuelven contenido JSON. También se podría leer ficheros locales con contenido .json. 
-
--------------------------------
-# ARRAYS
+# 2. ARRAYS
 Datos estructurados siguiendo un orden. Cada dato se identifica con un índice que indica su posición dentro de la estructura. Un  es una colección o agrupación de elementos en una misma variable, cada uno de ellos ubicado por la posición que ocupa en el array. En algunas ocasiones también se les suelen llamar arreglos o vectores. En Javascript, se pueden definir de varias formas:
 
 | Constructor |	Descripción |
@@ -1657,7 +1527,7 @@ user = {}; // TypeError: Assignment to constant variable
 ```
 
 
-# Set - Conjuntos
+# 3. Set - Conjuntos
 Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
 ```
 const set = new Set();                    // Set({})               (Conjunto vacío)
@@ -1667,10 +1537,7 @@ const set = new Set([5, 5, 7, 8, 9]);     // Set({5, 7, 8, 9})     (Conjunto con
 set.constructor.name;                     // "Set"
 ```
 
-# WeakSet
-En JavaScript, WeakSet es una colección de objetos, similar a un conjunto (Set), pero con algunas diferencias importantes que lo hacen más adecuado para ciertos casos de uso relacionados con la gestión de memoria y la eliminación automática de objetos.
-
-# Map
+# 4. Map
 Los Map en Javascript son estructuras de datos nativas que permiten implementar una estructura de tipo mapa, es decir, una estructuras donde tiene valores guardados a través de una clave para identificarlos. Comúnmente, esto se denomina pares clave-valor.
 
 Un Map es una colección de pares clave-valor, donde cada clave está asociada a un valor único. A diferencia de los objetos simples en JavaScript, donde las claves deben ser strings (o símbolos), en un Map puedes utilizar cualquier tipo de dato como clave, incluyendo números, booleanos, objetos e incluso otros Map.
@@ -1716,3 +1583,153 @@ Los tipos de dato Map son muy similares a los Objetos de Javascript, ya que esto
 - Tamaño dinámico: Si el número de elementos en tu colección puede variar y necesitas conocer su tamaño exacto en cualquier momento, un Map es más adecuado, ya que proporciona la propiedad size.
 - Iteración: Si necesitas iterar sobre las claves, los valores o las entradas (pares clave-valor) de forma directa y eficiente, un Map ofrece métodos específicos para ello (keys(), values() y entries()).
 
+# 5. WeakSet
+En JavaScript, WeakSet es una colección de objetos, similar a un conjunto (Set), pero con algunas diferencias importantes que lo hacen más adecuado para ciertos casos de uso relacionados con la gestión de memoria y la eliminación automática de objetos. Los weaksets son colecciones de objetos únicos. No permiten valores primitivos como claves.
+
+
+## 6. WeakMap
+Los weakmaps son colecciones de pares clave-valor donde las claves deben ser objetos.
+
+-----------------
+# FORMATO JSON
+Buena práctica: Separar nuestro código de programación de los datos que aparecen en él. JSON se utiliza ampliamente para representar estructuras de datos, especialmente en el contexto de comunicación entre servidores y aplicaciones web.
+
+JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
+
+Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
+
+Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
+
+Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
+
+## Características de JSON
+- Formato de Texto: JSON es un formato basado en texto que es independiente del lenguaje de programación.
+- Intercambio de Datos: JSON se utiliza comúnmente para enviar y recibir datos entre un cliente y un servidor.
+- Sintaxis Simplicidad: La sintaxis de JSON es fácil de leer y escribir, lo que lo hace ideal para representar datos estructurados.
+
+## Usos Comunes de JSON
+- Comunicación Cliente-Servidor: JSON es el formato de datos preferido para APIs web, facilitando el intercambio de datos entre el cliente (navegador) y el servidor.
+- Configuración: JSON se utiliza a menudo para archivos de configuración debido a su simplicidad y legibilidad.
+- Almacenamiento de Datos: JSON se usa para almacenar datos estructurados en bases de datos NoSQL como MongoDB.
+
+## Ejemplo de JSON:
+```
+{
+  "name": "Manz",
+  "life": 3,
+  "totalLife": 6
+  "power": 10,
+  "dead": false,
+  "props": ["invisibility", "coding", "happymood"],
+  "senses": {
+    "vision": 50,
+    "audition": 75,
+    "taste": 40,
+    "touch": 80
+  }
+}
+```
+
+## JSON vs Objetos Javascript
+Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
+- Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
+- Los textos  deben estar entrecomillados con «comillas dobles».
+- Sólo se puede almacenar tipos como string, number, object, array,  boolean o null.
+- Tipos de datos como Function, Date, Regexp u otros, no es posible almacenarlos en un JSON.
+- Tampoco es posible añadir comentarios en un JSON.
+
+
+## Métodos para convertir de Object de Javascript a JSON
+- Parseo (De string a objeto): El método .parse() nos va a permitir pasar el contenido de texto string de un JSON a object. 
+  - Object JSON.parse(str)	⟶ Convierte el texto str (si es un JSON válido) a un objeto y lo devuelve.
+- Convertir a texto (De objeto a string): El método .stringify() nos va a permitir pasar de object de Javascript a contenido de texto string con el JSON en cuestión.
+  - String JSON.stringify(obj) ⟶	Convierte un objeto obj a su representación JSON y la devuelve.
+  - String JSON.stringify(obj, props)	⟶ Idem al anterior, pero filtra y mantiene solo las propiedades del  props.
+  - String JSON.stringify(obj, props, spaces)	⟶ Idem al anterior, pero indenta el JSON a (number) spaces espacios.
+
+
+## Métodos para convertir JSON a objeto
+La acción de convertir JSON a objeto Javascript se le suele denominar parsear. Es una acción que analiza un sting que contiene un JSON válido y devuelve un objeto Javascript con dicha información correctamente estructurada. Para ello, utilizaremos el mencionado método JSON.parse():
+```
+const json = `{
+  "name": "Manz",
+  "life": 99
+}`;
+
+const user = JSON.parse(json);
+
+user.name;  // "Manz"
+user.life;  // 99
+```
+Como se puede ver,  user es un objeto generado a partir del JSON almacenado en la variable  json y podemos consultar sus propiedades y trabajar con ellas sin problemas.
+
+
+## Métodos para convertir objeto a JSON
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  talk: function () {
+    return "Hola!";
+  },
+};
+
+JSON.stringify(user);       // '{"name":"Manz","life":99}'
+```
+
+Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
+
+Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  power: 10,
+};
+
+JSON.stringify(user, ["life"])            // '{"life":99}'
+JSON.stringify(user, ["name", "power"])   // '{"name":"Manz","power":10}'
+JSON.stringify(user, [])                  // '{}'
+JSON.stringify(user, null)                // '{"name":"Manz","life":99,"power":10}'
+```
+Observamos que el penúltimo caso, no se conserva ninguna propiedad, mientras que el último, se conserva todo.
+
+Por último, también podemos añadir un tercer parámetro en el método .stringify() que indicará el número de espacios que quieres usar al crear el String del JSON resultante. Observa que hasta ahora, el String está minificado y aparece todo junto en la misma línea.
+
+
+Veamos lo que ocurre en los siguientes casos:
+```
+const user = {
+  name: "Manz",
+  life: 99
+};
+
+JSON.stringify(user, null, 2);
+// {
+//   "name": "Manz",
+//   "life": 99
+// }
+
+JSON.stringify(user, null, 4);
+// {
+//     "name": "Manz",
+//     "life": 99
+// }
+
+JSON.stringify(user, ["name"], 1);
+// {
+//  "name": "Manz"
+// }
+```
+
+En el primer caso, json2, el resultado se genera indentado a 2 espacios. En el segundo caso, json4, el resultado se genera indentado a 4 espacios. En el tercer y último caso, json1, se filtran las propiedades, dejando sólo "name" y se genera indentando a 1 espacio.
+
+
+## Leyendo JSON externo
+Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, que habría que leer desde nuestro código Javascript. Para ello, hoy en día se suele utilizar la función fetch() para hacer peticiones a sitios que devuelven contenido JSON. También se podría leer ficheros locales con contenido .json. 
+
+## Estructuras de Datos Representadas en JSON
+- JSON puede representar las siguientes estructuras de datos básicas:
+  - Objetos: Colecciones de pares clave-valor (similar a los objetos en JavaScript).
+  - Arrays: Listas ordenadas de valores (similar a los arrays en JavaScript).
+  - Valores Primitivos: Cadenas, números, booleanos y null.
