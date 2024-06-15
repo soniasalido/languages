@@ -878,14 +878,324 @@ elements.shift();      // Devuelve 'Z'. Ahora elements = ['a', 'b', 'c']
 | ---- | ---- |
 | ARRAY Array.from(obj) |	Intenta convertir el obj en un array.|
 | ARRAY Array.from(obj, fmap)  |	Idem, pero ejecuta la función fmap por cada elemento. Equivalente a .map() |
-| ARRAY Array.from({ length:size})	Crea un array a partir de un OBJECT de tamaño size, relleno de UNDEFINED |
+| ARRAY Array.from({ length:size}) |	Crea un array a partir de un OBJECT de tamaño size, relleno de UNDEFINED |
 | ARRAY .concat(e1, e2, e3...)	 |	Devuelve los elementos pasados por parámetro concatenados al final del array. |
 | STRING .join(sep)	 |	Une los elementos del array mediante separadores sep en un STRING. |
 
 
+## Separar y unir strings
+Además, también tenemos otro método con el que es posible crear un ARRAY a partir de un STRING. Se trata del método .split(). En este caso, el método .join() es su contrapartida. Con .join() podemos crear un STRING con todos los elementos del array, separándolo por el texto que le pasemos por parámetro:
+```
+const letters = ["a", "b", "c"];
+
+// Une elementos del array por el separador indicado
+letters.join("->");       // Devuelve 'a->b->c'
+letters.join(".");        // Devuelve 'a.b.c'
+
+// Separa elementos del string por el separador indicado
+"a.b.c".split(".");       // Devuelve ['a', 'b', 'c']
+"5-4-3-2-1".split("-");   // Devuelve ['5', '4', '3', '2', '1']
+```
+Ten en cuenta que, como se puede ver en los ejemplos, .join() siempre devolverá los elementos como STRING, mientras que .split() devolverá un ARRAY.
+
+Observa un caso especial, en el que pasamos un cadena de texto  vacía al .split():
+```
+"Hola a todos".split("");   // ['H', 'o', 'l', 'a', ' ', 'a', ' ', 't', 'o', 'd', 'o', 's']
+```
+En este caso, le hemos pedido dividir el  sin indicar ningún separador, por lo que Javascript toma la unidad mínima como separador: nos devuelve un  con cada carácter del  original. Ten en cuenta que los espacios en blanco también cuentan como carácter.
+
+## Buscar elementos en un array
+| Método |	Descripción |
+| ---- | ---- |
+| BOOLEAN .includes(element) | Comprueba si element está incluido en el array. ¿El elemento existe? |
+| BOOLEAN .includes(element, from) | Idem, pero partiendo desde la posición from del array. |
+| NUMBER .indexOf(element) | Devuelve la posición de la primera aparición de element o -1 si no existe. Buscar la posición. |
+| NUMBER .indexOf(element, from) | Idem, pero partiendo desde la posición from del array. |
+| NUMBER .lastIndexOf(element) | Empezará a buscar desde el final. Devuelve la posición de la última aparición de element. Devuelve -1 si no existe. |
+| NUMBER .lastIndexOf(element, from) | Idem, pero partiendo desde la posición from del array. |
+
+
+## Buscar un elemento en un array con una función imperativa
+Esta función tiene una implementación imperativa ya que se indican los pasos que se deben hacer:
+```
+const names = [
+  { name: "María", age: 20 },
+  { name: "Bernardo", age: 28 },
+  { name: "Pancracio", age: 22 },
+  { name: "Andrea", age: 19 },
+  { name: "Sara", age: 29 },
+  { name: "Jorge", age: 32 },
+  { name: "Yurena", age: 38 },
+  { name: "Ayoze", age: 18 }
+];
+
+// Busca el primer elemento con la edad indicada, sino devuelve -1
+const findElement = (array, searchedAge) => {
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (element.age === searchedAge) {
+      return element;
+    }
+  }
+  return -1;
+}
+
+findElement(names, 19);     // { name: "Andrea", age: 19 }
+findElement(names, 32);     // { name: "Jorge", age: 32 }
+findElement(names, 33);     // -1
+```
+
+
+## Buscar un elemento en un array con una función declarativa
+Indicamos lo que quieres obtener, para ello, usaremos la función .find():
+```
+const findElement = (array, searchedAge) => {
+  return array.find(element => element.age === searchedAge) ?? -1;
+}
+
+findElement(names, 19);     // { name: "Andrea", age: 19 }
+findElement(names, 32);     // { name: "Jorge", age: 32 }
+findElement(names, 33);     // -1
+```
+De la misma forma que tenemos .find() también tenemos .findIndex() que devuelve la posición en lugar del propio elemento. 
+
+
+## Crear subarrays, fragmentos:
+| Método	| Descripción |
+| ---- | ---- |
+| ARRAY .slice(start, end) ✅	 | Devuelve los elementos desde la posición start hasta end (excluído). |
+| ARRAY .splice(start, size) ⚠️	 | Devuelve los size siguientes elementos desde la posición start. |
+| ARRAY .splice(start, size, e1, e2...) ⚠️	 | Idem. Además, luego inserta e1, e2... en la posición start. |
+| ARRAY .toSpliced(start, size)  ✅	 | Idem a splice(start, size), pero sin mutar el array original. |
+| ARRAY .toSpliced(st, sz, e1, e2...)  ✅	 | Idem a splice(st, sz, e1, e2..), pero sin mutar el array original. |
+| ARRAY .copyWithin(pos, start, end)  ⚠️	 | Muta el array, cambiando en pos y copiando desde start a end. |
+| ARRAY .fill(element, start, end)  ⚠️	 | Cambia los elementos del  por element desde start hasta end. |
+| ARRAY .with(index, item)  ✅	 | Devuelve una copia del original, con el elemento index modificado. |
+✅ El array original está seguro (no muta).
+⚠️ El array original cambia (muta).
+
+## Alterar fragmento con .copyWithin()
+Es posible tener un array al que queremos hacer ciertas modificaciones donde .slice() y .splice() se quedan cortos (o no resultan cómodos). Veamos algunos métodos introducidos en ECMAScript  que nos permiten crear una versión modificada de un array:
+
+C  ON copyWithin(pos, start, end) nos permite alterar el array, de modo que, empezando en la posición pos, copiará los elementos que están desde la posición start hasta la posición end. El parámetro end es opcional, de modo que si no se indica, se asume que end es el tamaño del array.
+
+
+## Reducir el tamaño de un array
+También, en ciertos casos, nos podría interesar reducir el tamaño de un array para quedarnos con sus primeros elementos y descartar el resto. En el siguiente ejemplo, creamos un nuevo  con .slice(). Dicho array es una versión reducida del array original que teníamos en un principio:
+```
+// Mediante slice()
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+const newNumbers = numbers.slice(0, 4);
+
+newNumbers    // [1, 2, 3, 4], numbers no cambia
+```
+
+Sin embargo, hay una forma muy sencilla y rápida de hacer lo mismo, que es modificar directamente el tamaño del array mediante la propiedad .length. Por ejemplo, hacer un numbers.length = 4 en un array de 8 elementos, reducirá el array a los primeros 4 elementos:
+```
+// Mediante .length
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+numbers.length = 4;
+
+numbers       // [1, 2, 3, 4], numbers cambia
+```
+En este último caso no estamos creando un nuevo array, sino que reutilizamos el que ya teníamos, reduciendo su tamaño y descartando el resto de elementos.
+
+
+## Rellenar un array con .fill()
+Existe un método que nos permite rellenar el ARRAY con los elementos indicados. Se le puede indicar unos parámetros opcionales start y end para establecer la posición de inicio y/o fin donde queremos rellenar, y así sólo alterar un fragmento del array.
+
+⚠️ Ten en cuenta que con .fill() estamos alterando el ARRAY.
+```
+const letters = ["a", "b", "c", "d", "e", "f"];
+
+// Estos métodos modifican el array original
+
+letters.fill("Z", 0, 5);             // ["Z", "Z", "Z", "Z", "Z", "f"]
+letters.fill("AA", 0, 2);            // ["AA", "AA", "Z", "Z", "Z", "f"]
+letters.fill(1);                     // [1, 1, 1, 1, 1]
+new Array(5).fill(5);                // [5, 5, 5, 5, 5]
+```
+
+## Rellenar un array con .map()
+El método .map() en JavaScript se utiliza para crear un nuevo array a partir de un array existente, aplicando una función a cada uno de sus elementos. No se utiliza directamente para "rellenar" un array, pero puedes usarlo para transformar y generar un nuevo array con los valores que necesitas.
+
+Sintaxis básica:
+```
+const nuevoArray = arrayOriginal.map(funcionDeTransformacion);
+```
+
+
+### 1. Usando .map() para transformar un array
+Supongamos que tienes un array de números y quieres crear un nuevo array donde cada número se incrementa en 1.
+```
+const numbers = [1, 2, 3, 4, 5];
+const incrementedNumbers = numbers.map(number => number + 1);
+
+console.log(incrementedNumbers); // [2, 3, 4, 5, 6]
+```
+Donde, la funcionDeTransformacion es una función que se aplica a cada elemento del array original. Esta función recibe el elemento actual, su índice y el array original como argumentos, y debe devolver el nuevo valor que reemplazará al elemento original en el nuevo array.
 
 
 
+### 2. Rellenar un array usando .map()
+Aunque .map() se utiliza principalmente para transformar elementos existentes, también puedes usarlo para crear un nuevo array y rellenarlo con valores específicos.
+```
+const indices = [0, 1, 2, 3, 4];
+const cuadrados = indices.map(indice => indice * indice); // [0, 1, 4, 9, 16]
+```
+
+Rellenar con valores de otro array:
+```
+const nombres = ["Ana", "Juan", "María"];
+const saludos = nombres.map(nombre => `Hola, ${nombre}!`); // ["Hola, Ana!", "Hola, Juan!", "Hola, María!"]
+```
+
+## Manipular arrays de manera inmutable: Método .with()
+El método .with() es una adición reciente a JavaScript que permite crear una copia de un array, pero con un cambio en un elemento específico. La característica principal de este método es que no modifica el array original, sino que devuelve una nueva copia del array con el cambio aplicado. Esto es especialmente útil en programación funcional e inmutable.
+
+Permite encadenar múltiples operaciones, pero debemos de tener en cuenta que **sólo modifica, no se pueden añadir elementos que no existen antes en el array**:
+```
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+
+// Usando el método .with() para cambiar 'banana' por 'blueberry'
+const newFruits = fruits.with(1, 'blueberry');
+
+console.log(fruits); // ['apple', 'banana', 'cherry', 'date']
+console.log(newFruits); // ['apple', 'blueberry', 'cherry', 'date']
+
+```
+
+## Iterar sobre los elementos de un Array
+### 1. forEach()
+El método forEach es un método de los arrays que ejecuta una función dada en cada uno de sus elementos.
+```
+const array = [1, 2, 3, 4, 5];
+
+array.forEach(element => {
+  console.log(element);
+});
+
+```
+
+### 2. for(...)
+```
+const array = [1, 2, 3, 4, 5];
+
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i]);
+}
+
+```
+
+### 3. for..of (azúcar sintáctico para objetos iterables)
+```
+const array = [1, 2, 3, 4, 5];
+
+for (const element of array) {
+  console.log(element);
+}
+
+```
+
+Un string, por ejemplo, implementa el patrón iterable y puede ser recorrido con for..of
+```
+for (const char of "javi") {
+  console.log(char); // "j", "a", "v", "i"
+}
+```
+
+### 4. map Method
+El método map crea un nuevo array con los resultados de la llamada a la función indicada aplicados a cada uno de sus elementos. No se usa típicamente solo para iterar, sino para transformar los elementos del array.
+```
+const array = [1, 2, 3, 4, 5];
+const newArray = array.map(element => element * 2);
+
+console.log(newArray); // [2, 4, 6, 8, 10]
+```
+
+### 5. for...in Loop
+El bucle for...in se usa para iterar sobre las propiedades de un objeto. Aunque se puede usar con arrays, no es recomendable ya que itera sobre las propiedades enumerables, lo cual puede incluir propiedades no numéricas.
+```
+const array = [1, 2, 3, 4, 5];
+
+for (const index in array) {
+  console.log(array[index]);
+}
+
+```
+
+
+### 6. while Loop
+El bucle while ejecuta su bloque de código siempre que una condición especificada sea verdadera.
+```
+const array = [1, 2, 3, 4, 5];
+let i = 0;
+
+while (i < array.length) {
+  console.log(array[i]);
+  i++;
+}
+```
+
+### 7. do...while Loop
+El bucle do...while es similar a while, pero garantiza que el bloque de código se ejecute al menos una vez.
+```
+const array = [1, 2, 3, 4, 5];
+let i = 0;
+
+do {
+  console.log(array[i]);
+  i++;
+} while (i < array.length);
+```
+
+### 8. reduce Method
+El método reduce se usa para acumular valores a través del array, pero también se puede usar para iterar.
+```
+const array = [1, 2, 3, 4, 5];
+
+array.reduce((accumulator, currentValue) => {
+  console.log(currentValue);
+  return accumulator;
+}, 0);
+```
+
+### 9. entries Method with for...of
+Puedes usar el método entries junto con for...of para iterar tanto sobre el índice como sobre el valor del array.
+```
+const array = [1, 2, 3, 4, 5];
+
+for (const [index, element] of array.entries()) {
+  console.log(`Index: ${index}, Element: ${element}`);
+}
+```
+
+### 10. every Method
+El método every ejecuta una función en cada elemento del array hasta que la función devuelve un valor false.
+```
+const array = [1, 2, 3, 4, 5];
+
+array.every(element => {
+  console.log(element);
+  return true; // continuar iterando
+});
+```
+
+### 11. some Method
+El método some ejecuta una función en cada elemento del array hasta que la función devuelve un valor true.
+```
+const array = [1, 2, 3, 4, 5];
+
+array.some(element => {
+  console.log(element);
+  return false; // continuar iterando
+});
+
+```
+
+
+
+---------------
 // Inicialización de arrays de forma literal.
 const collection = ["hey", "ho", "let's go"]; // [] => Inicializador de arrays
 
@@ -916,26 +1226,6 @@ collection[100] = "oops!";
 console.log(collection); // ["hey", "ho", "let's go", "yay", "nice", empty x95, "oops!"]
 console.log(collection.length); // 101
 
-// Formas de iterar por los elementos de un array
-// 1. forEach()
-collection.forEach(function (item) {
-  console.log(item); // "hey", "ho", "let's go", "yay", "nice", "oops!"
-});
-
-// 2. for(...)
-for (let i = 0; i < collection.length; i++) {
-  console.log(collection[i]); // "hey", "ho", "let's go", "yay", (x95) undefined, "oops!"
-}
-
-// 3. for..of (azúcar sintáctico para objetos iterables)
-for (const item of collection) {
-  console.log(item); // "hey", "ho", "let's go", "yay", (x95) undefined, "oops!"
-}
-
-// Un string, por ejemplo, implementa el patrón iterable y puede ser recorrido con for..of
-for (const char of "javi") {
-  console.log(char); // "j", "a", "v", "i"
-}
 
 // Comparando arrays
 // ⚠ Los arrays son objetos y por tanto implementan la misma comparación que éstos:
