@@ -1265,6 +1265,52 @@ Estas son las Array functions que podemos encontrarnos en Javascript:
 | OBJECT  .reduceRight(ƒ, initial)	| Idem al anterior, pero en orden de derecha a izquierda. |
 
 
+## Bucles .forEach()
+Como se puede ver, el método forEach() no devuelve nada y espera que se le pase por parámetro una FUNCTION que se ejecutará por cada elemento del array. Esa función, puede ser pasada en cualquiera de los formatos que hemos visto: como función tradicional o como función flecha:
+```
+const letters = ["a", "b", "c", "d"];
+
+// Con funciones por expresión
+const f = function () {
+  console.log("Un elemento.");
+};
+letters.forEach(f);
+
+// Con funciones anónimas
+letters.forEach(function () {
+  console.log("Un elemento.");
+});
+
+// Con funciones flecha
+letters.forEach(() => console.log("Un elemento."));
+```
+
+Sin embargo, este ejemplo no tiene demasiada utilidad. A la FUNCTION callback se le pueden pasar varios parámetros opcionales:
+- Si se le pasa un primer parámetro, este será el elemento del array.
+- Si se le pasa un segundo parámetro, este será la posición en el array.
+- Si se le pasa un tercer parámetro, este será el array en cuestión.
+```
+const letters = ["a", "b", "c", "d"];
+
+letters.forEach((element) => console.log(element));
+// Devuelve 'a' / 'b' / 'c' / 'd'
+
+letters.forEach((element, index) => console.log(element, index));
+// Devuelve 'a' 0 / 'b' 1 / 'c' 2 / 'd' 3
+
+letters.forEach((element, index, array) => console.log(array[0]));
+// Devuelve 'a' / 'a' / 'a' / 'a'
+```
+
+En este ejemplo, he nombrado element al parámetro que hará referencia al elemento, index al parámetro que hará referencia al índice (posición del array) y array al parámetro que hará referencia al propio array en cuestión. En algunos ejemplos los abreviaré como (e, i, a).
+
+Por ejemplo, una buena estrategia sería utilizar letters (plural) para el array y letter (singular) en lugar de element para el elemento que se va recorriendo. Como se puede ver, realmente forEach() es otra forma de hacer un bucle (sobre un array), sin tener que recurrir a bucles tradicionales como for o while.
+```
+const letters = ["a", "b", "c", "d"];
+
+letters.forEach((letter) => console.log(letter));
+```
+
 
 ---------------
 // Inicialización de arrays de forma literal.
