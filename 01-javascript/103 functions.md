@@ -40,6 +40,55 @@ Para abordar estas dificultades, ES6 introdujo dos nuevas formas de declarar var
 - let: Las variables declaradas con let tienen ámbito de bloque y no se elevan de la misma manera que var. Esto significa que una variable declarada con let solo es accesible dentro del bloque en el que se declara.
 - const: Las variables declaradas con const también tienen ámbito de bloque y deben ser inicializadas en el momento de su declaración. Además, las variables const no pueden ser reasignadas.
 
+## Closure
+Capacidad que tienen las funciones en JS de recordar el ámbito léxico en el que han sido declaradas. Un closure (clausura) es una función que guarda referencias del estado adyacente (ámbito léxico). Un clousure permite acceder al ámbito exterior desde una función interior.
+
+Closure encapsula datos y encapsula métodos. Se tiene una interfaz para acceder a estos datos.
+
+Cuando se hace una llmada a una función, se genera una pequeña asignación de memoria donde se guarda las variables de esa función, y que no es accesible desde el exterior a esa función. Cuando termina la función si hay algún tipo de referencia en el código, esa cajita no desapacere. No se borra.
+
+Un closure (clausura) es una característica poderosa de JavaScript que permite que una función "recuerde" el ámbito léxico en el que fue declarada, incluso después de que ese ámbito haya finalizado su ejecución. En otras palabras, una clausura es una función que tiene acceso a su propio ámbito, al ámbito de la función externa y al ámbito global.
+
+**El ámbito léxico** se refiere al alcance de las variables que está determinado por la ubicación física de esas variables dentro del código fuente. Cuando una función se define, se crea un cierre que incluye todas las variables de su ámbito exterior en el momento de la definición de la función.
+
+**Closures con Variables Privadas:** Los closures se utilizan comúnmente para crear variables privadas. Esto permite encapsular datos y proporcionar una interfaz para interactuar con ellos.
+
+**Uso de Closures en Callbacks y Asincronía:** Los closures son muy útiles en el contexto de callbacks y operaciones asíncronas.
+```
+function fetchData(callback) {
+  const data = 'Some data';
+
+  setTimeout(function() {
+    callback(data);
+  }, 1000);
+}
+
+fetchData(function(data) {
+  console.log(data); // 'Some data' después de 1 segundo
+});
+
+```
+En este ejemplo, el callback pasado a fetchData "recuerda" el ámbito en el que fue creado y puede acceder a data cuando se ejecuta después de 1 segundo.
+
+[!IMPORTANT]
+**Closures en Bucles:** Un uso común de los closures es en bucles, para capturar el valor de la variable de iteración en cada iteración.
+```
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 1000);
+}
+// Salida: 3, 3, 3
+
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 1000);
+}
+// Salida: 0, 1, 2
+```
+[!WARNING]En el primer bucle, var no tiene ámbito de bloque, por lo que el cierre recuerda la misma referencia a i, que al final del bucle es 3. En el segundo bucle, let tiene ámbito de bloque, por lo que cada cierre recuerda un valor diferente de i.
+
 
 ## Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
