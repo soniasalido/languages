@@ -1,6 +1,20 @@
 # Funcionamiento de JS
 El esquema general de una página web es un documento HTML donde están las etiquetas HTML, referencias o relaciones a otros documentos, como por ejemplo archivos CSS o archivos javascript.
 
+# Características de JS
+- Multiparadigma: OOP, funcional, Imperativo.
+- Dinámico: Evaluación en tiempo de ejecución.
+- Interpretado: No requiere previamente de compilación.
+- Multipropósito: No sólo se usa en el Desarrollo Web.
+- Objetos: El lenguaje nos da objetos estándar built-in (Objetos de Clase).
+- Propotipos: Proporciona una herencia superior a la clásica..
+- JSON: Notación literal de objetos. Con JSON podemos:
+  - Serializar Objetos.
+  - Deserializar Objetos.
+- Popular: Es el lenguaje más usado del mundo.
+- Clave: Estándar en la web.
+
+
 # Script en línea
 JavaScript en línea, también conocido como JavaScript "inline", se refiere a la práctica de incluir código JavaScript directamente dentro de las etiquetas HTML de una página web. Este código puede estar contenido dentro de un atributo de evento HTML o dentro de una etiqueta <script> dentro del mismo archivo HTML. No es recomendable. Lo ideal es separar el código HTML del código JS. Se evitan problemas de mantenieminto, reutilización, legibilidad y seguridad (se incremente el riesgo de ataques de inyección de código y otros probleas de seguridad).
 
