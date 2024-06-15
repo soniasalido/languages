@@ -440,6 +440,12 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 | Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados ⚠️ No funciones/DOM		| ✅ Sí
 
 
+
+| Command | Description |
+| --- | --- |
+| `git status` | List all *new or modified* files |
+| `git diff` | Show file differences that **haven't been** staged |
+
 ---------------------------------------------
 ## JSON vs Objetos Javascript
 Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
