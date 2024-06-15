@@ -96,20 +96,27 @@ const person = {
 console.log(person.greet()); // "Hello, my name is Alice"
 ```
 
-
-
-
-## SINTAXIS básica de una función
+## Parámetros y Argumentos
+Las funciones pueden aceptar parámetros, que son variables que actúan como marcadores de posición para los valores que se pasarán a la función.
 ```
-function saySomething() {
-  console.log("hello world");
+function add(a, b) {
+  return a + b;
 }
 
-console.log(typeof saySomething); // "function" Aunque en el fondo, es también un objeto.
+console.log(add(2, 3)); // 5
+```
+
+**Parámetros Predeterminados:** Se pueden asignar valores predeterminados a los parámetros de una función.
+```
+function greet(name = 'Guest') {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet()); // "Hello, Guest!"
 ```
 
 
-## Añadiendo argumentos
+**Añadiendo argumentos**
 ```
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
@@ -125,7 +132,8 @@ Es legítimo llamar a una función con más argumentos que los que han sido decl
 saySomething("hello", "wonderful", "world"); // hello wonderful
 ```
 
-Añadiendo valor de retorno:
+
+## Añadiendo valor de retorno:
 ```
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
@@ -136,8 +144,105 @@ console.log(saySomething("hello", "world")); // hello world, true
 console.log(saySomething("hello")); // hello undefined, false
 ```
 
+
+
+## Funciones de Orden Superior (Higher-Order Functions)
+Las funciones de orden superior son funciones que aceptan otras funciones como argumentos o devuelven funciones como resultado.
+```
+function operate(a, b, operation) {
+  return operation(a, b);
+}
+
+const add = (x, y) => x + y;
+const subtract = (x, y) => x - y;
+
+console.log(operate(5, 3, add)); // 8
+console.log(operate(5, 3, subtract)); // 2
+```
+
+## Closures
+Un closure es una función que tiene acceso a su propio ámbito léxico, al ámbito de la función externa y al ámbito global.
+```
+function outerFunction(outerVariable) {
+  return function innerFunction(innerVariable) {
+    console.log('Outer Variable:', outerVariable);
+    console.log('Inner Variable:', innerVariable);
+  };
+}
+
+const newFunction = outerFunction('outside');
+newFunction('inside');
+// Outer Variable: outside
+// Inner Variable: inside
+```
+
+
+## Funciones Recursivas
+Las funciones recursivas son funciones que se llaman a sí mismas.
+```
+function factorial(n) {
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // 120
+```
+
+## Funciones Generadoras
+Las funciones generadoras permiten pausar y reanudar la ejecución del código utilizando yield.
+```
+function* generatorFunction() {
+  yield 'First output';
+  yield 'Second output';
+  return 'Done';
+}
+
+const generator = generatorFunction();
+
+console.log(generator.next().value); // 'First output'
+console.log(generator.next().value); // 'Second output'
+console.log(generator.next().value); // 'Done'
+```
+
+## this en Funciones
+El valor de this varía dependiendo de cómo se llama la función:
+- Funciones regulares: El valor de this depende del contexto en el que se llama la función.
+- Funciones flecha: No tienen su propio this, sino que heredan el this del contexto en el que se definieron.
+```
+const obj = {
+  name: 'Alice',
+  regularFunction: function() {
+    console.log(this.name); // 'Alice'
+  },
+  arrowFunction: () => {
+    console.log(this.name); // undefined
+  }
+};
+
+obj.regularFunction();
+obj.arrowFunction();
+```
+
+
+
 ## VARIADIC FUNCTIONS
-Argumentos dinámicos o variables (variadic functions) mediante el objeto iterable arguments:
+Las funciones variádicas (variadic functions) son funciones que pueden aceptar un número variable de argumentos. En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
+
+### Funciones Variádicas mediante el operador rest:
+Un ejemplo de función variádica en una Funciones Declaradas (Function Declarations):
+```
+function sum(...numbers) {
+  return numbers.reduce((total, number) => total + number, 0);
+}
+
+console.log(sum(1, 2, 3)); // 6
+console.log(sum(4, 5, 6, 7)); // 22
+```
+
+### Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
+Además del operador rest, en JavaScript las funciones tienen acceso a un objeto arguments que contiene todos los argumentos pasados a la función. Aunque el uso del operador rest es más moderno y legible, el objeto arguments todavía se usa en algunas situaciones.
 ```
 function logArguments() {
   console.log(arguments); // "arguments" es un objeto array-like (iterable)
@@ -147,7 +252,7 @@ logArguments(); // {}
 logArguments(true); // {0: true}
 ```
 
-## Podemos iterar por "arguments" por comodidad:
+**Podemos iterar por "arguments" por comodidad:**
 ```
 function logArguments() {
   for (const arg of arguments) {
@@ -158,7 +263,7 @@ function logArguments() {
 logArguments(1, true, "hello"); // 1, true, hello
 ```
 
-Ejemplo práctico de utilidad con "arguments":
+**Ejemplo práctico de utilidad con "arguments":**
 ```
 function sum() {
   let total = 0;
@@ -171,6 +276,12 @@ function sum() {
 console.log(sum(1, 2, 3)); // 6;
 ```
 
+### Diferencias entre el Operador Rest y el Objeto Arguments
+- Sintaxis y Modernidad: El operador rest (...) es una característica moderna de ES6 y es más legible y conciso.
+- Tipo de Objeto: El operador rest devuelve un array real, mientras que el objeto arguments es similar a un array pero no es un array real (es un objeto array-like).
+- Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
+
+---------------------------------------
 # ARROW FUNCTIONS
 Funciones flecha o también llamadas "lambda". Siempre son anónimas.
 
