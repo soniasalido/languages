@@ -971,6 +971,7 @@ De la misma forma que tenemos .find() también tenemos .findIndex() que devuelve
 | ARRAY .copyWithin(pos, start, end)  ⚠️	 | Muta el array, cambiando en pos y copiando desde start a end. |
 | ARRAY .fill(element, start, end)  ⚠️	 | Cambia los elementos del  por element desde start hasta end. |
 | ARRAY .with(index, item)  ✅	 | Devuelve una copia del original, con el elemento index modificado. |
+
 ✅ El array original está seguro (no muta).
 ⚠️ El array original cambia (muta).
 
@@ -1203,6 +1204,7 @@ array.some(element => {
 | ARRAY .sort(criterio) ⚠️	| ARRAY Idem, pero bajo un criterio de ordenación indicado por  criterio. |
 | ARRAY .toSorted() ✅	| ARRAY Devuelve una copia del array, con los elementos ordenados. |
 | ARRAY .toSorted(criterio) ✅	| ARRAY Idem, pero ordenado por el criterio establecido por parámetro. |
+
 ✅ El array original está seguro (no muta).
 ⚠️ El array original cambia (muta).
 
