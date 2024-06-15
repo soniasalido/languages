@@ -1209,6 +1209,63 @@ array.some(element => {
 ⚠️ El array original cambia (muta).
 
 
+## El método de la burbuja para ordenar un array
+El algoritmo recorre el array varias veces. En cada pasada, compara elementos adyacentes y los intercambia si están en el orden incorrecto. Después de cada pasada, el siguiente elemento más grande está en su posición correcta. Este proceso se repite hasta que no se necesiten más intercambios, lo que significa que el array está ordenado.
+```
+function bubbleSort(arr) {
+  let n = arr.length;
+  let swapped;
+
+  // Repetimos el proceso hasta que no haya más intercambios
+  do {
+    swapped = false;
+    // Recorremos el array desde el principio hasta el penúltimo elemento
+    for (let i = 0; i < n - 1; i++) {
+      // Si el elemento actual es mayor que el siguiente, los intercambiamos
+      if (arr[i] > arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        swapped = true;
+      }
+    }
+    // Reducimos el rango de comparación ya que el último elemento está en su lugar
+    n--;
+  } while (swapped);
+
+  return arr;
+}
+```
+
+
+## Array functions. Funciones sobre objetos basados en Array
+Así como tenemos un conjunto de métodos para realizar sobre variables que sean STRING u otro conjunto de métodos para variables que sean NUMBER, existe una serie de métodos que podemos utilizar sobre variables que sean de tipo ARRAY. Son las llamadas array functions que veremos a continuación.
+
+Las Array functions son métodos que tiene cualquier variable que sea de tipo ARRAY, y que permite realizar una operación con todos los elementos de dicho array (o parte de ellos) para conseguir un objetivo concreto, dependiendo del método. En general, a dichos métodos se les pasa por parámetro una función callback y unos parámetros opcionales.
+
+Estas son las Array functions que podemos encontrarnos en Javascript:
+| Método |	Descripción |
+| ---- | ---- |
+| UNDEFINED .forEach(ƒ)	| Ejecuta la función definida en ƒ por cada uno de los elementos del array.  |
+| Comprobaciones |
+| BOOLEAN .every(ƒ)	| Comprueba si todos los elementos del array cumplen la condición de ƒ. |
+| BOOLEAN .some(ƒ)	| Comprueba si al menos un elemento del array cumple la condición de ƒ. |
+| Transformadores y filtros |
+| ARRAY .map(ƒ)	| Construye un array con lo que devuelve ƒ por cada elemento del array. |
+| ARRAY ..filter(ƒ)	| Filtra un array y se queda sólo con los elementos que cumplen la condición de ƒ. |
+| OBJECT .flat(level)	| Aplana el array al nivel level indicado. |
+| OBJECT  .flatMap(ƒ)	| Aplana cada elemento del array, transformándolo según ƒ. Equivale a .map().flat(1). |
+| Búsquedas |
+| NUMBER  .findIndex(ƒ)	| Devuelve la posición del elemento que cumple la condición de ƒ. |
+| OBJECT  .find(ƒ)	| Devuelve el elemento que cumple la condición de ƒ.
+| OBJECT  .findLastIndex(ƒ)	| Idem a findIndex(), pero empezando a buscar desde el último elemento al primero. |
+| OBJECT  .findLast(ƒ)	| Idem a find(), pero empezando a buscar desde el último elemento al primero. |
+| Acumuladores |
+| OBJECT  .reduce(ƒ, initial)	| Ejecuta ƒ con cada elemento (de izq a der), acumulando el resultado. |
+| OBJECT  .reduceRight(ƒ, initial)	| Idem al anterior, pero en orden de derecha a izquierda. |
+
+
+
 ---------------
 // Inicialización de arrays de forma literal.
 const collection = ["hey", "ho", "let's go"]; // [] => Inicializador de arrays
