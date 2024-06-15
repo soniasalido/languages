@@ -861,6 +861,29 @@ Existen varias formas de añadir elementos a un array ya existente. Ten en cuent
 | OBJECT .shift() | ⚠️	Elimina el primer elemento del array. Devuelve dicho elemento. |
 
 
+**⚠️ Recuerda que estos métodos sirven para modificar (mutar) el array original.**
+```
+const elements = ["a", "b", "c"]; // Array inicial
+
+elements.push("d");    // Devuelve 4.   Ahora elements = ['a', 'b', 'c', 'd']
+elements.pop();        // Devuelve 'd'. Ahora elements = ['a', 'b', 'c']
+
+elements.unshift("Z"); // Devuelve 4.   Ahora elements = ['Z', 'a', 'b', 'c']
+elements.shift();      // Devuelve 'Z'. Ahora elements = ['a', 'b', 'c']
+```
+
+
+## Alternativas para crear arrays
+| Método	| Descripción|
+| ---- | ---- |
+| ARRAY Array.from(obj) |	Intenta convertir el obj en un array.|
+| ARRAY Array.from(obj, fmap)  |	Idem, pero ejecuta la función fmap por cada elemento. Equivalente a .map() |
+| ARRAY Array.from({ length:size})	Crea un array a partir de un OBJECT de tamaño size, relleno de UNDEFINED |
+| ARRAY .concat(e1, e2, e3...)	 |	Devuelve los elementos pasados por parámetro concatenados al final del array. |
+| STRING .join(sep)	 |	Une los elementos del array mediante separadores sep en un STRING. |
+
+
+
 
 
 // Inicialización de arrays de forma literal.
