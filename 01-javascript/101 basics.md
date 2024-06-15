@@ -139,6 +139,16 @@ const juan = new Persona("Juan");
 console.log(juan.constructor.name); // Salida: "Persona"
 ```
 
+# Tipos de Notación:
+| Notación | Descripción |
+| ---- | ----|
+| ; | Finalización de cada línea. No es obligatorio.|
+| . | Se usa en los objetos para acceder a los atributos (propiedades). |
+| [] | Se usa en las listas, arrays, objetos. Se usa para definir y para acceder a una valor dentro de un array. Permite acceder a las propiedades de un objeto utilizando corchetes |
+| () | Se usan para funciones. |
+| {} | Notación literal de objetos, funciones y estructuras de control. |
+| JSON | Notación JSON (JavaScript Object Notation) |
+
 
 # EXPRESIONES BÁSICAS ********
 
@@ -758,7 +768,7 @@ for (let i = 0, j = 10; i < 5; i++, j--) {
 ```
 
 ### 7. TRY
-Consiste en un bloque que se ejecuta de manera normal, y captura cualquier excepción que se pueda producir en ese bloque de sentencias.
+Consiste en un bloque que se ejecuta de manera normal, y captura cualquier excepción que se pueda producir en ese bloque de sentencias. Se utiliza para manejar excepciones. Permite ejecutar código que pueda producir errores y definir cómo manejar esos errores si ocurren.
 ```
 try {
   // Código que podría lanzar una excepción
@@ -783,9 +793,70 @@ function someFunctionThatMightThrow() {
 ```
 
 ### 8. FOR .... IN (objetos)
+```
+const person = {
+  name: 'Alice',
+  age: 30,
+  job: 'Developer'
+};
 
+for (let key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+```
 
 ### 9. FOR ... OF (listas)
+**Ejemplo Básico con Arrays:**
+```
+const array = ['apple', 'banana', 'cherry'];
+
+for (const fruit of array) {
+  console.log(fruit);
+}
+```
+
+**Iteracion sobre un array de objetos:**
+```
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 }
+];
+
+for (const user of users) {
+  console.log(`Name: ${user.name}, Age: ${user.age}`);
+}
+```
 
 
 ### 10. forEach
+```
+const fruits = ['apple', 'banana', 'cherry'];
+
+fruits.forEach(function(fruit) {
+  console.log(fruit);
+});
+```
+
+**Ejemplo con Índice:** Podemos usar el segundo argumento de la función callback para acceder al índice de cada elemento:
+```
+const fruits = ['apple', 'banana', 'cherry'];
+
+fruits.forEach(function(fruit, index) {
+  console.log(`${index}: ${fruit}`);
+});
+```
+
+
+**Ejemplo con Array de Objetos:**
+```
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 }
+];
+
+users.forEach(function(user) {
+  console.log(`Name: ${user.name}, Age: ${user.age}`);
+});
+```
