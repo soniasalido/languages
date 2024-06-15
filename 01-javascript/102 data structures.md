@@ -668,6 +668,12 @@ De hecho, observa que utilizando el método Object.fromEntries() puedes converti
 
 El método Map.groupBy() es una propuesta para el estándar ECMAScript, pero al momento (junio de 2023), no forma parte del estándar ECMAScript final. 
 
+
+### 3. Agrupar por criterio (legacy). Métodos .groupBy()
+Agrupar por criterio (legacy)" hace referencia a una técnica de programación utilizada para organizar los elementos de una colección (como un array) en grupos basados en algún criterio específico. El término "legacy" indica que la técnica o método en cuestión ha sido usada tradicionalmente antes de la introducción de métodos más modernos o estándar en el lenguaje de programación.
+
+En el contexto de JavaScript, los métodos .groupBy() son funciones que permiten agrupar elementos de una colección según un criterio definido por una función de agrupamiento. Aunque métodos como Object.groupBy() y Map.groupBy() han sido propuestos para el estándar ECMAScript, aún no forman parte de él, por lo que a menudo se implementan mediante soluciones personalizadas.
+
 ---------------------------------------------
 ## JSON vs Objetos Javascript
 Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
