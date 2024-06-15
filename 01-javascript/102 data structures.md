@@ -382,6 +382,7 @@ Como puedes ver, **al modificar la propiedad name de copy, también se altera la
 
 ## Clonando variables o constantes
 Dos conceptos importantes:
+
 🎈 **Clonación superficial (Shallow clone):** Se llama así cuando realizamos una clonación de una estructura de datos y sólo se copia su primer nivel, mientras que segundo y niveles más profundos, se crean referencias.
 
 🧨 **Clonación profunda (Deep clone):** Se llama así cuando realizamos una clonación de una estructura de datos a todos sus niveles.
