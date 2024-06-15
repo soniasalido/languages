@@ -649,7 +649,7 @@ const groupBy = (array, keyFn) => {
 const usersByType = groupBy(users, user => user.type);
 ```
 
-### El método Map.groupBy()
+### 2. El método Map.groupBy()
 Hay que tener presente que aunque hemos creado objetos a partir de la agrupación, también podemos hacerlo con una estructura de datos similar llamada Map. Para ello, en lugar de Object usamos Map:
 ```
 const usersByType = Map.groupBy(users, user => user.type);
@@ -666,6 +666,7 @@ Object.fromEntries(usersByType);
 ```
 De hecho, observa que utilizando el método Object.fromEntries() puedes convertir el Map resultante en un Object como el obtenido con Object.groupBy().
 
+El método Map.groupBy() es una propuesta para el estándar ECMAScript, pero al momento (junio de 2023), no forma parte del estándar ECMAScript final. 
 
 ---------------------------------------------
 ## JSON vs Objetos Javascript
