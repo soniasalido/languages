@@ -1407,7 +1407,189 @@ numbers.reduce((first, second) => {
 // Finalmente, devuelve 160
 ```
 
+### 2. El método .reduceRight()
+Gracias a esto, podemos utilizar el método reduce() como acumulador de elementos de izquierda a derecha y reduceRight() como acumulador de elementos de derecha a izquierda. Veamos un ejemplo de cada uno, realizando una resta en lugar de una suma:
+```
+const numbers = [95, 5, 25, 10, 25];
 
+numbers.reduce((first, second) => first - second);
+// 95 - 5 - 25 - 10 - 25. Devuelve 30
+
+numbers.reduceRight((first, second) => first - second);
+// 25 - 10 - 25 - 5 - 95. Devuelve -110
+```
+
+### 3. Parámetro inicial
+Es posible indicar un segundo parámetro opcional en el .reduce(). Este parámetro es el valor inicial que quieres tomar en el reduce, lo que puede facilitar bastante la implementación. Observa que en el primer ejemplo anterior, se realizan 4 iteraciones. Sin embargo, al indicar este valor inicial de cero se realizan 5 iteraciones:
+```
+const numbers = [95, 5, 25, 10, 25];
+numbers.reduce((accumulator, nextElement) => {
+  console.log(`F=${accumulator} S=${nextElement}`);
+  return accumulator + nextElement;
+}, 0);
+
+// F=0   S=95   (iteración inicial): 0 + elemento 1: 95) = 95
+// F=95  S=5    (1ª iteración: elemento 1: 95 + elemento 2: 5) = 100
+// F=100 S=25   (2ª iteración: 100 + elemento 3: 25) = 125
+// F=125 S=10   (3ª iteración: 125 + elemento 4: 10) = 135
+// F=135 S=25   (4ª iteración: 135 + elemento 5: 25) = 160
+
+// Finalmente, devuelve 160
+```
+
+Como se puede ver, hay una iteración 0 extra que es la que toma el valor inicial indicado, junto al primer elemento del array. Luego, sigue iterando con el resto de elementos.
+
+
+
+## Desestructuración de arrays
+
+### 1. Destructuración básica
+```
+const elements = [5, 2];
+const [first, last] = elements;    // first = 5, last = 2
+
+const elements = [5, 4, 3, 2];
+const [first, second] = elements;  // first = 5, second = 4, rest = discard
+
+const elements = [5, 4, 3, 2];
+const [first, , third] = elements; // first = 5, third = 3, rest = discard
+
+const elements = [4];
+const [first, second] = elements;  // first = 4, second = undefined
+```
+
+### 2. Intercambio de variables
+Veamos otro ejemplo donde utilizamos la desestructuración. En este caso, haremos un clásico intercambio de variables, donde el valor inicial de a debe estar en b y viceversa. Sin utilizar desestructuración, debemos utilizar una variable auxiliar aux donde guardar uno de los valores temporalmente, mientras hacemos el cambio de variables:
+```
+// Sin desestructuración
+let a = 10;
+let b = 5;
+
+let aux = a;
+a = b;
+b = aux;
+```
+
+Sin embargo, si utilizamos desestructuración, este ejemplo es mucho más sencillo:
+```
+// Con desestructuración
+let a = 10;
+let b = 5;
+
+[a, b] = [b, a];
+```
+
+### 3. Spread (Expandir)
+La desestructuración en JavaScript es una sintaxis especial que permite extraer valores de arrays o propiedades de objetos en variables distintas. Combinada con el operador spread (...), se convierte en una herramienta poderosa para trabajar con arrays y objetos de manera más eficiente y legible.
+
+El operador spread (...) se puede utilizar junto con la desestructuración para capturar el resto de los elementos de un array.
+```
+const array = [1, 2, 3, 4, 5];
+
+const [first, , third, ...rest] = array;
+
+console.log(first); // 1
+console.log(third); // 3
+console.log(rest); // [4, 5]
+// Se ignora el segundo elemento del array
+```
+
+
+### 4. Rest (Agrupar)
+
+
+### 5. Operador ...
+El operador ... en JavaScript puede significar tanto rest (agrupar) como spread (expandir), dependiendo del contexto en el que se utilice. Aquí te explico cómo distinguir entre estos dos usos:
+
+**1. Rest (Agrupar)**
+El operador ... actúa como rest cuando se utiliza en la declaración de funciones o en la desestructuración de arrays y objetos. En este caso, agrupa múltiples elementos en una sola variable.
+- En Parámetros de Función: Cuando se utiliza en los parámetros de una función, ... agrupa el resto de los argumentos en un array.
+  ```
+  function sum(...numbers) { // Aquí, ... significa rest
+    return numbers.reduce((total, number) => total + number, 0);
+  }
+
+  console.log(sum(1, 2, 3)); // 6
+  console.log(sum(4, 5, 6, 7)); // 22
+  ```
+
+- En Desestructuración de Arrays: Cuando se utiliza en la desestructuración de arrays, ... agrupa los elementos restantes en un nuevo array.
+  ```
+  const array = [1, 2, 3, 4, 5];
+  const [first, second, ...rest] = array; // Aquí, ... significa rest
+
+  console.log(first); // 1
+  console.log(second); // 2
+  console.log(rest); // [3, 4, 5]
+  ```
+
+- En Desestructuración de Objetos: Cuando se utiliza en la desestructuración de objetos, ... agrupa las propiedades restantes en un nuevo objeto.
+  ```
+  const person = {
+    name: 'John',
+    age: 30,
+    job: 'developer',
+    city: 'New York'
+  };
+  
+  const { name, age, ...rest } = person; // Aquí, ... significa rest
+  
+  console.log(name); // 'John'
+  console.log(age); // 30
+  console.log(rest); // { job: 'developer', city: 'New York' }
+  ```
+  
+**2. Spread (Expandir)**
+El operador ... actúa como spread cuando se utiliza en el contexto de una llamada a función, arrays o objetos para expandir un iterable en lugares donde se esperan múltiples elementos.
+- En Llamadas a Función: Cuando se utiliza en la llamada a una función, ... expande un array en múltiples argumentos.
+  ```
+  const numbers = [1, 2, 3];
+  console.log(Math.max(...numbers)); // Aquí, ... significa spread
+  // Es equivalente a Math.max(1, 2, 3)
+  ```
+
+- En Literales de Arrays: Cuando se utiliza en literales de arrays, ... expande un iterable en elementos individuales.
+  ```
+  const array1 = [1, 2, 3];
+  const array2 = [...array1, 4, 5]; // Aquí, ... significa spread
+  
+  console.log(array2); // [1, 2, 3, 4, 5]
+  ```
+
+- En Literales de Objetos: Cuando se utiliza en literales de objetos, ... copia las propiedades de un objeto a otro.
+  ```
+  const obj1 = { a: 1, b: 2 };
+  const obj2 = { ...obj1, c: 3 }; // Aquí, ... significa spread
+  
+  console.log(obj2); // { a: 1, b: 2, c: 3 }
+  ```
+
+**Resumen:**
+- Rest (Agrupar):
+  - Se utiliza en la declaración de funciones para agrupar argumentos en un array.
+  - Se utiliza en la desestructuración de arrays y objetos para agrupar el resto de los elementos/properties.
+- Spread (Expandir):
+  - Se utiliza en llamadas a funciones para expandir un array en múltiples argumentos.
+  - Se utiliza en literales de arrays para expandir un iterable en elementos individuales.
+  - Se utiliza en literales de objetos para copiar las properties de un objeto a otro.
+
+
+La clave para distinguir entre rest y spread es el contexto en el que se utiliza el operador ....
+  
+
+## Reestructuración de arrays
+Tenemos un array de 2 elementos [3, 4] y queremos aprovecharlo para crear un nuevo array del 1 al 5. Vamos a hacer uso de la desestructuración para reaprovecharlo:
+```
+const pair = [3, 4];
+
+// Usando desestructuración + spread
+const complete = [1, 2, ...pair, 5];  // [1, 2, 3, 4, 5]
+
+// Sin usar desestructuración
+const complete = [1, 2, pair, 5];     // [1, 2, [3, 4], 5]
+```
+
+En este caso, tendríamos que complete es el nuevo array [1, 2, 3, 4, 5] que buscábamos si usamos la desestructuración, pero ten en cuenta que si no utilizaramos el ... previo al pair, conseguiríamos algo muy diferente: [1, 2, [3, 4], 5].
 
 ---------------
 // Inicialización de arrays de forma literal.
