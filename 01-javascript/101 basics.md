@@ -4,7 +4,7 @@ El esquema general de una página web es un documento HTML donde están las etiq
 # Características de JS
 - Multiparadigma: OOP, funcional, Imperativo.
 - Dinámico: Evaluación en tiempo de ejecución.
-- Interpretado: No requiere previamente de compilación.
+- Interpretado: No requiere previamente de compilación. El navegador lo va ejecutando línea por línea. No se compila ni se traduce a otro lenguaje intermedio.
 - Multipropósito: No sólo se usa en el Desarrollo Web.
 - Objetos: El lenguaje nos da objetos estándar built-in (Objetos de Clase).
 - Propotipos: Proporciona una herencia superior a la clásica..
