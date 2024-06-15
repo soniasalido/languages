@@ -2,6 +2,103 @@
 Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros lenguajes, son elementos invocables que reciben una serie de argumentos y pueden devolver valores.
 
 
+Las funciones en JavaScript son bloques de código diseñados para realizar una tarea específica y se pueden invocar desde cualquier parte del programa. Las funciones son fundamentales en JavaScript y permiten la modularidad, la reutilización del código y la organización lógica de las operaciones.
+
+## Definición de Funciones
+- Hay varias maneras de definir funciones en JavaScript:
+  - Funciones Declaradas (Function Declarations).
+  - Funciones Expresadas (Function Expressions).
+  - Funciones Flecha (Arrow Functions).
+  - Funciones Anónimas (Anonymous Functions).
+  - Métodos dentro de Objetos.
+
+
+### 1. Funciones Declaradas
+Las funciones declaradas son definidas utilizando la palabra clave function seguida del nombre de la función, una lista de parámetros entre paréntesis y el cuerpo de la función entre llaves.
+```
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
+
+**Hoisting:** Las funciones declaradas se "elevan" al inicio de su contexto, por lo que se pueden llamar antes de ser declaradas en el código.
+
+```
+console.log(greet('Bob')); // "Hello, Bob!"
+
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+### 2. Funciones Expresadas
+Las funciones expresadas son definidas como parte de una expresión. No tienen nombre (aunque pueden tenerlo) y se asignan a una variable.
+```
+const greet = function(name) {
+  return `Hello, ${name}!`;
+};
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
+
+**Hoisting:** Las funciones expresadas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
+```
+console.log(greet('Bob')); // Error: greet is not defined
+
+const greet = function(name) {
+  return `Hello, ${name}!`;
+};
+```
+
+### 3. Funciones Flecha (Arrow Functions)
+Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
+```
+const greet = (name) => {
+  return `Hello, ${name}!`;
+};
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
+
+Para funciones de una sola expresión, se pueden omitir las llaves y el return:
+```
+const greet = name => `Hello, ${name}!`;
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
+
+**Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
+
+
+### 4. Funciones Anónimas (Callback)
+Las funciones anónimas son aquellas que no tienen nombre. Se suelen usar como funciones de callback.
+```
+setTimeout(function() {
+  console.log('Hello after 2 seconds');
+}, 2000);
+```
+
+**Hoisting:** Las funciones anónimas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
+
+
+### 5. Métodos dentro de Objetos
+Los métodos son funciones que se definen dentro de un objeto.
+```
+const person = {
+  name: 'Alice',
+  greet: function() {
+    return `Hello, my name is ${this.name}`;
+  }
+};
+
+console.log(person.greet()); // "Hello, my name is Alice"
+```
+
+
+
+
 ## SINTAXIS básica de una función
 ```
 function saySomething() {
