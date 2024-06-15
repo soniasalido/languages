@@ -776,19 +776,96 @@ Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, 
 
 -------------------------------
 # ARRAYS
+Datos estructurados siguiendo un orden. Cada dato se identifica con un índice que indica su posición dentro de la estructura. Un  es una colección o agrupación de elementos en una misma variable, cada uno de ellos ubicado por la posición que ocupa en el array. En algunas ocasiones también se les suelen llamar arreglos o vectores. En Javascript, se pueden definir de varias formas:
 
-/*
-Datos estructurados siguiendo un orden. Cada dato se identifica con un índice que indica su
-posición dentro de la estructura.
-*/
+| Constructor |	Descripción |
+|----| ----|
+| ARRAY new Array(size) |	Crea un array vacío de tamaño size. Sus valores no están definidos, pero Undefined son .|
+| ARRAY new Array(e1, e2...)	| Crea un array con los elementos indicados.|
+| ARRAY [e1, e2...]	| Simplemente, los elementos dentro de corchetes: []. Notación preferida.|
+
+Al contrario que muchos otros lenguajes de programación, **Javascript permite que se puedan realizar arrays de tipo mixto**, no siendo obligatorio que todos los elementos sean del mismo tipo de dato.
+
+OJO: Al crear un array con new Array(size) hay varios matices que merece la pena mencionar. Lo primero, si sólo se indica un parámetro numérico size, Javascript creará un array vacío de size elementos. Es decir, no es lo mismo que const a = [3], donde creamos un array con un elemento 3. Por otro lado, new Array(size) realmente crea un array vacío que aún no ha sido rellenado con nada (esto hace que sea más óptimo para arrays grandes) y aunque es equivalente, no es exactamente igual new Array(3) que [undefined, undefined, undefined].
+
+
+
+## Acceso a elementos del array
+Al igual que los String, para saber el número elementos que tiene un array se accede a la propiedad .length, que nos devolverá el número de elementos existentes en un array:
+
+| Forma |	Descripción|
+| ---- | ----|
+| .length |	Propiedad que devuelve el número de elementos del array.|
+| [pos]	| Operador que devuelve (o modifica) el elemento número pos del array.|
+| .at(pos) 	| Método que devuelve el elemento en la posición pos. Números negativos en orden inverso.|
+
+
+### 1. El operador []
+Por otro lado, si lo que queremos es acceder a un elemento específico del array, no hay más que utilizar el operador [], al igual que lo podríamos hacer con los String para acceder a un carácter concreto.
+```
+const letters = ["a", "b", "c"];
+
+letters.length;   // 3
+letters[0];       // 'a'
+letters[2];       // 'c'
+letters[5];       // undefined
+```
+
+ Las posiciones empiezan a contar desde 0 y que si intentamos acceder a una posición que no existe (mayor del tamaño del array), nos devolverá un Undefined.
+
+El operador [] no sólo nos **permite obtener o acceder a un elemento del array, sino que también nos permite modificar un elemento específico del array,** si utilizamos la asignación:
+```
+const letters =  ["a", "b", "c"];
+
+letters[1] = "Z";  // Devuelve "Z" y modifica letters a ["a", "Z", "c"]
+letters[3] = "D";  // Devuelve "D" y modifica letters a ["a", "Z", "c", "D"]
+letters[5] = "A";  // Devuelve "A" y modifica letters a ["a", "Z", "c", "D", undefined, "A"]
+```
+
+### 2. El método .at()
+Además del clásico operador [], también podemos utilizar el método .at(), añadido en Javascript ES2022. Con él, se puede hacer exactamente lo mismo que con [pos], sólo que además permite valores negativos, mediante los cuales se puede obtener elementos en orden inverso, es decir, empezando a contar desde el último elemento:
+```
+const letters = ["a", "b", "c"];
+
+letters.at(0);    // "a"
+letters.at(1);    // "b"
+letters.at(3);    // undefined
+letters.at(-1);   // "c"
+letters.at(-2);   // "b"
+```
+
+
+## Manipular arrays de manera inmutable: Método .with()
+El método .with() es una adición reciente a JavaScript que permite crear una copia de un array, pero con un cambio en un elemento específico. La característica principal de este método es que no modifica el array original, sino que devuelve una nueva copia del array con el cambio aplicado. Esto es especialmente útil en programación funcional e inmutable.
+
+Permite encadenar múltiples operaciones, pero debemos de tener en cuenta que **sólo modifica, no se pueden añadir elementos que no existen antes en el array**:
+```
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+
+// Usando el método .with() para cambiar 'banana' por 'blueberry'
+const newFruits = fruits.with(1, 'blueberry');
+
+console.log(fruits); // ['apple', 'banana', 'cherry', 'date']
+console.log(newFruits); // ['apple', 'blueberry', 'cherry', 'date']
+
+```
+
+## Añadir o eliminar elementos
+Existen varias formas de añadir elementos a un array ya existente. Ten en cuenta que en todos estos casos **estamos mutando (variando los elementos del array ya existente)**. Veamos los métodos que podemos usar para ello:
+
+| Método	| Descripción|
+| ---- | ---- |
+| NUMBER .push(e1, e2, e3...) | ⚠️	Añade uno o varios elementos al final del array. Devuelve el tamaño del array. |
+| OBJECT .pop() | ⚠️	Elimina el último elemento del array. Devuelve dicho elemento. |
+| NUMBER .unshift(e1, e2, e3...) | ⚠️	Añade uno o varios elementos al inicio del array. Devuelve el tamaño del array. |
+| OBJECT .shift() | ⚠️	Elimina el primer elemento del array. Devuelve dicho elemento. |
+
+
+
 
 // Inicialización de arrays de forma literal.
 const collection = ["hey", "ho", "let's go"]; // [] => Inicializador de arrays
 
-// Accediendo a sus elementos
-console.log(collection[0]); // "hey"
-console.log(collection[3]); // undefined
-console.log(collection.length); // 3
 
 // Un array puede contener cualquier tipo de elemento
 const mixedCollection = [1, 2, 3, "Go!", { object: true }];
