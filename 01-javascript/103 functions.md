@@ -90,6 +90,35 @@ for (let i = 0; i < 3; i++) {
 > [!CAUTION]
 > En el primer bucle, var no tiene ámbito de bloque, por lo que el cierre recuerda la misma referencia a i, que al final del bucle es 3. En el segundo bucle, let tiene ámbito de bloque, por lo que cada cierre recuerda un valor diferente de i.
 
+Con el concepto de clouser nos acercamos a las clases en programación, cosa que con JS de forma nativa no tiene clases. Con la introducción de ECMAScript 6 (ES6) en 2015, JavaScript añadió una sintaxis de clases que hace que la programación orientada a objetos sea más familiar para los desarrolladores acostumbrados a los lenguajes basados en clases. Sin embargo, es importante entender que esta sintaxis de clases es simplemente azúcar sintáctico sobre el modelo de prototipos subyacente de JavaScript.
+
+
+## Funciones Autoinvocadas (IIFE). 
+En JavaScript, una función autoinvocada (Immediately Invoked Function Expression, o IIFE) es un patrón que permite ejecutar una función inmediatamente después de definirla. Aunque generalmente se utilizan funciones anónimas para crear IIFEs, no es un requisito estricto; también se pueden usar funciones nombradas. A continuación, se explica el concepto en detalle.
+
+Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón se utiliza para crear un ámbito léxico que no contamina el ámbito global y puede ser útil para encapsular variables.
+
+- Ejemplo de IIFE con Función Anónima: La forma más común de escribir una IIFE es utilizando una función anónima:
+  ```
+  (function() {
+    console.log('This is an IIFE!');
+  })();
+  ```
+
+- Ejemplo de IIFE con Función Nombrada: También puedes usar una función nombrada dentro de una IIFE:
+  ```
+  (function namedIIFE() {
+    console.log('This is a named IIFE!');
+  })();
+  ```
+  Aunque la función tiene un nombre (namedIIFE), este nombre solo es accesible dentro de la función misma y no en el ámbito exterior.
+
+
+**Propósitos de Usar IIFEs:**
+- Encapsulación: Las IIFEs se utilizan para crear un ámbito de función que ayuda a encapsular variables y evitar conflictos de nombres en el ámbito global.
+- Inicialización: Las IIFEs son útiles para ejecutar código de inicialización sin dejar variables temporales en el ámbito global.
+- Modularidad: Las IIFEs pueden ser una forma de organizar el código en módulos autocontenidos.
+
 
 
 ## Definición de Funciones
