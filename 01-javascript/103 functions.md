@@ -134,7 +134,7 @@ En javascript, como acabamos de ver, tenemos 2 formas diferentes de declarar fun
 
 - En las funciones clásicas, 'this' hace referencia al contexto que ha invocado a la función, es decir, aquello que la llama, el 'caller'. Luego el 'this' se resuelve en tiempo de ejecución (runtime binding). Están pensadas para ser utilizadas como MÉTODOS.
 
-- En las arrow functions, 'this' ya no es la entidad que la invoca sino que ahora apunta al contexto léxico en el que dicha arrow function ha sido definida. Ya no hay 'runtime binding', se resuelve en tiempo de desarrollo. Están más pensadas para ser usadas como 'function expressions' ligeras.
+- En las arrow functions, 'this' ya no es la entidad que la invoca sino que ahora apunta al contexto léxico en el que dicha arrow function ha sido definida. Ya no hay 'runtime binding', se resuelve en tiempo de desarrollo. Están más pensadas para ser usadas como 'function expressions' ligeras. En las arrow functions el valor this se hereda del contexto léxico en el que se define la función. Las arrow functions no tienen su propio contexto this. En lugar de eso, heredan el valor de this del contexto léxico en el que se definen. Esto significa que this dentro de una arrow function se refiere al mismo valor que this en la función o el bloque de código donde se definió la arrow function.
  
 ```
 function f() {
