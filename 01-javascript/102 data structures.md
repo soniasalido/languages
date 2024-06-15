@@ -356,6 +356,80 @@ Ejemplo de JSON:
 }
 ```
 
+## Clonar objetos o elementos
+Javascript tiene dos mecanismos para copiar elementos:
+🥂 Copia por valor (Duplica el contenido)
+🔮 Copia por referencia (Hace referencia a dónde está el contenido)
+![](https://lenguajejs.com/javascript/objetos/clonar-o-copiar-elementos/copia-valor-referencia.png)
+
+
+### 1. Copia por valor
+Se realiza con los tipos de datos más básicos, es decir, los tipos de datos primitivos, es decir: Number, String, Boolean, etc. Esto ocurre así porque son estructuras simples y rápidas de copiar.
+
+La copia por valor significa que simplemente se crea una nueva variable o constante y se asigna el mismo valor que tiene la variable original. Lo que a efectos prácticos cualquiera imaginaría como una copia:
+```
+let originalValue = 42;
+
+// Creamos una copia del valor de originalValue
+let copy = originalValue;
+
+originalValue;    // 42
+copy;             // 42
+
+// Alteramos el valor de copy
+copy = 55;
+
+originalValue;    // 42
+copy;             // 55
+
+// Al alterar el valor de copy, este es modificado y por otro lado, el valor de originalValue sigue siendo el valor original.
+```
+
+### 2. Copia por referencia
+En Javascript, como en otros lenguajes, al almacenar la información en una variable, esta se guarda en una dirección de memoria.
+
+Con estructuras de datos más complejas como **Array, Object u otros, esta información no se copia por valor,** puesto que podríamos tener estructuras muy complejas donde pueden haber muchos niveles de profundidad (array que contiene arrays, que a su vez cada uno de ellos contienen arrays y a su vez cada uno de ellos contienen arrays...).
+
+Para simplificar el proceso, lo que se hace con estos tipos de datos más complejos, es que la copia será una referencia al elemento original, algo que es mucho más práctico y rápido, pero con lo que hay que tener mucho cuidado:
+```
+let originalValue = { name: "ManzDev" };
+
+// Creamos una supuesta copia del valor de originalValue
+let copy = originalValue;
+
+originalValue;    // { name: "ManzDev" }
+copy;             // { name: "ManzDev" }
+
+// Alteramos el valor de copy
+copy.name = "Niv3k_el_pato";
+
+originalValue;    // { name: "Niv3k_el_pato" }
+copy;             // { name: "Niv3k_el_pato" }
+```
+
+Como puedes ver, **al modificar la propiedad name de copy, también se altera la propiedad name de originalValue** puesto que copy solo es una referencia a la estructura original, es decir, está ligado a originalValue. Al cambiar cualquiera de ellos, se modificará el otro.
+
+
+## Clonando variables o constantes
+Dos conceptos importantes:
+🎈 **Clonación superficial (Shallow clone):** Se llama así cuando realizamos una clonación de una estructura de datos y sólo se copia su primer nivel, mientras que segundo y niveles más profundos, se crean referencias.
+
+🧨 **Clonación profunda (Deep clone):** Se llama así cuando realizamos una clonación de una estructura de datos a todos sus niveles.
+```
+const data = {
+  name: "ManzDev",        // Se clona en superficial y en profundidad
+  tired: false,           // Se clona en superficial y en profundidad
+  likes: ["css", "javascript", "html", "vue"], // Sólo en profundidad
+  numbers: [4, 8, 15, 16, 23, 42]              // Sólo en profundidad
+}
+```
+Si realizamos una clonación superficial, solo clonaríamos los tipos de datos básicos (los dos primeros). Los dos últimos, al ser estructuras complejas en sí mismas, no se realizaría una clonación, sino que sería una referencia al elemento original, modificando ambos si alteramos uno de sus elementos, como vimos anteriormente.
+
+Si realizamos una clonación profunda, no tendríamos este problema, se clonarían todos los elementos, independientemente del nivel de profundidad.
+
+
+
+
 ---------------------------------------------
 ## JSON vs Objetos Javascript
 Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
