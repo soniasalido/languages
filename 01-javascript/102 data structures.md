@@ -510,10 +510,161 @@ Existen unos **métodos denominados Object.keys(), Object.values() y Object.entr
 
 | Método |	Descripción |
 | ---- | ---- |
-| Object.keys(obj)  | Itera el objeto y **devuelve un array con sus propiedades o keys.** |
+| Object.keys(obj)  | Itera el objeto y **devuelve un array con las claves (propiedades) del objeto.** |
 | Object.values(obj) | Itera el objeto y **devuelve un array con los valores de sus propiedades.**  |
 | Object.entries(obj) | Itera el objeto y **devuelve un array con los pares [key, valor].**  |
 | Object.fromEntries(array)  | Itera el objeto y **devuelve un objeto con un array de pares [key, valor].**  |
+
+
+## Convertir un objeto a array
+```
+const user = {
+  name: "Manz",
+  life: 99,
+  power: 10,
+  talk: function() {
+    return "Hola!";
+  }
+};
+
+Object.keys(user);        // ["name", "life", "power", "talk"]
+Object.values(user);      // ["Manz", 99, 10, ƒ]
+Object.entries(user);     // [["name", "Manz"], ["life", 99], ["power", 10], ["talk", ƒ]]
+```
+
+- Con el método Object.keys() obtenemos un Array de las claves (propiedades, índices, keys) del objeto.
+- Con el método Object.values() obtenemos un Array de los valores de las claves anteriores, en el mismo orden.
+- Con el método Object.entries() obtenemos un Array de entradas. Cada entrada es un Array del par clave-valor, es decir, la propiedad del objeto original y su valor correspondiente.
+
+
+## Iterar un Array con los métodos de iterar Objetos
+Como un Array también es un Object, podemos utilizar estos métodos también para recorrerlos, sólo que en este caso los índices del array son las posiciones (0, 1, 2, 3...).
+```
+const animals = ["Gato", "Perro", "Burro", "Gallo", "Ratón"];
+
+Object.keys(animals);     // [0, 1, 2, 3, 4]
+Object.values(animals);   // ["Gato", "Perro", "Burro", "Gallo", "Ratón"]
+Object.entries(animals);  // [[0, "Gato"], [1, "Perro"], [2, "Burro"], [3, "Gallo"], [4, "Ratón"]]
+```
+
+
+## Convertir un array a objeto. Forma 1. Usando el método Object.keys(keys)
+También se puede hacer la operación inversa, convertir un array en un objeto. Para ello, usaremos el método Object.fromEntries(). En esta ocasión, vamos a partir de dos Array keys y values, donde el primero tiene la lista de propiedades en String y el segundo tiene la lista de valores.
+
+El objetivo es, a partir de esos dos arrays (que deben ser del mismo tamaño), generar el objeto inicial user que teníamos antes:
+```
+const keys = ["name", "life", "power", "talk"];
+const values = ["Manz", 99, 10, function() { return "Hola" }];
+
+// Partimos de un  vacío entries
+const entries = [];
+for (let i of Object.keys(keys)) {
+  const key = keys[i];
+  const value = values[i];
+  entries.push([key, value]);
+}
+
+const user = Object.fromEntries(entries);     // {name: 'Manz', life: 99, power: 10, talk: ƒ}
+```
+Con Object.keys(keys) obtenemos una lista de números de 0 al tamaño del array keys. Esto nos servirá de posición para ir recorriendo los arrays keys y values en el interior del bucle for..of.
+
+De esta forma, en cada iteración del bucle generamos un par key, value, que meteremos en un array e insertaremos en entries. De esta forma, regeneramos la estructura de entradas de Object.entries() que es la que necesitamos para que, mediante Object.fromEntries() podamos regenerar el objeto user con las keys de keys y los valores de values.
+
+
+## Convertir un array a objeto. Forma 2. Utilizando método .map()
+Otra forma, más compacta:
+```
+const keys = ["name", "life", "power", "talk"];
+const values = ["Manz", 99, 10, function() { return "Hola" }];
+
+const entries = values.map((value, index) => [keys[index], value]);
+const user = Object.fromEntries(entries);
+```
+
+
+## Agrupar datos por criterio
+En principio, tenemos dos métodos apropiados para esta tarea. Ambos son idénticos, la diferencia es que uno crea un Objeto y otro crea un Map:
+| Método |	Descripción |
+| ---- | ----|
+| Object.groupBy(datos, criterio)	| Agrupa en un Object los datos por el criterio indicado.|
+| Map.groupBy(datos, criterio)	| Agrupa en un MAP los datos por el criterio indicado. |
+
+Por parámetro, pasaremos la estructura de datos Array y en el segundo parámetros una Function que hará de callback para definir cuál es el criterio que vamos a escoger.
+
+### 1. El método Object.groupBy()
+El método Object.groupBy() es una utilidad de JavaScript que permite agrupar los elementos de un array en un objeto, donde las claves del objeto son los valores obtenidos de aplicar una función de agrupamiento a cada elemento del array. Este método es muy útil para organizar datos en categorías de manera sencilla.
+Dado el array de usuarios:
+```
+const users = [
+  { name: "ManzDev", type: "streamer", color: "indigo" },
+  { name: "afor_digital", type: "streamer", color: "blue" },
+  { name: "BlurSoul_", type: "moderator", color: "indigo" },
+  { name: "felixicaza", type: "moderator", color: "blue" },
+  { name: "pheralb", type: "moderator", color: "green" },
+  { name: "omaaraguirre", type: "viewer", color: "orange" },
+  { name: "LuisLlamas_es", type: "viewer", color: "orange" },
+  { name: "ZeroBl", type: "viewer", color: "black" }
+];
+```
+
+Queremos agrupar estos usuarios por su type (tipo).
+```
+const usersByType = Object.groupBy(users, user => user.type);
+```
+
+
+Resultado: El resultado es un objeto donde las claves son los diferentes tipos de usuarios (streamer, moderator, viewer) y los valores son arrays de objetos de usuarios correspondientes a cada tipo:
+```
+{
+  streamer: [
+    { name: "ManzDev", type: "streamer", color: "indigo" },
+    { name: "afor_digital", type: "streamer", color: "blue" }
+  ],
+  moderator: [
+    { name: "BlurSoul_", type: "moderator", color: "indigo" },
+    { name: "felixicaza", type: "moderator", color: "blue" },
+    { name: "pheralb", type: "moderator", color: "green" }
+  ],
+  viewer: [
+    { name: "omaaraguirre", type: "viewer", color: "orange" },
+    { name: "LuisLlamas_es", type: "viewer", color: "orange" },
+    { name: "ZeroBl", type: "viewer", color: "black" }
+  ]
+}
+```
+
+**Nota: Object.groupBy() no es una función nativa de JavaScript.** Si quieremos implementar algo similar, podemos usar el siguiente código:
+```
+const groupBy = (array, keyFn) => {
+  return array.reduce((result, item) => {
+    const key = keyFn(item);
+    if (!result[key]) {
+      result[key] = [];
+    }
+    result[key].push(item);
+    return result;
+  }, {});
+};
+
+const usersByType = groupBy(users, user => user.type);
+```
+
+### El método Map.groupBy()
+Hay que tener presente que aunque hemos creado objetos a partir de la agrupación, también podemos hacerlo con una estructura de datos similar llamada Map. Para ello, en lugar de Object usamos Map:
+```
+const usersByType = Map.groupBy(users, user => user.type);
+
+// usersByType:
+{
+  0: { "streamer" => [{...}, {...}] },
+  1: { "moderator" => [{...}, {...}, {...}] },
+  2: { "viewer" => [{...}, {...}, {...}] },
+  size: 3
+}
+
+Object.fromEntries(usersByType);
+```
+De hecho, observa que utilizando el método Object.fromEntries() puedes convertir el Map resultante en un Object como el obtenido con Object.groupBy().
 
 
 ---------------------------------------------
