@@ -113,7 +113,7 @@ La transpilación es el proceso de convertir el código fuente escrito en un len
 - Uso de Características Modernas: Los desarrolladores quieren aprovechar las nuevas características del lenguaje que hacen que el código sea más limpio, eficiente y mantenible.
 
 
-** Herramientas de Transpilación**
+**Herramientas de Transpilación**
 - Las herramientas de transpilación más comunes en el ecosistema JavaScript son:
   - Babel: Babel es la herramienta de transpilación más popular en JavaScript. Convierte el código ECMAScript moderno a ECMAScript 5, que es ampliamente soportado por la mayoría de los navegadores.
   - TypeScript Compiler: TypeScript es un superset de JavaScript que añade tipos estáticos. El compilador de TypeScript también puede transpilar código TypeScript a JavaScript estándar.
