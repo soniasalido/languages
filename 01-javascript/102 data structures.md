@@ -510,10 +510,10 @@ Existen unos **métodos denominados Object.keys(), Object.values() y Object.entr
 
 | Método |	Descripción |
 | ---- | ---- |
-| ARRAY | Object.keys(obj)  | Itera el obj y devuelve un array con sus propiedades o keys. |
-| ARRAY | Object.values(obj) | Itera el obj y devuelve un array con los valores de sus propiedades.  |
-| ARRYA | Object.entries(obj) | Itera el obj y devuelve un array con los pares [key, valor].  |
-| OBJECT | Object.fromEntries(array)  | Construye un objeto con un array de pares [key, valor].  |
+| ARRAY Object.keys(obj)  | Itera el obj y devuelve un array con sus propiedades o keys. |
+| ARRAY  Object.values(obj) | Itera el obj y devuelve un array con los valores de sus propiedades.  |
+| ARRYA  Object.entries(obj) | Itera el obj y devuelve un array con los pares [key, valor].  |
+| OBJECT  Object.fromEntries(array)  | Construye un objeto con un array de pares [key, valor].  |
 
 
 ---------------------------------------------
