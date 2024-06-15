@@ -391,6 +391,7 @@ Se utilizan para representar datos estructurados, como los objetos en si mismos 
 ⚠ Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo.
 ⚠ Entre otros, las funciones son un tipo especial de objetos y las veremos más adelante.
 ⚠ Existen más tipos de estructuras de datos nativas como Map o Set que iremos viendo en sus propias secciones.
+Operador: instanceof: Determina la clase concreta de un objeto. Devuelve, true ó false.
 
 
 # OPERADORES 
@@ -629,7 +630,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Op
 
 # DIRECTIVAS DE CONTROL
 
-## if else
+## 1. IF ... ELSE IF .... ELSE
 ```
 // 1 sola rama
 const count = 0;
@@ -659,7 +660,7 @@ else if (count === 1) console.log("one");
 else console.log("more than one");
 ```
 
-## switch
+## 2. SWITCH
 ```
 const pet = "dog";
 switch (pet) {
@@ -690,7 +691,7 @@ switch (pet) {
 
 ```
 
-## operador ternario
+## 3. Operador ternario
 ```
 const age = 20;
 const status = (age >= 18) ? "adult" : "minor";
@@ -702,7 +703,7 @@ const status = age >= 18 ? "adult" : "minor";
 const status = age >= 18 ? "adult" : (age >= 14 ? "teen" : "kid");
 ```
 
-## bucle "for".
+## 4. Bucle "for".
 ⚠ Importante el uso de `let` aquí
 ```
 const limit = 10;
@@ -716,7 +717,7 @@ for (let i = 0, limit = 10; i < limit; i++) {
 }
 ```
 
-## bucle "while"
+## 5. Bucle "while"
 ```
 const limit = 10;
 let i = 0;
@@ -726,7 +727,7 @@ while (i < limit) {
 }
 ```
 
-## bucle "do while"
+## 6. Bucle "do while"
 ```
 const limit = 10;
 let i = 0;
@@ -740,7 +741,7 @@ do {
 ## ⚠ forEach() se verá con los arrays
 ## ⚠ for..of se verá con los arrays
 
-## operador coma en expresiones
+## Operador coma en expresiones
 ```
 const a = (2 + 4, 9);
 console.log(a); // 9
@@ -755,3 +756,36 @@ for (let i = 0, j = 10; i < 5; i++, j--) {
   console.log(i, j);
 }
 ```
+
+### 7. TRY
+Consiste en un bloque que se ejecuta de manera normal, y captura cualquier excepción que se pueda producir en ese bloque de sentencias.
+```
+try {
+  // Código que podría lanzar una excepción
+  let result = someFunctionThatMightThrow();
+  console.log('Result:', result);
+} catch (error) {
+  // Código que se ejecuta si ocurre una excepción
+  console.error('An error occurred:', error.message);
+} finally {
+  // Código que se ejecuta siempre
+  console.log('This will always execute.');
+}
+
+function someFunctionThatMightThrow() {
+  // Simulamos una condición que puede o no lanzar un error
+  let randomValue = Math.random();
+  if (randomValue < 0.5) {
+    throw new Error('This is an intentional error.');
+  }
+  return 'Success!';
+}
+```
+
+### 8. FOR .... IN (objetos)
+
+
+### 9. FOR ... OF (listas)
+
+
+### 10. forEach
