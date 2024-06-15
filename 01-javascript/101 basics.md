@@ -205,6 +205,20 @@ console.log(a); // Error! Todavía no existe la variable `a`
 let a = 10;
 ```
 
+## Valores Falsy en JS
+En JavaScript, los valores falsy son valores que se consideran falsos cuando se evalúan en un contexto booleano, como en una condición de un if o en otras estructuras de control de flujo que requieren una evaluación de verdad o falsedad. Entender los valores falsy es crucial para escribir código más robusto y prevenir errores lógicos.
+
+**Lista de Valores Falsy:**
+- false: El valor booleano false.
+- 0: El número cero (tanto en formato decimal como hexadecimal).
+- -0: El número negativo cero.
+- 0n: El valor BigInt cero.
+- "" (cadena vacía): Una cadena de texto vacía.
+- null: Representa la ausencia de cualquier valor.
+- undefined: Indica que una variable no ha sido asignada a un valor.
+- NaN: El valor especial Not-a-Number.
+
+
 ## TIPOS DE DATOS 
 Distinguimos 2 grandes grupos de tipos de datos en Javascript:
 1. Tipos PRIMITIVOS (representan un único dato simple).
