@@ -87,8 +87,11 @@ for (let i = 0; i < 3; i++) {
 }
 // Salida: 0, 1, 2
 ```
-[!WARNING]En el primer bucle, var no tiene ámbito de bloque, por lo que el cierre recuerda la misma referencia a i, que al final del bucle es 3. En el segundo bucle, let tiene ámbito de bloque, por lo que cada cierre recuerda un valor diferente de i.
+[!WARNING]
+En el primer bucle, var no tiene ámbito de bloque, por lo que el cierre recuerda la misma referencia a i, que al final del bucle es 3. En el segundo bucle, let tiene ámbito de bloque, por lo que cada cierre recuerda un valor diferente de i.
 
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
 
 ## Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
