@@ -508,12 +508,12 @@ Iterador es un término que se suele referir a algo que te permite recorrer una 
 
 Existen unos **métodos denominados Object.keys(), Object.values() y Object.entries()** que nos van a permitir realizar esta tarea. En primer lugar, observa que son métodos de una Clase estática, por lo que tienes que escribir siempre el Object. y no ejecutar el método sobre el objeto en sí, como solemos hacerlo.
 
-| Método |	Descripción | Devuelve |
-| ---- | ---- | ---- |
-| ARRAY | Object.keys(obj)  | Itera el obj y devuelve sus propiedades o keys. | Array |
-| ARRAY | Object.values(obj) | Itera el obj y devuelve los valores de sus propiedades.  | Array |
-| ARRYA | Object.entries(obj) | Itera el obj y devuelve un  con los pares [key, valor].  | Array |
-| OBJECT | Object.fromEntries(array)  | Construye un objeto con un array de pares [key, valor].  | Object |
+| Método |	Descripción |
+| ---- | ---- |
+| ARRAY | Object.keys(obj)  | Itera el obj y devuelve un array con sus propiedades o keys. |
+| ARRAY | Object.values(obj) | Itera el obj y devuelve un array con los valores de sus propiedades.  |
+| ARRYA | Object.entries(obj) | Itera el obj y devuelve un array con los pares [key, valor].  |
+| OBJECT | Object.fromEntries(array)  | Construye un objeto con un array de pares [key, valor].  |
 
 
 ---------------------------------------------
