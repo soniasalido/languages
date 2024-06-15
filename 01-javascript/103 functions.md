@@ -4,6 +4,35 @@ Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros
 
 Las funciones en JavaScript son bloques de código diseñados para realizar una tarea específica y se pueden invocar desde cualquier parte del programa. Las funciones son fundamentales en JavaScript y permiten la modularidad, la reutilización del código y la organización lógica de las operaciones.
 
+
+## Hoisting
+Hoisting es el mecanismo por el que JS procesa las declaraciones antes de cualquier código. Por eso se puede definir una función por debajo de una llamada a dicha función.
+
+Hoisting permite usar funciones y variables antes de que se hayan declarado. El intérprete de JS divide la declaración y asignación de funciones y variables. Javascript "hoists" o "alza" nuestras declaraciones en la parte superior de su scope (ámbito) antes de la ejecución.
+
+**Ejemplo de código:**
+```
+console.log(foo) // undefined
+var foo = 'Bar';
+console.log(foo) // 'Bar'
+```
+
+**Lo que hace el hoisting en el código anterior:**
+```
+var foo;
+console.log(foo) // undefined
+var foo = 'Bar';
+console.log(foo) // 'Bar'
+```
+
+Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recomendable usar una variable antes de que sea declarada. 
+
+**Sólo las declaraciones hacen hoisting. Las asignaciones no hacen hoisting.**
+
+**Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
+
+
+
 ## Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
   - Funciones Declaradas (Function Declarations).
