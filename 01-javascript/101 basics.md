@@ -207,8 +207,8 @@ let a = 10;
 
 ## TIPOS DE DATOS 
 Distinguimos 2 grandes grupos de tipos de datos en Javascript:
-- Tipos PRIMITIVOS (representan un único dato simple).
-- Tipos estructurales (representan estructuras de datos) u OBJETOS.
+1. Tipos PRIMITIVOS (representan un único dato simple).
+2. Tipos estructurales (representan estructuras de datos) u OBJETOS.
 
 7 PRIMITIVOS (2 de nueva incorporación) + OBJETOS
 
@@ -219,7 +219,7 @@ Distinguimos 2 grandes grupos de tipos de datos en Javascript:
   - Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser alterado ni modificado (no confundir con reasignar una variable con otro valor).
   - Operador 'typeof'.
 
-#### String (Cadenas de Texto)
+#### 1.1 String (Cadenas de Texto)
 ```
 "hello world" // dobles comillas
 'hello world' // comillas simples
@@ -276,7 +276,7 @@ Es importante distinguir entre expresiones y sentencias en JavaScript:
 - Sentencias: Realizan una acción (declarar una variable, definir una función, controlar el flujo del programa).
 
 
-#### Number (Números)
+#### 1.2 Number (Números)
 ```
 101       // entero positivo
 -200      // entero negativo
@@ -289,13 +289,13 @@ NaN       // NotANumber** (de hecho es de tipo número)
 
 Indeterminados (0 * Infinity), indefinidos (1 / 0), fuera del conjunto de los reales (sqrt(-1)), o errores al parsear (parseInt("abc")).
 
-#### Boolean (Lógicos)
+#### 1.3 Boolean (Lógicos)
 ```
 true
 false
 ```
 
-#### Null
+#### 1.4 Null
 Representa la ausencia intencionada de cualquier valor u objeto. Es usado comúnmente para indicar que una variable debería tener un objeto pero actualmente no tiene ninguno. Null es un primitivo especial de tipo "object" en JavaScript y la raíz de la cadena de prototipos.
 
 **1. null como Primitivo Especial:**
@@ -313,7 +313,7 @@ Representa la ausencia intencionada de cualquier valor u objeto. Es usado común
 
 
 
-#### Undefined
+#### 1.5 Undefined
 Es un tipo de dato primitivo que representa la ausencia de valor.
 - Valor único: undefined es el único valor posible del tipo de dato undefined.
 - Variables no inicializadas: Cuando se declara una variable en JavaScript pero no le asignamos un valor, automáticamente se le asigna el valor undefined.
@@ -335,18 +335,43 @@ En general, se recomienda utilizar `null` para indicar la ausencia intencional d
   - Reiniciar variables: Puedes asignar null a una variable para borrar su valor anterior y liberarla de cualquier referencia a objetos.
   - Valores por defecto: En algunos casos, puedes usar null como valor por defecto para indicar que una variable o parámetro no tiene un valor inicial válido.
 
-#### Symbol
+#### 1.6 Symbol
 /* ⚠ Lo veremos más adelante ya que su uso está muy ligado a los objetos */
 
-#### Bigint
+#### 1.7 Bigint
 ⚠ Nuevo tipo numérico para representar enteros de cualquier tamaño, con cualquier precisión. 
 ```
 2n
 BigInt(2)
 ```
 
+#### 1.8 NaN 
+En JavaScript, NaN (Not-a-Number) es un valor especial que representa un resultado de una operación matemática que no puede producir un número válido. 
+** Características de NaN:**
+- Tipo: NaN es de tipo number.
+- Autoreferencia: NaN no es igual a ningún valor, incluido él mismo.
+- Resultado de Operaciones Inválidas: NaN es el resultado de operaciones matemáticas que no tienen un resultado numérico válido.
+```
+let result = 0 / 0; // División de cero por cero
+console.log(result); // NaN
 
-### OBJETOS
+result = Math.sqrt(-1); // Raíz cuadrada de un número negativo
+console.log(result); // NaN
+
+result = parseFloat("hello"); // Intentar convertir una cadena no numérica en número
+console.log(result); // NaN
+```
+
+**Uso de isNaN:** La función global isNaN convierte el valor a número y luego comprueba si es NaN.
+```
+console.log(isNaN(NaN));         // true
+console.log(isNaN("hello"));     // true (cadena no numérica se convierte en NaN)
+console.log(isNaN(123));         // false
+console.log(isNaN("123"));       // false (cadena numérica se convierte en número)
+```
+
+
+### 1.2 OBJETOS
 Se utilizan para representar datos estructurados, como los objetos en si mismos o los arrays (que también son objetos en el fondo)
 
 ⚠ Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo.
