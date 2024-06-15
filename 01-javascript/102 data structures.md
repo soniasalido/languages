@@ -433,6 +433,8 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 | Estrategia | Clonación superficial | Clonación profunda | Tipos de datos avanzados | Nativo | Más info |
 | --- | --- |
 | Asignación =	| ❌ No		| ❌ No		| ❌ No		| ✅ Sí	|
+
+
 | Usar Object.assign()		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí |
 | Usar spread ...		| ✅ Sí		| ❌ No		| ❌ No		| ✅ Sí		| Copias con spread |
 | Serializar con JSON.parse()		| ✅ Sí		| ✅ Sí		| ⚠️ Solo tipos básicos ⚠️ No funciones/DOM		| ✅ Sí		| [JSON](https://lenguajejs.com/javascript/objetos/desestructuracion-objetos/#haciendo-copias-de-objetos) |
@@ -441,7 +443,7 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 
 
 
-| Command | Description |
+| Estrategia | Clonación superficial |
 | --- | --- |
 | `git status` | List all *new or modified* files |
 | `git diff` | Show file differences that **haven't been** staged |
