@@ -1194,6 +1194,18 @@ array.some(element => {
 ```
 
 
+## Ordenación de un array
+| Método |	Descripción |
+| ----| ARRAY ---- |
+| ARRAY .reverse() ⚠️	| ARRAY Invierte el orden de elementos del array. |
+| ARRAY .toReversed() ✅	| ARRAY Devuelve una copia del array, con el orden de los elementos invertido. |
+| ARRAY .sort() ⚠️	| ARRAY Ordena los elementos del array bajo un criterio de ordenación alfabética. |
+| ARRAY .sort(criterio) ⚠️	| ARRAY Idem, pero bajo un criterio de ordenación indicado por  criterio. |
+| ARRAY .toSorted() ✅	| ARRAY Devuelve una copia del array, con los elementos ordenados. |
+| ARRAY .toSorted(criterio) ✅	| ARRAY Idem, pero ordenado por el criterio establecido por parámetro. |
+✅ El array original está seguro (no muta).
+⚠️ El array original cambia (muta).
+
 
 ---------------
 // Inicialización de arrays de forma literal.
