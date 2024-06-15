@@ -1,4 +1,15 @@
-# OBJETOS 
+# Estructuras de datos en JS
+JavaScript ofrece varias estructuras de datos incorporadas que son esenciales para la manipulación y gestión de datos. Estas estructuras de datos incluyen arrays, objetos, sets, maps, y sus variantes débiles como WeakSet y WeakMap. A continuación, se describen estas estructuras de datos y sus principales características.
+
+1. Objetos
+2. Arrays.
+3. Sets.
+4. Maps.
+5. WeakSets.
+6. WeakMaps
+
+---------------------
+# 1. OBJETOS 
 Una primera forma de verlo, es como una variable especial que puede contener más variables en su interior. De esta forma, tenemos la posibilidad de organizar múltiples variables de la misma temática en el interior de un objeto.
 
 **En JavaScript, un objeto es una colección de propiedades, y cada propiedad es una asociación entre un nombre o clave y un valor**. Las propiedades de un objeto pueden contener valores de cualquier tipo de datos, incluyendo otros objetos y funciones. 
