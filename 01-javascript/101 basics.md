@@ -149,7 +149,7 @@ console.log(juan.constructor.name); // Salida: "Persona"
 | Booleanos | Los valores true y false.|
 | Arrays | Se definen entre corchetes, con elementos separados por comas (ej: [1, 2, 3]).|
 | Objetos| Se definen entre llaves, con pares clave-valor separados por comas (ej: { nombre: "Ana", edad: 30 }).|
-| 2. Notación de Punto (.) |
+| 2. Notación de Punto (.) | colspan |
 | Acceso a propiedades de objetos | Se utiliza para acceder a las propiedades de un objeto (ej: persona.nombre).|
 | Llamada a métodos de objetos | Se utiliza para llamar a los métodos de un objeto (ej: Math.random()).|
 | 3. Notación de Corchetes ([]) |
@@ -159,7 +159,7 @@ console.log(juan.constructor.name); // Salida: "Persona"
 | Strings con expresiones incrustadas | Permite incrustar expresiones de JavaScript dentro de un string utilizando ${...} (ej: const nombre = "Ana"; console.log(Hola, ${nombre}!);).|
 | 5. Notación JSON (JavaScript Object Notation)|
 | Intercambio de datos | Es un formato ligero basado en texto para el intercambio de datos, muy utilizado en aplicaciones web. Se basa en la notación de objetos de JavaScript, pero con algunas restricciones (ej: las claves deben ser strings).|
-| 6. Notación de Finalización de cada líne (;) |
+| 6. Notación de Finalización de cada línea (;) |
 | Finalización de cada línea. No es obligatorio.| x|
 
 
