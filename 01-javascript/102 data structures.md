@@ -1265,7 +1265,7 @@ Estas son las Array functions que podemos encontrarnos en Javascript:
 | OBJECT  .reduceRight(ƒ, initial)	| Idem al anterior, pero en orden de derecha a izquierda. |
 
 
-## Bucles .forEach()
+## Bucles .forEach() en Arrays
 Como se puede ver, el método forEach() no devuelve nada y espera que se le pase por parámetro una FUNCTION que se ejecutará por cada elemento del array. Esa función, puede ser pasada en cualquiera de los formatos que hemos visto: como función tradicional o como función flecha:
 ```
 const letters = ["a", "b", "c", "d"];
@@ -1310,6 +1310,103 @@ const letters = ["a", "b", "c", "d"];
 
 letters.forEach((letter) => console.log(letter));
 ```
+
+
+## Comprobaciones en Arrays
+Existen dos métodos para realizar comprobaciones: el método .every() y el método .some(). Ambos métodos evaluan los elementos del array y devuelven siempre un ARRAY, que representa si se cumple o no. Los explicamos a continuación.
+
+### 1. El método .every() (Todos)
+El método every() permite comprobar si todos y cada uno de los elementos de un array cumplen la condición que se especifique en la FUNCTION  callback:
+```
+const letters = ["a", "b", "c", "d"];
+letters.every((letter) => letter.length === 1); // true
+```
+
+### 2. El método .some() (Al menos uno)
+De la misma forma que el método anterior sirve para comprobar si todos los elementos del array cumplen una determinada condición, con some() podemos comprobar si al menos uno de los elementos del array, cumplen dicha condición definida por el callback.
+```
+const letters = ["a", "bb", "c", "d"];
+letters.some((element) => element.length == 2);   // true
+```
+
+
+## Transformadores y filtros en Arrays
+### 1. El método .map()
+El método map() es un método muy potente y útil para trabajar con arrays, puesto que su objetivo es devolver un nuevo array donde cada uno de sus elementos será lo que devuelva la función callback por cada uno de los elementos del array original:
+```
+const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
+const nameSizes = names.map((name) => name.length);
+
+nameSizes; // Devuelve [3, 5, 5, 9, 9]
+```
+
+### 2. El método .filter()
+El método filter() nos permite filtrar los elementos de un array y devolver un nuevo array con sólo los elementos que queramos. Para ello, utilizaremos la función callback para establecer una condición que devuelve true sólo en los elementos que nos interesen:
+```
+const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
+const filteredNames = names.filter((name) => name.startsWith("P"));
+
+filteredNames; // Devuelve ['Pablo', 'Pedro', 'Pancracio']
+```
+
+
+### 3. El método .flatMap()
+Un método que puede resultar interesante es .flat(level). Se trata de un método que revisa todos los elementos del array en busca de arrays anidados, y los aplana hasta el nivel level indicado por parámetro.
+```
+const values = [10, 15, 20, [25, 30], 35, [40, 45, [50, 55], 60]];
+
+values.flat(0);         // [10, 15, 20, [25, 30], 35, [40, 45, [50, 55], 60]];
+values.flat(1);         // [10, 15, 20, 25, 30, 35, 40, 45, [50, 55], 60];
+values.flat(2);         // [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+
+// Idem al anterior, pero si hubieran más niveles los aplanaría todos
+values.flat(Infinity);
+```
+
+
+## Búsquedas en un Array
+### 1. El método .find() y .findIndex()
+Dentro de las Array functions, existen dos métodos interesantes: find() y findIndex(). Ambos se utilizan para buscar elementos de un array mediante una condición, la diferencia es que el primero devuelve el elemento mientras que el segundo devuelve su posición en el array original. Veamos como funcionan:
+```
+const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
+
+names.find((name) => name.length == 5);       // 'Pablo'
+names.findIndex((name) => name.length == 5);  // 1
+```
+
+### 2. El método .findLast() y .findLastIndex()
+De la misma forma, tenemos findLastIndex() y findLast(), que son las funciones equivalentes a findIndex() y find(), pero buscando elementos desde derecha a izquierda, en lugar de izquierda a derecha:
+```
+const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
+
+names.findLast((name) => name.length == 5);       // 'Pedro'
+names.findLastIndex((name) => name.length == 5);  // 2
+```
+
+## ACUMULADORES
+Nos permiten realizar tareas por cada elemento del array, acumulando valores para hacerles una modificación en cada iteración.
+
+### 1. El método .reduce()
+Los métodos denominados reduce() y reduceRight() se encargan de recorrer todos los elementos del array, e ir acumulando sus valores (o alguna operación diferente) y sumarlo todo, para devolver su resultado final.
+
+En este par de métodos, encontraremos una primera diferencia en su función callback, puesto que en lugar de tener los clásicos parámetros opcionales (element, index, array) que hemos utilizado hasta ahora, tiene (first, second, iteration, array), que funciona de forma muy similar, pero adaptado a este tipo de acumuladores.
+
+En la primera iteración, first contiene el valor del primer elemento del array y second del segundo. En siguientes iteraciones, first es el acumulador que contiene lo que devolvió el callback en la iteración anterior, mientras que second es el siguiente elemento del array, y así sucesivamente. Veamos un ejemplo para entenderlo:
+```
+const numbers = [95, 5, 25, 10, 25];
+numbers.reduce((first, second) => {
+  console.log(`F=${first} S=${second}`);
+  return first + second;
+});
+
+// F=95  S=5    (1ª iteración: elemento 1: 95 + elemento 2: 5) = 100
+// F=100 S=25   (2ª iteración: 100 + elemento 3: 25) = 125
+// F=125 S=10   (3ª iteración: 125 + elemento 4: 10) = 135
+// F=135 S=25   (4ª iteración: 135 + elemento 5: 25) = 160
+
+// Finalmente, devuelve 160
+```
+
 
 
 ---------------
