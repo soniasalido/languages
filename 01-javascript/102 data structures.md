@@ -498,6 +498,22 @@ const copy = structuredClone(data);
 | FUNCTION / CLASS | 	❌ No, referencia	 | ⚠️ null	 | ✅ Sí	 | ❌ Devuelve DOMException |
 | Elemento del DOM	 | ❌ No, referencia	 | ⚠️ {} vacío	 | ❌ No, referencia	 | ❌ Devuelve DOMException |
 
+En principio, en estructuras de datos no deberían existir elementos del DOM ni funciones, por lo que structuredClone() debería ser la mejor opción. No obstante, si lo que deseas es clonar ciertas estructuras que además contienen funciones o elementos del DOM, lo mejor sería decantarse por cloneDeep().
+
+Ten en cuenta que aunque puede ser atractivo el método _.cloneDeep() por soportar todos los tipos de datos, también hay que tener en cuenta que no se trata de un método nativo del navegador, sino que se trata de una librería externa, que debe cargarse, parsearse y ejecutarse y que con estructuras muy complejas puede ser lenta o pesada.
+
+
+## Iteradores de Objetos
+Iterador es un término que se suele referir a algo que te permite recorrer una estructura de datos por todos sus apartados o miembros. En muchos casos, se presenta la situación en la que necesitamos recorrer un objeto, a través de las propiedades de su estructura, como si fueran los elementos de un array. 
+
+Existen unos **métodos denominados Object.keys(), Object.values() y Object.entries()** que nos van a permitir realizar esta tarea. En primer lugar, observa que son métodos de una Clase estática, por lo que tienes que escribir siempre el Object. y no ejecutar el método sobre el objeto en sí, como solemos hacerlo.
+
+| Método |	Descripción | Devuelve |
+| ---- | ---- | ---- |
+| ARRAY | Object.keys(obj)  | Itera el obj y devuelve sus propiedades o keys. | Array |
+| ARRAY | Object.values(obj) | Itera el obj y devuelve los valores de sus propiedades.  | Array |
+| ARRYA | Object.entries(obj) | Itera el obj y devuelve un  con los pares [key, valor].  | Array |
+| OBJECT | Object.fromEntries(array)  | Construye un objeto con un array de pares [key, valor].  | Object |
 
 
 ---------------------------------------------
