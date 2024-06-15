@@ -325,36 +325,6 @@ Si lo necesitasemos, también podríamos usar rest en este caso.
 
 **Recuerda que la desestructuración solo funciona para estructuras de datos. Si tienes un objeto que contiene métodos o elementos del DOM, por ejemplo, no se copiarán y lanzará una excepción.**
 
---------------------------------------------------------------------
-# FORMATO JSON
-Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
-
-JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
-
-Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
-
-Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
-
-Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
-
-
-Ejemplo de JSON:
-```
-{
-  "name": "Manz",
-  "life": 3,
-  "totalLife": 6
-  "power": 10,
-  "dead": false,
-  "props": ["invisibility", "coding", "happymood"],
-  "senses": {
-    "vision": 50,
-    "audition": 75,
-    "taste": 40,
-    "touch": 80
-  }
-}
-```
 
 ## Clonar objetos o elementos
 Javascript tiene dos mecanismos para copiar elementos:
@@ -674,7 +644,37 @@ Agrupar por criterio (legacy)" hace referencia a una técnica de programación u
 
 En el contexto de JavaScript, los métodos .groupBy() son funciones que permiten agrupar elementos de una colección según un criterio definido por una función de agrupamiento. Aunque métodos como Object.groupBy() y Map.groupBy() han sido propuestos para el estándar ECMAScript, aún no forman parte de él, por lo que a menudo se implementan mediante soluciones personalizadas.
 
----------------------------------------------
+--------------------------------------------------------------------
+# FORMATO JSON
+Buena práctica: Separar nuestro código de programación de los datos que aparecen en él.
+
+JSON se basa en una subconjunto del lenguaje de programación JavaScript, específicamente en la notación de objetos de JavaScript, aunque es independiente del lenguaje y se utiliza ampliamente en diferentes entornos de programación. JSON son las siglas de JavaScript Object Notation. JSON es un formato ligero de datos, con una estructura (notación) específica, que es totalmente compatible de forma nativa con Javascript. Como su propio nombre indica, JSON se basa en la sintaxis que tiene Javascript para crear objetos. JSON es un formato ligero y fácil de leer para intercambiar datos. Es como una forma organizada de escribir información en forma de texto.
+
+Además de JSON, existen otros formatos para separar datos y código, como XML, CSV, YAML, etc. La elección del formato depende de tus necesidades y preferencias.
+
+Su contenido puede ser simplemente un array, un number, un string, un boolean o incluso un array, sin embargo, lo más habitual es que parta siendo un object o un array. Puedes comprobar en (https://jsonlint.com/) si algo concreto es un JSON válido o no.
+
+Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes (antes de un cierre de llaves, por ejemplo). Suelen ser motivos de error de sintaxis frecuentemente. 
+
+
+Ejemplo de JSON:
+```
+{
+  "name": "Manz",
+  "life": 3,
+  "totalLife": 6
+  "power": 10,
+  "dead": false,
+  "props": ["invisibility", "coding", "happymood"],
+  "senses": {
+    "vision": 50,
+    "audition": 75,
+    "taste": 40,
+    "touch": 80
+  }
+}
+```
+
 ## JSON vs Objetos Javascript
 Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras diferencias y matices:**
 - Las propiedades del objeto deben estar entrecomilladas con «comillas dobles».
