@@ -1,4 +1,4 @@
-///-- DEFAULT ARGUMENTS **************************************************************************
+# DEFAULT ARGUMENTS
 
 // A partir de ES6 podemos asignar valores por defecto a los argumentos de una función:
 const greet = (name = "Unknown") => console.log("Hello, " + name);
