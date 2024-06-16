@@ -171,20 +171,51 @@ const greet = function(name) {
 
 ### 3. Funciones Flecha (Arrow Functions)
 Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
+
+Son siempre anónimas. Para tener un bimbre es necesario almacenar esa expresión en una variable de tipo Const:
 ```
+const nombreVaribale = (argumento) => {
+  .....
+  return ......
+}
+
+
 const greet = (name) => {
   return `Hello, ${name}!`;
 };
-
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
-Para funciones de una sola expresión, se pueden omitir las llaves y el return:
+Cuando la función flecha consta de una única línea para el return, se puede simplificar eliminando llaves y la palabra return:
 ```
+const nombreVariable = (argumento) => ........;
+```
+
+Si la función flecha tiene un único argumento, se puede simplificar quitando los corchetes ():
+```
+const nombreVariable = argumento => ........;
+
 const greet = name => `Hello, ${name}!`;
-
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
+
+> [!WARNING]
+> La función flecha que devuelve un objeto: Hay un error si lo hacemos sólo con {}. **Es necesario los corchetes ().**
+
+Sin eliminar el return -->
+```
+const toObject = (name, surname, age) => {
+  return {name,surname, age};
+}
+```
+
+Eliminado la palabra return:
+```
+const toObject = (name, surname, age) => (
+  {name, surname, age}
+);
+
+
 
 **Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
