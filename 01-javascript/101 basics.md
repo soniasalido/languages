@@ -166,16 +166,33 @@ console.log(juan.constructor.name); // Salida: "Persona"
 
 # EXPRESIONES BÁSICAS ********
 
+
+## Comentarios en línea
+```
+let d = 4; // d value is 4
+```
+
+## Comentarios de bloque
+```
+/*
+let c = 3;
+let d = 4;
+*/
+```
+
 ## VARIABLES
 
-Javascript es un **lenguaje dinámico y débilmente tipado**, lo que significa que las variables no están asociadas a ningún tipo concreto. Por tanto, no tengo que declararlas especificando ningún tipo. 
-Puedo asignar el valor que quiera, del tipo que quiera.
+Javascript es un **lenguaje dinámico y débilmente tipado**, lo que significa que las variables no están asociadas a ningún tipo concreto. Por tanto, no tengo que declararlas especificando ningún tipo. Puedo asignar el valor que quiera, del tipo que quiera.
 
 Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actualmente `var` está desaconsejado debido a un concepto llamado ["Hoisting".](https://github.com/soniasalido/languages/blob/main/01-javascript/103%20functions.md#hoisting)
 
 
+A partir de ES6: Let y Const tiene un ábito de bloque, lo que implica que sólo tienen validez en el bloque en el cual se declara, No se aplica hoisting.
+
+Var tiene un ámbito de función. Sí se aplica hoisting.
+
 ### LET
-Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, podamos ser capaces de reasignar su valor.
+Utilizaremos `let` cuando queramos declarar una variable a la que, posteriormente, **podamos ser capaces de reasignar su valor.** Se pueden inicializar después de declararse.
 ```
 let a = 3;
 a = 14;
@@ -186,29 +203,20 @@ Podemos crear multiples declaraciones todas con el mismo tipo `let` separadas po
 let b = 10, c = "hello";
 ```
 
-Una vez tengamos una variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito. Veremos con más detalle el ámbito más adelante:
+Una vez tengamos una **variable declarada no podemos redeclarar otra con el mismo nombre en el mismo ámbito**. Veremos con más detalle el ámbito más adelante:
 ```
 let a = 3;
 let a = 14; // Error! La variable `a` ya ha sido redeclarada
 ```
 
-### comentarios en línea
-```
-let d = 4; // d value is 4
-```
-
-### comentarios de bloque
-```
-/*
-let c = 3;
-let d = 4;
-*/
-```
 
 ### CONST
 Utilizaremos `const` cuando queramos declarar una variable que nunca queramos volver a reasignar. Es importante entender que **una vez que declaremos la variable no podemos volver a reasignar su valor.**
-Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada.
+Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada. Siempre tienen que ser inicializadas. No se pueden inicializar después de su declaración.
 **⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.**
+
+>[Important]
+> Const es referencia constante, NO ES CONTENIDO CONSTANTE.
 
 ```
 // Esto lanzará un error de ejecución
