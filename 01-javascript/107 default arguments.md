@@ -1,6 +1,6 @@
 # DEFAULT ARGUMENTS
 
-A partir de ES6 podemos asignar valores por defecto a los argumentos de una función:
+A partir de ES6 podemos asignar valores por defecto a los argumentos de una función. Aunque sólo tengamos un argumento, no se quitan los paréntesis () en las arrow function. Es por cuestión de legibilidad:
 ```
 const greet = (name = "Unknown") => console.log("Hello, " + name);
 
@@ -8,13 +8,13 @@ greet(); // "Hello, Unknown"
 greet("Jake"); // "Hello, Jake"
 ```
 
-Los valores por defecto son aplicados si el argumento es específicamente undefined
+Los valores por defecto son aplicados si el argumento es específicamente undefined. Los argumentos por defecto sólo se activan cuando nosotros explícitamente no pasamos ningún valor en la llamada a la función o pasamos undefind como argumento de llamada a la función. No es igual si pasamos null. No devolvería unknown.
 ```
 greet(undefined); // "Hello, Unknown"
 greet(null); // "Hello, null"
 ```
 
-Se pueden aplicar valores por defecto a variables asignadas por destructuring
+Aplicación útil: Una función que admite objetos como argumentos y que captura mediante destructuring una de sus propiedades (name) y la muestra por consola. Para evitar la situación de que el objeto no tenga la propiedad name, lo que hacemos es asignarle un valor por defecto 🠮 Se pueden aplicar valores por defecto a variables asignadas por destructuring:
 ```
 const logName = ({ name = "Unknown" }) => console.log(name);
 logName({ age: 24 }); // "Unknown"
