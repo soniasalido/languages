@@ -171,7 +171,7 @@ console.log(juan.constructor.name); // Salida: "Persona"
 Javascript es un **lenguaje dinámico y débilmente tipado**, lo que significa que las variables no están asociadas a ningún tipo concreto. Por tanto, no tengo que declararlas especificando ningún tipo. 
 Puedo asignar el valor que quiera, del tipo que quiera.
 
-Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actualmente `var` está desaconsejado debido a un concepto llamado "Hoisting" que veremos más adelante.
+Tenemos varios operadores para declarar variables: `let`, `const` y `var`. Actualmente `var` está desaconsejado debido a un concepto llamado ["Hoisting".](https://github.com/soniasalido/languages/blob/main/01-javascript/103%20functions.md#hoisting)
 
 
 ### LET
