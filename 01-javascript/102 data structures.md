@@ -1360,10 +1360,14 @@ let b = 5;
 [a, b] = [b, a];
 ```
 
-### 3. Spread (Expandir)
+### 3. Spread (Expandir | Soltar | Esparcir | Extender | Agrupar)
 La desestructuración en JavaScript es una sintaxis especial que permite extraer valores de arrays o propiedades de objetos en variables distintas. Combinada con el operador spread (...), se convierte en una herramienta poderosa para trabajar con arrays y objetos de manera más eficiente y legible.
 
-El operador spread (...) se puede utilizar junto con la desestructuración para capturar el resto de los elementos de un array.
+El operador spread (...) se puede utilizar junto con la desestructuración para capturar el resto de los elementos de un array. El operador Spread nos permite extender | agrupar | soltar, los valores de un Array u Objeto en un nuevo Array u Objeto. No es una copia como tal, lo que sí es igual, es su contenido.
+
+> [!IMPORTANT]
+> Spread suelta | esparce los elementos perno no hace una copia en profundidad.
+
 ```
 const array = [1, 2, 3, 4, 5];
 
@@ -1373,6 +1377,13 @@ console.log(first); // 1
 console.log(third); // 3
 console.log(rest); // [4, 5]
 // Se ignora el segundo elemento del array
+```
+
+En el siguiente ejemplo, veremos que con el operador Spread, se hace un nuevo array, soltando los elementos de miArray y su orden en el nuevo array creado. Poero no es el mismo Array. Los objetos se comparan por referencias y como son arrays diferentes, no tienen igual referencia, aunque tengan los mismos elementos:
+```
+const miArray = [ "uno", "dos", "tres"];
+const nuevo Array = ...miArray;
+console.log(miArray === nuevoArray); // FALSE
 ```
 
 
