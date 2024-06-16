@@ -214,7 +214,7 @@ Eliminado la palabra return:
 const toObject = (name, surname, age) => (
   {name, surname, age}
 );
-
+```
 
 
 **Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
