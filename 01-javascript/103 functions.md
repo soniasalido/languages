@@ -200,9 +200,9 @@ console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 > [!WARNING]
-> La función flecha que devuelve un objeto: Hay un error si lo hacemos sólo con {}. **Es necesario los corchetes ().**
+> **La función flecha que devuelve un objeto: Es necesario usar corchetes (). Se genera un error si lo hacemos sólo con {}.**
 
-Sin eliminar el return -->
+Sin eliminar el return 🠮
 ```
 const toObject = (name, surname, age) => {
   return {name,surname, age};
