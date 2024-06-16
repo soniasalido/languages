@@ -1264,6 +1264,8 @@ names.findLast((name) => name.length == 5);       // 'Pedro'
 names.findLastIndex((name) => name.length == 5);  // 2
 ```
 
+
+
 ## ACUMULADORES
 Nos permiten realizar tareas por cada elemento del array, acumulando valores para hacerles una modificación en cada iteración.
 
@@ -1537,6 +1539,39 @@ console.log(user); // {"name": "Adam", "age": 22}
 user = {}; // TypeError: Assignment to constant variable
 ```
 
+
+## Array Prototype Last
+Código que mejore todos los arrays de tal manera que puedas llamar al método array.last() en cualquier array y este devuelva el último elemento. Si no hay elementos en el array, debería devolver -1.
+
+Este bloque de comentario es un comentario de JSDoc que describe lo que hace la función last que se va a definir. Indica que la función puede devolver varios tipos de datos: null, boolean, number, string, Array, u Object.
+```
+/**
+ * @return {null|boolean|number|string|Array|Object}
+ */
+```
+
+Añadiendo un nuevo método llamado last al prototipo del objeto Array. Esto significa que todas las instancias de Array tendrán acceso a este método.
+```
+Array.prototype.last = function() {
+  ......
+};
+```
+
+
+
+```
+/**
+ * @return {null|boolean|number|string|Array|Object}
+ */
+Array.prototype.last = function() {
+    return this.length === 0 ? -1 : this[this.length-1]
+};
+
+/**
+ * const arr = [1, 2, 3];
+ * arr.last(); // 3
+ */
+```
 
 # 3. Set - Conjuntos
 Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
