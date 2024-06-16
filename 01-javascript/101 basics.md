@@ -215,7 +215,7 @@ Utilizaremos `const` cuando queramos declarar una variable que nunca queramos vo
 Es por esto que una variable declarada con `const` debe incluir la asignación. Generalmente utilizaremos `const` para dar a entender de forma semántica que esa variable no seá reasignada. Siempre tienen que ser inicializadas. No se pueden inicializar después de su declaración.
 **⚠ Importante: Una variable declarada con `const` puede no ser "constante", es decir, de sólo lectura. El concepto "constante" dependerá del tipo de dato que almacenemos.**
 
->[Important]
+>[!CAUTION]
 > Const es referencia constante, NO ES CONTENIDO CONSTANTE.
 
 ```
