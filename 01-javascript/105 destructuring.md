@@ -14,9 +14,9 @@ const name = student.name;
 const surname = student.surname;
 console.log(name); // "Evan"
 console.log(surname); // "Smith"
+```
 
-// Pero con "destructuring" podemos asignar propiedades ya existentes a variables de forma directa,
-// en una línea:
+Pero con "destructuring" podemos asignar propiedades ya existentes a variables de forma directa, en una línea:
 const student = {
   name: "Evan",
   surname: "Smith",
