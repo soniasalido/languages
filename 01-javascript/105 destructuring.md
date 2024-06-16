@@ -1,8 +1,38 @@
 # DESTRUCTURING 
 
-Destructuring es una técnica rápida para asignar propiedades de objetos a variables, o items de un array a variables.
+Destructuring es una técnica rápida para asignar
+- Propiedades de objetos a variables.
+- Items de un array a variables.
+- Parámetros de una función.
+
+En cualquier otro caso da error.
+
+## Destructuring Largo
+```
+const student = {
+  name: "Evan",
+  surname: "Smith",
+  country: "USA",
+};
+
+const {propiedadDelObjeto1 : nombreVariableQueCreamos, propiedadDelObjeto2 : nombreVariableQueCreamos2, ....} = nombre Objeto
+const {name: name, surname: surname} = student;
+```
+
+## Destructuring Corto
+```
+const student = {
+  name: "Evan",
+  surname: "Smith",
+  country: "USA",
+};
+
+const {propiedadDelObjeto1 , propiedadDelObjeto2....} = nombre Objeto
+const {name, surname} = student;
+```
 
 ## "DESTRUCTURING" SOBRE OBJETOS
+**Capturamos propiedades del objeto y las almacenamos en variable** que se llaman igual que esas propiedades, aunque tambien se pueden nombrar las variables que capturan las propiedades de otra form.
 ```
 // Ejemplo a mano, sin "destructuring":
 const student = {
@@ -16,7 +46,7 @@ console.log(name); // "Evan"
 console.log(surname); // "Smith"
 ```
 
-Pero con "destructuring" podemos asignar propiedades ya existentes a variables de forma directa, en una línea:
+Pero con "destructuring" **podemos asignar propiedades ya existentes a variables de forma directa**, en una línea:
 ```
 const student = {
   name: "Evan",
@@ -28,7 +58,7 @@ console.log(name); // "Evan"
 console.log(surname); // "Smith"
 ```
 
-La de arriba es una forma abreviada a la notación clave-valor, por lo que es equivalente a hacer:
+La de arriba es una **forma abreviada a la notación clave-valor**, por lo que es equivalente a hacer:
 ```
 const student = {
   name: "Evan",
@@ -40,7 +70,7 @@ console.log(name); // "Evan"
 console.log(surname); // "Smith"
 ```
 
-Aunque si queremos, también podemos reemplazar el nombre de las variables donde vamos asignando nuestras propiedades:
+Aunque si queremos, también podemos **reemplazar el nombre de las variables donde vamos asignando nuestras propiedades:**
 ```
 const student = {
   name: "Evan",
@@ -52,7 +82,7 @@ console.log(studentName); // "Evan"
 console.log(studentSurname); // "Smith"
 ```
 
-También podemos hacer un "destructuring" profundo, es decir, extraer propiedades de objetos anidados:
+**También podemos hacer un "destructuring" profundo, es decir, extraer propiedades de objetos anidados:**
 ```
 const student = {
   name: "Evan",
@@ -80,6 +110,11 @@ const student = {
 const getName = ({ name }) => name;
 console.log(getName(student)); // "Evan"
 ```
+El argumento de la función getName, ({ name }) es una desestructuración de una propiedad de un objeto. Genera una variable llamada name en el cuerp de la función con lo que ya se puede usar.
+
+> [!TIP]
+> Si capturamos una propiedad que no existe, no da un ERROR, ya que se captura con el valor undefined.
+
 
 ## "DESTRUCTURING" SOBRE ARRAYS
 Ejemplo a mano, sin "destructuring":
@@ -133,14 +168,12 @@ console.log(center); // 10;
 ```
 
 ## "DESTRUCTURING" PARA REASIGNAR VARIABLES
-Se pueden hacer cosas bastante bizarras con el destructuring, como por ejemplo hacer un swap de variables de una sola vez. Veamos:
-```
-let a = "a";
-let b = "b";
-```
+Se pueden hacer cosas bastante bizarras con el destructuring, como por ejemplo hacer un swap de variables de una sola vez. No necesitaremos variables auxiliares. Veamos:
 
 Swap clásico, nos tenemos que apoyar en variables auxiliares
 ```
+let a = "a";
+let b = "b";
 let temp = a;
 a = b;
 b = temp;
@@ -151,11 +184,16 @@ console.log(b);
   
 Sin embargo, recurriendo al destrúcturing, se puede hacer un swap inmediato, en una sola línea:
 ```
+let a = "a";
+let b = "b";
 [a, b] = [b, a];
 
 console.log(a);
 console.log(b);
 ```
+[a, b] 🠮 Lo que se desestructura.
+[b, a] 🠮 Un array que me lo invento para poder hacer el intercambio. Asó no se necesitan variables intermedias para que dos variables intercambien sus valores.
+
   
 El equivalente con destructuring de objetos podría ser:
 ```
