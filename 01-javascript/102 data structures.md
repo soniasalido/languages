@@ -1405,7 +1405,7 @@ El operador ... en JavaScript puede significar tanto rest (agrupar) como spread 
 
 **1. Rest (Agrupar)**
 El operador ... actúa como rest cuando se utiliza en la declaración de funciones o en la desestructuración de arrays y objetos. En este caso, agrupa múltiples elementos en una sola variable.
-- En Parámetros de Función: Cuando se utiliza en los parámetros de una función, ... agrupa el resto de los argumentos en un array.
+- En Parámetros de Función: Cuando se utiliza en los parámetros de una función, ... agrupa el resto de los argumentos en un array. Todos los argumentos cuando se utilice y se llame a esta función, se agrupan en un array que se llamará numbers. Esto es algo parecedo al concepto arguments en las funciones normales. Recuerda que en las arrow function no existe el concepto arguments.
   ```
   function sum(...numbers) { // Aquí, ... significa rest
     return numbers.reduce((total, number) => total + number, 0);
