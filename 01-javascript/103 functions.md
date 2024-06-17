@@ -138,6 +138,22 @@ funcionEtiqueta`cadena literal con ${variable}`;
 - Generación de HTML: Crear contenido HTML dinámico de una manera segura.
 - Formateo avanzado: Crear cadenas formateadas, como fechas o números, de una manera consistente.
 
+**Ejemplo práctico: Sanitización:**
+```
+function sanitizar(cadenas, ...valores) {
+  return cadenas.reduce((resultado, parte, indice) => {
+    let valor = valores[indice] ? String(valores[indice]).replace(/<|>|&|"/g, '') : '';
+    return resultado + parte + valor;
+  }, '');
+}
+
+let entradaUsuario = '<script>alert("hack!")</script>';
+let texto = sanitizar`Entrada segura: ${entradaUsuario}`;
+console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
+```
+
+
+
 ## Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
   - Funciones Declaradas (Function Declarations).
@@ -145,6 +161,9 @@ funcionEtiqueta`cadena literal con ${variable}`;
   - Funciones Flecha (Arrow Functions).
   - Funciones Anónimas (Anonymous Functions).
   - Métodos dentro de Objetos.
+
+
+
 
 
 ### 1. Funciones Declaradas
