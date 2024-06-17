@@ -1,4 +1,4 @@
-# OPTIONAL CHAINING 
+# OPTIONAL CHAINING: ?.
 
 Claro, el operador de encadenamiento opcional (optional chaining) en JavaScript es una característica que permite acceder a propiedades de objetos profundamente anidadas sin necesidad de verificar manualmente si cada nivel de la cadena es null o undefined. Esto ayuda a evitar errores y hacer el código más limpio y legible.
 
@@ -54,7 +54,16 @@ console.log(user?.greet?.());     // Acceso seguro
 > IMPORTANTE: el operador optional chaining comprueba si una propiedad o referencia es 'nullish', es decir, null o undefined. Si es nullish, cortocircuita devolviendo undefined, en caso contrario continúa.
 
 
-# NULLISH COALESCING
+# NULLISH COALESCING: ??
+El operador de coalescencia nula (nullish coalescing) en JavaScript, representado por ??, es una característica introducida en ECMAScript 2020 (ES11). Este operador permite proporcionar un valor predeterminado cuando una variable es null o undefined, diferenciándose del operador lógico ||, que considera falsy otros valores como 0, "", y false.
+
+**Sintaxis básica:**
+```
+let variable = valor1 ?? valor2;
+```
+valor1: El valor que se está evaluando.
+valor2: El valor predeterminado que se utiliza si valor1 es null o undefined.
+
 
 El operador nullish coalescing es un operador lógico que devuelve el operando derecho cuando el izquierdo es 'nullish', es decir, null o undefined. Viene a mejorar la forma en que asignamos valores por defecto. Hasta ahora era frecuente utilicar el operador lógico OR (||) a tal efecto, pero era problemático. ¿Por qué? Puesto que OR devolvería el operando derecho cuando el izquierdo sea 'falsy'. Veámoslo:
 
@@ -87,3 +96,7 @@ let a = null;
 a ??= 'unavailable';    // a = a ?? false
 console.log(a); // false
 ```
+
+> [!Important]
+> **Diferencia entre ?? y ||:**
+> El operador || evalúa todos los valores falsy (como 0, "", false, null, undefined), mientras que ?? solo evalúa null o undefined.
