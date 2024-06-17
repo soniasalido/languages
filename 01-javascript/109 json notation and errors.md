@@ -1,4 +1,4 @@
-///-- NOTACIÓN JSON ******************************************************************************
+# NOTACIÓN JSON
 
 // La notación JSON consiste en un objeto formado por pares de clave : valor.
 // - Las claves obligatoriamente deben ser strings con comillas dobles.
