@@ -8,7 +8,10 @@ const original = ["one", "two", "three"];
 const copy = [...original]; // Extendemos cada elemento del array origen en el array destino
 console.log(original); // ["one", "two", "three"]
 console.log(copy); // ["one", "two", "three"]
-// Plantear pregunta, ¿entonces, que nos dará esto?
+```
+
+Plantear pregunta, ¿entonces, que nos dará esto?
+```
 console.log(original === copy); // false
 console.log(original[0] === copy[0]); // true
 ```
