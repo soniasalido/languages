@@ -2,7 +2,8 @@
 
 Las notación de clases se introdujo en ES6 como una forma abreviada de implementar el modelo de prototipos**. Veamos sus características principales:
 
-**IMPORTANTE: Como veremos más adelante en el capítulo de clases avanzadas, una vez hayamos asimilado el concepto del prototipo y su herencia, descubriremos que la notación de clases no es más que azúcar sintáctico que nos abstraen y simplifican la tarea de trabajar a más bajo nivel con
+> [!Important]
+> **IMPORTANTE: Como veremos más adelante en el capítulo de clases avanzadas, una vez hayamos asimilado el concepto del prototipo y su herencia, descubriremos que la notación de clases no es más que azúcar sintáctico que nos abstraen y simplifican la tarea de trabajar a más bajo nivel con
 funciones constructoras, prototipos y el operador new. RECORDAD: en javascript las clases como tales no existen!
 
 
