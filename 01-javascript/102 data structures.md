@@ -1573,6 +1573,18 @@ Array.prototype.last = function() {
  */
 ```
 
+## Encontrar el menor elemento de un array:
+**Combinación de Math.min y el Operador de Propagación ... operador de propagación (spread operator)**
+Para encontrar el menor elemento en un array, puedes combinar Math.min con el operador de propagación para expandir el array en una lista de argumentos individuales:
+```
+let arr1 = [3, 1, 4, 1, 5, 9];
+let min1 = Math.min(...arr1);
+console.log(min1); // Salida: 1
+```
+Operador de Propagación: ...arr1 expande el array en los elementos individuales 3, 1, 4, 1, 5, 9.
+Función Math.min: Math.min(3, 1, 4, 1, 5, 9) encuentra el menor valor entre los argumentos proporcionados, que es 1.
+
+
 # 3. Set - Conjuntos
 Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
 ```
