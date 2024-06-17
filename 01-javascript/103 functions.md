@@ -120,6 +120,23 @@ Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón
 - Modularidad: Las IIFEs pueden ser una forma de organizar el código en módulos autocontenidos.
 
 
+## Template Functions | Tagged Template Literals
+Son un tipo de funciones especiales que se invocan con los backticks en vez de con los paréntesis (). No tienen un uso común. Se usan en ciertas librerías. Permite personalizar el procesamiento de las plantillas literales. Esto es útil para crear DSL (lenguajes específicos de dominio), formateo de cadenas, entre otras aplicaciones.
+
+Como primer argumento de la función recibe un chunks que es un array con todo el string hasta que se encuentra con un ${}, el siguiente argumento es el siguiente string hasta el siguiente ${} y así sucesivamente.
+
+Las Tagged Template Literals te permiten llamar a una función "etiqueta" que procesa una Template Literal. La función etiqueta recibe la cadena y los valores interpolados como argumentos, lo que permite manipular la salida antes de que se genere la cadena final.
+
+Sintaxis Básica:
+```
+funcionEtiqueta`cadena literal con ${variable}`;
+```
+
+**Casos de uso:**
+- Sanitización de entradas: Prevenir inyecciones SQL o XSS al limpiar entradas de usuario.
+- Internacionalización: Formatear mensajes en diferentes idiomas.
+- Generación de HTML: Crear contenido HTML dinámico de una manera segura.
+- Formateo avanzado: Crear cadenas formateadas, como fechas o números, de una manera consistente.
 
 ## Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
