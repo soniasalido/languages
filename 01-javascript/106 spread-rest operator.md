@@ -45,11 +45,10 @@ main(...values);  // "hey"
 // "ho"
 // "let's go"
 // Arguments(4) ["hey", "ho", "let's go", "yay" ... ]
+```
 
-// El operador "rest" hace justo lo contrario que "spread", aunque su notación es la misma: 
-// agrupa argumentos en un array. Es decir, asigna todo los argumentos pasados a una funcion a
-// elementos de un array. ¿Os acordáis de que las lambdas no tenían variable dinámica "arguments"?
-// Se puede emular con el operador "rest":
+El operador "rest" hace justo lo contrario que "spread", aunque su notación es la misma: agrupa argumentos en un array. Es decir, asigna todo los argumentos pasados a una funcion a elementos de un array. ¿Os acordáis de que las lambdas no tenían variable dinámica "arguments"? Se puede emular con el operador "rest":
+```
 const sum = (...nums) => nums.reduce((acc, num) => acc + num, 0);
 console.log(sum()); // 0
 console.log(sum(1, 2, 3)); // 6
