@@ -1,8 +1,6 @@
-///-- MODULES ************************************************************************************
+# MODULES 
 
-// La separación de código en distintos ficheros es una buena práctica y ayuda a que
-// tu código sea más reusable y mantenible. Los módulos nos permiten estructurar nuestra aplicación
-// y encapsular partes que no queremos que estén expuestas directamente.
+La separación de código en distintos ficheros es una buena práctica y ayuda a que tu código sea más reusable y mantenible. Los módulos nos permiten estructurar nuestra aplicación y encapsular partes que no queremos que estén expuestas directamente.
 // Por lo general cada fichero constituye un módulo aunque un módulo puede estar también compuesto
 // por varios ficheros
 // Las acciones que podemos hacer sobre un módulo son:
