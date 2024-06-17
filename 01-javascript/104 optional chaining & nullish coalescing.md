@@ -2,8 +2,8 @@
 
 Claro, el operador de encadenamiento opcional (optional chaining) en JavaScript es una característica que permite acceder a propiedades de objetos profundamente anidadas sin necesidad de verificar manualmente si cada nivel de la cadena es null o undefined. Esto ayuda a evitar errores y hacer el código más limpio y legible.
 
-**Sintaxis del Operador Optional Chaining:**
-El operador de encadenamiento opcional es (?.). Podemos usarlo para acceder a propiedades, llamar a funciones y acceder a elementos de arrays de manera segura.
+**Sintaxis del Operador Optional Chaining: ?.**
+El operador de encadenamiento opcional es "?.". Podemos usarlo para acceder a propiedades, llamar a funciones y acceder a elementos de arrays de manera segura.
 
 El operador optional chaining nos permite acceder en profundidad a propiedades de objetos de manera segura, sin tener que realizar de forma explícita un chequeo para validar si todas las propiedades de la cadena existen o no. Veamos la problemática y como este operador la resuelve:
 ```
@@ -51,20 +51,14 @@ console.log(user?.greet?.());     // Acceso seguro
 ```
 
 > [!Important]
-> IMPORTANTE: el operador optional chaining comprueba si una propiedad o referencia es 'nullish', es decir, null o undefined. Si es nullish, cortocircuita devolviendo undefined, en caso contrario
-continúa.
+> IMPORTANTE: el operador optional chaining comprueba si una propiedad o referencia es 'nullish', es decir, null o undefined. Si es nullish, cortocircuita devolviendo undefined, en caso contrario continúa.
 
 
-///-- NULLISH COALESCING **************************************************************************
+# NULLISH COALESCING
 
-/*
-El operador nullish coalescing es un operador lógico que devuelve el operando derecho cuando el
-izquierdo es 'nullish', es decir, null o undefined. Viene a mejorar la forma en que asignamos
-valores por defecto. Hasta ahora era frecuente utilicar el operador lógico OR (||) a tal efecto,
-pero era problemático. ¿Por qué? Puesto que OR devolvería el operando derecho cuando el izquierdo
-sea 'falsy'. Veámoslo:
-*/
+El operador nullish coalescing es un operador lógico que devuelve el operando derecho cuando el izquierdo es 'nullish', es decir, null o undefined. Viene a mejorar la forma en que asignamos valores por defecto. Hasta ahora era frecuente utilicar el operador lógico OR (||) a tal efecto, pero era problemático. ¿Por qué? Puesto que OR devolvería el operando derecho cuando el izquierdo sea 'falsy'. Veámoslo:
 
+```
 const quantity = 43;
 console.log(quantity || "unknown");
 // Este uso del cortocircuito del OR ha sido muy común para devolver valores por defecto.
@@ -76,10 +70,11 @@ console.log(quantity ?? "unknown");
 // Es común combinar nullish coalescing con optional chaining para hacer accesos seguros
 // y con valores por defecto en caso de no existir. Siguiendo el ejemplo anterior:
 console.log(user?.stats?.likes ?? "Not available");
+```
 
-// IMPORTANTE:
-// Estos dos operadores permiten construir código robusto y resiliente a errores.
-
+> [!Important]
+> IMPORTANTE: Estos dos operadores permiten construir código robusto y resiliente a errores.
+```
 // *** Asignaciones con operadores lógicos. ⚠ Bajo implementación ES2022.
 let a = true;
 a &&= false;    // a = a && false
@@ -91,3 +86,4 @@ console.log(a); // true
 let a = null;
 a ??= 'unavailable';    // a = a ?? false
 console.log(a); // false
+```
