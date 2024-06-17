@@ -1,102 +1,82 @@
-///-- MODELO PROTOTÍPICO *************************************************************************
+# MODELO PROTOTÍPICO 
 
-/*
-JS no proporciona un modelo o implementación de clases en si mismo, sino que es un lenguaje
-dinámico, basado en objetos, es decir, instancias en memoria. La notación o sintaxis de clases
-vista hasta ahora no es más que azúcar sintáctico, es decir, un 'engaño' (o abstracción) que nos
-permite pensar que estamos trabajando con clases reales cuando en realidad no lo son.
+JS no proporciona un modelo o implementación de clases en si mismo, sino que es un lenguaje dinámico, basado en objetos, es decir, instancias en memoria. La notación o sintaxis de clases vista hasta ahora no es más que azúcar sintáctico, es decir, un 'engaño' (o abstracción) que nos permite pensar que estamos trabajando con clases reales cuando en realidad no lo son.
 
 A veces no se tiene una idea muy clara de la diferencia entre una clase y un objeto, pues bien:
-- Un ejemplo típico para explicar lo que es una clase versus un objeto es el caso de un plano
-versus una casa. El plano es la representación de una posible casa, pero no existe como tal,
-es sólo un papel. La casa, por su parte sería la instancia, la materialización del plano hecho
-realidad. Podremos obtener tantas casas queramos a partir de un plano.
+- Un ejemplo típico para explicar lo que es una clase versus un objeto es el caso de un plano versus una casa. El plano es la representación de una posible casa, pero no existe como tal, es sólo un papel. La casa, por su parte sería la instancia, la materialización del plano hecho realidad. Podremos obtener tantas casas queramos a partir de un plano.
 
-Pues bien, en JS todo son objetos, es decir, casas. No existen los planos (o clases). ¡Hasta las
-funciones son objetos!. Y aunque existe la palabra reservada "class" como ya hemos visto, solo
-es azúcar sintáctico.
+Pues bien, en JS todo son objetos, es decir, casas. No existen los planos (o clases). ¡Hasta las funciones son objetos!. Y aunque existe la palabra reservada "class" como ya hemos visto, solo es azúcar sintáctico.
 
 -------------------------------------------------------------------------------------------------
 
-Lo que vamos a hacer a continuación es demostrar el hecho anterior, ¿cómo? emulando una clase con
-javascript (lenguaje que, recordemos, no dispone de clases 'out of the box') sin utilizar el
-azúcar sintáctico que nos proporciona (sintaxis de "class"). Y para ello nos serviremos de las
-herramientas nativas que si dispone el lenguaje, concretamente emplearemos 3 ingredientes para
-nuestra receta:
+Lo que vamos a hacer a continuación es demostrar el hecho anterior, ¿cómo? emulando una clase con javascript (lenguaje que, recordemos, no dispone de clases 'out of the box') sin utilizar el azúcar sintáctico que nos proporciona (sintaxis de "class"). Y para ello nos serviremos de las herramientas nativas que si dispone el lenguaje, concretamente emplearemos 3 ingredientes para nuestra receta:
 1. Función Constructora.
 2. Operador New.
 3. Prototipo.
-*/
 
-// *** 1 y 2 Función constructora y Operador New *************************************************
 
-/*
-Volviendo al simil de plano vs casas, todo sistema de clases tiene un mecanismo para poder crear
-"casas a partir de planos", es decir, instancias de clase. En JS para crear un objeto, una
-instancia nueva, que responda a un tipo especifico necesitamos una función que llamaremos
-constructora, y un operador new:
-*/
+## 1 y 2 Función constructora y Operador New 
 
+Volviendo al simil de plano vs casas, todo sistema de clases tiene un mecanismo para poder crear "casas a partir de planos", es decir, instancias de clase. En JS para crear un objeto, una instancia nueva, que responda a un tipo especifico necesitamos una función que llamaremos constructora, y un operador new:
+
+```
 // Función constructora
 function Person(name) {
   this.name = name;
 }
+```
 
-// Con el operador new creamos INSTANCIAS independientes del tipo Person.
+Con el operador new creamos INSTANCIAS independientes del tipo Person.
+```
 const dan = new Person("Dan");
 const james = new Person("James");
 console.log(dan); // Person {name: "Dan"}
 console.log(james); // Person {name: "James"}
-/*
+```
+
 El operador "new" hace por debajo 3 cosas:
 1. Crear un objeto nuevo, vacío.
-2. Hacer que ese objeto vacío invoque a la función constructora, por tanto 'this' representará al
-   objeto recién creado.
-3. ¿..? Además "new", tiene una particularidad, hace algo más, y ahi entra en juego el prototipo,
-   pero esta tercera operación la desvelaremos un poco más adelante.
-*/
+2. Hacer que ese objeto vacío invoque a la función constructora, por tanto 'this' representará al objeto recién creado.
+3. ¿..? Además "new", tiene una particularidad, hace algo más, y ahi entra en juego el prototipo, pero esta tercera operación la desvelaremos un poco más adelante.
 
-// Podemos acceder a sus propiedades.
+Podemos acceder a sus propiedades.
+```
 console.log(dan.name); // "Dan"
 console.log(james.name); // "James"
+```
 
-// Puesto que son objetos, podemos crear propiedades solo para una instancia en concreto sin que la
-// otra se ve afectada. O si quisieramos, modificarlas también. Podemos jugar con cada objeto de
-// forma 100% independiente (a diferencia de las clases tradicionales).
+
+Puesto que son objetos, podemos crear propiedades solo para una instancia en concreto sin que la otra se ve afectada. O si quisieramos, modificarlas también. Podemos jugar con cada objeto de forma 100% independiente (a diferencia de las clases tradicionales).
+```
 dan.age = 26;
 console.log(dan.age); // 26
 console.log(james.age); // undefined
+```
 
-// También podemos crear estas propiedades directamente en el "constructor".
-// Podemos crear funciones por ejemplo:
+También podemos crear estas propiedades directamente en el "constructor". Podemos crear funciones por ejemplo:
+```
 function Person(name) {
   this.name = name;
   this.greet = function () {
     console.log("Hello, I'm " + this.name);
   };
 }
+```
 
-// Y si ahora creamos instancias independientes de "Person", tenemos:
+Y si ahora creamos instancias independientes de "Person", tenemos:
+```
 const dan = new Person("Dan");
 const james = new Person("James");
 dan.greet(); // "Hello, I'm Dan"
 james.greet(); // "Hello, I'm James"
+```
 
-/*
-⚠ Pero aqui hay un problema. El constructor ha creado una nueva función cada vez que ha sido
-invocado. Cada función será un objeto diferente, es decir, cada instancia tendrá una función
-distinta. Si tenemos miles de instancias habrá miles de funciones "greet" creadas.
-En lugar de eso, ¿por qué no almacenamos una única función en un lugar común para que todas las
-instancias apunten a la misma función?
-*/
+⚠ Pero aqui hay un problema. El constructor ha creado una nueva función cada vez que ha sido invocado. Cada función será un objeto diferente, es decir, cada instancia tendrá una función distinta. Si tenemos miles de instancias habrá miles de funciones "greet" creadas. En lugar de eso, ¿por qué no almacenamos una única función en un lugar común para que todas las instancias apunten a la misma función?
 
-// *** 3 Prototipo ***
 
-/*
-A ese lugar común es a lo que llamamos "prototipo" y está representado por la propiedad
-"prototype". El prototipo será por tanto ese almacén común que las distintas instancias de un
-mismo tipo compartirán.
-*/
+## 3 Prototipo
+A ese lugar común es a lo que llamamos "prototipo" y está representado por la propiedad "prototype". El prototipo será por tanto ese almacén común que las distintas instancias de un mismo tipo compartirán.
+```
 function Person(name) {
   this.name = name;
 }
@@ -109,56 +89,37 @@ const dan = new Person("Dan");
 const james = new Person("James");
 dan.greet(); // "Hello, I'm Dan"
 james.greet(); // "Hello, I'm James"
+```
 
-/*
-Como vemos, tanto "dan" como "james" son 2 objetos con el mismo prototipo, puesto que han sido
-creados a partir de la misma función constructora. De dicho prototipo obtienen la propiedad "greet"
-que ahora si, es una función única, que existe una única vez. ¿Donde? En el objeto prototipo
-(el prototipo es un objeto también, todo son objetos en JS!).
-*/
+Como vemos, tanto "dan" como "james" son 2 objetos con el mismo prototipo, puesto que han sido creados a partir de la misma función constructora. De dicho prototipo obtienen la propiedad "greet" que ahora si, es una función única, que existe una única vez. ¿Donde? En el objeto prototipo (el prototipo es un objeto también, todo son objetos en JS!).
 
-// Inspeccionemos alguna de las instancias con la consola para descubrir las pistas
-// que nos muestra acerca de su prototipo:
+Inspeccionemos alguna de las instancias con la consola para descubrir las pistas que nos muestra acerca de su prototipo:
+```
 console.log(dan); // Person {name: 'Dan'}
 // [[Prototype]]: Object
-// La notación [[]] se usa para exponer o mostrar propiedades internas. Las propiedades
-// internas no forman parte del lenguaje (no se pueden usar en nuestro código), sino que
-// se diseñaron para enriquecer la semántica de los objetos, para darnos pistas.
-// https://262.ecma-international.org/5.1/#sec-8.6.2
+```
+La notación [[]] se usa para exponer o mostrar propiedades internas. Las propiedades internas no forman parte del lenguaje (no se pueden usar en nuestro código), sino que se diseñaron para enriquecer la semántica de los objetos, para darnos pistas. https://262.ecma-international.org/5.1/#sec-8.6.2
 
-/*
-El vínculo entre un objeto y su prototipo lo establece el operador "new", es la pieza que nos
-faltaba. Entre bambalinas, su tercera misión es vincularle el prototipo de la función constructora.
-Es una manera de decirle, "como has sido creado por Person, tu tienes el
-prototipo de Person".
+El vínculo entre un objeto y su prototipo lo establece el operador "new", es la pieza que nos faltaba. Entre bambalinas, su tercera misión es vincularle el prototipo de la función constructora. Es una manera de decirle, "como has sido creado por Person, tu tienes el prototipo de Person".
 
-Con el new generamos un objeto vacío, que invoca al constructor, y acaba asignandole el prototipo
-adecuado:
+Con el new generamos un objeto vacío, que invoca al constructor, y acaba asignandole el prototipo adecuado:
+```
 new => {name: "Dan", __proto__: Person.prototype}
-*/
 
 console.log(Person.prototype); // Es el mismo objeto
 console.log(Object.getPrototypeOf(dan)); // Es el mismo objeto
 console.log(dan.__proto__) // OPCIONAL: Equivalente a Object.getPrototypeOf(dan)
 console.log(Person.prototype === Object.getPrototypeOf(dan)); // true
 console.log(dan instanceof Person); // true
+```
 
+## HERENCIA PROTOTÍPICA 
+Al mecanismo de herencia en JS, gracias a los prototipos, se le conoce como herencia prototípica. Cada objeto tiene una propiedad "prototype", que es un puntero o ref que apunta hacia el prototipo de la instancia. Pero es que el prototipo vuelve a ser un objeto, que tendrá otro "prototype" que a su vez apuntará a su prototipo, y así sucesivamente. Se forma una cadena de prototipos que termina finalmente apuntando a "null".
 
-///-- HERENCIA PROTOTÍPICA **********************************************************************
+Como ejemplo, vamos a rescatar la herencia de Automobile + Taxi ya vista en el capítulo de clases e implementarla mediante herencia prototípica.
 
-/*
-Al mecanismo de herencia en JS, gracias a los prototipos, se le conoce como herencia prototípica.
-Cada objeto tiene una propiedad "prototype", que es un puntero o ref que apunta hacia el prototipo
-de la instancia. Pero es que el prototipo vuelve a ser un objeto, que tendrá otro "prototype" que
-a su vez apuntará a su prototipo, y así sucesivamente. Se forma una cadena de prototipos que
-termina finalmente apuntando a "null".
-
-Como ejemplo, vamos a rescatar la herencia de Automobile + Taxi ya vista en el capítulo de clases
-e implementarla mediante herencia prototípica.
-*/
-
-// Creamos la función constructora para objetos de tipo Automobile y añadimos algunas funciones a
-// su prototipo (que sería la equivalencia a hacer métodos de clase).
+Creamos la función constructora para objetos de tipo Automobile y añadimos algunas funciones a su prototipo (que sería la equivalencia a hacer métodos de clase).
+```
 function Automobile(wheels) {
   this.wheels = wheels;
   this.kms = 0;
@@ -172,33 +133,40 @@ Automobile.prototype.drive = function (kms) {
 Automobile.prototype.showKms = function () {
   console.log("Total Kms: " + this.kms);
 };
+```
 
-
-// A continuación creamos otro objeto algo más específico, un Taxi. Vamos a hacer que Taxi "herede"
-// de Automobile. Para eso, queremos que el objeto que llama al constructor Taxi() invoque también
-// al constructor Automobile().
+A continuación creamos otro objeto algo más específico, un Taxi. Vamos a hacer que Taxi "herede" de Automobile. Para eso, queremos que el objeto que llama al constructor Taxi() invoque también al constructor Automobile().
+```
 function Taxi() {
   Automobile.call(this, 4); // super();
   this.isOccupied = false;
 }
+```
 
-
-// Hacemos que Taxi "herede" de Automobile. Para ello creamos un prototipo para Taxi, gracias a
-// Object.create que crea un nuevo objeto cuyo prototipo podemos hacer que apunte a donde queramos.
-// Ademas hay que setear su constructor.
+Hacemos que Taxi "herede" de Automobile. Para ello creamos un prototipo para Taxi, gracias a Object.create que crea un nuevo objeto cuyo prototipo podemos hacer que apunte a donde queramos. Ademas hay que setear su constructor.
+```
 Taxi.prototype = Object.create(Automobile.prototype); // Crea un objeto nuevo {__proto__: arg}
 Taxi.prototype.constructor = Taxi;
-// Una forma equivalente sería directamente apuntando a donde queramos
-// Taxi.prototype.__proto__ = Automobile.prototype;
-// Otra forma más limpia sin sobreescribir esta propiedad __proto__ es:
-// Object.setPrototypeOf(Taxi.prototype, Automobile.prototype);
+```
+Una forma equivalente sería directamente apuntando a donde queramos
+```
+Taxi.prototype.__proto__ = Automobile.prototype;
+```
 
-// Añadimos también algún método a Taxi.
+Otra forma más limpia sin sobreescribir esta propiedad __proto__ es:
+```
+Object.setPrototypeOf(Taxi.prototype, Automobile.prototype);
+```
+
+Añadimos también algún método a Taxi.
+```
 Taxi.prototype.service = function () {
   this.isOccupied = true;
 };
+```
 
-// Este método se sirve de otro que está más arriba en la cadena de prototipos.
+Este método se sirve de otro que está más arriba en la cadena de prototipos.
+```
 Taxi.prototype.drive = function (kms) {
   Automobile.prototype.drive.call(this, kms); // super.drive()
   const serviceStatus = this.isOccupied ? "in service" : "free";
@@ -210,14 +178,10 @@ Taxi.prototype.drive = function (kms) {
 Taxi.prototype.showKms = function () {
   console.log("Taxi Total Kms: " + this.kms);
 };
+```
 
-/*
-Asi pues tenemos Automobile y Taxi que hereda del primero. Cuando queremos acceder a una propiedad
-de Taxi, buscamos en la instancia y si no está vamos a su prototipo. Si no estuviera alli, se
-busca en el prototipo del prototipo, y así sucesivamente hasta que se alcance el final de la
-cadena de prototiopos. De este modo se comparten propiedades, sin copiarlas cada vez que creamos
-una instancia.
-*/
+Asi pues tenemos Automobile y Taxi que hereda del primero. Cuando queremos acceder a una propiedad de Taxi, buscamos en la instancia y si no está vamos a su prototipo. Si no estuviera alli, se busca en el prototipo del prototipo, y así sucesivamente hasta que se alcance el final de la cadena de prototiopos. De este modo se comparten propiedades, sin copiarlas cada vez que creamos una instancia.
+```
 const taxi = new Taxi();
 console.log(taxi); // Inspección de la cadena de prototipos
 taxi.drive(100); // "Driving 100kms... And I am free"
@@ -230,20 +194,24 @@ taxi.showKms(); // "Taxi total Kms: 150"
 console.log(taxi instanceof Taxi); // true
 console.log(taxi instanceof Automobile); // true
 console.log(taxi instanceof Object); // true
+```
 
-/*
-Herencia simulada via cadena de prototipos
+
+**Herencia simulada via cadena de prototipos:**
 Taxi -----> Automobile -----> Object -----> null
 
-Cadena Prototípica
+**Cadena Prototípica:**
 Taxi.prototype
+
 Taxi.prototype.__proto__ ---> Automobile.prototype
+
                               Automobile.prototype.__proto__ ---> Object.prototype
+                                                                  
                                                                   Object.prototype.__proto__: ---> null
-*/
 
 
-///-- CREACIÓN DE OBJETOS Y SU CADENA DE PROTOTIPOS **********************************************
+
+## CREACIÓN DE OBJETOS Y SU CADENA DE PROTOTIPOS 
 
 // Hay 3 formas de crear objetos, que difieren en la cadena de prototipos que generan:
 
