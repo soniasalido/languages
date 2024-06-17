@@ -1,11 +1,12 @@
-///-- OPTIONAL CHAINING **************************************************************************
+# OPTIONAL CHAINING 
 
-/*
-El operador optional chaining nos permite acceder en profundidad a propiedades de objetos de manera
-segura, sin tener que realizar de forma explícita un chequeo para validar si todas las propiedades
-de la cadena existen o no. Veamos la problemática y como este operador la resuelve:
-*/
+Claro, el operador de encadenamiento opcional (optional chaining) en JavaScript es una característica que permite acceder a propiedades de objetos profundamente anidadas sin necesidad de verificar manualmente si cada nivel de la cadena es null o undefined. Esto ayuda a evitar errores y hacer el código más limpio y legible.
 
+**Sintaxis del Operador Optional Chaining:**
+El operador de encadenamiento opcional es (?.). Podemos usarlo para acceder a propiedades, llamar a funciones y acceder a elementos de arrays de manera segura.
+
+El operador optional chaining nos permite acceder en profundidad a propiedades de objetos de manera segura, sin tener que realizar de forma explícita un chequeo para validar si todas las propiedades de la cadena existen o no. Veamos la problemática y como este operador la resuelve:
+```
 const user = {
   name: "Javi",
   // stats: {
@@ -18,8 +19,10 @@ const user = {
 
 console.log(user.stats); // undefined. Acceso "seguro" porque user siempre existe como objeto.
 console.log(user.stats.like); // undefined.like! no se puede acceder, undefined no es un objeto!
+```
 
-// Forma clásica de solventar el problema. Chequeos inline -> Engorroso
+**Forma clásica de solventar el problema. Chequeos inline -> Engorroso**
+```
 console.log(user && user.stats && user.stats.likes);
 // Forma aún más tediosa
 // if(Boolean(user)) {
@@ -31,19 +34,25 @@ console.log(user && user.stats && user.stats.likes);
 // }
 // Con el operador optional chaining:
 console.log(user?.stats?.likes);
+```
 
-// De igual modo el optional chaining se puede utilizar para acceso seguro a arrays incluso para
-// funciones, con un pequeño matiz sintáctico:
+**Forma con Optional Chaining:**
+```
+let nombre = usuario?.perfil?.nombre;
+console.log(nombre);  // Output: Juan
+```
+
+De igual modo el optional chaining se puede utilizar para acceso seguro a arrays incluso para funciones, con un pequeño matiz sintáctico:
+```
 console.log(user?.friends[1]);    // SyntaxError
 console.log(user?.friends?.[1]);  // Acceso seguro
 console.log(user?.greet());       // SyntaxError
 console.log(user?.greet?.());     // Acceso seguro
+```
 
-/*
-IMPORTANTE: el operador optional chaining comprueba si una propiedad o referencia es 'nullish',
-es decir, null o undefined. Si es nullish, cortocircuita devolviendo undefined, en caso contrario
+> [!Important]
+> IMPORTANTE: el operador optional chaining comprueba si una propiedad o referencia es 'nullish', es decir, null o undefined. Si es nullish, cortocircuita devolviendo undefined, en caso contrario
 continúa.
-*/
 
 
 ///-- NULLISH COALESCING **************************************************************************
