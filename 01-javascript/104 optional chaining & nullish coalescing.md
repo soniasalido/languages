@@ -81,8 +81,7 @@ console.log(quantity ?? "unknown");
 console.log(user?.stats?.likes ?? "Not available");
 ```
 
-> [!Important]
-> IMPORTANTE: Estos dos operadores permiten construir código robusto y resiliente a errores.
+
 ```
 // *** Asignaciones con operadores lógicos. ⚠ Bajo implementación ES2022.
 let a = true;
@@ -100,3 +99,7 @@ console.log(a); // false
 > [!Important]
 > **Diferencia entre ?? y ||:**
 > El operador || evalúa todos los valores falsy (como 0, "", false, null, undefined), mientras que ?? solo evalúa null o undefined.
+
+
+> [!Important]
+> IMPORTANTE: Estos dos operadores, nullish coalescing y optional chaining, permiten construir código robusto y resiliente a errores.
