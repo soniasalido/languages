@@ -1,4 +1,4 @@
-///-- ASYNCHRONOUS JAVASCRIPT ********************************************************************
+# ASYNCHRONOUS JAVASCRIPT
 
 /*
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el
