@@ -2,9 +2,12 @@
 
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el "Event Loop" que implementa el lenguaje como solución para gestionar eventos y llamadas asíncronas. Recomendamos encarecidamente la lectura de la siguiente guía para profundizar en estos conceptos: https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 
-Una llamada asíncrona es aquella donde la tarea asociada se ejecuta fuera del contexto de nuestra aplicación,y por tanto nuestra aplicación no consume recursos (CPU). A esto se le conoce como  operaciones de entrada/salida (I/O Operations). Pensad en un acceso a disco o en una consulta a servidor.
+Una **llamada asíncrona** es aquella donde la tarea asociada se ejecuta fuera del contexto de nuestra aplicación,y por tanto nuestra aplicación no consume recursos (CPU). A esto se le conoce como **operaciones de entrada/salida (I/O Operations).** Pensad en un acceso a disco o en una consulta a servidor.
 
-Además, en las llamadas asíncronas, la respuesta se notifica a nuestro programa, evitando que quede bloqueado a la espera de una respuesta. Es decir, nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
+Además, **en las llamadas asíncronas, la respuesta se notifica a nuestro programa, evitando que quede bloqueado a la espera de una respuesta**.
+
+> [Important]
+> Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
 
 Estudiemos los 3 patrones más comunes para el manejo de código asíncrono en Javascript:
 - Callbacks.
