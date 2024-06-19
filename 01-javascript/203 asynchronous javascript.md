@@ -6,7 +6,7 @@ Una **llamada asíncrona** es aquella donde la tarea asociada se ejecuta fuera d
 
 Además, **en las llamadas asíncronas, la respuesta se notifica a nuestro programa, evitando que quede bloqueado a la espera de una respuesta**.
 
-> [Important]
+> [Cauption]
 > Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
 
 Estudiemos los 3 patrones más comunes para el manejo de código asíncrono en Javascript:
