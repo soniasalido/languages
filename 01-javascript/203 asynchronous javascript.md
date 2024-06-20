@@ -18,14 +18,14 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
 > [Important]
 > Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
 
-Estudiemos los 3 patrones más comunes para el manejo de código asíncrono en Javascript:
+
+# Patrones más comunes para el manejo de código asíncrono en Javascript
 - Callbacks.
 - Promesas (azúcar sintáctico alrededor de callbacks).
 - Async/await (azúcar sintáctico alrededor de promesas).
 
 
-# CALLBACKS
-
+## 1. CALLBACKS
 El patrón mas sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, una función que se pasa como argumento de otra (ciudadanos de primer orden). La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos nuestra respuesta. Ejemplo:
 
 
@@ -75,7 +75,7 @@ getDataAsync(console.log); // Ejemplo de uso.
 ```
 
 
-# PROMESAS
+## 2. PROMESAS
 
 Una promesa es un objeto que representa el resultado de una operación asíncrona. Este resultado podría estar disponible ahora o en el futuro. Una promesa puede tener los siguientes estados:
 - A la espera de respuesta -> PENDING
@@ -89,7 +89,7 @@ EJEMPLO: *Analogía de la pizza y el beeper*
 
 
 
-## CONSUMIENDO PROMESAS
+### CONSUMIENDO PROMESAS
 
 Cuando llamamos a una función asíncrona implementada con Promesas, nos devolverá inmediatamente un objeto promesa como garantía de que la operación asíncrona se ha puesto en marcha y finalizará en
 algún momento, ya sea con éxito o con fallo. Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para registrar 2 callbacks:
@@ -113,7 +113,7 @@ fetch("https://api.github.com/users/lemoncode")
   .catch(error => console.error(error));
 ```
 
-## CREANDO PROMESAS
+### CREANDO PROMESAS
 
 Una promesa se crea instanciando un nuevo objeto Promise. En el momento de la creación, en el constructor, debemos especificar un callback que contenga la carga de la promesa, aquello que la 
 promesa debe hacer.
@@ -154,7 +154,7 @@ getDataWithPromise()
   .catch(error => console.log(`ERROR CAPTURADO: ${error}`));
 ```
 
-## MANEJANDO MÚLTIPLES PROMESAS 
+### MANEJANDO MÚLTIPLES PROMESAS 
 
 Modifiquemos la función anterior ligeramente para, antes de resolver la promesa, loguear el dato por la consola.
 ```
@@ -189,8 +189,7 @@ Promise.all([
 ]).then(result => console.log("And the result is ...", result));
 ```
 
-# ASYNC / AWAIT 
-
+## 3. ASYNC / AWAIT 
 Las promesas, al igual que los callbacks, pueden llegar a ser tediosas cuando se anidan y se requieren más y más .then(). Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
 ```
 const getDataWithSugar = async () => {
