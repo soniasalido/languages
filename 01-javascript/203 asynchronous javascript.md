@@ -1,10 +1,19 @@
+# Ejemplo de consultar una API para obtener datos de un servidor:
+- **De manera síncrona:** En una llamada síncrona, tu aplicación enviaría la solicitud al servidor y esperaría a que el servidor responda antes de continuar. Durante esta espera, tu aplicación no puede hacer nada más (bloqueada).
+- **De manera asíncrona:** En una llamada asíncrona, tu aplicación envía la solicitud al servidor y continúa ejecutando otras tareas mientras espera la respuesta. Cuando el servidor responde, la respuesta es manejada por una función específica (callback) o se resuelve una promesa, permitiendo a tu aplicación procesar los datos recibidos sin haber estado bloqueada en ningún momento.
+
+
 # ASYNCHRONOUS JAVASCRIPT
 
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el "Event Loop" que implementa el lenguaje como solución para gestionar eventos y llamadas asíncronas. Recomendamos encarecidamente la lectura de la siguiente guía para profundizar en estos conceptos: https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 
-Una **llamada asíncrona** es aquella donde la tarea asociada se ejecuta fuera del contexto de nuestra aplicación,y por tanto nuestra aplicación no consume recursos (CPU). A esto se le conoce como **operaciones de entrada/salida (I/O Operations).** Pensad en un acceso a disco o en una consulta a servidor.
+## Llamada asíncrona:
+- Ejecuta una tarea fuera del contexto principal de la aplicación: Esto significa que la tarea no se ejecuta en el flujo principal de nuestro programa. En lugar de eso, se delega a otro contexto (como otro hilo o un proceso separado) que se encarga de ejecutarla.
+- No consume recursos de CPU de la aplicación principal: Dado que la tarea se ejecuta en otro contexto, nuestra aplicación principal puede continuar su ejecución sin tener que esperar a que esta tarea termine. Esto es especialmente útil para operaciones que no requieren procesamiento intensivo de la CPU pero que podrían tardar en completarse, como esperar una respuesta de un servidor o leer un archivo grande desde el disco.
+- Comportamiento de las Llamadas Asíncronas: Respuesta notificada a nuestro programa:
+  - No bloquea el programa: La llamada asíncrona permite que el programa continúe ejecutándose mientras la operación de I/O se completa. El flujo principal no se detiene esperando la respuesta.
+  - Notificación de la respuesta: Una vez que la operación asíncrona termina, se notifica al programa principal (a través de callbacks, promesas, eventos, etc.). En este punto, el programa puede procesar la respuesta de la operación sin haber estado bloqueado durante la espera.
 
-Además, **en las llamadas asíncronas, la respuesta se notifica a nuestro programa, evitando que quede bloqueado a la espera de una respuesta**.
 
 > [Cauption]
 > Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
