@@ -19,20 +19,24 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
 > Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
 
 
-# Patrones más comunes para el manejo de código asíncrono en Javascript
+## Patrones más comunes para el manejo de código asíncrono en Javascript
 - Callbacks.
 - Promesas (azúcar sintáctico alrededor de callbacks).
 - Async/await (azúcar sintáctico alrededor de promesas).
 
 
 ## 1. CALLBACKS
-El patrón mas sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, una función que se pasa como argumento de otra (ciudadanos de primer orden). La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos nuestra respuesta. Ejemplo:
+El patrón mas sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, una función que se pasa como argumento de otra (ciudadanos de primer orden). La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos nuestra respuesta.
 
+Un callback es una función que se pasa como argumento de otra función. La finalidad de un callback es registra el código que debe ser ejecutado una vez que tengamos nuestra respuesta de dicha llamada asíncrona.
 
-setTimeout es una de las llamadas asíncronas más sencillas que hay: postpone la ejecución de un callback, como mínimo, a X segundos después.
+La función de respuesta (el callback) se ejecutará cuando la respuesta a la llamada asíncrona esté disponible.
+
+Ejemplo: setTimeout es una de las llamadas asíncronas más sencillas que hay: postpone la ejecución de un callback, como mínimo, a X segundos después.
 ```
 const callback = () => console.log("Hello World! con retardo");
 setTimeout(callback, 1000);
+console.log("Granada"); // Granada espera 1000 ms. No detiene a Hello World.
 ```
 
 Al ser asíncrona, nuestra aplicación sigue corriendo:
@@ -61,6 +65,8 @@ const getDataAsync = callback => {
 };
 ```
 
+Un "mock" es una versión simulada de una función o componente que se utiliza para pruebas. Permite probar el comportamiento del código sin tener que depender de recursos externos, como un servidor real.
+
 Una posible mejora para poder randomizar el tiempo del timer y el dato devuelto sería la siguiente:
 ```
 const randomData = () => Math.ceil(Math.random() * 100); // random [1-100] número
@@ -70,13 +76,11 @@ const getDataAsync = callback => {
   setTimeout(() => callback(randomData()), randomDelay());
 };
 
-
 getDataAsync(console.log); // Ejemplo de uso.
 ```
 
 
 ## 2. PROMESAS
-
 Una promesa es un objeto que representa el resultado de una operación asíncrona. Este resultado podría estar disponible ahora o en el futuro. Una promesa puede tener los siguientes estados:
 - A la espera de respuesta -> PENDING
 - Finalizada -> SETTLED. En este caso, puede terminar con 2 estados:
@@ -88,14 +92,19 @@ Las promesas se basan en callbacks pero son una evolución de éstos, una mejora
 EJEMPLO: *Analogía de la pizza y el beeper*
 
 
-
 ### CONSUMIENDO PROMESAS
+Cuando llamamos a una función asíncrona implementada con Promesas, nos devolverá inmediatamente un objeto promesa como garantía de que la operación asíncrona se ha puesto en marcha y finalizará en algún momento, ya sea con éxito o con fallo. Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para registrar 2 callbacks:
+- Uno para indicar 'qué se debe hacer en caso de que todo vaya bien' (resolución de la promesa o resolve).
+- Otro para indicar 'qué hacer en caso de fallo' (rechazo de la promesa o reject).
 
-Cuando llamamos a una función asíncrona implementada con Promesas, nos devolverá inmediatamente un objeto promesa como garantía de que la operación asíncrona se ha puesto en marcha y finalizará en
-algún momento, ya sea con éxito o con fallo. Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para registrar 2 callbacks:
-- uno para indicar 'que se debe hacer en caso de que todo vaya bien' (resolución de la promesa o
-  resolve).
-- otro para indicar 'que hacer en caso de fallo' (rechazo de la promesa o reject).
+Usamos una función llamada FETCH. API FETCH es un sencillo API que permite lanzar peticiones a un servidor. Api Fetch devuelve una promesa. Este objeto es un símbolo o una garantía de que hay una operación asíncrona en marcha y que en algún momento recibiremos una respuesa.
+
+La utilidad real del objeto Promise es usarlo para registrar los callbaks que queremos que se ejecuten cuando la promesa sea, o bien resuelta con éxito o bien, rechazada.
+
+Para registrar dichos callbacks, el objeto Promise proporciona dos métodos:
+- .then() ➝ Qué hacemos en caso de éxito.
+- .catch() ➝ Qué hacemos en caso de rechazo/error.
+
 
 ```
 fetch("https://api.github.com/users/lemoncode")
@@ -103,15 +112,71 @@ fetch("https://api.github.com/users/lemoncode")
   .catch(error => console.error(error));
 ```
 
-Encadenando promesas. El resolveCallback de una promesa, podría devolver otra promesa, en cuyo caso pueden encadenarse. Solo será necesario especificar un rejectCallback (un único catch()) para
-cualquiera de las promesas encadenadas.
+response => console.log(response) ⟵ Es una callback que captura la respuesta como argumento.
+
+
+### Encadenando promesas
+Sucede cuando nuestro callback de resolución vuelve a lanzar una nueva promesa. El resolveCallback de una promesa, podría devolver otra promesa, en cuyo caso pueden encadenarse. Solo será necesario especificar un rejectCallback (un único catch()) para cualquiera de las promesas encadenadas.
 
 ```
 fetch("https://api.github.com/users/lemoncode")
   .then(response => response.json())
-  .then(data => console.log(data)) // Muestra el resultado de la promesa `response.json()`
+  .then(data => console.log(data)) // Muestra el resultado de la promesa `response.json()`. Nuevo callback. Se resuelve cuando se resuelva el primer then
   .catch(error => console.error(error));
 ```
+
+#### El método .json():**
+Es un método del objeto de respuesta (Response). Su propósito es leer el cuerpo de la respuesta y convertirlo en un objeto JavaScript. 
+**Paso 1: Leer el Flujo de Respuesta:**
+El cuerpo de la respuesta HTTP se recibe como un flujo (stream). Un flujo es una secuencia de datos que llega de manera continua, lo cual es útil para manejar grandes cantidades de datos de forma eficiente.
+
+**Paso 2: Completar la Lectura**
+El método .json() lee este flujo hasta que todos los datos se han recibido. Es decir, espera a que toda la respuesta esté disponible antes de procesarla.
+
+**Paso 3: Devolver una Promesa**
+El método .json() devuelve una promesa. Una promesa es un objeto que representa la eventual finalización (o falla) de una operación asíncrona. Esta promesa se resuelve una vez que el flujo de la respuesta se ha leído completamente y se ha analizado.
+
+**Paso 4: Analizar el Texto del Cuerpo como JSON**
+Una vez que la promesa se resuelve, el método .json() toma el texto del cuerpo de la respuesta y lo analiza como JSON (JavaScript Object Notation). JSON es un formato de texto ligero y fácil de leer/escribir que se utiliza para intercambiar datos.
+
+**Paso 5: Convertir JSON a un Objeto JavaScript**
+El resultado de este análisis no es una cadena JSON, sino un objeto o array de JavaScript. En otras palabras, .json() convierte la cadena JSON en una estructura de datos de JavaScript que se puede manipular directamente.
+
+```
+fetch('https://api.example.com/data')
+  .then(response => response.json()) // Aquí se llama al método .json()
+  .then(data => {
+    console.log(data); // Aquí data es un objeto JavaScript
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+```
+
+Realizar una Solicitud con fetch. Esto hace una solicitud HTTP a la URL especificada y devuelve una promesa que se resuelve con un objeto de respuesta (Response).:
+```
+fetch('https://api.example.com/data')
+```
+
+Usar .json() para Leer y Analizar la Respuesta. Este código llama al método .json() en el objeto de respuesta. Este método lee el flujo de la respuesta hasta completarlo y analiza el texto del cuerpo como JSON. Devuelve una promesa que se resuelve con el objeto JavaScript resultante.:
+```
+.then(response => response.json())
+```
+
+Trabajar con el Objeto JavaScript. Una vez que la promesa devuelta por .json() se resuelve, podemos trabajar con los datos convertidos a un objeto JavaScript. En este caso, simplemente los mostramos en la consola.:
+```
+.then(data => {
+  console.log(data);
+})
+```
+
+Manejo de Errores:
+```
+.catch(error => {
+  console.error('Error:', error);
+});
+```
+
 
 ### CREANDO PROMESAS
 
