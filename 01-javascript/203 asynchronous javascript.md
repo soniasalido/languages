@@ -99,8 +99,8 @@ Usamos una función llamada FETCH. **API FETCH** es un sencillo API que permite 
 La utilidad real del objeto Promise es usarlo para registrar los callbaks que queremos que se ejecuten cuando la promesa sea, o bien resuelta con éxito o bien, rechazada.
 
 **Para registrar dichos callbacks, el objeto Promise proporciona dos métodos:**
-- .then() ➝ Qué hacemos en caso de éxito.
-- .catch() ➝ Qué hacemos en caso de rechazo/error.
+- .then() ➝ Callback respuesta de resolve. Qué hacemos en caso de éxito.
+- .catch() ➝ Callback respuesta de fallo. Qué hacemos en caso de rechazo/error.
 
 
 ```
@@ -118,8 +118,18 @@ Sucede cuando nuestro callback de resolución vuelve a lanzar una nueva promesa.
 ```
 fetch("https://api.github.com/users/lemoncode")
   .then(response => response.json())
-  .then(data => console.log(data)) // Muestra el resultado de la promesa `response.json()`. Nuevo callback. Se resuelve cuando se resuelva el primer then
+  .then(data => console.log(data))
   .catch(error => console.error(error));
+```
+
+Parseamos el Json --> Recibe un string y devuelve un objeto.
+```
+.then(response => response.json())
+```
+
+Data es el callback de resolve cuando se ejecuta el response.json(). Muestra el resultado de la promesa `response.json()`. Nuevo callback. Se resuelve cuando se resuelva el primer then:
+```
+then(data => console.log(data)) 
 ```
 
 #### El método .json():**
@@ -197,10 +207,19 @@ Modifiquemos el ejemplo anterior en el que haciamos un mock de llamada a servido
 ```
 const getDataWithPromise = () => {
   return new Promise((resolve, _reject) => {
-      getDataAsync(resolve);
-      
+      try {
+          // Tarea Asíncrona
+          getDataAsync(resolve);
+      }catch(error) {
+          reject(error);
+      }      
   });
 };
+
+// Consumimos la promesa:
+getDataWithPromise()
+  .then(data => console.log(data))  // resolveCallback
+  .catch(error => console.log(`Error capturado: ${error}`));  // rejectCallback
 ```
 
 ⚠ OPCIONALMENTE podríamos manejar de forma explícita la ejecución dentro de la promesa con un try catch, aunque NO ES NECESARIO obligatoriamente:
