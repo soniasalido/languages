@@ -15,9 +15,8 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
   - Notificación de la respuesta: Una vez que la operación asíncrona termina, se notifica al programa principal (a través de callbacks, promesas, eventos, etc.). En este punto, el programa puede procesar la respuesta de la operación sin haber estado bloqueado durante la espera.
 
 
-> [Important]
-> Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada.
-
+| ❗ Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada. |
+| -----|
 
 ## Patrones más comunes para el manejo de código asíncrono en Javascript
 - Callbacks.
