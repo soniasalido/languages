@@ -8,9 +8,9 @@
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el "Event Loop" que implementa el lenguaje como solución para gestionar eventos y llamadas asíncronas. Recomendamos encarecidamente la lectura de la siguiente guía para profundizar en estos conceptos: https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 
 ## Llamada asíncrona:
-- Ejecuta una tarea fuera del contexto principal de la aplicación: Esto significa que la tarea no se ejecuta en el flujo principal de nuestro programa. En lugar de eso, se delega a otro contexto (como otro hilo o un proceso separado) que se encarga de ejecutarla.
-- No consume recursos de CPU de la aplicación principal: Dado que la tarea se ejecuta en otro contexto, nuestra aplicación principal puede continuar su ejecución sin tener que esperar a que esta tarea termine. Esto es especialmente útil para operaciones que no requieren procesamiento intensivo de la CPU pero que podrían tardar en completarse, como esperar una respuesta de un servidor o leer un archivo grande desde el disco.
-- Comportamiento de las Llamadas Asíncronas: Respuesta notificada a nuestro programa:
+- **Ejecuta una tarea fuera del contexto principal de la aplicación:** Esto significa que la tarea no se ejecuta en el flujo principal de nuestro programa. En lugar de eso, se delega a otro contexto (como otro hilo o un proceso separado) que se encarga de ejecutarla.
+- **No consume recursos de CPU de la aplicación principal:** Dado que la tarea se ejecuta en otro contexto, nuestra aplicación principal puede continuar su ejecución sin tener que esperar a que esta tarea termine. Esto es especialmente útil para operaciones que no requieren procesamiento intensivo de la CPU pero que podrían tardar en completarse, como esperar una respuesta de un servidor o leer un archivo grande desde el disco.
+- **Comportamiento de las Llamadas Asíncronas:** Respuesta notificada a nuestro programa:
   - No bloquea el programa: La llamada asíncrona permite que el programa continúe ejecutándose mientras la operación de I/O se completa. El flujo principal no se detiene esperando la respuesta.
   - Notificación de la respuesta: Una vez que la operación asíncrona termina, se notifica al programa principal (a través de callbacks, promesas, eventos, etc.). En este punto, el programa puede procesar la respuesta de la operación sin haber estado bloqueado durante la espera.
 
