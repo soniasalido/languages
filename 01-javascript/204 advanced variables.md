@@ -1,4 +1,4 @@
-///--  HOISTING **********************************************************************************
+# HOISTING
 
 // En Javascript, la declaración de determinadas entidades, concretamente las funciones, variables
 // o clases, pueden estar sometidas a un curioso proceso que se denomina "hoisting".
