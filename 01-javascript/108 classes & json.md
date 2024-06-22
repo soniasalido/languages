@@ -33,17 +33,68 @@ class Alumno {
     this.edad = edad;
     this.curso = curso;
   }
+
+  // Método para mostrar información del alumno
+  mostrarInfo() {
+    return `Nombre: ${this.nombre}, Edad: ${this.edad}, Curso: ${this.curso}`;
+  }
 }
 ```
 
-# Conversión entre JSON y objeto de clase:
-Puedes convertir un objeto JSON en una instancia de la clase Alumno y viceversa:
+# Conversión JSON a objeto de clase:
+Puedes convertir un objeto JSON en una instancia de la clase Alumno:
 ```
-// JSON a objeto de clase
-const alumno = new Alumno(alumnoJSON.nombre, alumnoJSON.edad, alumnoJSON.curso);
+// Creación de una instancia de Alumno
+const alumno = new Alumno(jsonAlumno.nombre, jsonAlumno.edad, jsonAlumno.curso);
 
-// Objeto de clase a JSON
-const alumnoJSON2 = JSON.stringify(alumno); 
+// Uso del método de la clase
+console.log(alumno.mostrarInfo()); // Salida: Nombre: Juan Pérez, Edad: 20, Curso: Matemáticas
+```
+
+# Conversión Objeto de clase a JSON:
+Puedes convertir de una instancia de la clase Alumno a un objeto JSON:
+```
+// Conversión de la instancia de Alumno a JSON
+const jsonAlumnoString = JSON.stringify(alumno);
+
+console.log(jsonAlumnoString); // Salida: {"nombre":"Juan Pérez","edad":20,"curso":"Matemáticas"}
+```
+
+# Método Estático para Crear una Instancia desde JSON
+```
+class Alumno {
+  constructor(nombre, edad, curso) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.curso = curso;
+  }
+
+  mostrarInfo() {
+    return `Nombre: ${this.nombre}, Edad: ${this.edad}, Curso: ${this.curso}`;
+  }
+
+  // Método estático para crear una instancia desde JSON
+  static desdeJSON(json) {
+    return new Alumno(json.nombre, json.edad, json.curso);
+  }
+
+  // Método para convertir una instancia a JSON
+  aJSON() {
+    return {
+      nombre: this.nombre,
+      edad: this.edad,
+      curso: this.curso
+    };
+  }
+}
+
+// Uso del método estático
+const alumnoDesdeJSON = Alumno.desdeJSON(jsonAlumno);
+console.log(alumnoDesdeJSON.mostrarInfo()); // Salida: Nombre: Juan Pérez, Edad: 20, Curso: Matemáticas
+
+// Conversión de la instancia a JSON
+const jsonAlumnoDesdeInstancia = alumnoDesdeJSON.aJSON();
+console.log(jsonAlumnoDesdeInstancia); // Salida: { nombre: 'Juan Pérez', edad: 20, curso: 'Matemáticas' }
 ```
 
 # Prototipos y herencia:
