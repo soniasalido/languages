@@ -166,7 +166,7 @@ for (const i = 0; i < 10; i++) { // Uncaught TypeError: Assignment to constant v
 }
 ```
 
-# LET & CONST: HOISTING **********************************************************************
+# LET & CONST: HOISTING
 A diferencia de "var", aquellas variables que se declaren usando let y const no les será aplicado el hoisting:
 
 Con "var" gracias al hoisting:
