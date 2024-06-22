@@ -27,7 +27,7 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
 ## 1. CALLBACKS
 El patrón mas sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, **una función que se pasa como argumento de otra (ciudadanos de primer orden)**.
 
-**La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos nuestra respuesta respuesta de dicha llamada asíncrona.** La función de respuesta (el callback) se ejecutará cuando la respuesta a la llamada asíncrona esté disponible.
+**La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos la respuesta de dicha llamada asíncrona.** La función de respuesta (el callback) se ejecutará cuando la respuesta a la llamada asíncrona esté disponible.
 
 Ejemplo: setTimeout es una de las llamadas asíncronas más sencillas que hay: postpone la ejecución de un callback, como mínimo, a X segundos después.
 ```
