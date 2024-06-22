@@ -437,7 +437,7 @@ const getManyDataWithSugar = async () => {
 getManyDataWithSugar().then(console.log);
 ```
 
-Posible implementación de Promise.race usando async await
+**OPCIÓN 3. Posible implementación de Promise.race usando async await**
 ```
 const myCustomPromiseRace = promises =>
   new Promise((resolve, reject) => {
