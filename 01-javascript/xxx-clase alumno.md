@@ -315,6 +315,10 @@ Esta integración proporciona una forma eficiente de manejar el estado y la lóg
 # Mejora del store alumno
 Si defines el método para verificar si el alumno ha elegido una asignatura que conlleva el pago de una matrícula dentro de la clase Alumno, no necesitarás implementar esa lógica en el store. Esto permite que la lógica de negocio permanezca encapsulada dentro de la clase, manteniendo el store más limpio y enfocado únicamente en la gestión del estado.
 
+Al mover la lógica de negocio, como la verificación de si el alumno debe pagar matrícula, a la clase Alumno, simplificas el store y mantienes una separación clara de responsabilidades. El store se encarga de la reactividad y la gestión del estado, mientras que la clase encapsula la lógica de negocio.
+
+Esto no solo mejora la organización y el mantenimiento del código, sino que también permite aprovechar mejor las características de programación orientada a objetos, manteniendo el código más limpio y modular.
+
 ## Definir el Método en la Clase Alumno
 Primero, actualizamos la clase Alumno para incluir el método verificarPagoMatricula.
 ```
