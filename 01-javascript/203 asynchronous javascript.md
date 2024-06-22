@@ -246,6 +246,7 @@ getDataWithPromise()
 ```
 
 ### 2.4 MANEJANDO MÚLTIPLES PROMESAS 
+A veces se necesita lanzar varias promesas asíncronas y poder manejar todos los resultados.
 
 Modifiquemos la función anterior ligeramente para, antes de resolver la promesa, loguear el dato por la consola.
 ```
@@ -258,7 +259,10 @@ const getDataWithPromise = (autolog = true) =>
   });
 ```
 
-Promise Race: devuelve una nueva promesa que se resuelve con el resultado o rechazo de la primera promesa que termine:
+**1. Promise Race:**
+Este método recibe un array de promesas y devuelve una nueva promesa que se resuelve o se rechaza tan pronto como una de las promesas del array se resuelva o se rechace, con el valor o razón de esa promesa.
+
+Devuelve una nueva promesa que se resuelve con el resultado o rechazo de la primera promesa que termine. Promise race tiene un array con todas las promesas que queramos. Promise race devuelve una promesa. Luego tendremos un resolveCallback. En este callback recibe el ganador, el dato ganador, el que terminó primero. Las demás promesas también se irán completando. Pero el promise race se quedó con la primera promesa que termina. Si alguna falla, entonces se invoca al rejectCallback de la PromiseRace.
 ```
 Promise.race([
   getDataWithPromise(),
@@ -280,7 +284,7 @@ Promise.all([
 ]).then(result => console.log("And the result is ...", result));
 ```
 
-### 2.5 Ejemplo
+### 2.5 Ejemplo de Promise
 Función que le pasamos como parámetro un usuario y devuelve una promesa.
 ```
 const getGithubUser = ( user ) => {
@@ -313,22 +317,82 @@ Callback de fallo. Llamamos al callback reject y le pasamos el error que se ha o
 
 
 ## 3. ASYNC / AWAIT 
-Las promesas, al igual que los callbacks, pueden llegar a ser tediosas cuando se anidan y se requieren más y más .then(). Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
+async y await son palabras clave en JavaScript introducidas en ECMAScript 2017 (ES8) que permiten manejar promesas de manera más simple y estructurada.
+
+**async: Convierte una función en una función asíncrona. Esto significa que dicha función siempre devolverá una promesa.**
+
+**await: Hace que la función asíncrona espere la resolución de una promesa antes de continuar con la ejecución.** Sólo puede ser usado dentro de funciones marcadas con async.
+
+### 3.1 Función async
+Una función marcada con async siempre devuelve una promesa. Si la función devuelve un valor, ese valor es automáticamente envuelto en una promesa resuelta. Si la función arroja un error, ese error es envuelto en una promesa rechazada.
+
+```
+async function ejemploAsync() {
+  return 'Hola, mundo!';
+}
+
+ejemploAsync().then((mensaje) => {
+  console.log(mensaje); // Salida: 'Hola, mundo!'
+});
+```
+
+### 3.2 Uso de await
+await sólo puede ser usado dentro de funciones async. Hace que el código espere a que una promesa se resuelva o se rechace antes de continuar con la ejecución.
+```
+async function ejemploAwait() {
+  let promesa = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("¡Hecho!"), 1000);
+  });
+
+  let resultado = await promesa; // Espera a que la promesa se resuelva
+  console.log(resultado); // Salida: '¡Hecho!'
+}
+
+ejemploAwait();
+```
+
+### 3.3 Otro ejemplo de uso de async/await:
+Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
 ```
 const getDataWithSugar = async () => {
   const data = await getDataWithPromise(false);
   return data;
 };
-```
 
-Su utilización sería:
-```
+// Data es el resultado de esperar a la promesa getDataWithPromise. Cuando la promesa termina, continúa ejecutando.
+// Pero el console.log NO se pausa la ejecución. Lo que está debajo continúa su ejecución.
+console.log("Mensaje que no se pausa.");
+
 getDataWithSugar()
   .then(data => console.log(data))
   .catch(error => console.log(`ERROR CAPTURADO: ${error}`));
 ```
 
-[OPCIONAL] Versión con manejo de errores:
+Await: Espera a que esto termine, función síncrona y el resultado lo mete en Data:
+```
+const data = await getDataWithPromise(false);
+```
+
+### 3.4 Manejo de Errores try...catch
+Podemos usar try...catch para manejar errores en funciones asíncronas, de manera similar a cómo lo harías en el manejo de promesas con .catch().
+```
+async function ejemploError() {
+  try {
+    let promesa = new Promise((resolve, reject) => {
+      setTimeout(() => reject(new Error("Algo salió mal")), 1000);
+    });
+
+    let resultado = await promesa;
+    console.log(resultado);
+  } catch (error) {
+    console.log(error.message); // Salida: 'Algo salió mal'
+  }
+}
+
+ejemploError();
+```
+
+### 3.5 Manejo de Errores throw new error
 ```
 const getDataWithSugar = async () => {
   try {
@@ -340,9 +404,9 @@ const getDataWithSugar = async () => {
 };
 ```
 
-Manejo de Múltiples Promesas con Async / Await
+### 3.6 Manejo de Múltiples Promesas con Async / Await
 
-## OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!
+**OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!**
 ```
 const getManyDataWithSugar = async () => {
   const data1 = await getDataWithPromise();
@@ -355,7 +419,7 @@ const getManyDataWithSugar = async () => {
 getManyDataWithSugar().then(console.log);
 ```
 
-## OPCIÓN 2. Lanzamos todas las promesas primero, y hacemos la espera de todas a la vez, al estilo de Promise.all().
+**OPCIÓN 2. Lanzamos todas las promesas primero, y hacemos la espera de todas a la vez, al estilo de Promise.all().**
 ```
 const getManyDataWithSugar = async () => {
   const promise1 = getDataWithPromise();
