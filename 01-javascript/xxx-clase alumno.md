@@ -129,8 +129,10 @@ class Alumno {
     };
   }
 }
+```
 
-// Ejemplo de uso de la clase Alumno
+## Ejemplo de uso de la clase Alumno
+```
 const alumnoData = {
   codigoAlumno: '',
   nifAlumno: '',
@@ -192,7 +194,7 @@ const alumnoJSON = alumno.toJSON();
 console.log(alumnoJSON);
 ```
 
-
+## Resumen
 - Clase Alumno: Representa la estructura del objeto alumno con métodos para manejar sus propiedades.
 - Métodos:
   - fromJSON: Crea una instancia de Alumno a partir de un objeto JSON.
