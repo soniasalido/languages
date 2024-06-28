@@ -446,3 +446,22 @@ const myCustomPromiseRace = promises =>
     });
   });
 ```
+
+
+### Consultar el estado de una promesa
+```
+function getState(promise) {
+
+  return new Promise((resolve) => {
+    promise.then (
+      () => resolve('fulfilled'),
+      () => resolve('rejected')
+    );
+    
+    setTimeout(() => resolve('pending'), 0);
+  });
+}
+```
+Se encadenan .then() y .catch() a la promesa original para detectar si se resuelve correctamente (fulfilled) o se rechaza (rejected).
+
+Para detectar el estado pendiente: Se utiliza setTimeout con un retraso de 0 milisegundos. Esto coloca la verificación de "pending" al final de la cola de tareas de JavaScript.
