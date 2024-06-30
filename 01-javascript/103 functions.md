@@ -394,6 +394,17 @@ setTimeout(function() {
 }, 2000);
 ```
 
+Ejemplo: All About Anonymous Functions: Adding Suffixes: Write a function that returns an anonymous function, which transforms its input by adding a particular suffix at the end.
+```
+add_ly = add_suffix("ly") 
+add_less = add_suffix("less") 
+add_ing = add_suffix("ing") 
+// Test.assertEquals(add_ly("hopeless"), "hopelessly")
+// Test.assertEquals(add_ly("total"), "totally")
+
+const add_suffix = suffix => prefix => prefix + suffix
+```
+
 **Hoisting:** Las funciones anónimas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
 
 
