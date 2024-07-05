@@ -27,7 +27,7 @@
 
 
 -------
-
+# Functions
 Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros lenguajes, son elementos invocables que reciben una serie de argumentos y pueden devolver valores.
 
 
