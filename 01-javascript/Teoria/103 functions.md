@@ -1,4 +1,33 @@
-# FUNCTIONS
+
+# FUNCIONES
+
+[Funciones](#functions)  
+[Hoisting](#hoisting)  
+[Ámbito de una variable](#%C3%A1mbito-variable-var)  
+[Closure](#closure)  
+[Funciones Autoinvocadas - IIFE](#funciones-autoinvocadas-iife)  
+[Template Functions | Tagged Template Literals](#funciones-autoinvocadas-iife)  
+[Definición de Funciones](#funciones-autoinvocadas-iife)  
+[1. Funciones Declaradas](#1-funciones-declaradas)  
+[2. Funciones Expresadas](2-funciones-expresadas)  
+[3. Funciones Flecha (Arrow Functions)](#3-funciones-flecha-arrow-functions)  
+[4. Funciones Anónimas (Callback)](#3-funciones-flecha-arrow-functions)  
+[Métodos dentro de Objetos](#5-métodos-dentro-de-objetos)  
+[Parámetros y Argumentos](#par%C3%A1metros-y-argumentos)  
+[Añadiendo valor de retorno](#par%C3%A1metros-y-argumentos)  
+[Funciones de Orden Superior (Higher-Order Functions)](#funciones-de-orden-superior-higher-order-functions)  
+[Closures](#closures)  
+[Funciones Recursivas](#funciones-recursivas)  
+[Funciones Generadoras](#funciones-generadoras)  
+[this en Funciones](#this-en-funciones)  
+[VARIADIC FUNCTIONS](#variadic-functions)  
+[1. Funciones Variádicas mediante el operador rest](#variadic-functions)  
+[2. Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)](#variadic-functions)  
+[Diferencias entre el Operador Rest y el Objeto Arguments](#variadic-functions)  
+
+
+-------
+
 Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros lenguajes, son elementos invocables que reciben una serie de argumentos y pueden devolver valores.
 
 
@@ -27,7 +56,9 @@ console.log(foo) // 'Bar'
 
 Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recomendable usar una variable antes de que sea declarada. 
 
-**Sólo las declaraciones hacen hoisting. Las asignaciones no hacen hoisting.**
+| ❗ Sólo las declaraciones hacen hoisting. Las asignaciones **NO** hacen hoisting. |
+|------------------------------------------------------------------------------------|
+
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
