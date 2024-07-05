@@ -20,9 +20,9 @@
 [7.4.- Funciones Recursivas](#74-funciones-recursivas)  
 [7.5.- Funciones Generadoras](#75-funciones-generadoras)  
 [7.6.- this en Funciones](#76-this-en-funciones)  
-[7.8.- VARIADIC FUNCTIONS](#78-variadic-functions)  
-[7.8.1.- Funciones Variadic mediante el operador rest](#781-funciones-variádicas-mediante-el-operador-rest)  
-[7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#782-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
+[7.8.- VARIADIC FUNCTIONS](#77-variadic-functions)  
+[7.8.1.- Funciones Variadic mediante el operador rest](#771-funciones-variádicas-mediante-el-operador-rest)  
+[7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#772-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
 [8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)  
 
 
