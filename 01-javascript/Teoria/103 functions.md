@@ -2,9 +2,9 @@
 # FUNCIONES
 
 [Funciones](#functions)  
-[Hoisting](#hoisting)  
-[Ámbito de una variable](#%C3%A1mbito-variable-var)  
-[Closure](#closure)  
+[Hoisting](#1-hoisting)  
+[Ámbito de una variable](#1-%C3%A1mbito-variable-var)  
+[Closure](#4-closure)  
 [Funciones Autoinvocadas - IIFE](#funciones-autoinvocadas-iife)  
 [Template Functions | Tagged Template Literals](#funciones-autoinvocadas-iife)  
 [Definición de Funciones](#funciones-autoinvocadas-iife)  
@@ -34,7 +34,7 @@ Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros
 Las funciones en JavaScript son bloques de código diseñados para realizar una tarea específica y se pueden invocar desde cualquier parte del programa. Las funciones son fundamentales en JavaScript y permiten la modularidad, la reutilización del código y la organización lógica de las operaciones.
 
 
-## Hoisting
+# 1. Hoisting
 Hoisting es el mecanismo por el que JS procesa las declaraciones antes de cualquier código. Por eso se puede definir una función por debajo de una llamada a dicha función.
 
 Hoisting permite usar funciones y variables antes de que se hayan declarado. El intérprete de JS divide la declaración y asignación de funciones y variables. Javascript "hoists" o "alza" nuestras declaraciones en la parte superior de su scope (ámbito) antes de la ejecución.
@@ -62,7 +62,11 @@ Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recom
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
-## Ámbito variable VAR
+# 2. Ámbito variable VAR
+El ámbito (o alcance) de una variable se refiere al contexto en el cual la variable está definida y puede ser accedida. Existen principalmente dos tipos de ámbitos:
+- Ámbito Local: Una variable definida dentro de una función tiene un ámbito local y solo puede ser accedida dentro de esa función.
+- Ámbito Global: Una variable definida fuera de todas las funciones tiene un ámbito global y puede ser accedida desde cualquier lugar del código.
+
 En JavaScript, el ámbito (scope) de las variables declaradas con var se diferencia del ámbito de las variables declaradas con let y const, introducidas en ES6.
 - Las variables declaradas con var tienen ámbito de función. Esto significa que si declaras una variable con var dentro de una función, esa variable es accesible en cualquier parte de esa función, pero no fuera de ella.
 - Confusión por Hoisting: El comportamiento de elevación puede llevar a errores y confusión porque las variables parecen estar disponibles antes de ser declaradas.
@@ -71,7 +75,9 @@ Para abordar estas dificultades, ES6 introdujo dos nuevas formas de declarar var
 - let: Las variables declaradas con let tienen ámbito de bloque y no se elevan de la misma manera que var. Esto significa que una variable declarada con let solo es accesible dentro del bloque en el que se declara.
 - const: Las variables declaradas con const también tienen ámbito de bloque y deben ser inicializadas en el momento de su declaración. Además, las variables const no pueden ser reasignadas.
 
-## Closure
+# 3. Closure
+Un closure (o clausura) es una función que "recuerda" el entorno léxico en el que fue creada. Esto significa que la función puede acceder a las variables de su ámbito exterior incluso después de que ese ámbito haya terminado de ejecutarse.
+
 Capacidad que tienen las funciones en JS de recordar el ámbito léxico en el que han sido declaradas. Un closure (clausura) es una función que guarda referencias del estado adyacente (ámbito léxico). Un clousure permite acceder al ámbito exterior desde una función interior.
 
 Closure encapsula datos y encapsula métodos. Se tiene una interfaz para acceder a estos datos.
