@@ -3,26 +3,28 @@
 
 [Funciones](#functions)  
 [1.- Hoisting](#1-hoisting)  
-[2.- Ámbito de una variable](#2-ambito-de-una-variable)  
+[2.- Ámbito de una variable](#2-enlaces-y-ámbitos)  
 [3.- Closure](#3-closure)  
 [4.- Funciones Autoinvocadas - IIFE](#4-funciones-autoinvocadas---iife-)  
 [5.- Template Functions | Tagged Template Literals](#5-template-functions--tagged-template-literals)  
 [6.- Definición de Funciones](#6-definición-de-funciones)  
-[6.1.- Funciones Declaradas](#61-funciones-declaradas)  
-[6.2.- Funciones Expresadas](#62-funciones-expresadas)  
-[6.3.- Funciones Flecha (Arrow Functions)](#63-funciones-flecha-arrow-functions)  
-[6.4.- Funciones Anónimas (Callback)](#64-funciones-anónimas-callback)  
-[6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)  
+- [6.1.- Funciones Declaradas](#61-funciones-declaradas)  
+- [6.2.- Funciones Expresadas](#62-funciones-expresadas)  
+- [6.3.- Funciones Flecha (Arrow Functions)](#63-funciones-flecha-arrow-functions)  
+- [6.4.- Funciones Anónimas (Callback)](#64-funciones-anónimas-callback)  
+- [6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)  
+
 [7.- Parámetros y Argumentos](#7-parámetros-y-argumentos)  
-[7.1.- Añadiendo valor de retorno](#71--añadiendo-valor-de-retorno)  
-[7.2.- Funciones de Orden Superior (Higher-Order Functions)](#72-funciones-de-orden-superior-higher-order-functions)  
-[7.3.- Closures](#73-closures)  
-[7.4.- Funciones Recursivas](#74-funciones-recursivas)  
-[7.5.- Funciones Generadoras](#75-funciones-generadoras)  
-[7.6.- this en Funciones](#76-this-en-funciones)  
-[7.8.- VARIADIC FUNCTIONS](#77-variadic-functions)  
-[7.8.1.- Funciones Variadic mediante el operador rest](#771-funciones-variádicas-mediante-el-operador-rest)  
-[7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#772-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
+- [7.1.- Añadiendo valor de retorno](#71--añadiendo-valor-de-retorno)  
+- [7.2.- Funciones de Orden Superior (Higher-Order Functions)](#72-funciones-de-orden-superior-higher-order-functions)  
+- [7.3.- Closures](#73-closures)  
+- [7.4.- Funciones Recursivas](#74-funciones-recursivas)  
+- [7.5.- Funciones Generadoras](#75-funciones-generadoras)  
+- [7.6.- this en Funciones](#76-this-en-funciones)  
+- [7.8.- VARIADIC FUNCTIONS](#77-variadic-functions)  
+    - [7.8.1.- Funciones Variadic mediante el operador rest](#771-funciones-variádicas-mediante-el-operador-rest)  
+    - [7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#772-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
+
 [8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)  
 
 
@@ -32,6 +34,18 @@ Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros
 
 
 Las funciones en JavaScript son bloques de código diseñados para realizar una tarea específica y se pueden invocar desde cualquier parte del programa. Las funciones son fundamentales en JavaScript y permiten la modularidad, la reutilización del código y la organización lógica de las operaciones.
+
+Las funciones en JavaScript son **objetos de primera clase**, lo que significa que pueden ser asignadas a variables, pasadas como argumentos a otras funciones y devueltas como valores de otras funciones. Esto permite que las funciones se utilicen de manera flexible y se adapten a diferentes situaciones.
+
+## Definir una Función:
+Una definición de función es una declaración en el código donde se especifica una nueva función, incluyendo su nombre, parámetros (si los hay) y el cuerpo de la función que contiene las instrucciones que se ejecutarán cuando la función sea llamada.
+
+### Una definición de función es un enlace habitual donde el valor del enlace es una función: 
+* **Un "enlace habitual" se refiere a la asociación entre un nombre (o identificador) y un valor** en el entorno de ejecución de un programa. En muchos lenguajes de programación, esto se hace mediante variables. Por ejemplo, cuando se escribe let x = 5; en JavaScript, se está creando un enlace entre el nombre x y el valor 5.
+* El Valor del Enlace es una Función: En el contexto de una definición de función, **el "valor del enlace" es la función en sí misma**. Esto significa que **el nombre de la función está asociado (o enlazado) a un objeto de función que puede ser invocado posteriormente**.
+* La definición de una función como un "enlace habitual donde el valor del enlace es una función" subraya la naturaleza fundamental de las funciones en muchos lenguajes de programación: son objetos que pueden ser asignados a variables, pasados como argumentos, y retornados desde otras funciones, proporcionando una base poderosa para la programación funcional y modular.
+
+Los parámetros de una función se comportan como enlaces habituales, pero sus valores iniciales son dados por el llamador de la función, no por el código en la función en sí misma.
 
 
 # 1. Hoisting
@@ -62,7 +76,13 @@ Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recom
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
-# 2. Ambito de una variable
+# 2. Enlaces y Ámbitos
+Cada enlace tiene un ámbito, que es la parte del programa en la que el enlace es visible. Para los enlaces definidos fuera de cualquier función, bloque o módulo, el ámbito es todo el programa (se puede hacer referencia a esos enlaces donde queramos). Estos se llaman globales.
+
+Los enlaces creados para los parámetros de una función o declarados dentro de una función solo pueden ser referenciados en esa función, por lo que se conocen como enlaces locales. Cada vez que se llama a la función, se crean nuevas instancias de estos enlaces. Esto proporciona cierto aislamiento entre funciones. Ccada llamada a función actúa en su propio pequeño mundo (su entorno local) y a menudo se puede entender sin saber mucho sobre lo que está sucediendo en el entorno global.
+
+Los enlaces declarados con let y const en realidad son locales al bloque en el que se declaran, por lo que si creamos uno de ellos dentro de un bucle, el código antes y después del bucle no puede “verlo”. En JavaScript anterior a 2015, solo las funciones creaban nuevos ámbitos, por lo que los enlaces de estilo antiguo, creados con la palabra clave var, son visibles en toda función en la que aparecen, o en todo el ámbito global, si no están dentro de una función.
+
 El ámbito (o alcance) de una variable se refiere al contexto en el cual la variable está definida y puede ser accedida. Existen principalmente dos tipos de ámbitos:
 - Ámbito Local: Una variable definida dentro de una función tiene un ámbito local y solo puede ser accedida dentro de esa función.
 - Ámbito Global: Una variable definida fuera de todas las funciones tiene un ámbito global y puede ser accedida desde cualquier lugar del código.
@@ -75,13 +95,86 @@ Para abordar estas dificultades, ES6 introdujo dos nuevas formas de declarar var
 - let: Las variables declaradas con let tienen ámbito de bloque y no se elevan de la misma manera que var. Esto significa que una variable declarada con let solo es accesible dentro del bloque en el que se declara.
 - const: Las variables declaradas con const también tienen ámbito de bloque y deben ser inicializadas en el momento de su declaración. Además, las variables const no pueden ser reasignadas.
 
-# 3. Closure
+
+### Funciones como valores
+En JavaScript, las funciones son valores de primera clase, lo que significa que pueden ser asignadas a variables, pasadas como argumentos a otras funciones y devueltas como valores de otras funciones. Esto permite que las funciones se utilicen de manera flexible y se adapten a diferentes situaciones.
+
+Generalmente un enlace de función simplemente actúa como un nombre para una parte específica del programa. Este enlace se define una vez y nunca se cambia. Esto hace que sea fácil confundir la función y su nombre.
+
+Pero los dos son diferentes. Un valor de función puede hacer todas las cosas que pueden hacer otros valores: se puede utilizar en expresiones arbitrarias, no solo llamarlo. Es posible almacenar un valor de función en un nuevo enlace, pasarlo como argumento a una función, etc. De manera similar, un enlace que contiene una función sigue siendo solo un enlace habitual y, si no es constante, se le puede asignar un nuevo valor
+```
+let launchMissiles = function() {
+  missileSystem.launch("now");
+};
+
+if (safeMode) {
+  launchMissiles = function() {
+    console.log("Safe mode - missiles not launched");
+  };
+}
+```
+
+### Pila de llamadas
+La pila de llamadas es una estructura de datos que se utiliza para almacenar información sobre las llamadas a funciones en un programa. Cada vez que se llama a una función, se crea un nuevo marco de pila que contiene información sobre la función, sus parámetros y variables locales. Cuando la función termina de ejecutarse, su marco de pila se elimina de la pila de llamadas.
+El lugar donde la computadora almacena este contexto es la pila de llamadas. Cada vez que se llama a una función, el contexto actual se almacena en la parte superior de esta pila. Cuando una función devuelve, elimina el contexto superior de la pila y usa ese contexto para continuar la ejecución.
+
+Almacenar esta pila requiere espacio en la memoria de la computadora. Cuando la pila crece demasiado, la computadora fallará con un mensaje como “sin espacio en la pila” o “demasiada recursividad”.
+
+
+
+# 3. Closure - Clausura 
+La capacidad de tratar las funciones como valores, combinada con el hecho de que los enlaces locales se recrean cada vez que se llama a una función, plantea una pregunta interesante: ¿qué sucede con los enlaces locales cuando la llamada a la función que los creó ya no está activa?El siguiente código muestra un ejemplo de esto. Define una función, wrapValue, que crea un enlace local. Luego devuelve una función que accede a este enlace local y lo devuelve:
+```
+function wrapValue(n) {
+  let local = n;
+  return () => local;
+}
+
+let wrap1 = wrapValue(1);
+let wrap2 = wrapValue(2);
+console.log(wrap1());
+// → 1
+console.log(wrap2());
+// → 2
+```
+
+Esto está permitido y funciona como esperamos: ambas instancias del enlace aún pueden accederse. Esta situación es una buena demostración de que los enlaces locales se crean nuevamente para cada llamada, y las diferentes llamadas no afectan los enlaces locales de los demás.
+
+Esta característica, poder hacer referencia a una instancia específica de un enlace local en un ámbito superior, se llama clausura. Una función que hace referencia a enlaces de ámbitos locales a su alrededor se llama una clausura. Este comportamiento no solo nos libera de tener que preocuparnos por la vida útil de los enlaces, sino que también hace posible usar valores de función de formas creativas.
+
+Con un ligero cambio, podemos convertir el ejemplo anterior en una forma de crear funciones que multiplican por una cantidad arbitraria:
+```
+function crearSumador(x) {
+    return function(y) {
+        return x + y;
+    };
+}
+
+const sumaCinco = crearSumador(5);
+console.log(sumaCinco(10)); // Imprime 15
+
+```
+
+| 💥 Un buen modelo mental es pensar en los valores de función como que contienen tanto el código en su cuerpo como el entorno en el que fueron creados. Cuando se llama, el cuerpo de la función ve el entorno en el que fue creado, no el entorno en el que se llama. |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+En este ejemplo:
+- crearSumador es una función que toma un argumento x y devuelve una nueva función.
+- La nueva función toma un argumento y y devuelve la suma de x y y.
+- Cuando llamamos a crearSumador(5), se crea una nueva función con x igual a 5.
+- La función sumaCinco "recuerda" el valor de x (que es 5) incluso cuando se llama con un nuevo argumento y (que es 10).
+
+Cuando llamamos a sumaCinco(10), el cuerpo de la función ve el valor de x que fue capturado en el entorno donde fue creada (x = 5), no en el entorno donde se llama. Esto es crucial para entender cómo los closures permiten que una función "recuerde" el estado de las variables en el momento de su creación.
+
+
+
+
+| 💥 Un closure permite acceder al ámbito exterior desde una función interior.|
+|------------------------------------------------------------------------------------------------------------|
+
 Un closure (o clausura) es una función que "recuerda" el entorno léxico en el que fue creada. Esto significa que la función puede acceder a las variables de su ámbito exterior incluso después de que ese ámbito haya terminado de ejecutarse.
 
 Closure es la capacidad que tienen las funciones en JS de recordar el ámbito léxico en el que han sido declaradas. Un closure (clausura) es una función que guarda referencias del estado adyacente (ámbito léxico).
-
-| 💥 Un closure permite acceder al ámbito exterior desde una función interior. Se accede a través del this. |
-|------------------------------------------------------------------------------------------------------------|
 
 Closure encapsula datos y encapsula métodos. Se tiene una interfaz para acceder a estos datos.
 
@@ -172,7 +265,7 @@ Las Tagged Template Literals te permiten llamar a una función "etiqueta" que pr
 
 Sintaxis Básica:
 ```
-funcionEtiqueta`cadena literal con ${variable}`;
+funcion Etiqueta`cadena literal con ${variable}`;
 ```
 
 **Casos de uso:**
@@ -197,7 +290,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 
 
-## 6. Definición de Funciones
+## 6. Definición de Funciones - Notación de Declaración
 - Hay varias maneras de definir funciones en JavaScript:
   - Funciones Declaradas (Function Declarations).
   - Funciones Expresadas (Function Expressions).
@@ -218,8 +311,11 @@ function greet(name) {
 
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
+La declaración define el enlace greet y lo apunta a la función que se define. Las funciones declaradas se pueden invocar en cualquier parte del código, incluso antes de la declaración de la función.
 
-**Hoisting:** Las funciones declaradas se "elevan" al inicio de su contexto, por lo que se pueden llamar antes de ser declaradas en el código.
+
+
+**Hoisting:** Las declaraciones de función no forman parte del flujo de control regular de arriba hacia abajo. Conceptualmente se mueven al principio de su alcance y pueden ser utilizadas por todo el código en ese alcance. Las funciones declaradas se "elevan" al inicio de su contexto, por lo que se pueden llamar antes de ser declaradas en el código.
 
 ```
 console.log(greet('Bob')); // "Hello, Bob!"
@@ -251,7 +347,7 @@ const greet = function(name) {
 ### 6.3. Funciones Flecha (Arrow Functions)
 Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
 
-Son siempre anónimas. Para tener un bimbre es necesario almacenar esa expresión en una variable de tipo Const:
+Son siempre anónimas. Es necesario almacenar esa expresión en una variable de tipo Const:
 ```
 const nombreVaribale = (argumento) => {
   .....
@@ -670,3 +766,34 @@ console.log(sum(1, 2, 3)); // 6;
 - Sintaxis y Modernidad: El operador rest (...) es una característica moderna de ES6 y es más legible y conciso.
 - Tipo de Objeto: El operador rest devuelve un array real, mientras que el objeto arguments es similar a un array pero no es un array real (es un objeto array-like).
 - Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
+
+
+# 9. Recursión
+La recursión es un concepto en programación en el que una función se llama a sí misma para resolver un problema. La recursión es una técnica poderosa y elegante que se puede utilizar para resolver problemas complejos de manera simple y concisa.
+```
+function power(base, exponent) {
+  if (exponent == 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
+
+console.log(power(2, 3));
+// → 8
+```
+
+Sin embargo, esta implementación tiene un problema: en implementaciones típicas de JavaScript, es aproximadamente tres veces más lenta que una versión que utiliza un bucle for. Recorrer un simple bucle suele ser más económico que llamar a una función múltiples veces.
+
+
+
+
+# 10. Crecimiento de Funciones
+Hay dos formas más o menos naturales de introducir funciones en los programas.
+- La primera ocurre cuando te encuentras escribiendo código similar varias veces. Preferirías no hacer eso, ya que tener más código significa más espacio para que se escondan los errores y más material para que las personas que intentan entender el programa lo lean. Por lo tanto, tomas la funcionalidad repetida, encuentras un buen nombre para ella y la colocas en una función.
+- La segunda forma es que te das cuenta de que necesitas alguna funcionalidad que aún no has escrito y que suena como si mereciera su propia función. Comienzas por nombrar la función, luego escribes su cuerpo. Incluso podrías comenzar a escribir código que use la función antes de definir la función en sí.
+
+# 11. Funciones y efectos secundarios
+Las funciones pueden dividirse aproximadamente en aquellas que se llaman por sus efectos secundarios (como puede ser imprimir una línea) y aquellas que se llaman por su valor de retorno (aunque también es posible tener efectos secundarios y devolver un valor).
+
+**Una función pura** es un tipo específico de función productora de valor que no solo no tiene efectos secundarios, sino que tampoco depende de efectos secundarios de otro código, por ejemplo, no lee enlaces globales cuyo valor podría cambiar. Una función pura tiene la agradable propiedad de que, al llamarla con los mismos argumentos, siempre produce el mismo valor (y no hace nada más). Una llamada a tal función puede sustituirse por su valor de retorno sin cambiar el significado del código. Cuando no estás seguro de si una función pura está funcionando correctamente, puedes probarla llamándola y saber que si funciona en ese contexto, funcionará en cualquier otro. Las funciones no puras tienden a requerir más andamiaje para probarlas.

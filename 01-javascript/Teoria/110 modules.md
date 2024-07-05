@@ -29,3 +29,47 @@ https://codesandbox.io/s/48qk1px1wx
 
 **Demo AMD (obsoleto a día de hoy):**
 http://next.plnkr.co/edit/IYYj6f7hXUACTAW7Df1R?preview
+
+# Programas Modulares
+Un programa modular es aquel que está compuesto por módulos. Cada módulo es un fichero que contiene una parte del programa. Los módulos se pueden importar y exportar entre sí.
+
+Un módulo es una parte de un programa que especifica en qué otras piezas se basa y qué funcionalidad proporciona para que otros módulos la utilicen (su interfaz).
+
+Las interfaces de los módulos tienen mucho en común con las interfaces de objetos. Permiten que una parte del módulo esté disponible para el mundo exterior y mantienen el resto privado."
+- Interfaces de Objetos: En la programación orientada a objetos (OOP), una interfaz es un conjunto de métodos y propiedades que un objeto expone al mundo exterior. La idea principal es que el objeto oculta su implementación interna (atributos y métodos privados) y sólo expone lo que es necesario para interactuar con él. Esto se conoce como encapsulamiento.
+- Interfaces de Módulos: Los módulos en muchos lenguajes de programación funcionan de manera similar a los objetos. Un módulo puede contener variables, funciones y clases, y puede decidir qué partes de su contenido se exponen al mundo exterior y cuáles se mantienen privadas.
+
+Archivo: modulo.js -->
+```js
+const variablePrivada = "No disponible fuera del módulo";
+
+export const variablePublica = "Disponible fuera del módulo";
+
+export function funcionPublica() {
+return "Esta función es pública";
+}
+
+function funcionPrivada() {
+return "Esta función es privada";
+}
+```
+
+En este ejemplo:
+- variablePrivada y funcionPrivada son privadas al módulo y no están disponibles fuera de él.
+- variablePublica y funcionPublica son exportadas y, por lo tanto, están disponibles para otros módulos que importen este módulo.
+
+Uso del Módulo -->
+```js
+// archivo: usoModulo.js
+import { variablePublica, funcionPublica } from './modulo.js';
+
+console.log(variablePublica); // "Disponible fuera del módulo"
+console.log(funcionPublica()); // "Esta función es pública"
+```
+
+Encapsulamiento:: Los módulos también encapsulan variables, funciones y clases, exponiendo solo lo que es necesario a través de exportaciones, mientras mantienen otros elementos privados.
+
+Interacción Controlada: Módulos: La interacción con un módulo se realiza a través de sus exportaciones públicas.
+
+Privacidad: Módulos: Utilizan el alcance del módulo para ocultar variables y funciones internas que no son exportadas.
+
