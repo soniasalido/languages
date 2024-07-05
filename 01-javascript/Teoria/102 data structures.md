@@ -1,3 +1,64 @@
+
+# Biblioteca Lodash
+Lodash es una biblioteca de JavaScript que proporciona utilidades para trabajar con matrices, números, objetos, cadenas, entre otras estructuras de datos. Es especialmente útil para simplificar y hacer más eficiente el trabajo con colecciones de datos y operaciones comunes. Según la documentación oficial de Lodash, esta biblioteca ofrece una serie de características destacadas:
+- Utilidades para matrices: Incluye funciones para manipular y transformar matrices de manera eficiente, como:
+  - _.drop: Elimina los primeros elementos de una matriz.
+  - _map: Crea una matriz con los resultados de aplicar una función a cada elemento de una matriz.
+  - _filter: Filtra los elementos de una matriz según una condición.
+  - _reduce: Reduce una matriz a un solo valor aplicando una función acumuladora.
+  - _find: Encuentra el primer elemento que cumple una condición.
+  - _dropRight: Elimina los elementos finales de una matriz.
+  - _dropRight: Elimina los elementos finales de una matriz.
+  - _.compact: Elimina los valores falsy de una matriz.
+  - _.flatten: Aplana una matriz anidada.
+  - _.pull: Elimina los elementos especificados de una matriz.
+  - _.concat: Agregar elementos a un array sin modificar el array original. Crea un nuevo array concatenando el array original con los nuevos elementos.
+  - reverse: Invierte el orden de los elementos de un array. Muta el array.
+
+- Manipulación de objetos: Ofrece herramientas para trabajar con objetos, incluyendo funciones como:
+  - assign: Combina las propiedades de uno o más objetos en un objeto de destino.
+  - clone: Crea una copia superficial de un objeto.
+  - merge: Fusiona dos o más objetos en un objeto de destino.
+  - get: Obtiene el valor de una propiedad anidada de un objeto.
+  - set: Establece el valor de una propiedad anidada de un objeto.
+  - isEqual: Compara dos valores para determinar si son iguales.
+
+- Manipulación de cadenas: Proporciona métodos para trabajar con cadenas de texto, incluyendo:
+  - camelCase: Convierte una cadena en formato camelCase.
+  - capitalize: Capitaliza la primera letra de una cadena.
+  - deburr: Elimina los acentos y diacríticos de una cadena.
+  - escape: Escapa los caracteres especiales de una cadena.
+  - kebabCase: Convierte una cadena en formato kebab-case.
+  - lowerCase: Convierte una cadena en minúsculas.
+  - trim: Elimina los espacios en blanco al principio y al final de una cadena.
+
+- Utilidades para números: Incluye funciones para operaciones matemáticas y de precisión, como:
+  - clamp: Limita un número dentro de un rango específico.
+  - inRange: Comprueba si un número está dentro de un rango específico.
+  - random: Genera un número aleatorio dentro de un rango específico.
+
+- Funcionalidad general: Proporciona métodos generales como:
+  - identity: Devuelve el primer argumento que recibe.
+  - constant: Devuelve una función que siempre devuelve el mismo valor.
+  - noop: No hace nada y devuelve undefined.
+  - times: Ejecuta una función un número específico de veces.
+  - uniqueId: Genera un identificador único.
+
+- Funciones para colecciones: Ofrece herramientas para manejar y operar sobre colecciones de datos, tanto matrices como objetos, con funciones como:
+  - each: Itera sobre una colección y aplica una función a cada elemento.
+  - map: Crea una nueva colección aplicando una función a cada elemento.
+  - reduce: Reduce una colección a un solo valor aplicando una función acumuladora.
+  - filter: Filtra los elementos de una colección según una condición.
+  - groupBy: Agrupa los elementos de una colección según una clave.
+  - orderBy: Ordena los elementos de una colección según un criterio.
+  - sortBy: Ordena los elementos de una colección según una clave.
+
+- Funciones de alto rendimiento: Está diseñada para ser rápida y eficiente, optimizando muchas operaciones comunes para mejorar el rendimiento de las aplicaciones.
+
+- Compatibilidad y modularidad: Lodash es compatible con una amplia gama de navegadores y entornos de JavaScript. Además, permite importar solo las partes de la biblioteca que se necesiten, reduciendo así el tamaño del código y mejorando el rendimiento de la aplicación.
+
+
+
 # Estructuras de datos en JS
 JavaScript ofrece varias estructuras de datos incorporadas que son esenciales para la manipulación y gestión de datos. Estas estructuras de datos incluyen arrays, objetos, sets, maps, y sus variantes débiles como WeakSet y WeakMap. A continuación, se describen estas estructuras de datos y sus principales características.
 
@@ -102,7 +163,7 @@ person["greet"](); // logs "Hello!"
 
 Esto resulta muy similar a un concepto que veremos más adelante llamado Clase. 
 
-## Iterando por las propiedades
+## Iterar un Objeto por sus propiedades
 ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
 ```
 for (const prop in person) {
@@ -335,6 +396,41 @@ Si lo necesitasemos, también podríamos usar rest en este caso.
 
 
 **Recuerda que la desestructuración solo funciona para estructuras de datos. Si tienes un objeto que contiene métodos o elementos del DOM, por ejemplo, no se copiarán y lanzará una excepción.**
+
+
+
+## Comparación de Objetos con la función _.isEqual:
+La función _.isEqual es muy útil para realizar comparaciones profundas entre objetos, asegurando que todas las propiedades y subpropiedades (incluyendo matrices y objetos anidados) sean equivalentes. Esta función simplifica la verificación de igualdad en estructuras de datos complejas en JavaScript.
+```
+const isEqual_myVersion3= (a, b) => {
+    const _ = require("lodash");
+    const result = _.isEqual(a, b);
+    return result;
+}
+```
+
+
+## Encontrar propiedades en un Objeto con _.find
+En Lodash, la función .find se utiliza para iterar sobre los elementos de una colección (matriz u objeto) y devolver el primer elemento que satisfaga la condición proporcionada en la función de predicado.
+```
+_.find(collection, [predicate=_.identity], [fromIndex=0])
+```
+- collection (Array|Object): La colección a iterar.
+- predicate: La función invocada por iteración. Esta puede ser una función de comparación, un objeto, una cadena, etc.
+- fromIndex: El índice inicial para comenzar la búsqueda. Es opcional
+
+Ejemplo:
+```
+const users = [
+  { id: 1, name: "John", age: 25 },
+  { id: 2, name: "Jane", age: 30 },
+  { id: 3, name: "Alice", age: 35 }
+];
+
+const user = _.find(users, { name: "Jane" });
+console.log(user); // { id: 2, name: "Jane", age: 30 }
+```
+
 
 
 ## Clonar objetos o elementos
@@ -656,6 +752,8 @@ Agrupar por criterio (legacy)" hace referencia a una técnica de programación u
 
 En el contexto de JavaScript, los métodos .groupBy() son funciones que permiten agrupar elementos de una colección según un criterio definido por una función de agrupamiento. Aunque métodos como Object.groupBy() y Map.groupBy() han sido propuestos para el estándar ECMAScript, aún no forman parte de él, por lo que a menudo se implementan mediante soluciones personalizadas.
 
+
+---------------------
 # 2. ARRAYS
 Datos estructurados siguiendo un orden. Cada dato se identifica con un índice que indica su posición dentro de la estructura. Un  es una colección o agrupación de elementos en una misma variable, cada uno de ellos ubicado por la posición que ocupa en el array. En algunas ocasiones también se les suelen llamar arreglos o vectores. En Javascript, se pueden definir de varias formas:
 
@@ -740,6 +838,27 @@ Existen varias formas de añadir elementos a un array ya existente. Ten en cuent
 | OBJECT .pop() | ⚠️	Elimina el último elemento del array. Devuelve dicho elemento. |
 | NUMBER .unshift(e1, e2, e3...) | ⚠️	Añade uno o varios elementos al inicio del array. Devuelve el tamaño del array. |
 | OBJECT .shift() | ⚠️	Elimina el primer elemento del array. Devuelve dicho elemento. |
+
+
+## Eliminar elementos con la función _.drop de Lodash
+La función _.drop() de Lodash es una función que permite eliminar un número determinado de elementos al principio de un array. Es una función muy útil para **eliminar elementos no deseados de un array sin tener que modificar el array original.**
+Esta función  crea una nueva matriz excluyendo un número específico de elementos desde el inicio de la matriz original. La sintaxis básica de .drop es:
+```
+_.drop(array, [n=1])
+
+// n es opcional. El número de elementos a eliminar del principio del array. Por defecto, es 1.
+```
+
+
+## Añadir o eliminar elementos con el método .push() y .pop()
+El método .push() añade uno o varios elementos al final del array, mientras que el método .pop() elimina el último elemento del array. Ambos métodos devuelven el elemento añadido o eliminado, respectivamente. **⚠️ Recuerda que estos métodos sirven para modificar (mutar) el array original.**
+```
+const elements = ["a", "b", "c"]; // Array inicial
+
+elements.push("d");    // Devuelve 4.   Ahora elements = ['a', 'b', 'c', 'd']
+elements.pop();        // Devuelve 'd'. Ahora elements = ['a', 'b', 'c']
+``` 
+
 
 
 **⚠️ Recuerda que estos métodos sirven para modificar (mutar) el array original.**
@@ -872,6 +991,7 @@ const newNumbers = numbers.slice(0, 4);
 newNumbers    // [1, 2, 3, 4], numbers no cambia
 ```
 
+
 Sin embargo, hay una forma muy sencilla y rápida de hacer lo mismo, que es modificar directamente el tamaño del array mediante la propiedad .length. Por ejemplo, hacer un numbers.length = 4 en un array de 8 elementos, reducirá el array a los primeros 4 elementos:
 ```
 // Mediante .length
@@ -884,7 +1004,21 @@ En este último caso no estamos creando un nuevo array, sino que reutilizamos el
 
 
 ## Rellenar un array con .fill()
-Existe un método que nos permite rellenar el ARRAY con los elementos indicados. Se le puede indicar unos parámetros opcionales start y end para establecer la posición de inicio y/o fin donde queremos rellenar, y así sólo alterar un fragmento del array.
+El método .fill() se utiliza para rellenar todos los elementos de una matriz con un valor estático, desde un índice inicial hasta un índice final (opcional). **Este método modifica la matriz original.**
+
+Sintaxis básica:
+```
+array.fill(value, start, end)
+
+// value es el valor que se utilizará para rellenar la matriz.
+const fill = (arr, value, start = 0, end = arr.length) => arr.fill(value, start, end);
+```
+Donde:
+- value es el valor que se utilizará para rellenar la matriz.
+- start es el índice de inicio (inclusive) donde se comenzará a rellenar la matriz.
+- end es el índice final (exclusivo) donde se detendrá el relleno. Si no se especifica, se rellenarán todos los elementos hasta el final de la matriz.
+ 
+
 
 ⚠️ Ten en cuenta que con .fill() estamos alterando el ARRAY.
 ```
@@ -1073,6 +1207,20 @@ array.some(element => {
   return false; // continuar iterando
 });
 
+```
+
+
+## Excluir elementos de un array con la función _.drop de Lodash
+La función _.dropRight de Lodash se utiliza para crear una nueva matriz que excluye un número específico de elementos desde el final de la matriz original. Esto es útil cuando necesitas eliminar los últimos elementos de una matriz. Aquí tienes una explicación detallada de cómo funciona _.dropRight y algunos ejemplos de su uso.
+```
+const _ = require("lodash");
+_.dropRight(array, [n=1])
+// n (opcional): El número de elementos a excluir desde el final de la matriz.
+// El valor predeterminado es 1.
+
+let array = [1, 2, 3, 4, 5];
+let result = _.dropRight(array, 3);
+console.log(result); // Salida: [1, 2]
 ```
 
 
@@ -1325,6 +1473,10 @@ Como se puede ver, hay una iteración 0 extra que es la que toma el valor inicia
 
 
 ## Desestructuración de arrays
+Destructuring es una característica de JavaScript que permite desempaquetar valores de arrays u objetos en variables separadas. En este caso, nos centraremos en la desestructuración de arrays, que es una forma de extraer valores de un array y asignarlos a variables individuales.
+
+La desestructuración de arrays se realiza mediante la asignación de variables entre corchetes [] que coinciden con los elementos del array. Los valores se asignan en el orden en que aparecen en el array, y los elementos no asignados se pueden ignorar utilizando comas adicionales.
+
 
 ### 1. Destructuración básica
 ```
@@ -1508,6 +1660,8 @@ console.log([] == ""); // true (type coertion). [].toString() => "" == ''
 ```
 
 
+
+
 # MUTABILIDAD EN ESTRUCTURAS DE DATOS
 En javascript tenemos, principalmente, dos formas de declarar variables: "let" y "const". Estas 2 formas diferenciadas se entenderán mejor cuando expliquemos una tercera, mediante la keyword "var", que se empleaba de forma primigenia hasta la llegada de "let" y "const".
 
@@ -1573,6 +1727,20 @@ Array.prototype.last = function() {
  */
 ```
 
+Ejemplo:
+```
+function getLastItem(arr) {
+    if (arr.length === 0) {
+        return undefined; // O cualquier valor que consideres apropiado para matrices vacías
+    }
+    return arr[arr.length - 1];
+}
+```
+
+
+
+
+
 ## Encontrar el menor elemento de un array:
 **Combinación de Math.min y el Operador de Propagación ... operador de propagación (spread operator)**
 Para encontrar el menor elemento en un array, puedes combinar Math.min con el operador de propagación para expandir el array en una lista de argumentos individuales:
@@ -1585,6 +1753,7 @@ Operador de Propagación: ...arr1 expande el array en los elementos individuales
 Función Math.min: Math.min(3, 1, 4, 1, 5, 9) encuentra el menor valor entre los argumentos proporcionados, que es 1.
 
 
+---------------------
 # 3. Set - Conjuntos
 Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
 ```
@@ -1595,6 +1764,8 @@ const set = new Set([5, 5, 7, 8, 9]);     // Set({5, 7, 8, 9})     (Conjunto con
 set.constructor.name;                     // "Set"
 ```
 
+
+---------------------
 # 4. Map
 Los Map en Javascript son estructuras de datos nativas que permiten implementar una estructura de tipo mapa, es decir, una estructuras donde tiene valores guardados a través de una clave para identificarlos. Comúnmente, esto se denomina pares clave-valor.
 
@@ -1641,11 +1812,12 @@ Los tipos de dato Map son muy similares a los Objetos de Javascript, ya que esto
 - Tamaño dinámico: Si el número de elementos en tu colección puede variar y necesitas conocer su tamaño exacto en cualquier momento, un Map es más adecuado, ya que proporciona la propiedad size.
 - Iteración: Si necesitas iterar sobre las claves, los valores o las entradas (pares clave-valor) de forma directa y eficiente, un Map ofrece métodos específicos para ello (keys(), values() y entries()).
 
+------------------
 # 5. WeakSet
 En JavaScript, WeakSet es una colección de objetos, similar a un conjunto (Set), pero con algunas diferencias importantes que lo hacen más adecuado para ciertos casos de uso relacionados con la gestión de memoria y la eliminación automática de objetos. Los weaksets son colecciones de objetos únicos. No permiten valores primitivos como claves.
 
-
-## 6. WeakMap
+--------------------
+# 6. WeakMap
 Los weakmaps son colecciones de pares clave-valor donde las claves deben ser objetos.
 
 -----------------
@@ -1791,3 +1963,27 @@ Normalmente los contenidos JSON suelen estar almacenados en un archivo externo, 
   - Objetos: Colecciones de pares clave-valor (similar a los objetos en JavaScript).
   - Arrays: Listas ordenadas de valores (similar a los arrays en JavaScript).
   - Valores Primitivos: Cadenas, números, booleanos y null.
+
+
+
+# Cadenas de Texto
+## Métodos de Cadenas de Texto
+- **.length**: Devuelve la longitud de la cadena.
+- **.charAt(index)**: Devuelve el carácter en la posición index.
+- **.charCodeAt(index)**: Devuelve el valor Unicode del carácter en la posición index.
+- **.concat(str1, str2, ...)**: Concatena una o más cadenas con la cadena actual.
+- **.includes(searchString, position)**: Devuelve true si searchString está en la cadena, false en caso contrario.
+- **.indexOf(searchValue, fromIndex)**: Devuelve la posición de la primera ocurrencia de searchValue en la cadena, o -1 si no se encuentra.
+- **.lastIndexOf(searchValue, fromIndex)**: Devuelve la posición de la última ocurrencia de searchValue en la cadena, o -1 si no se encuentra.
+- **.match(regexp)**: Devuelve un array con las coincidencias de la cadena con la expresión regular regexp.
+- **.replace(searchValue, newValue)**: Reemplaza searchValue por newValue en la cadena.
+- **.search(regexp)**: Devuelve la posición de la primera coincidencia de la expresión regular regexp en la cadena, o -1 si no se encuentra.
+- **.slice(start, end)**: Devuelve una subcadena de la cadena desde start hasta end.
+- **.split(separator, limit)**: Divide la cadena en un array de subcadenas utilizando separator como delimitador.
+- **.substr(start, length)**: Devuelve una subcadena de la cadena desde start con una longitud de length.
+- **.substring(start, end)**: Devuelve una subcadena de la cadena desde start hasta end.
+- **.toLowerCase()**: Devuelve la cadena en minúsculas.
+- **.trim()**: Elimina los espacios en blanco al principio y al final de la cadena.
+- **.toUpperCase()**: Devuelve la cadena en mayúsculas.
+- **.toString()**: Devuelve la cadena como un string.
+- **.valueOf()**: Devuelve el valor primitivo de la cadena.
