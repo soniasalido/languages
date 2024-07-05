@@ -1,0 +1,65 @@
+<!--IGUAL QUE V2 PERO SIN BOTON DE MOSTRAR. SE ACTIVA MOSTRAR PROFESOR,
+    SOLO CAMBIANDO DE OPCION -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .error{
+            background : darkred;
+            color : white;
+        }
+    </style>
+</head>
+<body>
+
+    <div></div>
+    <form action="#" method="POST">
+        <label for="nombreUsuario">Nombre Usuario:</label>
+        <input type="text" name="nombreUsuario" id="nombreUsuario"/>
+        <span id="resultadoComprobacionUsuario"></span>
+
+        <label for="passwoord">Contraseña:</label>
+        <input type="password" name="password" id="passwoord"/>
+
+        <input type="button" id="Enviar" value="Enviar"/>
+    </form>
+
+    <hr>
+
+    <!-- *************************************************************************** -->
+    <form action="#">
+        <label for="especialidad">Mostrar profesores de:</label>
+        <select name="especialidad" id="especialidad">
+            <option value=""></option>
+            <option value="Guitarra">Guitarra</option>
+            <option value="Piano">Piano</option>
+        </select>
+    </form>
+
+
+
+    <!-- Para mostrar resultado del response con stringify-->
+    <div>
+        <h3 id="resultado"></h3>
+    </div>
+
+
+    <!-- FILTRAR UNA BD CON UN SELECT - OPTION - AJAX - JSON-->
+    <div>
+        <p>Filtar una bd con un select - option - ajax - json</p>
+        <table id="tablaResultado">
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="miJS.js"></script>
+</body>
+</html>

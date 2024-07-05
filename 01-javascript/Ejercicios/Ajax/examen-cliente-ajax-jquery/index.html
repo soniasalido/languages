@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .error{
+            background : darkred;
+            color : white;
+        }
+    </style>
+</head>
+<body>
+
+    <div></div>
+    <form action="#" method="POST">
+        <label for="idProfesor">ID Profesor:</label>
+        <input type="text" name="idProfesor" id="idProfesor"/>
+        <span id="resultadoComprobacionUsuario"></span>
+
+        Sede:
+        <select name="sede" id="sede">
+            <option value="Nigüelas">Nigüelas</option>
+            <option value="Lecrín">Lecrin</option>
+            <option value="Durcal">Durcal</option>
+        </select>
+
+        <br>
+        Especialidad
+        <input type="checkbox" name="Piano" value="Piano" />Piano
+        <input type="checkbox" name="Flauta" value="Flauta" />Flauta
+        <input type="checkbox" name="Guitarra" value="Guitarra" />Guitarra
+
+        <br>
+        <label>Sede donde hacer los examenes</label>
+        <input type="radio" name="sedeExamen" value="Nigüelas" id="sedeNigüelas" required><label>Nigüelas</label>
+        <input type="radio" name="sedeExamen" value="Lecrín" id="sedeLecrin"><label>Lecrín</label>
+        <input type="radio" name="sedeExamen" value="El Pinar" id="sedeElPinar"><label>El Pinar</label>
+
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" id="password"/>
+
+
+        <button id="ajax">Enviar por AJAX</button>
+        <button id="fecth">Enviar por fetch</button>
+    </form>
+
+    <hr>
+
+    <!-- *************************************************************************** -->
+    <!-- FILTRAR UNA BD CON UN SELECT - OPTION - AJAX - JSON-->
+    <form action="#">
+        <label for="profEspecialidad">Mostrar profesores de:</label>
+        <select name="profEspecialidad" id="profEspecialidad">
+            <option value=""></option>
+            <option value="Guitarra">Guitarra</option>
+            <option value="Piano">Piano</option>
+        </select>
+    </form>
+
+
+    <!-- Se muestra el resultado de la petición AJAX   -->
+    <div>
+        <p>Filtar una bd con un select - option - ajax - json</p>
+        <table id="tablaResultado">
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="miJS.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<body>
+
+<div id="result" class="result"></div>
+
+    <script>
+        let valores = [true, 5, false, "hola", "adios", 2, "television", "cadena de caracteres"];
+        let result = document.getElementById("result");
+        result.innerHTML = '<p><strong>Del array []</strong></p>';
+
+
+        //1. Determinar cual de los dos elementos de texto es mayor
+        let strMayor = '';
+        valores.forEach(e =>{
+            if(typeof e === 'string'){
+                console.log(e);
+                if(e.length >= strMayor.length)
+                    strMayor = e;
+            }
+        });
+        result.innerHTML += '<br>';
+        result.innerHTML += '<p>1. La palabra mayor es: <strong>' + strMayor + '</strong></p>';
+
+
+
+        // 2. Utilizando exclusivamente los dos valores booleanos del array, determinar los operadores necesarios para obtener un resultado true y otro resultado false
+        let soyTrue;
+        let soyFalse;
+
+        valores.forEach(e =>{
+            if(typeof e === 'boolean'){
+                (e) ? (soyTrue = e) : (soyFalse = e);
+            }
+        });
+        result.innerHTML += '<br>';
+        result.innerHTML += '<p>2a. El operador ' + soyTrue +' se obtuvo utilizando if(variable) </p>';
+        result.innerHTML += '<p>2b. El operador ' + soyFalse +' se obtuvo utilizando  if(!variable) </p>';
+
+        // 3. Determinar el resultado de las cinco operaciones matemáticas realizadas con los dos elementos numéricos
+        let valA = null;
+        let valB = null;
+
+        valores.forEach(e =>{
+            if(typeof e === 'number'){
+
+                if(valA == null){
+                    valA = e;
+                }else if(valB == null){
+                    valB = e;
+                }
+            }
+        });
+
+        result.innerHTML += '<br>';
+        result.innerHTML += '<p>3a. ' + valA + ' + ' + valB + ' = ' + (valA + valB) + '</p>';
+        result.innerHTML += '<p>3b. ' + valA + ' - ' + valB + ' = ' + (valA - valB) + '</p>';
+        result.innerHTML += '<p>3c. ' + valA + ' * ' + valB + ' = ' + (valA * valB) + '</p>';
+        result.innerHTML += '<p>3d. ' + valA + ' / ' + valB + ' = ' + (valA / valB) + '</p>';
+
+    </script>
+
+</body>
+</html>

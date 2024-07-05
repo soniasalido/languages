@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+  <script>
+      let numero1 = window.prompt("Introduce un numero: ");
+      let numero2 = window.prompt("Introduce otro numero: ");
+      divisoresNum1     = [];
+      divisoresNum2     = [];
+      divisoresComunes  = [];
+
+      for (let i=1; i<=numero1; i++){
+          if (numero1 % i==0){
+              divisoresNum1.push(i);
+              document.write()
+          }
+      }
+
+      for (let i=1; i<=numero2; i++){
+          if (numero2%i == 0){
+              divisoresNum2.push(i);
+          }
+      }
+
+      for (let i=0; i<divisoresNum1.length; i++ ){
+          for (let j=0; j<=divisoresNum2.length; j++){
+              if (divisoresNum1[i]==divisoresNum2[j]){
+                  divisoresComunes.push(divisoresNum1[i])
+              }
+          }
+      }
+
+      // Da error. no sale el resultado
+
+
+
+      document.write("Divisores del numero 1: " + divisoresNum1 + "<br>");
+      document.write("Divisores del numero 2: " + divisoresNum2 + "<br>");
+      document.write("Divisores comunes " + divisoresComunes + "<br>");
+
+
+
+  </script>
+</body>
+</html>

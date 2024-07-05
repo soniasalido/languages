@@ -1,0 +1,39 @@
+
+
+<!-- Rellena un array con los números del 1 al 10. Muéstralo por la consola.-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Array que se autorellena</title>
+</head>
+<body>
+    <script>
+        let miArray = [];
+
+        // Una forma de autorellenar un array
+        for (let i = 0; i<=9; i++){
+            miArray.push(i);
+        }
+        console.log(miArray);
+
+
+        // Otra forma de autorellenar un array
+        for (let i = 0; i<=9; i++){
+            miArray[i] = i;
+        }
+        console.log(miArray);
+
+
+        // Autorellenar un array con 10 numeros aleatorios
+        for (let i = 0; i<=9; i++){
+            miArray[i] = Math.random(0,9);
+        }
+        console.log(miArray);
+
+
+    </script>
+</body>
+
+
+</html>

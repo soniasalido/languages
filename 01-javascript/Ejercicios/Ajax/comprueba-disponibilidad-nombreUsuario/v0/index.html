@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div></div>
+    <form action="#" method="POST">
+        <label for="nombreUsuario">Nombre Usuario:</label>
+        <input type="text" name="nombreUsuario" id="nombreUsuario"/>
+
+        <label for="passwoord">Contraseña:</label>
+        <input type="password" name="password" id="passwoord"/>
+
+        <input type="button" id="Enviar" value="Enviar"/>
+    </form>
+
+
+    <script>
+
+        $("#nombreUsuario").on("change", function(){
+            let login = $("#nombreUsuario").val();
+            $.ajax({
+                url : 'compruebaDisponibilidad.php',
+                data : {idUsuario : login },
+                type : 'GET',
+                dataType: "json",
+            })
+            .done(function(response){
+                console.log(response)
+                document.querySelector("div").innerHTML = JSON.stringify(response);
+            })
+            .error = response => {
+                console.log("Erorr!!!!!")
+            }
+        });
+    </script>
+</body>
+</html>

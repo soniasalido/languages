@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>MEDAC Formacion</h2>
+        <h3 id="parrafo"></h3>
+        <button>Obtener texto externo</button>
+    </div>
+
+<script>
+    $("button").on("click", function(){
+        $.ajax({url: "prueba.txt", success: function(result){
+                $("#parrafo").html(result);
+            }});
+    });
+</script>
+</body>
+
+</html>

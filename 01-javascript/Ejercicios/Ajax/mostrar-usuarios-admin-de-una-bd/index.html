@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" />
+    </form>
+
+
+    <input type="button" id="mostrarUsuarios" value="Mostrar Usuarios" />
+    <input type="button" id="mostrarAdministradores" value="Mostrar Administradores" />
+
+
+    <div>
+        <h3 id="resultado"></h3>
+    </div>
+
+    <div>
+        <table id="tablaResultado">
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+        //******************************************************************************
+        //USUARIOS
+        $("#mostrarUsuarios").on("click", function(){
+            $.ajax({
+                url      : 'select-usuarios-BD-PDO.php',
+                type     : 'GET',
+                dataType: "json",
+                success  : function(response){
+                    console.log(response)
+                    $("#tablaResultado > tbody").empty();
+
+                    //FORMA A: Mostrar contenido del response
+                    document.querySelector("div").innerHTML = JSON.stringify(response);
+
+                    mostrarUsuarios(response);
+               },
+                error:function(data) {
+                    console.log("Erorr")
+                }
+           })
+        });
+
+
+        //FORMA B: Mostrar contenido del response en uns tabla
+        function mostrarUsuarios(response){
+            //Recorre el resonse para mostrar resultados
+            for(let i = 0; i<response.length ; i++) {
+                console.log(response[i]['idUsuario']);
+                let tr_str = "<tr>" +
+                    "<td>" + (i+1) + "</td>" +
+                    '<td>' + response[i]['idUsuario'] + '</td>' +
+                    "<td>" + response[i]['nombre'] + "</td>" +
+                    "<td>" + response[i]['apellidos'] + "</td>" +
+                    "<td>" + response[i]['telefono'] + "</td>" +
+                    "<td>" + response[i]['password'] + "</td>" +
+                    "</tr>";
+                $("#tablaResultado tbody").append(tr_str);
+            }
+        }
+
+
+        //******************************************************************************
+        //ADMINISTRADORES
+        $("#mostrarAdministradores").on("click", function(){
+            $.ajax({
+                url      : 'select-administradores-BD-PDO.php',
+                type     : 'GET',
+                success  : function(response){
+                    $("#tablaResultado > tbody").empty();
+                    //FORMAA: Mostrar contenido del response con stringify
+                    document.querySelector("div").innerHTML = JSON.stringify(response);
+                    mostrarAdministradores(response);
+                },
+                error:function(response) {
+                    console.log("Erorr " + data )
+                },
+            })
+        });
+
+
+
+        //FORMA B: Mostrar contenido del response en una tabla
+        function mostrarAdministradores(response){
+            //Recorre el resonse para mostrar resultados
+            for (let i = 0; i<response.length ; i++) {
+                //console.log(response[i]['idUsuario']);
+                let tr_str = "<tr>" +
+                    "<td>" + (i+1) + "</td>" +
+                    "<td>" + response[i]['idUsuario'] + "</td>" +
+                    "<td>" + response[i]['nombre'] + "</td>" +
+                    "<td>" + response[i]['apellido'] + "</td>" +
+                    "<td>" + response[i]['telefono'] + "</td>" +
+                    "<td>" + response[i]['password'] + "</td>" +
+                    "</tr>";
+                $("#tablaResultado tbody").append(tr_str);
+            }
+        }
+    </script>
+</body>
+</html>

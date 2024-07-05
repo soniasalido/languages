@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <input type="button" id="mostrarUsuarios" value="Mostrar Usuarios" />
+    <input type="button" id="mostrarRegistros" value="Mostrar Registros" />
+
+    <div id="resultado"></div>
+
+    <div>
+        <table id="tablaResultado">
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <script>
+        //JSON.parse --> Convierte cadenas json a objetos Javascript
+        //Al usar JSON.parse() en un JSON derivado de una matriz, el método devolverá una matriz de JavaScript, en lugar de un objeto de JavaScript.
+        //JSON.stringifi --> Convierte un objeto javascript a una cadena json.
+
+
+
+        //EVENTO MOSTRAR USUARIOS
+        $("#mostrarUsuarios").on("click", function(){
+            //JSON PHP Array to Javascript
+            $.ajax({
+                type:    'POST',
+                url:     'seleccionUsuarios.php',
+                data:    'id=testdata',
+                cache:   false,
+                success: function(data){
+                    $('#resultado').append(data);
+                }
+            });
+        });
+
+
+
+        //EVENTO MOSTRAR REGISTROS
+        $("#mostrarRegistros").on("click", function(){
+            $.ajax({
+                type:    'POST',
+                url:     'seleccionUsuarios.php',
+                data:    'id=testdata',
+                cache:   false,
+                success: function(data){
+                    $('#resultado').append(data);
+                }
+            });
+        });
+
+
+
+    </script>
+</body>
+</html>

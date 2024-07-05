@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <!-- CSS -->
+        <style>
+            .colorear {
+                background-color : yellow;
+            }
+        </style>
+        <script src="jquery/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <h2>Ejercicio:</h2>
+        <p>XXXX.</p>
+
+
+        <form id="formulario" action="#" method="POST">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Escribe aquí tu nombre">
+
+            <label for="apellidos">Apellidos</label>
+            <input id="apellidos" name="nombre" type="text" placeholder="Escribe aquí tus apellidos">
+
+            <label for="contraseña">Contraseña</label>
+            <input id="contraseña" name="contraseña" type="password">
+
+            <input type="submit" id="enviar" value="Enviar">
+        </form>
+
+
+
+    </body>
+
+    <script>
+        let x = $("input");
+        if (x.is(":focus")){
+            x.css("background-color","yellow");
+            alert("Hola");
+        }
+
+
+
+    </script>
+</html>

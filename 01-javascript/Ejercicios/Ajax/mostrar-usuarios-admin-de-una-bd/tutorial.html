@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    /*
+        Las funciones y utilidades relacionadas con AJAX son parte fundamental de jQuery.
+        El método principal para realizar peticiones AJAX es $.ajax().
+        A partir de esta función básica, se han definido otras funciones relacionadas, de más alto nivel y especializadas
+        en tareas concretas: $.get(), $.post(), $.load(), etc.
+        La URL que se solicita también se incluye dentro del array asociativo de opcione
+
+
+
+    // Ejemplo básico que se utilizó en Prototype realizado con $.ajax():
+    $.ajax({
+        url: 'ejecucion.php',
+        type: 'POST',
+        async: true,
+        data: 'parametro1=valor1&parametro2=valor2',
+        success: procesaRespuesta,
+        error: muestraError
+    });
+
+async --> Indica si la petición es asíncrona. Su valor por defecto es true, el habitual para las peticiones AJAX
+
+type --> El tipo de petición que se realiza. Su valor por defecto es GET, aunque también se puede utilizar el método POST.
+
+data --> Información que se incluye en la petición. Se utiliza para enviar parámetros al servidor. Si es una cadena de texto,
+se envía tal cual, por lo que su formato debería ser parametro1=valor1&parametro2=valor2.
+También se puede indicar un array asociativo de pares clave/valor que se convierten automáticamente en una cadena tipo query string
+
+success --> Permite establecer la función que se ejecuta cuando una petición se ha completado de forma correcta. La función
+recibe como primer parámetro los datos recibidos del servidor, previamente formateados según se especifique en la opción dataType
+
+
+dataType --> El tipo de dato que se espera como respuesta. Si no se indica ningún valor, jQuery lo deduce a partir de las cabeceras
+de la respuesta. Los posibles valores son: xml (se devuelve un documento XML correspondiente al valor responseXML),
+html (devuelve directamente la respuesta del servidor mediante el valor responseText), script (se evalúa la respuesta como
+si fuera JavaScript y se devuelve el resultado) y json (se evalúa la respuesta como si fuera JSON y se devuelve el objeto JavaScript generado)
+
+     */
+</script>
+
+</body>
+</html>
+
