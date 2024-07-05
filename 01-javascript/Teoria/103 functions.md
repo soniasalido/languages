@@ -3,8 +3,8 @@
 
 [Funciones](#functions)  
 [Hoisting](#1-hoisting)  
-[Ámbito de una variable](#1-%C3%A1mbito-variable-var)  
-[Closure](#4-closure)  
+[Ámbito de una variable](#2-ambito-de-una-variable)  
+[Closure](#3-closure)  
 [Funciones Autoinvocadas - IIFE](#funciones-autoinvocadas-iife)  
 [Template Functions | Tagged Template Literals](#funciones-autoinvocadas-iife)  
 [Definición de Funciones](#funciones-autoinvocadas-iife)  
@@ -62,7 +62,7 @@ Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recom
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
-# 2. Ámbito variable VAR
+# 2. Ambito de una variable
 El ámbito (o alcance) de una variable se refiere al contexto en el cual la variable está definida y puede ser accedida. Existen principalmente dos tipos de ámbitos:
 - Ámbito Local: Una variable definida dentro de una función tiene un ámbito local y solo puede ser accedida dentro de esa función.
 - Ámbito Global: Una variable definida fuera de todas las funciones tiene un ámbito global y puede ser accedida desde cualquier lugar del código.
@@ -78,13 +78,19 @@ Para abordar estas dificultades, ES6 introdujo dos nuevas formas de declarar var
 # 3. Closure
 Un closure (o clausura) es una función que "recuerda" el entorno léxico en el que fue creada. Esto significa que la función puede acceder a las variables de su ámbito exterior incluso después de que ese ámbito haya terminado de ejecutarse.
 
-Capacidad que tienen las funciones en JS de recordar el ámbito léxico en el que han sido declaradas. Un closure (clausura) es una función que guarda referencias del estado adyacente (ámbito léxico). Un clousure permite acceder al ámbito exterior desde una función interior.
+Closure es la capacidad que tienen las funciones en JS de recordar el ámbito léxico en el que han sido declaradas. Un closure (clausura) es una función que guarda referencias del estado adyacente (ámbito léxico).
+
+| 💥 Un closure permite acceder al ámbito exterior desde una función interior. Se accede a través del this. |
+|------------------------------------------------------------------------------------------------------------|
 
 Closure encapsula datos y encapsula métodos. Se tiene una interfaz para acceder a estos datos.
 
-Cuando se hace una llmada a una función, se genera una pequeña asignación de memoria donde se guarda las variables de esa función, y que no es accesible desde el exterior a esa función. Cuando termina la función si hay algún tipo de referencia en el código, esa cajita no desapacere. No se borra.
+Cuando se hace una llamada a una función, se genera una pequeña asignación de memoria donde se guarda las variables de esa función, y que no es accesible desde el exterior a esa función. Cuando termina la función si hay algún tipo de referencia en el código, esa cajita no desapacere. No se borra.
 
-Un closure (clausura) es una característica poderosa de JavaScript que permite que una función "recuerde" el ámbito léxico en el que fue declarada, incluso después de que ese ámbito haya finalizado su ejecución. En otras palabras, una clausura es una función que tiene acceso a su propio ámbito, al ámbito de la función externa y al ámbito global.
+Un closure (clausura) es una característica poderosa de JavaScript que permite que una función "recuerde" el ámbito léxico en el que fue declarada, incluso después de que ese ámbito haya finalizado su ejecución. En otras palabras.
+
+| 💥 Un closure es una función que tiene acceso a su propio ámbito, al ámbito de la función externa y al ámbito global.|
+| ----- |
 
 **El ámbito léxico** se refiere al alcance de las variables que está determinado por la ubicación física de esas variables dentro del código fuente. Cuando una función se define, se crea un cierre que incluye todas las variables de su ámbito exterior en el momento de la definición de la función.
 
@@ -107,7 +113,7 @@ fetchData(function(data) {
 ```
 En este ejemplo, el callback pasado a fetchData "recuerda" el ámbito en el que fue creado y puede acceder a data cuando se ejecuta después de 1 segundo.
 
->[!IMPORTANT]
+>[! IMPORTANT]
 >**Closures en Bucles:** Un uso común de los closures es en bucles, para capturar el valor de la variable de iteración en cada iteración.
 ```
 for (var i = 0; i < 3; i++) {
@@ -127,10 +133,10 @@ for (let i = 0; i < 3; i++) {
 > [!CAUTION]
 > En el primer bucle, var no tiene ámbito de bloque, por lo que el cierre recuerda la misma referencia a i, que al final del bucle es 3. En el segundo bucle, let tiene ámbito de bloque, por lo que cada cierre recuerda un valor diferente de i.
 
-Con el concepto de clouser nos acercamos a las clases en programación, cosa que con JS de forma nativa no tiene clases. Con la introducción de ECMAScript 6 (ES6) en 2015, JavaScript añadió una sintaxis de clases que hace que la programación orientada a objetos sea más familiar para los desarrolladores acostumbrados a los lenguajes basados en clases. Sin embargo, es importante entender que esta sintaxis de clases es simplemente azúcar sintáctico sobre el modelo de prototipos subyacente de JavaScript.
+Con el concepto de clouse nos acercamos a las clases en programación, cosa que con JS de forma nativa no tiene clases. Con la introducción de ECMAScript 6 (ES6) en 2015, JavaScript añadió una sintaxis de clases que hace que la programación orientada a objetos sea más familiar para los desarrolladores acostumbrados a los lenguajes basados en clases. Sin embargo, es importante entender que esta sintaxis de clases es simplemente azúcar sintáctico sobre el modelo de prototipos subyacente de JavaScript.
 
 
-## Funciones Autoinvocadas (IIFE). 
+## 4. Funciones Autoinvocadas (IIFE). 
 En JavaScript, una función autoinvocada (Immediately Invoked Function Expression, o IIFE) es un patrón que permite ejecutar una función inmediatamente después de definirla. Aunque generalmente se utilizan funciones anónimas para crear IIFEs, no es un requisito estricto; también se pueden usar funciones nombradas. A continuación, se explica el concepto en detalle.
 
 Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón se utiliza para crear un ámbito léxico que no contamina el ámbito global y puede ser útil para encapsular variables.
