@@ -2,28 +2,28 @@
 # FUNCIONES
 
 [Funciones](#functions)  
-[Hoisting](#1-hoisting)  
-[Ámbito de una variable](#2-ambito-de-una-variable)  
-[Closure](#3-closure)  
-[Funciones Autoinvocadas - IIFE](#funciones-autoinvocadas-iife)  
-[Template Functions | Tagged Template Literals](#funciones-autoinvocadas-iife)  
-[Definición de Funciones](#funciones-autoinvocadas-iife)  
-[1. Funciones Declaradas](#1-funciones-declaradas)  
-[2. Funciones Expresadas](2-funciones-expresadas)  
-[3. Funciones Flecha (Arrow Functions)](#3-funciones-flecha-arrow-functions)  
-[4. Funciones Anónimas (Callback)](#3-funciones-flecha-arrow-functions)  
-[Métodos dentro de Objetos](#5-métodos-dentro-de-objetos)  
-[Parámetros y Argumentos](#par%C3%A1metros-y-argumentos)  
-[Añadiendo valor de retorno](#par%C3%A1metros-y-argumentos)  
-[Funciones de Orden Superior (Higher-Order Functions)](#funciones-de-orden-superior-higher-order-functions)  
-[Closures](#closures)  
-[Funciones Recursivas](#funciones-recursivas)  
-[Funciones Generadoras](#funciones-generadoras)  
-[this en Funciones](#this-en-funciones)  
-[VARIADIC FUNCTIONS](#variadic-functions)  
-[1. Funciones Variádicas mediante el operador rest](#variadic-functions)  
-[2. Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)](#variadic-functions)  
-[Diferencias entre el Operador Rest y el Objeto Arguments](#variadic-functions)  
+[1.- Hoisting](#1-hoisting)  
+[2.- Ámbito de una variable](#2-ambito-de-una-variable)  
+[3.- Closure](#3-closure)  
+[4.- Funciones Autoinvocadas - IIFE](#4-funciones-autoinvocadas---iife-)  
+[5.- Template Functions | Tagged Template Literals](#5-template-functions--tagged-template-literals)  
+[6.- Definición de Funciones](#6-definición-de-funciones)  
+[6.1.- Funciones Declaradas](#61-funciones-declaradas)  
+[6.2.- Funciones Expresadas](#62-funciones-expresadas)  
+[6.3.- Funciones Flecha (Arrow Functions)](#63-funciones-flecha-arrow-functions)  
+[6.4.- Funciones Anónimas (Callback)](#64-funciones-anónimas-callback)  
+[6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)  
+[7.- Parámetros y Argumentos](#7-parámetros-y-argumentos)  
+[7.1.- Añadiendo valor de retorno](#71--añadiendo-valor-de-retorno)  
+[7.2.- Funciones de Orden Superior (Higher-Order Functions)](#72-funciones-de-orden-superior-higher-order-functions)  
+[7.3.- Closures](#73-closures)  
+[7.4.- Funciones Recursivas](#74-funciones-recursivas)  
+[7.5.- Funciones Generadoras](#75-funciones-generadoras)  
+[7.6.- this en Funciones](#76-this-en-funciones)  
+[7.8.- VARIADIC FUNCTIONS](#78-variadic-functions)  
+[7.8.1.- Funciones Variadic mediante el operador rest](#781-funciones-variádicas-mediante-el-operador-rest)  
+[7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#782-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
+[8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)  
 
 
 -------
@@ -136,7 +136,7 @@ for (let i = 0; i < 3; i++) {
 Con el concepto de clouse nos acercamos a las clases en programación, cosa que con JS de forma nativa no tiene clases. Con la introducción de ECMAScript 6 (ES6) en 2015, JavaScript añadió una sintaxis de clases que hace que la programación orientada a objetos sea más familiar para los desarrolladores acostumbrados a los lenguajes basados en clases. Sin embargo, es importante entender que esta sintaxis de clases es simplemente azúcar sintáctico sobre el modelo de prototipos subyacente de JavaScript.
 
 
-## 4. Funciones Autoinvocadas (IIFE). 
+## 4. Funciones Autoinvocadas - IIFE. 
 En JavaScript, una función autoinvocada (Immediately Invoked Function Expression, o IIFE) es un patrón que permite ejecutar una función inmediatamente después de definirla. Aunque generalmente se utilizan funciones anónimas para crear IIFEs, no es un requisito estricto; también se pueden usar funciones nombradas. A continuación, se explica el concepto en detalle.
 
 Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón se utiliza para crear un ámbito léxico que no contamina el ámbito global y puede ser útil para encapsular variables.
@@ -163,7 +163,7 @@ Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón
 - Modularidad: Las IIFEs pueden ser una forma de organizar el código en módulos autocontenidos.
 
 
-## Template Functions | Tagged Template Literals
+## 5. Template Functions | Tagged Template Literals
 Son un tipo de funciones especiales que se invocan con los backticks en vez de con los paréntesis (). No tienen un uso común. Se usan en ciertas librerías. Permite personalizar el procesamiento de las plantillas literales. Esto es útil para crear DSL (lenguajes específicos de dominio), formateo de cadenas, entre otras aplicaciones.
 
 Como primer argumento de la función recibe un chunks que es un array con todo el string hasta que se encuentra con un ${}, el siguiente argumento es el siguiente string hasta el siguiente ${} y así sucesivamente.
@@ -197,7 +197,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 
 
-## Definición de Funciones
+## 6. Definición de Funciones
 - Hay varias maneras de definir funciones en JavaScript:
   - Funciones Declaradas (Function Declarations).
   - Funciones Expresadas (Function Expressions).
@@ -209,7 +209,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 
 
-### 1. Funciones Declaradas
+### 6.1. Funciones Declaradas
 Las funciones declaradas son definidas utilizando la palabra clave function seguida del nombre de la función, una lista de parámetros entre paréntesis y el cuerpo de la función entre llaves.
 ```
 function greet(name) {
@@ -229,7 +229,7 @@ function greet(name) {
 }
 ```
 
-### 2. Funciones Expresadas
+### 6.2. Funciones Expresadas
 Las funciones expresadas son definidas como parte de una expresión. No tienen nombre (aunque pueden tenerlo) y se asignan a una variable.
 ```
 const greet = function(name) {
@@ -248,7 +248,7 @@ const greet = function(name) {
 };
 ```
 
-### 3. Funciones Flecha (Arrow Functions)
+### 6.3. Funciones Flecha (Arrow Functions)
 Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
 
 Son siempre anónimas. Para tener un bimbre es necesario almacenar esa expresión en una variable de tipo Const:
@@ -429,7 +429,7 @@ Sin embargo, existe una forma de obtener todos los argumentos con forma de array
 
 
 
-### 4. Funciones Anónimas (Callback)
+### 6.4. Funciones Anónimas (Callback)
 Las funciones anónimas son aquellas que no tienen nombre. Se suelen usar como funciones de callback.
 ```
 setTimeout(function() {
@@ -473,7 +473,7 @@ console.log(product2([1, 2])([1, 1])([2, 3])); // 8
 **Hoisting:** Las funciones anónimas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
 
 
-### 5. Métodos dentro de Objetos
+### 6. 5. Métodos dentro de Objetos
 Los métodos son funciones que se definen dentro de un objeto.
 ```
 const person = {
@@ -486,7 +486,7 @@ const person = {
 console.log(person.greet()); // "Hello, my name is Alice"
 ```
 
-## Parámetros y Argumentos
+# 7. Parámetros y Argumentos
 Las funciones pueden aceptar parámetros, que son variables que actúan como marcadores de posición para los valores que se pasarán a la función.
 ```
 function add(a, b) {
@@ -523,7 +523,7 @@ saySomething("hello", "wonderful", "world"); // hello wonderful
 ```
 
 
-## Añadiendo valor de retorno:
+# 7.1.- Añadiendo valor de retorno:
 ```
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
@@ -536,7 +536,7 @@ console.log(saySomething("hello")); // hello undefined, false
 
 
 
-## Funciones de Orden Superior (Higher-Order Functions)
+## 7.2 Funciones de Orden Superior (Higher-Order Functions)
 Las funciones de orden superior son funciones que aceptan otras funciones como argumentos o devuelven funciones como resultado.
 ```
 function operate(a, b, operation) {
@@ -550,7 +550,7 @@ console.log(operate(5, 3, add)); // 8
 console.log(operate(5, 3, subtract)); // 2
 ```
 
-## Closures
+## 7.3 Closures
 Un closure es una función que tiene acceso a su propio ámbito léxico, al ámbito de la función externa y al ámbito global.
 ```
 function outerFunction(outerVariable) {
@@ -567,7 +567,7 @@ newFunction('inside');
 ```
 
 
-## Funciones Recursivas
+## 7.4 Funciones Recursivas
 Las funciones recursivas son funciones que se llaman a sí mismas.
 ```
 function factorial(n) {
@@ -580,7 +580,7 @@ function factorial(n) {
 console.log(factorial(5)); // 120
 ```
 
-## Funciones Generadoras
+## 7.5 Funciones Generadoras
 Las funciones generadoras permiten pausar y reanudar la ejecución del código utilizando yield.
 ```
 function* generatorFunction() {
@@ -596,7 +596,7 @@ console.log(generator.next().value); // 'Second output'
 console.log(generator.next().value); // 'Done'
 ```
 
-## this en Funciones
+## 7.6 this en Funciones
 El valor de this varía dependiendo de cómo se llama la función:
 - Funciones regulares: El valor de this depende del contexto en el que se llama la función.
 - Funciones flecha: No tienen su propio this, sino que heredan el this del contexto en el que se definieron.
@@ -617,10 +617,10 @@ obj.arrowFunction();
 
 
 
-## VARIADIC FUNCTIONS
+## 7.7 VARIADIC FUNCTIONS
 Las funciones variádicas (variadic functions) son funciones que pueden aceptar un número variable de argumentos. En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
 
-### Funciones Variádicas mediante el operador rest:
+### 7.7.1. Funciones Variádicas mediante el operador rest:
 Un ejemplo de función variádica en una Funciones Declaradas (Function Declarations):
 ```
 function sum(...numbers) {
@@ -631,7 +631,7 @@ console.log(sum(1, 2, 3)); // 6
 console.log(sum(4, 5, 6, 7)); // 22
 ```
 
-### Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
+### 7.7.2 Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
 Además del operador rest, en JavaScript las funciones tienen acceso a un objeto arguments que contiene todos los argumentos pasados a la función. Aunque el uso del operador rest es más moderno y legible, el objeto arguments todavía se usa en algunas situaciones.
 ```
 function logArguments() {
@@ -666,7 +666,7 @@ function sum() {
 console.log(sum(1, 2, 3)); // 6;
 ```
 
-### Diferencias entre el Operador Rest y el Objeto Arguments
+# 8. Diferencias entre el Operador Rest y el Objeto Arguments
 - Sintaxis y Modernidad: El operador rest (...) es una característica moderna de ES6 y es más legible y conciso.
 - Tipo de Objeto: El operador rest devuelve un array real, mientras que el objeto arguments es similar a un array pero no es un array real (es un objeto array-like).
 - Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
