@@ -499,16 +499,10 @@ let func = (arg1, arg2, ..., argN) => expression;
 
 Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa la expression del lado derecho mediante su uso y devuelve su resultado.
 
-Las funciones NO tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
+**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
 
 Son siempre anónimas. Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
-const nombreVaribale = (argumento) => {
-  .....
-  return ......
-}
-
-
 const greet = (name) => {
   return `Hello, ${name}!`;
 };
@@ -542,16 +536,9 @@ const greet = name => `Hello, ${name}!`;
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
-Si la función flecha tiene un único argumento, se puede simplificar quitando los corchetes ():
-```js
-const nombreVariable = argumento => xxxxxx........;
-
-const greet = name => `Hello, ${name}!`;
-console.log(greet('Alice')); // "Hello, Alice!"
-```
 
 > [!WARNING]
-> **La función flecha que devuelve un objeto: Es necesario usar corchetes (). Se genera un error si lo hacemos sólo con {}.**
+> **La función flecha que devuelve un objeto: Es necesario usar corchetes (). Se genera un error si lo hacemos sólo con {}. Ya que las llaves de objeto literal se confundirían con las llaves de ámbito de función.**
 
 Sin eliminar el return 🠮
 ```js
@@ -571,28 +558,6 @@ const toObject = (name, surname, age) => (
 **Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
 
-Si solo tenemos la sentencia "return" podemos acortar la función y ahorrarnos la palabra clave "return" y las llaves:
-```js
-const toUpper = (text) => text.toUpperCase();
-```
-
-#### También podemos omitir los paréntesis cuando el argumento es único:
-Sólo cuando es único, porque sino la coma de separación de argumentos se podría confundir con el operador coma.
-```js
-const toUpper = text => text.toUpperCase();
-```
-
-#### En caso de que lo que devuelva sea un objeto literal hay que tener cuidado:
-```js
-const toObject = (name, surname, age) => {
-  return { name, surname, age }
-}
-```
-
-y utilizar paréntesis para devolver en la forma corta, ya que las llaves de objeto literal se confundirían con las llaves de ámbito de función.
-```js
-const toObject = (name, surname, age) => ({ name, surname, age })
-```
 
 
 #### SIMILITUDES: classic vs arrow
