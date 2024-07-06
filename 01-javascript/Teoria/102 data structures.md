@@ -1515,12 +1515,46 @@ let b = 5;
 ```
 
 ### 3. Spread (Expandir | Soltar | Esparcir | Extender | Agrupar)
+El operador spread (...) se utiliza para descomponer un array en sus elementos individuales. Se puede utilizar en cualquier lugar donde se esperen argumentos o elementos, como en la definición de una función o en la creación de un nuevo array.
+
+```js
+const numbers = [1, 2, 3];
+console.log(...numbers); // 1 2 3
+```
+
+
+```js
+let arr1 = [1, -2, 3, 4];
+let arr2 = [8, 3, -8, 1];
+
+alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
+```
+Cuando ...arr es usado en el llamado de una función, **“expande”** el objeto iterable arr en una lista de argumentos.
+
+El operador spread puede ser usado para combinar arrays:
+```js
+let arr = [3, 5, 1];
+let arr2 = [8, 9, 15];
+
+let merged = [0, ...arr, 2, ...arr2];
+
+alert(merged); // 0,3,5,1,2,8,9,15 (0, luego arr, después 2, después arr2)
+```
+
+
+Usamos el operador spread para convertir la cadena en un array de caracteres:
+```js
+let str = "Hola";
+
+alert( [...str] ); // H,o,l,a
+```
+
 La desestructuración en JavaScript es una sintaxis especial que permite extraer valores de arrays o propiedades de objetos en variables distintas. Combinada con el operador spread (...), se convierte en una herramienta poderosa para trabajar con arrays y objetos de manera más eficiente y legible.
 
 El operador spread (...) se puede utilizar junto con la desestructuración para capturar el resto de los elementos de un array. El operador Spread nos permite extender | agrupar | soltar, los valores de un Array u Objeto en un nuevo Array u Objeto. No es una copia como tal, lo que sí es igual, es su contenido.
 
 > [!IMPORTANT]
-> Spread suelta | esparce los elementos perno no hace una copia en profundidad.
+> Spread suelta | esparce los elementos pero no hace una copia en profundidad.
 
 ```
 const array = [1, 2, 3, 4, 5];
@@ -1533,7 +1567,7 @@ console.log(rest); // [4, 5]
 // Se ignora el segundo elemento del array
 ```
 
-En el siguiente ejemplo, veremos que con el operador Spread, se hace un nuevo array, soltando los elementos de miArray y su orden en el nuevo array creado. Poero no es el mismo Array. Los objetos se comparan por referencias y como son arrays diferentes, no tienen igual referencia, aunque tengan los mismos elementos:
+En el siguiente ejemplo, veremos que con el operador Spread, se hace un nuevo array, soltando los elementos de miArray y su orden en el nuevo array creado. Pero no es el mismo Array. Los objetos se comparan por referencias y como son arrays diferentes, no tienen igual referencia, aunque tengan los mismos elementos:
 ```
 const miArray = [ "uno", "dos", "tres"];
 const nuevo Array = ...miArray;
