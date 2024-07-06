@@ -603,7 +603,8 @@ count(); // 1
 count(); // 2
 count(); // 3
 ```
-⚠ En este último ejemplo hemos empleado un CLOSURE! Este concepto avanzado se verá con más detenimiento en la parte avanzada.
+> [!WARNING]
+>⚠ En este último ejemplo hemos empleado un CLOSURE!
 
 
 #### DIFERENCIAS: classic vs arrow
