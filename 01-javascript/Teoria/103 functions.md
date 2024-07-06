@@ -148,7 +148,11 @@ Este comportamiento es algo inusual de JS. Puede conducir a errores. No es recom
 
 **Hoisting de variables con let y con const**: Acceder a una variable declarada con let o const antes de que sea declarada, resulta en un ReferenceError.
 
-# 2. Enlaces y Ámbitos
+# 2. Enlaces y Ámbitos - Bindings and Scopes
+**Enlaces (Bindings):** Un enlace es una asociación entre un nombre (como el nombre de una variable o una función) y una entidad (como un valor o un objeto) en la memoria.
+
+**Ámbito (Scope):** El ámbito de un enlace es la parte del programa donde el enlace es visible y accesible. Los ámbitos pueden ser globales o locales:
+
 Cada enlace tiene un ámbito, que es la parte del programa en la que el enlace es visible. Para los enlaces definidos fuera de cualquier función, bloque o módulo, el ámbito es todo el programa (se puede hacer referencia a esos enlaces donde queramos). Estos se llaman globales.
 
 Los enlaces creados para los parámetros de una función o declarados dentro de una función solo pueden ser referenciados en esa función, por lo que se conocen como enlaces locales. Cada vez que se llama a la función, se crean nuevas instancias de estos enlaces. Esto proporciona cierto aislamiento entre funciones. Ccada llamada a función actúa en su propio pequeño mundo (su entorno local) y a menudo se puede entender sin saber mucho sobre lo que está sucediendo en el entorno global.
@@ -195,6 +199,8 @@ Almacenar esta pila requiere espacio en la memoria de la computadora. Cuando la 
 
 
 # 3. Closure - Clausura 
+Un closure o clausura es una característica de algunos lenguajes de programación, como JavaScript, donde una función "recuerda" el ámbito en el que fue creada, incluso cuando se ejecuta fuera de ese ámbito. Un closure se forma cuando una función anidada se devuelve desde la función exterior y mantiene una referencia a las variables de la función exterior.
+
 La capacidad de tratar las funciones como valores, combinada con el hecho de que los enlaces locales se recrean cada vez que se llama a una función, plantea una pregunta interesante: ¿qué sucede con los enlaces locales cuando la llamada a la función que los creó ya no está activa?El siguiente código muestra un ejemplo de esto. Define una función, wrapValue, que crea un enlace local. Luego devuelve una función que accede a este enlace local y lo devuelve:
 ```js
 function wrapValue(n) {
@@ -257,7 +263,7 @@ Un closure (clausura) es una característica poderosa de JavaScript que permite 
 | 💥 Un closure es una función que tiene acceso a su propio ámbito, al ámbito de la función externa y al ámbito global.|
 | ----- |
 
-**El ámbito léxico** se refiere al alcance de las variables que está determinado por la ubicación física de esas variables dentro del código fuente. Cuando una función se define, se crea un cierre que incluye todas las variables de su ámbito exterior en el momento de la definición de la función.
+
 
 **Closures con Variables Privadas:** Los closures se utilizan comúnmente para crear variables privadas. Esto permite encapsular datos y proporcionar una interfaz para interactuar con ellos.
 
@@ -301,7 +307,48 @@ for (let i = 0; i < 3; i++) {
 Con el concepto de clouse nos acercamos a las clases en programación, cosa que con JS de forma nativa no tiene clases. Con la introducción de ECMAScript 6 (ES6) en 2015, JavaScript añadió una sintaxis de clases que hace que la programación orientada a objetos sea más familiar para los desarrolladores acostumbrados a los lenguajes basados en clases. Sin embargo, es importante entender que esta sintaxis de clases es simplemente azúcar sintáctico sobre el modelo de prototipos subyacente de JavaScript.
 
 
-## 4. Funciones Autoinvocadas - IIFE. 
+# 4. Ámbito o Alcance Léxico (Lexical Scope)
+El ámbito léxico se refiere a la forma en que el compilador o intérprete de un lenguaje de programación determina el alcance (la visibilidad) de las variables basándose en la estructura física del código, es decir, el lugar donde las variables y funciones están declaradas. En el ámbito léxico, el alcance de una variable se determina en el momento de la escritura del código y no cambia en tiempo de ejecución.
+
+
+**El ámbito léxico** se refiere al alcance de las variables que está determinado por la ubicación física de esas variables dentro del código fuente. Cuando una función se define, se crea un cierre que incluye todas las variables de su ámbito exterior en el momento de la definición de la función.
+
+```js
+function externa() {
+  let x = 10;
+
+  function interna() {
+    console.log(x); // Tiene acceso a x de la función externa
+  }
+
+  interna();
+}
+
+externa(); // Imprime 10
+```
+La función interna puede acceder a la variable x de la función externa debido al ámbito léxico. El alcance de x está determinado por la estructura del código.
+
+## Relación entre Ámbito Léxico y Closures
+- Ámbito Léxico: Determina qué variables están disponibles en diferentes partes del código basado en la estructura del código.
+- Closures: Utilizan el ámbito léxico para "recordar" el contexto en el que fueron creados, permitiendo que las funciones anidadas accedan a las variables de las funciones exteriores, incluso después de que esas funciones exteriores hayan terminado de ejecutarse.
+
+## Diferencias entre Ámbito Léxico y Closures
+- Determinación del Alcance:
+  - Ámbito Léxico: Determinado en tiempo de compilación basado en la estructura del código.
+  - Closures: Aprovechan el ámbito léxico para mantener referencias a las variables de las funciones exteriores.
+- Persistencia del Alcance:
+  - Ámbito Léxico: Es estático y determinado por la estructura del código. 
+  - Closures: Permiten que las funciones mantengan acceso a su ámbito léxico original incluso después de que la función exterior haya finalizado.
+
+## Para profuncdizar:
+- [Ámbito o Alcance léxico](https://es.javascript.info/closure#ambito-o-alcance-lexico)
+
+
+# 5. Funciones Autoinvocadas - IIFE. 
+Como en el pasado solo existía var, y no había visibilidad a nivel de bloque, los programadores inventaron una manera de emularla. Lo que hicieron fue el llamado "expresiones de función inmediatamente invocadas (abreviado IIFE en inglés).
+
+**No es algo que debiéramos usar estos días,** pero podemos encontrarlas en código antiguo.  
+
 En JavaScript, una función autoinvocada (Immediately Invoked Function Expression, o IIFE) es un patrón que permite ejecutar una función inmediatamente después de definirla. Aunque generalmente se utilizan funciones anónimas para crear IIFEs, no es un requisito estricto; también se pueden usar funciones nombradas. A continuación, se explica el concepto en detalle.
 
 Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón se utiliza para crear un ámbito léxico que no contamina el ámbito global y puede ser útil para encapsular variables.
@@ -328,7 +375,7 @@ Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón
 - Modularidad: Las IIFEs pueden ser una forma de organizar el código en módulos autocontenidos.
 
 
-## 5. Template Functions | Tagged Template Literals
+## 6. Template Functions | Tagged Template Literals
 Son un tipo de funciones especiales que se invocan con los backticks en vez de con los paréntesis (). No tienen un uso común. Se usan en ciertas librerías. Permite personalizar el procesamiento de las plantillas literales. Esto es útil para crear DSL (lenguajes específicos de dominio), formateo de cadenas, entre otras aplicaciones.
 
 Como primer argumento de la función recibe un chunks que es un array con todo el string hasta que se encuentra con un ${}, el siguiente argumento es el siguiente string hasta el siguiente ${} y así sucesivamente.
@@ -362,7 +409,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 
 
-## 6. Definición de Funciones - Notación de Declaración
+## 7. Definición de Funciones - Notación de Declaración
 - Hay varias maneras de definir funciones en JavaScript:
   - Funciones Declaradas (Function Declarations).
   - Funciones Expresadas (Function Expressions).
@@ -374,7 +421,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 
 
-### 6.1. Funciones Declaradas
+### 7.1. Funciones Declaradas
 Las funciones declaradas son definidas utilizando la palabra clave function seguida del nombre de la función, una lista de parámetros entre paréntesis y el cuerpo de la función entre llaves.
 ```js
 function greet(name) {
@@ -397,7 +444,7 @@ function greet(name) {
 }
 ```
 
-### 6.2. Funciones Expresadas
+### 7.2. Funciones Expresadas
 Las funciones expresadas son definidas como parte de una expresión. No tienen nombre (aunque pueden tenerlo) y se asignan a una variable.
 
 En situaciones más avanzadas, una función puede ser creada e inmediatamente llamada o agendada para uso posterior, sin almacenarla en ningún lugar, permaneciendo así anónima.
@@ -489,7 +536,7 @@ También es un poco más fácil de buscar function f(…) {…} en el código co
 …Pero si una Declaración de Función no nos conviene por alguna razón, o necesitamos declaración condicional, entonces se debe usar la Expresión de función.
 
 
-### 6.3. Funciones Flecha (Arrow Functions)
+### 7.3. Funciones Flecha (Arrow Functions)
 Hay otra sintaxis muy simple y concisa para crear funciones, que a menudo es mejor que las Expresiones de funciones.
 
 Se llama “funciones de flecha”, porque se ve así:
@@ -688,7 +735,7 @@ Sin embargo, existe una forma de obtener todos los argumentos con forma de array
 Las arrow functions no tienen la propiedad 'super' y por tanto no pueden ser utilizadas en clases que hereden de otras clases.
 
 
-### 6.4. Funciones Anónimas (Callback)
+### 7.4. Funciones Anónimas (Callback)
 Escribimos una función ask(question, yes, no) con tres argumentos:
 
 question  
@@ -784,7 +831,7 @@ console.log(product2([1, 2])([1, 1])([2, 3])); // 8
 **Hoisting:** Las funciones anónimas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
 
 
-### 6. 5. Métodos dentro de Objetos
+### 7.5 Métodos dentro de Objetos
 Los métodos son funciones que se definen dentro de un objeto.
 ```js
 const person = {
@@ -797,7 +844,7 @@ const person = {
 console.log(person.greet()); // "Hello, my name is Alice"
 ```
 
-# 7. Parámetros y Argumentos
+# 8. Parámetros y Argumentos
 Las funciones pueden aceptar parámetros, que son variables que actúan como marcadores de posición para los valores que se pasarán a la función.
 
 ```js
@@ -846,7 +893,7 @@ saySomething("hello", "wonderful", "world"); // hello wonderful
 ```
 
 
-# 7.1.- Añadiendo valor de retorno:
+# 8.1.- Añadiendo valor de retorno:
 ```js
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
@@ -859,7 +906,7 @@ console.log(saySomething("hello")); // hello undefined, false
 
 
 
-## 7.2 Funciones de Orden Superior (Higher-Order Functions)
+## 8.2 Funciones de Orden Superior (Higher-Order Functions)
 Las funciones de orden superior son funciones que aceptan otras funciones como argumentos o devuelven funciones como resultado.
 
 Las funciones que operan en otras funciones, ya sea tomándolas como argumentos o devolviéndolas, se llaman funciones de orden superior.
@@ -921,7 +968,7 @@ console.log(operate(5, 3, add)); // 8
 console.log(operate(5, 3, subtract)); // 2
 ```
 
-## 7.3 Closures
+## 8.3 Closures
 Un closure es una función que tiene acceso a su propio ámbito léxico, al ámbito de la función externa y al ámbito global.
 ```js
 function outerFunction(outerVariable) {
@@ -938,7 +985,7 @@ newFunction('inside');
 ```
 
 
-## 7.4 Funciones Recursivas
+## 8.4 Funciones Recursivas
 Las funciones recursivas son funciones que se llaman a sí mismas.
 ```js
 function factorial(n) {
@@ -951,7 +998,26 @@ function factorial(n) {
 console.log(factorial(5)); // 120
 ```
 
-## 7.5 Funciones Generadoras
+La recursión es un concepto en programación en el que una función se llama a sí misma para resolver un problema. La recursión es una técnica poderosa y elegante que se puede utilizar para resolver problemas complejos de manera simple y concisa.
+```js
+function power(base, exponent) {
+  if (exponent == 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
+
+console.log(power(2, 3));
+// → 8
+```
+
+Sin embargo, esta implementación tiene un problema: en implementaciones típicas de JavaScript, es aproximadamente tres veces más lenta que una versión que utiliza un bucle for. Recorrer un simple bucle suele ser más económico que llamar a una función múltiples veces.
+
+
+
+
+## 8.5 Funciones Generadoras
 Las funciones generadoras permiten pausar y reanudar la ejecución del código utilizando yield.
 ```js
 function* generatorFunction() {
@@ -967,7 +1033,7 @@ console.log(generator.next().value); // 'Second output'
 console.log(generator.next().value); // 'Done'
 ```
 
-## 7.6 this en Funciones
+## 8.6 this en Funciones
 El valor de this varía dependiendo de cómo se llama la función:
 - Funciones regulares: El valor de this depende del contexto en el que se llama la función.
 - Funciones flecha: No tienen su propio this, sino que heredan el this del contexto en el que se definieron.
@@ -988,7 +1054,7 @@ obj.arrowFunction();
 
 
 
-## 7.7 VARIADIC FUNCTIONS
+## 8.7 VARIADIC FUNCTIONS
 Las funciones variádicas (variadic functions) son **funciones que pueden aceptar un número variable de argumentos.** En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
 
 ### 7.7.1. Funciones Variádicas mediante el operador rest:
@@ -1002,7 +1068,7 @@ console.log(sum(1, 2, 3)); // 6
 console.log(sum(4, 5, 6, 7)); // 22
 ```
 
-### 7.7.2 Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
+### 8.7.2 Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
 Además del operador rest, en JavaScript las funciones tienen acceso a un objeto arguments que contiene todos los argumentos pasados a la función. Aunque el uso del operador rest es más moderno y legible, el objeto arguments todavía se usa en algunas situaciones.
 ```js
 function logArguments() {
@@ -1036,26 +1102,6 @@ function sum() {
 
 console.log(sum(1, 2, 3)); // 6;
 ```
-
-
-
-# 8. Recursión
-La recursión es un concepto en programación en el que una función se llama a sí misma para resolver un problema. La recursión es una técnica poderosa y elegante que se puede utilizar para resolver problemas complejos de manera simple y concisa.
-```js
-function power(base, exponent) {
-  if (exponent == 0) {
-    return 1;
-  } else {
-    return base * power(base, exponent - 1);
-  }
-}
-
-console.log(power(2, 3));
-// → 8
-```
-
-Sin embargo, esta implementación tiene un problema: en implementaciones típicas de JavaScript, es aproximadamente tres veces más lenta que una versión que utiliza un bucle for. Recorrer un simple bucle suele ser más económico que llamar a una función múltiples veces.
-
 
 
 
@@ -1134,42 +1180,120 @@ console.log(sum(1, 2, 3)); // 6
 - Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
 
 
-
-# 14. Sintaxis Spread
-El operador spread (...) se utiliza para descomponer un array en sus elementos individuales. Se puede utilizar en cualquier lugar donde se esperen argumentos o elementos, como en la definición de una función o en la creación de un nuevo array.
-
-```js
-const numbers = [1, 2, 3];
-console.log(...numbers); // 1 2 3
-```
-
+# 14. Curried Functions
+Una función curried es una función que acepta uno o más argumentos y devuelve una nueva función que espera el siguiente argumento o argumentos. Esto se repite hasta que todos los argumentos han sido pasados. Una función curried es una función que acepta uno o más argumentos y devuelve una nueva función que espera el siguiente argumento o argumentos. Esto se repite hasta que todos los argumentos han sido pasados.
 
 ```js
-let arr1 = [1, -2, 3, 4];
-let arr2 = [8, 3, -8, 1];
+function curriedSuma(a) {
+  return function(b) {
+    return a + b;
+  };
+}
 
-alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
+
+// Uso de la función curried
+const suma5 = curriedSuma(5); // Devuelve una función que suma 5 a su argumento
+console.log(suma5(3)); // Devuelve 8
+console.log(curriedSuma(5)(3)); // Devuelve 8
 ```
-Cuando ...arr es usado en el llamado de una función, **“expande”** el objeto iterable arr en una lista de argumentos.
 
-El operador spread puede ser usado para combinar arrays:
+En el ejemplo anterior:
+- curriedSuma(5) devuelve una nueva función que toma un argumento b y suma 5 a b.
+- Podemos llamar a la función curried con un solo argumento a la vez (curriedSuma(5)(3)).
+
+
+# 15. Nested Functions
+Las funciones anidadas son simplemente funciones definidas dentro de otras funciones. La función interna (anidada) puede acceder a las variables y parámetros de la función externa.
 ```js
-let arr = [3, 5, 1];
-let arr2 = [8, 9, 15];
+function externa(x) {
+  function interna(y) {
+    return x + y;
+  }
+  return interna;
+}
 
-let merged = [0, ...arr, 2, ...arr2];
-
-alert(merged); // 0,3,5,1,2,8,9,15 (0, luego arr, después 2, después arr2)
+// Uso de funciones anidadas
+const suma5 = externa(5); // Devuelve la función interna con x fijado en 5
+console.log(suma5(3)); // Devuelve 8
+console.log(externa(5)(3)); // Devuelve 8
 ```
 
+En el ejemplo anterior:
+- externa es una función que contiene una función anidada interna.
+- externa devuelve la función interna, que puede usar el parámetro x de externa debido al alcance léxico.
 
-Usamos el operador spread para convertir la cadena en un array de caracteres:
+
+## Diferencias entre Curried Functions y Nested Functions
+1. Propósito:
+- Curried Functions: Facilitan la creación de funciones más específicas a partir de funciones más generales. Permiten la aplicación parcial de argumentos.
+- Funciones Anidadas: Permiten organizar el código y aprovechar el alcance léxico, permitiendo que las funciones internas accedan a las variables de las funciones externas.
+
+2. Uso:
+- Curried Functions: Se utilizan en programación funcional para crear funciones parcialmente aplicadas y para componer funciones.
+- Funciones Anidadas: Se utilizan para encapsular funcionalidad y crear cierres (closures).
+
+3. Sintaxis:
+- Curried Functions: Implican la creación de una cadena de funciones que cada una toma un argumento y devuelve una nueva función.
+- Funciones Anidadas: Simplemente se definen funciones dentro de otras funciones.
+
+
+# 16. Función como objeto, NFE
+Como ya sabemos, una función en JavaScript es un valor.
+
+Cada valor en JavaScript tiene un tipo. ¿Qué tipo es una función?
+
+En JavaScript, las funciones son objetos.
+
+Una buena manera de **imaginar funciones es como “objetos de acción” invocables.** No solo podemos llamarlos, sino también tratarlos como objetos: agregar/eliminar propiedades, pasar por referencia, etc.
+
+## La propiedad “name”
+Las funciones como objeto contienen algunas propiedades utilizables. Por ejemplo, el nombre de una función es accesible mediante la propiedad “name”:
 ```js
-let str = "Hola";
+function sayHi() {
+  alert("Hi");
+}
 
-alert( [...str] ); // H,o,l,a
+alert(sayHi.name); // sayHi
 ```
 
+En la especificación, esta característica se denomina “nombre contextual”. Si la función no proporciona una, entonces en una asignación se deduce del contexto.
+
+## La propiedad “length”
+Hay una nueva propiedad “length” incorporada que devuelve el número de parámetros de una función, por ejemplo:
+```js
+function f1(a) {}
+function f2(a, b) {}
+function many(a, b, ...more) {}
+
+alert(f1.length); // 1
+alert(f2.length); // 2
+alert(many.length); // 2
+```
+
+Aquí podemos ver que los parámetros rest no se cuentan.
 
 
+## Propiedades personalizadas
+También podemos agregar nuestras propias propiedades.
+
+Aquí agregamos la propiedad counter para registrar el recuento total de llamadas:
+```js
+function sayHi() {
+  alert("Hi");
+
+  //vamos a contar las veces que se ejecuta
+  sayHi.counter++;
+}
+sayHi.counter = 0; // valor inicial
+
+sayHi(); // Hi
+sayHi(); // Hi
+
+alert( `Called ${sayHi.counter} times` ); //  Llamamos 2 veces
+```
+
+> [!WARNING]
+> Una propiedad no es una variable
+> Una propiedad asignada a una función como sayHi.counter = 0 no define una variable local counter dentro de ella. En otras palabras, una propiedad counter y una variable let counter son dos cosas no relacionadas.
+> Podemos tratar una función como un objeto, almacenar propiedades en ella, pero eso no tiene ningún efecto en su ejecución. Las variables no son propiedades de la función y viceversa. Estos solo son dos mundos paralelos.
 
