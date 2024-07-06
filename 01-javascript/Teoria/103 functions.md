@@ -499,8 +499,6 @@ let func = (arg1, arg2, ..., argN) => expression;
 
 Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa la expression del lado derecho mediante su uso y devuelve su resultado.
 
-**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
-
 **Son siempre anónimas.** Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
 const greet = (name) => {
@@ -567,7 +565,11 @@ console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 > [!CAUTION]
-**Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
+>**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
+
+
+> [!CAUTION]
+>**Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
 
 
