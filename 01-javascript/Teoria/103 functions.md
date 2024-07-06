@@ -12,7 +12,8 @@
 - [6.2.- Funciones Expresadas](#62-funciones-expresadas)
 - [6.3.- Funciones Flecha (Arrow Functions)](#63-funciones-flecha-arrow-functions)
 - [6.4.- Funciones Anónimas (Callback)](#64-funciones-anónimas-callback)
-- [6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)
+- [6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)  
+
 [7.- Parámetros y Argumentos](#7-parámetros-y-argumentos)  
 - [7.1.- Añadiendo valor de retorno](#71--añadiendo-valor-de-retorno)  
 - [7.2.- Funciones de Orden Superior (Higher-Order Functions)](#72-funciones-de-orden-superior-higher-order-functions)  
