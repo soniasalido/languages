@@ -33,6 +33,11 @@
 
 -------
 # Functions
+```js
+function name(parámetros, delimitados, por, coma) {
+  /* code */
+}
+```
 Las funciones son un tipo especial de OBJETOS 😲. Al igual que sucede en otros lenguajes, son elementos invocables que reciben una serie de argumentos y pueden devolver valores.
 
 
@@ -50,6 +55,70 @@ Una definición de función es una declaración en el código donde se especific
 
 Los parámetros de una función se comportan como enlaces habituales, pero sus valores iniciales son dados por el llamador de la función, no por el código en la función en sí misma.
 
+
+
+### Sombra de variables
+En JavaScript, las variables declaradas dentro de una función tienen prioridad sobre las variables declaradas en un ámbito superior. Esto se conoce como "sombra de variables" y puede llevar a errores si no se tiene en cuenta.
+
+```js
+lastName = 'Smith';
+
+function greet() {
+  let lastName = 'Johnson';
+  console.log(`Hello, Mr. ${lastName}`);
+}
+
+greet(); // Hello, Mr. Johnson
+console.log(lastName); // Smith
+```
+
+### Variables Globales
+Variables declaradas fuera de cualquier función, como la variable externa userName en el código anterior, se llaman globales.
+
+Las variables globales son visibles desde cualquier función (a menos que se les superpongan variables locales con el mismo nombre).
+
+Es una buena práctica reducir el uso de variables globales. El código moderno tiene pocas o ninguna variable global. La mayoría de las variables residen en sus funciones. Aunque a veces puede justificarse almacenar algunos datos a nivel de proyecto.
+
+### Variables Locales
+Las variables declaradas dentro de una función, como la variable interna userName en el código anterior, se llaman locales.
+
+
+### Devolviendo un valor
+Una función puede devolver un valor al código de llamada como resultado. Para hacerlo, se utiliza la instrucción return seguida del valor que se desea devolver. La directiva return puede estar en cualquier lugar de la función. Cuando la ejecución lo alcanza, la función se detiene y el valor se devuelve al código de llamada
+
+Es posible utilizar return sin ningún valor. Eso hace que la función salga o termine inmediatamente. Una función con un return vacío, o sin return, devuelve undefined.
+
+
+### Nomenclatura de funciones
+Las funciones son acciones. Entonces su nombre suele ser un verbo. Debe ser breve, lo más preciso posible y describir lo que hace la función, para que alguien que lea el código obtenga una indicación de lo que hace la función.
+
+
+### Una función – una acción
+Una función debe hacer exactamente lo que sugiere su nombre, no más. Dos acciones independientes por lo general merecen dos funciones, incluso si generalmente se convocan juntas (en ese caso, podemos hacer una tercera función que llame a esas dos).
+
+Las funciones deben ser cortas y hacer exactamente una cosa. Si esa cosa es grande, tal vez valga la pena dividir la función en algunas funciones más pequeñas. A veces, seguir esta regla puede no ser tan fácil, pero definitivamente es algo bueno.
+
+### Ejecución de funciones
+Para ejecutar una función, se debe llamarla. Para llamar una función, se utiliza el nombre de la función seguido de paréntesis. Si la función tiene argumentos, se pasan dentro de los paréntesis. Los argumentos son los valores que la función utiliza para realizar su tarea.
+```js
+function sayHi() {
+  alert( "Hola" );
+}
+
+alert( sayHi ); // muestra el código de la función
+```
+La última línea no ejecuta la función, porque no hay paréntesis después de sayHi. Existen lenguajes de programación en los que cualquier mención del nombre de una función causa su ejecución, pero JavaScript no funciona así.
+
+
+### ; al final de una función
+Las declaraciones de funciones son declaraciones completas por sí mismas según la gramática de JavaScript, lo que significa que no requieren un punto y coma para terminar.
+
+En contraste, cuando definimos una función utilizando la sintaxis de expresión de función, el punto y coma es necesario si la expresión está asignada a una variable:
+```js
+const miFuncion = function() {
+  // código de la función
+}; // Aquí sí se necesita el punto y coma
+```
 
 # 1. Hoisting
 Hoisting es el mecanismo por el que JS procesa las declaraciones antes de cualquier código. Por eso se puede definir una función por debajo de una llamada a dicha función.
@@ -330,6 +399,8 @@ function greet(name) {
 
 ### 6.2. Funciones Expresadas
 Las funciones expresadas son definidas como parte de una expresión. No tienen nombre (aunque pueden tenerlo) y se asignan a una variable.
+
+En situaciones más avanzadas, una función puede ser creada e inmediatamente llamada o agendada para uso posterior, sin almacenarla en ningún lugar, permaneciendo así anónima.
 ```js
 const greet = function(name) {
   return `Hello, ${name}!`;
@@ -347,8 +418,88 @@ const greet = function(name) {
 };
 ```
 
+### Expresión de Función vs Declaración de Función
+- ¿Cuándo la función es creada por el motor de JavaScript?
+  - Una Expresión de Función **No tiene hoisting de funciones.** La función no puede ser llamada antes de que la expresión sea evaluada. Las Expresiones de Función son creada cuando la ejecución la alcance y es utilizable desde ahí en adelante. Una vez que el flujo de ejecución pase al lado derecho de la asignación let sum = function… – aquí vamos, la función es creada y puede ser usada (asignada, llamada, etc.) de ahora en adelante.
+    ```js
+    saludar(); // Error: saludar no está definido
+      const saludar = function() {
+      console.log("Hola");
+    };
+    ```
+
+  - Las Declaraciones de Función tiene el **hoisting o "elevación" de funciones,** lo que significa que se puede llamar a la función antes de su declaración en el código. Una Declaración de Función puede ser llamada antes de ser definida. Por ejemplo, una Declaración de Función global es visible en todo el script, sin importar dónde se esté. Esto se debe a los algoritmos internos. Cuando JavaScript se prepara para ejecutar el script, primero busca Declaraciones de Funciones globales en él y crea las funciones. Podemos pensar en esto como una “etapa de inicialización”. Y después de que se procesen todas las Declaraciones de Funciones, el código se ejecuta. Entonces tiene acceso a éstas funciones.
+    ```js
+    saludar(); // "Hola"
+    function saludar() {
+      console.log("Hola");
+    }
+    ```
+
+- Alcance de bloque:
+  - Funciones declaradas en modo estricto: Las funciones declaradas siempre tienen alcance de bloque en modo estricto. Cuando una Declaración de Función se encuentra dentro de un bloque de código, es visible en todas partes dentro de ese bloque. Pero no fuera de él.  Una Declaración de Función sólo es visible dentro del bloque de código en el que reside.
+    ```js
+    'use strict';
+    if (true) {
+      function saludar() {
+        console.log('Hola...');
+      }
+      saludar(); // Funciona correctamente
+    }
+    saludar(); // Error: saludar is not defined
+    ```
+  - Funciones declaradas fuera de modo estricto:En el modo no estricto (modo por defecto en JavaScript), las funciones declaradas dentro de un bloque pueden ser accesibles fuera de ese bloque, aunque esto puede variar según el entorno de ejecución (navegadores pueden comportarse diferente de Node.js).
+    ```js
+    if (true) {
+      function saludar() {
+        console.log('Hola...');
+      }
+      saludar(); // Funciona correctamente
+    }
+    saludar(); // Funciona correctamente
+    ``` 
+  - Expresiones de Función: Las expresiones de función siempre tienen el alcance en el que se definen, independientemente del modo estricto.
+    ```js
+    if (true) {
+      const saludar = function() {
+        console.log('Hola...');
+      };
+      saludar(); // Funciona correctamente
+    }
+    saludar(); // Error: saludar is not defined
+    ```
+  
+  - Funciones Flecha: Las funciones flecha tienen un alcance de bloque, independientemente del modo estricto.
+    ```js
+    if (true) {
+      const saludar = () => {
+        console.log('Hola...');
+      };
+      saludar(); // Funciona correctamente
+    }
+    saludar(); // Error: saludar is not defined
+    ```
+
+
+### ¿Cuándo debo elegir la Declaración de Función frente a la Expresión de Función?
+Como regla general, cuando necesitamos declarar una función, la primera que debemos considerar es la sintaxis de la Declaración de Función. Da más libertad en cómo organizar nuestro código, porque podemos llamar a tales funciones antes de que sean declaradas.
+
+También es un poco más fácil de buscar function f(…) {…} en el código comparado con let f = function(…) {…}. La Declaración de Función es más llamativa.
+
+…Pero si una Declaración de Función no nos conviene por alguna razón, o necesitamos declaración condicional, entonces se debe usar la Expresión de función.
+
+
 ### 6.3. Funciones Flecha (Arrow Functions)
-Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
+Hay otra sintaxis muy simple y concisa para crear funciones, que a menudo es mejor que las Expresiones de funciones.
+
+Se llama “funciones de flecha”, porque se ve así:
+```js
+let func = (arg1, arg2, ..., argN) => expression;
+```
+
+Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa la expression del lado derecho mediante su uso y devuelve su resultado.
+
+Las funciones NO tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
 
 Son siempre anónimas. Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
@@ -364,14 +515,36 @@ const greet = (name) => {
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
-Cuando la función flecha consta de una única línea para el return, se puede simplificar eliminando llaves y la palabra return:
+Cuando la función flecha solo tiene un argumento, se pueden omitir paréntesis alrededor de los parámetros
 ```js
-const nombreVariable = (argumento) => ........;
+const greet = name => {
+  return `Hello, ${name}!`;
+};
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
+
+
+Cuando la función flecha no tenga parámetros, los paréntesis estarán vacíos; pero deben estar presentes:
+```js
+const greet = () => {
+  return `Hello, Alice!`;
+};
+
+console.log(greet()); // "Hello, Alice!"
+```
+
+
+Cuando la función flecha tenga de una única línea para el return, se puede simplificar eliminando llaves y la palabra return:
+```js
+const greet = name => `Hello, ${name}!`;
+
+console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 Si la función flecha tiene un único argumento, se puede simplificar quitando los corchetes ():
 ```js
-const nombreVariable = argumento => ........;
+const nombreVariable = argumento => xxxxxx........;
 
 const greet = name => `Hello, ${name}!`;
 console.log(greet('Alice')); // "Hello, Alice!"
@@ -529,6 +702,58 @@ Sin embargo, existe una forma de obtener todos los argumentos con forma de array
 
 
 ### 6.4. Funciones Anónimas (Callback)
+Escribimos una función ask(question, yes, no) con tres argumentos:
+
+question  
+Texto de la pregunta  
+
+yes  
+Función a ejecutar si la respuesta es “Yes”  
+
+no  
+Función a ejecutar si la respuesta es “No”  
+
+La función deberá preguntar la question y, dependiendo de la respuesta del usuario, llamar yes() o no():
+
+```js
+function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+function showOk() {
+  alert( "Estás de acuerdo." );
+}
+
+function showCancel() {
+  alert( "Cancelaste la ejecución." );
+}
+
+// uso: las funciones showOk, showCancel son pasadas como argumentos de ask
+ask("Estás de acuerdo?", showOk, showCancel);
+```
+
+Los argumentos de ask se llaman funciones callback o simplemente callbacks.
+
+La idea es que pasamos una función y esperamos que se “devuelva la llamada” más tarde si es necesario. En nuestro caso, showOk se convierte en la callback para la respuesta “Yes”, y showCancel para la respuesta “No”.
+
+Podemos usar Expresión de Función para redactar una función equivalente y más corta:
+```js
+function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+ask(
+        "Estás de acuerdo?",
+        function() { alert("Estás de acuerdo"); },
+        function() { alert("Cancelaste la ejecución."); }
+);
+```
+
+Aquí, las funciones son declaradas justo dentro del llamado ask(...). No tienen nombre, y por lo tanto se denominan anónimas. Tales funciones no se pueden acceder fuera de ask (porque no están asignadas a variables), pero eso es justo lo que queremos aquí.
+
+-----
 Las funciones anónimas son aquellas que no tienen nombre. Se suelen usar como funciones de callback.
 ```js
 setTimeout(function() {
@@ -587,6 +812,7 @@ console.log(person.greet()); // "Hello, my name is Alice"
 
 # 7. Parámetros y Argumentos
 Las funciones pueden aceptar parámetros, que son variables que actúan como marcadores de posición para los valores que se pasarán a la función.
+
 ```js
 function add(a, b) {
   return a + b;
@@ -595,7 +821,18 @@ function add(a, b) {
 console.log(add(2, 3)); // 5
 ```
 
-**Parámetros Predeterminados:** Se pueden asignar valores predeterminados a los parámetros de una función.
+En este ejemplo, a y b son parámetros de la función add. Cuando se llama a la función add con los argumentos 2 y 3, los valores de los argumentos se copian en **variables locales a y b dentro de la función.**
+
+### Parámetros VS Argumentos:
+- Un parámetro es una variable listada dentro de los paréntesis en la declaración de función (es un término para el momento de la declaración).
+- Un argumento es el valor que es pasado a la función cuando esta es llamada (es el término para el momento en que se llama).
+Declaramos funciones listando sus parámetros, luego las llamamos pasándoles argumentos.
+
+La función add es declarada con dos parámetros a y b, y es llamada con los argumentos 2 y 3.
+
+
+### Parámetros Predeterminados:
+Si una función es llamada, pero no se le proporciona un argumento, su valor correspondiente se convierte en undefined. Se pueden asignar valores predeterminados a los parámetros de una función. Es el valor que se usa si el argumento fue omitido
 ```js
 function greet(name = 'Guest') {
   return `Hello, ${name}!`;
@@ -652,14 +889,14 @@ console.log(mayorQue10(11));
 // → true
 ```
 
-- Podemos tener funciones que modifican otras funciones:
+- Podemos tener funciones que modifican otras funciones: En este ejemplo, se función llamada ruidosa que toma otra función f como argumento y devuelve una nueva función que envuelve a f. La función devuelta añade mensajes de registro (logs) para mostrar los argumentos con los que se llama a f y el resultado devuelto por f.
 ```js
 function ruidosa(f) {
-  return (...args) => {
-    console.log("llamando con", args);
-    let resultado = f(...args);
-    console.log("llamado con", args, ", devolvió", resultado);
-    return resultado;
+  return (...args) => { // Se devuelve una nueva función que toma un nº variable de argumentos
+    console.log("llamando con", args); // Se muestra los argumentos
+    let resultado = f(...args); // Se llama a la función f con los mismo argumentos y se guarda el resultado
+    console.log("llamado con", args, ", devolvió", resultado); // Se muestra los argumentos y el resultado
+    return resultado; // Se devuelve el resultado
   };
 }
 
@@ -674,7 +911,7 @@ function aMenosQue(prueba, entonces) {
     if (!prueba) entonces();
 }
 
-repetir(3, n => {
+repetir(3, n => { // Verifica si 1, 2 y 3 son pares 
     aMenosQue(n % 2 == 1, () => {
         console.log(n, "es par");
     });
