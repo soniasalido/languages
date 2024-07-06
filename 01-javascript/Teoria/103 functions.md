@@ -278,7 +278,7 @@ fetchData(function(data) {
 ```
 En este ejemplo, el callback pasado a fetchData "recuerda" el ámbito en el que fue creado y puede acceder a data cuando se ejecuta después de 1 segundo.
 
->[! IMPORTANT]
+> [!WARNING]
 >**Closures en Bucles:** Un uso común de los closures es en bucles, para capturar el valor de la variable de iteración en cada iteración.
 ```js
 for (var i = 0; i < 3; i++) {
@@ -557,6 +557,16 @@ const toObject = (name, surname, age) => (
 
 **Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
+
+Funciones de flecha multilínea: Cuando la función flecha tenga más de una línea, debemos encerrarlos entre llaves. La diferencia principal es que las llaves necesitan usar un return para devolver un valor (tal como lo hacen las funciones comunes).
+```js
+const greet = name => {
+  const greeting = 'Hello';
+  return `${greeting}, ${name}!`;
+};
+
+console.log(greet('Alice')); // "Hello, Alice!"
+```
 
 
 
