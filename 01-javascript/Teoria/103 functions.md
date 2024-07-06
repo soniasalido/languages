@@ -57,14 +57,14 @@ Hoisting es el mecanismo por el que JS procesa las declaraciones antes de cualqu
 Hoisting permite usar funciones y variables antes de que se hayan declarado. El intérprete de JS divide la declaración y asignación de funciones y variables. Javascript "hoists" o "alza" nuestras declaraciones en la parte superior de su scope (ámbito) antes de la ejecución.
 
 **Ejemplo de código:**
-```
+```js
 console.log(foo) // undefined
 var foo = 'Bar';
 console.log(foo) // 'Bar'
 ```
 
 **Lo que hace el hoisting en el código anterior:**
-```
+```js
 var foo;
 console.log(foo) // undefined
 var foo = 'Bar';
@@ -105,7 +105,7 @@ En JavaScript, las funciones son valores de primera clase, lo que significa que 
 Generalmente un enlace de función simplemente actúa como un nombre para una parte específica del programa. Este enlace se define una vez y nunca se cambia. Esto hace que sea fácil confundir la función y su nombre.
 
 Pero los dos son diferentes. Un valor de función puede hacer todas las cosas que pueden hacer otros valores: se puede utilizar en expresiones arbitrarias, no solo llamarlo. Es posible almacenar un valor de función en un nuevo enlace, pasarlo como argumento a una función, etc. De manera similar, un enlace que contiene una función sigue siendo solo un enlace habitual y, si no es constante, se le puede asignar un nuevo valor
-```
+```js
 let launchMissiles = function() {
   missileSystem.launch("now");
 };
@@ -127,7 +127,7 @@ Almacenar esta pila requiere espacio en la memoria de la computadora. Cuando la 
 
 # 3. Closure - Clausura 
 La capacidad de tratar las funciones como valores, combinada con el hecho de que los enlaces locales se recrean cada vez que se llama a una función, plantea una pregunta interesante: ¿qué sucede con los enlaces locales cuando la llamada a la función que los creó ya no está activa?El siguiente código muestra un ejemplo de esto. Define una función, wrapValue, que crea un enlace local. Luego devuelve una función que accede a este enlace local y lo devuelve:
-```
+```js
 function wrapValue(n) {
   let local = n;
   return () => local;
@@ -146,7 +146,7 @@ Esto está permitido y funciona como esperamos: ambas instancias del enlace aún
 Esta característica, poder hacer referencia a una instancia específica de un enlace local en un ámbito superior, se llama clausura. Una función que hace referencia a enlaces de ámbitos locales a su alrededor se llama una clausura. Este comportamiento no solo nos libera de tener que preocuparnos por la vida útil de los enlaces, sino que también hace posible usar valores de función de formas creativas.
 
 Con un ligero cambio, podemos convertir el ejemplo anterior en una forma de crear funciones que multiplican por una cantidad arbitraria:
-```
+```js
 function crearSumador(x) {
     return function(y) {
         return x + y;
@@ -193,7 +193,7 @@ Un closure (clausura) es una característica poderosa de JavaScript que permite 
 **Closures con Variables Privadas:** Los closures se utilizan comúnmente para crear variables privadas. Esto permite encapsular datos y proporcionar una interfaz para interactuar con ellos.
 
 **Uso de Closures en Callbacks y Asincronía:** Los closures son muy útiles en el contexto de callbacks y operaciones asíncronas.
-```
+```js
 function fetchData(callback) {
   const data = 'Some data';
 
@@ -211,7 +211,7 @@ En este ejemplo, el callback pasado a fetchData "recuerda" el ámbito en el que 
 
 >[! IMPORTANT]
 >**Closures en Bucles:** Un uso común de los closures es en bucles, para capturar el valor de la variable de iteración en cada iteración.
-```
+```js
 for (var i = 0; i < 3; i++) {
   setTimeout(function() {
     console.log(i);
@@ -238,14 +238,14 @@ En JavaScript, una función autoinvocada (Immediately Invoked Function Expressio
 Una IIFE es una función que se define y se ejecuta inmediatamente. Este patrón se utiliza para crear un ámbito léxico que no contamina el ámbito global y puede ser útil para encapsular variables.
 
 - Ejemplo de IIFE con Función Anónima: La forma más común de escribir una IIFE es utilizando una función anónima:
-  ```
+  ```js
   (function() {
     console.log('This is an IIFE!');
   })();
   ```
 
 - Ejemplo de IIFE con Función Nombrada: También puedes usar una función nombrada dentro de una IIFE:
-  ```
+  ```js
   (function namedIIFE() {
     console.log('This is a named IIFE!');
   })();
@@ -267,7 +267,7 @@ Como primer argumento de la función recibe un chunks que es un array con todo e
 Las Tagged Template Literals te permiten llamar a una función "etiqueta" que procesa una Template Literal. La función etiqueta recibe la cadena y los valores interpolados como argumentos, lo que permite manipular la salida antes de que se genere la cadena final.
 
 Sintaxis Básica:
-```
+```js
 funcion Etiqueta`cadena literal con ${variable}`;
 ```
 
@@ -278,7 +278,7 @@ funcion Etiqueta`cadena literal con ${variable}`;
 - Formateo avanzado: Crear cadenas formateadas, como fechas o números, de una manera consistente.
 
 **Ejemplo práctico: Sanitización:**
-```
+```js
 function sanitizar(cadenas, ...valores) {
   return cadenas.reduce((resultado, parte, indice) => {
     let valor = valores[indice] ? String(valores[indice]).replace(/<|>|&|"/g, '') : '';
@@ -307,7 +307,7 @@ console.log(texto);  // Salida: Entrada segura: scriptalert("hack!")/script
 
 ### 6.1. Funciones Declaradas
 Las funciones declaradas son definidas utilizando la palabra clave function seguida del nombre de la función, una lista de parámetros entre paréntesis y el cuerpo de la función entre llaves.
-```
+```js
 function greet(name) {
   return `Hello, ${name}!`;
 }
@@ -320,7 +320,7 @@ La declaración define el enlace greet y lo apunta a la función que se define. 
 
 **Hoisting:** Las declaraciones de función no forman parte del flujo de control regular de arriba hacia abajo. Conceptualmente se mueven al principio de su alcance y pueden ser utilizadas por todo el código en ese alcance. Las funciones declaradas se "elevan" al inicio de su contexto, por lo que se pueden llamar antes de ser declaradas en el código.
 
-```
+```js
 console.log(greet('Bob')); // "Hello, Bob!"
 
 function greet(name) {
@@ -330,7 +330,7 @@ function greet(name) {
 
 ### 6.2. Funciones Expresadas
 Las funciones expresadas son definidas como parte de una expresión. No tienen nombre (aunque pueden tenerlo) y se asignan a una variable.
-```
+```js
 const greet = function(name) {
   return `Hello, ${name}!`;
 };
@@ -339,7 +339,7 @@ console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 **Hoisting:** Las funciones expresadas no se elevan al inicio del contexto, por lo que deben ser definidas antes de ser utilizadas.
-```
+```js
 console.log(greet('Bob')); // Error: greet is not defined
 
 const greet = function(name) {
@@ -351,7 +351,7 @@ const greet = function(name) {
 Las funciones flecha son una forma más corta de escribir funciones y no tienen su propio this. Son especialmente útiles para funciones anónimas y funciones de callback.
 
 Son siempre anónimas. Es necesario almacenar esa expresión en una variable de tipo Const:
-```
+```js
 const nombreVaribale = (argumento) => {
   .....
   return ......
@@ -365,12 +365,12 @@ console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 Cuando la función flecha consta de una única línea para el return, se puede simplificar eliminando llaves y la palabra return:
-```
+```js
 const nombreVariable = (argumento) => ........;
 ```
 
 Si la función flecha tiene un único argumento, se puede simplificar quitando los corchetes ():
-```
+```js
 const nombreVariable = argumento => ........;
 
 const greet = name => `Hello, ${name}!`;
@@ -381,14 +381,14 @@ console.log(greet('Alice')); // "Hello, Alice!"
 > **La función flecha que devuelve un objeto: Es necesario usar corchetes (). Se genera un error si lo hacemos sólo con {}.**
 
 Sin eliminar el return 🠮
-```
+```js
 const toObject = (name, surname, age) => {
   return {name,surname, age};
 }
 ```
 
 Eliminado la palabra return:
-```
+```js
 const toObject = (name, surname, age) => (
   {name, surname, age}
 );
@@ -399,25 +399,25 @@ const toObject = (name, surname, age) => (
 
 
 Si solo tenemos la sentencia "return" podemos acortar la función y ahorrarnos la palabra clave "return" y las llaves:
-```
+```js
 const toUpper = (text) => text.toUpperCase();
 ```
 
 #### También podemos omitir los paréntesis cuando el argumento es único:
 Sólo cuando es único, porque sino la coma de separación de argumentos se podría confundir con el operador coma.
-```
+```js
 const toUpper = text => text.toUpperCase();
 ```
 
 #### En caso de que lo que devuelva sea un objeto literal hay que tener cuidado:
-```
+```js
 const toObject = (name, surname, age) => {
   return { name, surname, age }
 }
 ```
 
 y utilizar paréntesis para devolver en la forma corta, ya que las llaves de objeto literal se confundirían con las llaves de ámbito de función.
-```
+```js
 const toObject = (name, surname, age) => ({ name, surname, age })
 ```
 
@@ -431,7 +431,7 @@ Las funciones en javascript, ya sean clásicas o arrow functions, son ciudadanos
 
 
 ##### 2. Funciones como argumentos de otras funciones
-```
+```js
 function saySomething(text, modifier) {
   console.log(modifier(text));
 }
@@ -440,7 +440,7 @@ saySomething("hello  world", str => str.replace(/[aeiou]/gi, "")); // hll wrld
 ```
 
 ##### 3. Funciones como valor de retorno
-```
+```js
 const createCounter = () => {
   let i = 0;
   return () => console.log(++i);
@@ -462,7 +462,7 @@ En javascript, como acabamos de ver, tenemos 2 formas diferentes de declarar fun
 
 - En las arrow functions, 'this' ya no es la entidad que la invoca sino que ahora apunta al contexto léxico en el que dicha arrow function ha sido definida. Ya no hay 'runtime binding', se resuelve en tiempo de desarrollo. Están más pensadas para ser usadas como 'function expressions' ligeras. En las arrow functions el valor this se hereda del contexto léxico en el que se define la función. Las arrow functions no tienen su propio contexto this. En lugar de eso, heredan el valor de this del contexto léxico en el que se definen. Esto significa que this dentro de una arrow function se refiere al mismo valor que this en la función o el bloque de código donde se definió la arrow function.
  
-```
+```js
 function f() {
   console.log(this.age);  // Aqui el contexto es el "caller" de la función. this -> caller.
 }
@@ -471,40 +471,40 @@ Al hacer la siguiente llamada debéis preguntaros ... ¿quién está invocando a
 En este caso en concreto es el contexto global (objeto "window") quien hace la invocación.
 Es por ello que, al no tener dicho contexto una propiedad "age", se muestre undefined.
 
-```
+```js
 f(); // undefined
 ```
 
 Para demostrar esta teoría, simplemente creemos una una propiedad "age" en el contexto global u objeto "window":
-```
+```js
 age = 35;
 // window.age = 35; <= Equivalente
 f(); // 35
 ```
 
 Las funciones, además, disponen de un método de utilidad con el que invocarlas haciendo que su contexto de invocación sea lo que nosotros decidamos, por ejemplo, un objeto que tenga 'age':
-```
+```js
 f.call({ age: 35 }); // 35
 ```
 
 Veamos que sucede ahora en el caso de arrow function. Recordemos que ahora "this" representa el contexto léxico y por tanto es fijo, sea quien sea quien invoque a la función flecha. A efectos prácticos, podemos decir que una arrow function toma el contexto del "this" de donde ha sido definida.
-```
+```js
 const g = () => console.log(this.surname);
 ```
 
 Puesto que en el ámbito global no existe "surname" el resultado será undefined, igual que antes:
-```
+```js
 g(); // undefined
 ```
 
 La forma de hacer que tengamos algo en la consola es crear una variable global "surname":
-```
+```js
 surname = "camargo";
 g(); // camargo.
 ```
 
 Pero a diferencia de las funciones clásica, puesto que ahora el "this" siempre apunta al ámbito global, PASE LO QUE PASE, no podré hacer esto:
-```
+```js
 surname = "camargo";
 g.call({ surname: "calzado" }); // camargo
 ```
@@ -514,7 +514,7 @@ No importa que intente invocar la arrow function con un objeto distinto de "wind
 
 ##### 2. Otras diferencias
 Las arrow functions no pueden ser 'variadic' y no presentan por tanto la keyword 'arguments'. Si lo intentamos nos petará (OJO en Stackblitz no peta)
-```
+```js
 const sum = () => {
   return Array.from(arguments).reduce((acc, val) => acc + val);
 };
@@ -530,14 +530,14 @@ Sin embargo, existe una forma de obtener todos los argumentos con forma de array
 
 ### 6.4. Funciones Anónimas (Callback)
 Las funciones anónimas son aquellas que no tienen nombre. Se suelen usar como funciones de callback.
-```
+```js
 setTimeout(function() {
   console.log('Hello after 2 seconds');
 }, 2000);
 ```
 
 **Ejemplo: All About Anonymous Functions:** Adding Suffixes: Write a function that returns an anonymous function, which transforms its input by adding a particular suffix at the end.
-```
+```js
 add_ly = add_suffix("ly") 
 add_less = add_suffix("less") 
 add_ing = add_suffix("ing") 
@@ -554,7 +554,7 @@ product(1,2)(1,1)(2,3) ➞ 8
 
 product(10,2)(5,0)(2,3) ➞ 100
 // 10 * 5 * 2 + 2 * 0 * 3
-```
+```js
 const product = (a, b) => (c, d) => (e, f) => a * c * e + b * d * f;
 console.log(product([1, 2])([1, 1])([2, 3])); // 8
 
@@ -574,7 +574,7 @@ console.log(product2([1, 2])([1, 1])([2, 3])); // 8
 
 ### 6. 5. Métodos dentro de Objetos
 Los métodos son funciones que se definen dentro de un objeto.
-```
+```js
 const person = {
   name: 'Alice',
   greet: function() {
@@ -587,7 +587,7 @@ console.log(person.greet()); // "Hello, my name is Alice"
 
 # 7. Parámetros y Argumentos
 Las funciones pueden aceptar parámetros, que son variables que actúan como marcadores de posición para los valores que se pasarán a la función.
-```
+```js
 function add(a, b) {
   return a + b;
 }
@@ -596,7 +596,7 @@ console.log(add(2, 3)); // 5
 ```
 
 **Parámetros Predeterminados:** Se pueden asignar valores predeterminados a los parámetros de una función.
-```
+```js
 function greet(name = 'Guest') {
   return `Hello, ${name}!`;
 }
@@ -606,7 +606,7 @@ console.log(greet()); // "Hello, Guest!"
 
 
 **Añadiendo argumentos**
-```
+```js
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
 }
@@ -617,13 +617,13 @@ saySomething(); // undefined undefined
 ```
 
 Es legítimo llamar a una función con más argumentos que los que han sido declarados. Veremos como aprovechar este hecho un poco más abajo.
-```
+```js
 saySomething("hello", "wonderful", "world"); // hello wonderful
 ```
 
 
 # 7.1.- Añadiendo valor de retorno:
-```
+```js
 function saySomething(arg1, arg2) {
   console.log(arg1, arg2);
   return arg1 && arg2 ? true : false; // Expresión equivalente: return Boolean(arg1 && arg2);
@@ -637,7 +637,55 @@ console.log(saySomething("hello")); // hello undefined, false
 
 ## 7.2 Funciones de Orden Superior (Higher-Order Functions)
 Las funciones de orden superior son funciones que aceptan otras funciones como argumentos o devuelven funciones como resultado.
+
+Las funciones que operan en otras funciones, ya sea tomándolas como argumentos o devolviéndolas, se llaman funciones de orden superior.
+
+Las funciones de orden superior nos permiten abstraer sobre acciones, no solo sobre valores. Vienen en varias formas. Por ejemplo:
+- Podemos tener funciones que crean nuevas funciones:
+```js
+function mayorQue(n) {
+    return m => m > n;
+}
+
+let mayorQue10 = mayorQue(10);
+console.log(mayorQue10(11));
+// → true
 ```
+
+- Podemos tener funciones que modifican otras funciones:
+```js
+function ruidosa(f) {
+  return (...args) => {
+    console.log("llamando con", args);
+    let resultado = f(...args);
+    console.log("llamado con", args, ", devolvió", resultado);
+    return resultado;
+  };
+}
+
+ruidosa(Math.min)(3, 2, 1);
+// → llamando con [3, 2, 1]
+// → llamado con [3, 2, 1] , devolvió 1
+```
+
+- Podemos escribir funciones que proveen nuevos tipos de flujo de control:
+```js
+function aMenosQue(prueba, entonces) {
+    if (!prueba) entonces();
+}
+
+repetir(3, n => {
+    aMenosQue(n % 2 == 1, () => {
+        console.log(n, "es par");
+    });
+});
+
+// → 0 es par
+// → 2 es par
+```
+
+
+```js
 function operate(a, b, operation) {
   return operation(a, b);
 }
@@ -651,7 +699,7 @@ console.log(operate(5, 3, subtract)); // 2
 
 ## 7.3 Closures
 Un closure es una función que tiene acceso a su propio ámbito léxico, al ámbito de la función externa y al ámbito global.
-```
+```js
 function outerFunction(outerVariable) {
   return function innerFunction(innerVariable) {
     console.log('Outer Variable:', outerVariable);
@@ -668,7 +716,7 @@ newFunction('inside');
 
 ## 7.4 Funciones Recursivas
 Las funciones recursivas son funciones que se llaman a sí mismas.
-```
+```js
 function factorial(n) {
   if (n === 0) {
     return 1;
@@ -681,7 +729,7 @@ console.log(factorial(5)); // 120
 
 ## 7.5 Funciones Generadoras
 Las funciones generadoras permiten pausar y reanudar la ejecución del código utilizando yield.
-```
+```js
 function* generatorFunction() {
   yield 'First output';
   yield 'Second output';
@@ -699,7 +747,7 @@ console.log(generator.next().value); // 'Done'
 El valor de this varía dependiendo de cómo se llama la función:
 - Funciones regulares: El valor de this depende del contexto en el que se llama la función.
 - Funciones flecha: No tienen su propio this, sino que heredan el this del contexto en el que se definieron.
-```
+```js
 const obj = {
   name: 'Alice',
   regularFunction: function() {
@@ -717,11 +765,11 @@ obj.arrowFunction();
 
 
 ## 7.7 VARIADIC FUNCTIONS
-Las funciones variádicas (variadic functions) son funciones que pueden aceptar un número variable de argumentos. En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
+Las funciones variádicas (variadic functions) son **funciones que pueden aceptar un número variable de argumentos.** En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
 
 ### 7.7.1. Funciones Variádicas mediante el operador rest:
 Un ejemplo de función variádica en una Funciones Declaradas (Function Declarations):
-```
+```js
 function sum(...numbers) {
   return numbers.reduce((total, number) => total + number, 0);
 }
@@ -732,7 +780,7 @@ console.log(sum(4, 5, 6, 7)); // 22
 
 ### 7.7.2 Funciones Variádicas mediante el objeto iterable Argumets (Argumentos Objeto)
 Además del operador rest, en JavaScript las funciones tienen acceso a un objeto arguments que contiene todos los argumentos pasados a la función. Aunque el uso del operador rest es más moderno y legible, el objeto arguments todavía se usa en algunas situaciones.
-```
+```js
 function logArguments() {
   console.log(arguments); // "arguments" es un objeto array-like (iterable)
 }
@@ -742,7 +790,7 @@ logArguments(true); // {0: true}
 ```
 
 **Podemos iterar por "arguments" por comodidad:**
-```
+```js
 function logArguments() {
   for (const arg of arguments) {
     console.log(arg);
@@ -753,7 +801,7 @@ logArguments(1, true, "hello"); // 1, true, hello
 ```
 
 **Ejemplo práctico de utilidad con "arguments":**
-```
+```js
 function sum() {
   let total = 0;
   for (const num of arguments) {
@@ -773,7 +821,7 @@ console.log(sum(1, 2, 3)); // 6;
 
 # 9. Recursión
 La recursión es un concepto en programación en el que una función se llama a sí misma para resolver un problema. La recursión es una técnica poderosa y elegante que se puede utilizar para resolver problemas complejos de manera simple y concisa.
-```
+```js
 function power(base, exponent) {
   if (exponent == 0) {
     return 1;
