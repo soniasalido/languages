@@ -503,6 +503,8 @@ Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa
 >**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
 
 
+
+
 **Son siempre anónimas.** Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
 const greet = (name) => {
@@ -604,16 +606,16 @@ count(); // 2
 count(); // 3
 ```
 > [!WARNING]
->⚠ En este último ejemplo hemos empleado un CLOSURE!
+>En este último ejemplo hemos empleado un CLOSURE!
 
 
 #### DIFERENCIAS: classic vs arrow
 ##### 1. THIS
 En javascript, como acabamos de ver, tenemos 2 formas diferentes de declarar funciones, de forma clásica o mediante arrow functions. ¿Pero por qué? ¿Para qué 2 maneras de hacer lo mismo? ¿Es solo pura sintáxis o estética? NO. Uno de los motivos de su exitencia tiene que ver con la keyword 'this'.
 
-- En las funciones clásicas, 'this' hace referencia al contexto que ha invocado a la función, es decir, aquello que la llama, el 'caller'. Luego el 'this' se resuelve en tiempo de ejecución (runtime binding). Están pensadas para ser utilizadas como MÉTODOS. This es un punturo de aquello que invoca a mi función. El contexto que llama a la función.
+- En las funciones clásicas, **'this' hace referencia al contexto que ha invocado a la función,** es decir, aquello que la llama, el 'caller'. Luego el 'this' se resuelve en tiempo de ejecución (runtime binding). Están pensadas para ser utilizadas como MÉTODOS. This es un punturo de aquello que invoca a mi función. El contexto que llama a la función.
 
-- En las arrow functions, 'this' ya no es la entidad que la invoca sino que ahora apunta al contexto léxico en el que dicha arrow function ha sido definida. Ya no hay 'runtime binding', se resuelve en tiempo de desarrollo. Están más pensadas para ser usadas como 'function expressions' ligeras. En las arrow functions el valor this se hereda del contexto léxico en el que se define la función. Las arrow functions no tienen su propio contexto this. En lugar de eso, heredan el valor de this del contexto léxico en el que se definen. Esto significa que this dentro de una arrow function se refiere al mismo valor que this en la función o el bloque de código donde se definió la arrow function.
+- En las arrow functions, 'this' ya no es la entidad que la invoca sino que ahora **this apunta al contexto léxico en el que dicha arrow function ha sido definida.** Ya no hay 'runtime binding', se resuelve en tiempo de desarrollo. Están más pensadas para ser usadas como 'function expressions' ligeras. En las arrow functions el valor this se hereda del contexto léxico en el que se define la función. Las arrow functions no tienen su propio contexto this. En lugar de eso, heredan el valor de this del contexto léxico en el que se definen. Esto significa que this dentro de una arrow function se refiere al mismo valor que this en la función o el bloque de código donde se definió la arrow function.
  
 ```js
 function f() {
@@ -665,7 +667,7 @@ g.call({ surname: "calzado" }); // camargo
 No importa que intente invocar la arrow function con un objeto distinto de "window", no tiene efecto!
 
 
-##### 2. Otras diferencias
+##### 2. Las funciones flechas no tienen “arguments”
 Las arrow functions no pueden ser 'variadic' y no presentan por tanto la keyword 'arguments'. Si lo intentamos nos petará (OJO en Stackblitz no peta)
 ```js
 const sum = () => {
@@ -677,8 +679,13 @@ console.log(sum(1, 2, 3)); // Uncaught ReferenceError: arguments is not defined
 
 Sin embargo, existe una forma de obtener todos los argumentos con forma de array *similar* a arguments. Esto lo veremos más adelante.
 
+
+##### 3. Las flechas no se pueden llamar con new
 **Las arrow functions no pueden ser funciones constructoras ni presentan la propiedad 'prototype'.** ⚠ Entenderemos esto en profundidad más adelante al estudiar el modelo prototípico.
 
+
+##### 4. Las flechas no tienen 'super'
+Las arrow functions no tienen la propiedad 'super' y por tanto no pueden ser utilizadas en clases que hereden de otras clases.
 
 
 ### 6.4. Funciones Anónimas (Callback)
