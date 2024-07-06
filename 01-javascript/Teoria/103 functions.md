@@ -3,32 +3,39 @@
 
 [Funciones](#functions)  
 [1.- Hoisting](#1-hoisting)  
-[2.- Enlaces y Ámbitos](#2-enlaces-y-ámbitos)  
-[3.- Closure - Clausura](#3-closure---clausura)  
-[4.- Funciones Autoinvocadas - IIFE](#4-funciones-autoinvocadas---iife-)  
-[5.- Template Functions | Tagged Template Literals](#5-template-functions--tagged-template-literals)  
-[6.- Definición de Funciones](#6-definición-de-funciones)
-- [6.1.- Funciones Declaradas](#61-funciones-declaradas)
-- [6.2.- Funciones Expresadas](#62-funciones-expresadas)
-- [6.3.- Funciones Flecha (Arrow Functions)](#63-funciones-flecha-arrow-functions)
-- [6.4.- Funciones Anónimas (Callback)](#64-funciones-anónimas-callback)
-- [6.5.- Métodos dentro de Objetos](#6-5-métodos-dentro-de-objetos)  
+[2.- Enlaces y Ámbitos](#2-enlaces-y-ámbitos---bindings-and-scopes)  
+[3.- Closure - Clausura](#3-closure---clausura-)  
+[4.- Ámbito o Alcance Léxico (Lexical Scope)](#4-ámbito-o-alcance-léxico-lexical-scope)  
+[5.- Funciones Autoinvocadas](#5-funciones-autoinvocadas---iife-)
+[6.- Template Functions | Tagged Template Literals](#6-template-functions--tagged-template-literals)
+[6.- Definición de Funciones](#6-template-functions--tagged-template-literals)
+[7.- Definición de Funciones](#7-definición-de-funciones---notación-de-declaración)
+- [7.1.- Funciones Declaradas](#71-funciones-declaradas)
+- [7.2.- Funciones Expresadas](#72-funciones-expresadas)
+- [7.3.- Funciones Flecha (Arrow Functions)](#73-funciones-flecha-arrow-functions)
+- [7.4.- Funciones Anónimas (Callback)](#74-funciones-anónimas-callback)
+- [7.5.- Métodos dentro de Objetos](#75-métodos-dentro-de-objetos)  
 
-[7.- Parámetros y Argumentos](#7-parámetros-y-argumentos)  
-- [7.1.- Añadiendo valor de retorno](#71--añadiendo-valor-de-retorno)  
-- [7.2.- Funciones de Orden Superior (Higher-Order Functions)](#72-funciones-de-orden-superior-higher-order-functions)  
-- [7.3.- Closures](#73-closures)  
-- [7.4.- Funciones Recursivas](#74-funciones-recursivas)  
-- [7.5.- Funciones Generadoras](#75-funciones-generadoras)  
-- [7.6.- this en Funciones](#76-this-en-funciones)  
-- [7.8.- VARIADIC FUNCTIONS](#77-variadic-functions)  
-    - [7.8.1.- Funciones Variadic mediante el operador rest](#771-funciones-variádicas-mediante-el-operador-rest)  
-    - [7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#772-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
+[8.- Parámetros y Argumentos](#8-parámetros-y-argumentos)  
+- [8.1.- Añadiendo valor de retorno](#81--añadiendo-valor-de-retorno)  
+- [8.2.- Funciones de Orden Superior (Higher-Order Functions)](#82-funciones-de-orden-superior-higher-order-functions)  
+- [8.3.- Closures](#83-closures)  
+- [8.4.- Funciones Recursivas](#84-funciones-recursivas)  
+- [8.5.- Funciones Generadoras](#85-funciones-generadoras)  
+- [8.6.- this en Funciones](#86-this-en-funciones)  
+- [8.7.- VARIADIC FUNCTIONS](#87-variadic-functions)  
+    - [8.7.1.- Funciones Variadic mediante el operador rest](#871-funciones-variádicas-mediante-el-operador-rest)  
+    - [8.7.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#872-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
 
-[8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)    
-[9.- Recursión](#9-recursión)  
-[10.- Crecimiento de funciones](#10-crecimiento-de-funciones)  
-[11.- Funciones y efectos secundarios](#11-funciones-y-efectos-secundarios)  
+[9.- Crecimiento de funciones](#9-crecimiento-de-funciones)  
+[10.- Funciones y efectos secundarios](#10-funciones-y-efectos-secundarios)  
+[11.- Parámetro Rest](#11--parámetro-rest)  
+[12.- La variable Arguments](#12-la-variable-arguments)  
+[13.- Diferencias entre el Operador Rest y el Objeto Arguments](#13-diferencias-entre-el-operador-rest-y-el-objeto-arguments)  
+[14.- Curried Functions](#14-curried-functions)    
+[15.- Nested Functions](#15-nested-functions)  
+[16.- Función como objeto, NFE](#16-función-como-objeto-nfe)  
+
 
 
 -------
@@ -1057,7 +1064,7 @@ obj.arrowFunction();
 ## 8.7 VARIADIC FUNCTIONS
 Las funciones variádicas (variadic functions) son **funciones que pueden aceptar un número variable de argumentos.** En JavaScript, cualquier función puede ser variádica, ya que las funciones no requieren que el número de argumentos coincida con el número de parámetros definidos. Aquí se incluye el concepto de funciones variádicas dentro de las distintas maneras de definir funciones en JavaScript.
 
-### 7.7.1. Funciones Variádicas mediante el operador rest:
+### 8.7.1. Funciones Variádicas mediante el operador rest:
 Un ejemplo de función variádica en una Funciones Declaradas (Function Declarations):
 ```js
 function sum(...numbers) {
@@ -1116,7 +1123,7 @@ Las funciones pueden dividirse aproximadamente en aquellas que se llaman por sus
 **Una función pura** es un tipo específico de función productora de valor que no solo no tiene efectos secundarios, sino que tampoco depende de efectos secundarios de otro código, por ejemplo, no lee enlaces globales cuyo valor podría cambiar. Una función pura tiene la agradable propiedad de que, al llamarla con los mismos argumentos, siempre produce el mismo valor (y no hace nada más). Una llamada a tal función puede sustituirse por su valor de retorno sin cambiar el significado del código. Cuando no estás seguro de si una función pura está funcionando correctamente, puedes probarla llamándola y saber que si funciona en ese contexto, funcionará en cualquier otro. Las funciones no puras tienden a requerir más andamiaje para probarlas.
 
 
-# 11.- Parámetros Rest
+# 11.- Parámetro Rest
 Muchas funciones nativas de JavaScript soportan un número arbitrario de argumentos. Por ejemplo:
 - Math.max(arg1, arg2, ..., argN) – devuelve el argumento más grande.
 - Object.assign(dest, src1, ..., srcN) – copia las propiedades de src1..N en dest.
