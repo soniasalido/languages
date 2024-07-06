@@ -501,7 +501,7 @@ Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa
 
 **Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
 
-Son siempre anónimas. Es necesario almacenar esa expresión en una variable de tipo Const:
+**Son siempre anónimas.** Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
 const greet = (name) => {
   return `Hello, ${name}!`;
@@ -509,7 +509,7 @@ const greet = (name) => {
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
-Cuando la función flecha solo tiene un argumento, se pueden omitir paréntesis alrededor de los parámetros
+Cuando la función flecha **solo tiene un argumento**, se pueden omitir paréntesis alrededor de los parámetros
 ```js
 const greet = name => {
   return `Hello, ${name}!`;
@@ -519,7 +519,7 @@ console.log(greet('Alice')); // "Hello, Alice!"
 ```
 
 
-Cuando la función flecha no tenga parámetros, los paréntesis estarán vacíos; pero deben estar presentes:
+Cuando la función flecha **no tenga parámetros**, los paréntesis estarán vacíos; pero deben estar presentes:
 ```js
 const greet = () => {
   return `Hello, Alice!`;
@@ -529,7 +529,7 @@ console.log(greet()); // "Hello, Alice!"
 ```
 
 
-Cuando la función flecha tenga de una única línea para el return, se puede simplificar eliminando llaves y la palabra return:
+Cuando la función flecha **tenga de una única línea para el return**, se puede simplificar eliminando llaves y la palabra return:
 ```js
 const greet = name => `Hello, ${name}!`;
 
@@ -555,10 +555,8 @@ const toObject = (name, surname, age) => (
 ```
 
 
-**Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
-
-Funciones de flecha multilínea: Cuando la función flecha tenga más de una línea, debemos encerrarlos entre llaves. La diferencia principal es que las llaves necesitan usar un return para devolver un valor (tal como lo hacen las funciones comunes).
+**Funciones de flecha multilínea:** Cuando la función flecha tenga más de una línea, debemos encerrarlos entre llaves. La diferencia principal es que las llaves necesitan usar un return para devolver un valor (tal como lo hacen las funciones comunes).
 ```js
 const greet = name => {
   const greeting = 'Hello';
@@ -567,6 +565,9 @@ const greet = name => {
 
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
+
+> [!CAUTION]
+**Hoisting:** Las funciones flecha no se elevan al inicio del contexto. Solo la declaración de la variable a la que se asigna la función flecha es elevada, pero no su asignación. Las funciones flecha no tienen un nombre propio y se asignan a una variable. La declaración de esta variable es la que se eleva al principio del contexto, pero la asignación de la función no se eleva. Por lo tanto, si intentas invocar una función flecha antes de su definición, obtendrás un TypeError porque la variable será undefined en ese momento.
 
 
 
