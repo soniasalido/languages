@@ -1040,6 +1040,17 @@ Sintaxis básica:
 const nuevoArray = arrayOriginal.map(funcionDeTransformacion);
 ```
 
+```
+function invertArray(arr) {
+    return arr.map(element => element !== 0 ? -element : element);
+}
+
+// Ejemplo de uso
+const arr = [1, -2, 3, 0, -5];
+const result = invertArray(arr);
+console.log(result); // [-1, 2, -3, 0, 5]
+```
+
 
 ### 1. Usando .map() para transformar un array
 Supongamos que tienes un array de números y quieres crear un nuevo array donde cada número se incrementa en 1.
