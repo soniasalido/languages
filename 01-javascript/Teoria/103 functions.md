@@ -1037,13 +1037,9 @@ function sum() {
 console.log(sum(1, 2, 3)); // 6;
 ```
 
-# 8. Diferencias entre el Operador Rest y el Objeto Arguments
-- Sintaxis y Modernidad: El operador rest (...) es una característica moderna de ES6 y es más legible y conciso.
-- Tipo de Objeto: El operador rest devuelve un array real, mientras que el objeto arguments es similar a un array pero no es un array real (es un objeto array-like).
-- Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
 
 
-# 9. Recursión
+# 8. Recursión
 La recursión es un concepto en programación en el que una función se llama a sí misma para resolver un problema. La recursión es una técnica poderosa y elegante que se puede utilizar para resolver problemas complejos de manera simple y concisa.
 ```js
 function power(base, exponent) {
@@ -1063,12 +1059,117 @@ Sin embargo, esta implementación tiene un problema: en implementaciones típica
 
 
 
-# 10. Crecimiento de Funciones
+# 9. Crecimiento de Funciones
 Hay dos formas más o menos naturales de introducir funciones en los programas.
 - La primera ocurre cuando te encuentras escribiendo código similar varias veces. Preferirías no hacer eso, ya que tener más código significa más espacio para que se escondan los errores y más material para que las personas que intentan entender el programa lo lean. Por lo tanto, tomas la funcionalidad repetida, encuentras un buen nombre para ella y la colocas en una función.
 - La segunda forma es que te das cuenta de que necesitas alguna funcionalidad que aún no has escrito y que suena como si mereciera su propia función. Comienzas por nombrar la función, luego escribes su cuerpo. Incluso podrías comenzar a escribir código que use la función antes de definir la función en sí.
 
-# 11. Funciones y efectos secundarios
+# 10. Funciones y efectos secundarios
 Las funciones pueden dividirse aproximadamente en aquellas que se llaman por sus efectos secundarios (como puede ser imprimir una línea) y aquellas que se llaman por su valor de retorno (aunque también es posible tener efectos secundarios y devolver un valor).
 
 **Una función pura** es un tipo específico de función productora de valor que no solo no tiene efectos secundarios, sino que tampoco depende de efectos secundarios de otro código, por ejemplo, no lee enlaces globales cuyo valor podría cambiar. Una función pura tiene la agradable propiedad de que, al llamarla con los mismos argumentos, siempre produce el mismo valor (y no hace nada más). Una llamada a tal función puede sustituirse por su valor de retorno sin cambiar el significado del código. Cuando no estás seguro de si una función pura está funcionando correctamente, puedes probarla llamándola y saber que si funciona en ese contexto, funcionará en cualquier otro. Las funciones no puras tienden a requerir más andamiaje para probarlas.
+
+
+# 11.- Parámetros Rest
+Muchas funciones nativas de JavaScript soportan un número arbitrario de argumentos. Por ejemplo:
+- Math.max(arg1, arg2, ..., argN) – devuelve el argumento más grande.
+- Object.assign(dest, src1, ..., srcN) – copia las propiedades de src1..N en dest.
+- …y otros más...
+
+Una función puede ser llamada con cualquier número de argumentos sin importar cómo sea definida. En el resultado solo los parámetros apropiados serán tomados en cuenta, los demás serán ignorados.
+
+El resto de los parámetros pueden ser referenciados en la definición de una función con 3 puntos ... seguidos por el nombre del array que los contendrá. Literalmente significan “Reunir los parámetros restantes en un array”. function sumAll(...args) { // args es el nombre del array
+```js
+let sum = 0;
+
+for (let arg of args) sum += arg;
+
+return sum;
+}
+
+alert( sumAll(1) ); // 1
+alert( sumAll(1, 2) ); // 3
+alert( sumAll(1, 2, 3) ); // 6
+```
+
+El operador rest debe ser siempre el último en la lista de parámetros, de lo contrario, JavaScript generará un error. Podemos obtener los primeros parámetros como variables, y juntar solo el resto.
+```js
+function showName(firstName, lastName, ...titles) {
+  alert( firstName + ' ' + lastName ); // Julio Cesar
+
+  // el resto va en el array titles
+  // por ejemplo titles = ["Cónsul", "Emperador"]
+  alert( titles[0] ); // Cónsul
+  alert( titles[1] ); // Emperador
+  alert( titles.length ); // 2
+}
+
+showName("Julio", "Cesar", "Cónsul", "Emperador");
+```
+
+> [!WARNING]
+> ...rest debe ir siempre último. Si no, JavaScript generará un error.
+
+
+
+# 12 La variable arguments
+El objeto arguments es una variable local disponible dentro de todas las funciones que proporciona una colección de todos los argumentos pasados a la función. Es un objeto array-like, pero no es un array real. No tiene las propiedades y métodos de un array, pero se puede iterar sobre él con un bucle for o convertirlo en un array real utilizando Array.from().
+
+```js
+function sum() {
+  let total = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+
+console.log(sum(1, 2, 3)); // 6
+```
+
+
+# 13. Diferencias entre el Operador Rest y el Objeto Arguments
+- Sintaxis y Modernidad: El operador rest (...) es una característica moderna de ES6 y es más legible y conciso.
+- Tipo de Objeto: El operador rest devuelve un array real, mientras que el objeto arguments es similar a un array pero no es un array real (es un objeto array-like). No soporta los métodos de array, no podemos ejecutar arguments.map(...) por ejemplo.
+- Funciones Flecha: El objeto arguments no está disponible en las funciones flecha, pero el operador rest sí lo está.
+
+
+
+# 14. Sintaxis Spread
+El operador spread (...) se utiliza para descomponer un array en sus elementos individuales. Se puede utilizar en cualquier lugar donde se esperen argumentos o elementos, como en la definición de una función o en la creación de un nuevo array.
+
+```js
+const numbers = [1, 2, 3];
+console.log(...numbers); // 1 2 3
+```
+
+
+```js
+let arr1 = [1, -2, 3, 4];
+let arr2 = [8, 3, -8, 1];
+
+alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
+```
+Cuando ...arr es usado en el llamado de una función, **“expande”** el objeto iterable arr en una lista de argumentos.
+
+El operador spread puede ser usado para combinar arrays:
+```js
+let arr = [3, 5, 1];
+let arr2 = [8, 9, 15];
+
+let merged = [0, ...arr, 2, ...arr2];
+
+alert(merged); // 0,3,5,1,2,8,9,15 (0, luego arr, después 2, después arr2)
+```
+
+
+Usamos el operador spread para convertir la cadena en un array de caracteres:
+```js
+let str = "Hola";
+
+alert( [...str] ); // H,o,l,a
+```
+
+
+
+
