@@ -499,6 +499,10 @@ let func = (arg1, arg2, ..., argN) => expression;
 
 Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa la expression del lado derecho mediante su uso y devuelve su resultado.
 
+> [!CAUTION]
+>**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
+
+
 **Son siempre anónimas.** Es necesario almacenar esa expresión en una variable de tipo Const:
 ```js
 const greet = (name) => {
@@ -563,9 +567,6 @@ const greet = name => {
 
 console.log(greet('Alice')); // "Hello, Alice!"
 ```
-
-> [!CAUTION]
->**Las funciones flecha NO tienen su propio this.** Son especialmente útiles para funciones anónimas y funciones de callback.
 
 
 > [!CAUTION]
