@@ -25,7 +25,10 @@
     - [7.8.1.- Funciones Variadic mediante el operador rest](#771-funciones-variádicas-mediante-el-operador-rest)  
     - [7.8.2.- Funciones Variadic mediante el objeto iterable Arguments (Argumentos Objeto)](#772-funciones-variádicas-mediante-el-objeto-iterable-argumets-argumentos-objeto)  
 
-[8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)  
+[8.- Diferencias entre el Operador Rest y el Objeto Arguments](#8-diferencias-entre-el-operador-rest-y-el-objeto-arguments)    
+[9.- Recursión](#9-recursión)  
+[10.- Crecimiento de funciones](#10-crecimiento-de-funciones)  
+[11.- Funciones y efectos secundarios](#11-funciones-y-efectos-secundarios)  
 
 
 -------
