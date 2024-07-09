@@ -504,6 +504,50 @@ const getDataWithSugar = async () => {
 };
 ```
 
+### G) Manejo de Múltiples Promesas con Async / Await
+
+**OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!**
+```js
+const getManyDataWithSugar = async () => {
+  const data1 = await getDataWithPromise();
+  const data2 = await getDataWithPromise();
+  const data3 = await getDataWithPromise();
+  const data4 = await getDataWithPromise();
+  const data5 = await getDataWithPromise();
+  return [data1, data2, data3, data4, data5];
+};
+getManyDataWithSugar().then(console.log);
+```
+
+**OPCIÓN 2. Lanzamos todas las promesas primero, y hacemos la espera de todas a la vez, al estilo de Promise.all().**
+```js
+const getManyDataWithSugar = async () => {
+  const promise1 = getDataWithPromise();
+  const promise2 = getDataWithPromise();
+  const promise3 = getDataWithPromise();
+  const promise4 = getDataWithPromise();
+  const promise5 = getDataWithPromise();
+  const data1 = await promise1;
+  const data2 = await promise2;
+  const data3 = await promise3;
+  const data4 = await promise4;
+  const data5 = await promise5;
+  return [data1, data2, data3, data4, data5];
+};
+getManyDataWithSugar().then(console.log);
+```
+
+**OPCIÓN 3. Posible implementación de Promise.race usando async await**
+```js
+const myCustomPromiseRace = promises =>
+  new Promise((resolve, reject) => {
+    promises?.forEach(async promise => {
+      resolve(await promise);
+    });
+  });
+```
+
+
 # 3. Promesas en grupo (Promise API)
 Controlar la ejecución de grupos de promesas.
 
@@ -623,52 +667,9 @@ En este caso, generamos un número aleatorio y se devuelve una promesa. Cuando e
 
 
 ------
-?
-### 3.6 Manejo de Múltiples Promesas con Async / Await
+# Ejemplos
 
-**OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!**
-```js
-const getManyDataWithSugar = async () => {
-  const data1 = await getDataWithPromise();
-  const data2 = await getDataWithPromise();
-  const data3 = await getDataWithPromise();
-  const data4 = await getDataWithPromise();
-  const data5 = await getDataWithPromise();
-  return [data1, data2, data3, data4, data5];
-};
-getManyDataWithSugar().then(console.log);
-```
-
-**OPCIÓN 2. Lanzamos todas las promesas primero, y hacemos la espera de todas a la vez, al estilo de Promise.all().**
-```js
-const getManyDataWithSugar = async () => {
-  const promise1 = getDataWithPromise();
-  const promise2 = getDataWithPromise();
-  const promise3 = getDataWithPromise();
-  const promise4 = getDataWithPromise();
-  const promise5 = getDataWithPromise();
-  const data1 = await promise1;
-  const data2 = await promise2;
-  const data3 = await promise3;
-  const data4 = await promise4;
-  const data5 = await promise5;
-  return [data1, data2, data3, data4, data5];
-};
-getManyDataWithSugar().then(console.log);
-```
-
-**OPCIÓN 3. Posible implementación de Promise.race usando async await**
-```js
-const myCustomPromiseRace = promises =>
-  new Promise((resolve, reject) => {
-    promises?.forEach(async promise => {
-      resolve(await promise);
-    });
-  });
-```
-
-
-### Consultar el estado de una promesa
+## Consultar el estado de una promesa
 ```js
 function getState(promise) {
 
