@@ -170,6 +170,16 @@ doSomething()
         });
 ```
 
+> [!Important]  
+> Usando arrow functions se puede mejorar aún más la legibilidad de este código, recordando que cuando sólo tenemos una sentencia en el cuerpo de la arrow function hay un return implícito:
+```js
+fetch("/robots.txt")
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .finally(() => console.log("Terminado."))
+        .catch(error => console.error(data));
+```
+
 ### Encadenar then() tras un catch():
 Tras un catch(), puedes encadenar otro then(). Esto permite continuar procesando la cadena de promesas incluso después de manejar un error.
 ```js
