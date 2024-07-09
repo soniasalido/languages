@@ -1,4 +1,4 @@
-# Ejemplo de consultar una API para obtener datos de un servidor:
+# Consultas a una API para obtener datos de un servidor:
 - **De manera síncrona:** En una llamada síncrona, tu aplicación enviaría la solicitud al servidor y esperaría a que el servidor responda antes de continuar. Durante esta espera, tu aplicación no puede hacer nada más (bloqueada).
 - **De manera asíncrona:** En una llamada asíncrona, tu aplicación envía la solicitud al servidor y continúa ejecutando otras tareas mientras espera la respuesta. Cuando el servidor responde, la respuesta es manejada por una función específica (callback) o se resuelve una promesa, permitiendo a tu aplicación procesar los datos recibidos sin haber estado bloqueada en ningún momento.
 
@@ -7,7 +7,7 @@
 
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el "Event Loop" que implementa el lenguaje como solución para gestionar eventos y llamadas asíncronas. Recomendamos encarecidamente la lectura de la siguiente guía para profundizar en estos conceptos: https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 
-## Llamada asíncrona:
+# Llamada asíncrona:
 - **Ejecuta una tarea fuera del contexto principal de la aplicación:** Esto significa que la tarea no se ejecuta en el flujo principal de nuestro programa. En lugar de eso, se delega a otro contexto (como otro hilo o un proceso separado) que se encarga de ejecutarla.
 - **No consume recursos de CPU de la aplicación principal:** Dado que la tarea se ejecuta en otro contexto, nuestra aplicación principal puede continuar su ejecución sin tener que esperar a que esta tarea termine. Esto es especialmente útil para operaciones que no requieren procesamiento intensivo de la CPU pero que podrían tardar en completarse, como esperar una respuesta de un servidor o leer un archivo grande desde el disco.
 - **Comportamiento de las Llamadas Asíncronas:** Respuesta notificada a nuestro programa:
@@ -18,26 +18,26 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
 | ❗ Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada. |
 | -----|
 
-## Patrones más comunes para el manejo de código asíncrono en Javascript
-- Callbacks.
-- Promesas (azúcar sintáctico alrededor de callbacks).
-- Async/await (azúcar sintáctico alrededor de promesas).
+# Patrones más comunes para el manejo de código asíncrono en Javascript
+1. Callbacks. 
+2. Promesas (azúcar sintáctico alrededor de callbacks). 
+3. Async/await (azúcar sintáctico alrededor de promesas).
 
 
 ## 1. CALLBACKS
-El patrón mas sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, **una función que se pasa como argumento de otra (ciudadanos de primer orden)**.
+El patrón más sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, **una función que se pasa como argumento de otra (ciudadanos de primer orden)**.
 
 **La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos la respuesta de dicha llamada asíncrona.** La función de respuesta (el callback) se ejecutará cuando la respuesta a la llamada asíncrona esté disponible.
 
 Ejemplo: setTimeout es una de las llamadas asíncronas más sencillas que hay: postpone la ejecución de un callback, como mínimo, a X segundos después.
-```
+```js
 const callback = () => console.log("Hello World! con retardo");
 setTimeout(callback, 1000);
 console.log("Granada"); // Granada espera 1000 ms. No detiene a Hello World.
 ```
 
 Al ser asíncrona, nuestra aplicación sigue corriendo:
-```
+```js
 const callback = () => console.log("Hello World! con retardo");
 setTimeout(callback, 1000);
 
@@ -46,14 +46,14 @@ console.log("No estoy bloqueada, puedo ejecutar código");
 
 
 Resultado por consola:
-```
+```js
 > No estoy bloqueada, puedo ejecutar código
 > Hello World! con retardo
 ```
 
 
 Podríamos hacer un mock a una llamada a servidor, sirviéndonos del patrón de callback y usando la operación asíncrona 'setTimeout', del siguiente modo:
-```
+```js
 const getDataAsync = callback => {
   setTimeout(
     () => callback(43 /* Dato random */), // callback del setTimeout
@@ -65,7 +65,7 @@ const getDataAsync = callback => {
 **Un "mock" es una versión simulada de una función o componente que se utiliza para pruebas.** Permite probar el comportamiento del código sin tener que depender de recursos externos, como un servidor real.
 
 Una posible mejora para poder randomizar el tiempo del timer y el dato devuelto sería la siguiente:
-```
+```js
 const randomData = () => Math.ceil(Math.random() * 100); // random [1-100] número
 const randomDelay = () => Math.random() * 2000 + 1000; // random [1000, 3000) ms
 
@@ -78,13 +78,26 @@ getDataAsync(console.log); // Ejemplo de uso.
 
 
 ## 2. PROMESAS
-**Una promesa es un objeto que representa el resultado de una operación asíncrona.** Este resultado podría estar disponible ahora o en el futuro. Una promesa puede tener los siguientes estados:
-- A la espera de respuesta -> PENDING
-- Finalizada -> SETTLED. En este caso, puede terminar con 2 estados:
-   - Operación completada con éxito -> FULFILLED or RESOLVED
-   - Operación rechazada con fallo o error -> REJECTED
 
-Las promesas se basan en callbacks pero son una evolución de éstos, una mejora, que añade azúcar sintáctico para un mejor manejo.
+![](https://lenguajejs.com/javascript/asincronia/promesas/promises.png)
+
+
+Las promesas en Javascript se representan a través de un OBJETO, y cada promesa estará en un estado concreto: pendiente, aceptada o rechazada. Además, cada promesa tiene los siguientes métodos:
+
+| Métodos                  | Descripción |
+|--------------------------| ----------- |
+| .then( FUNCTION resolve) | Ejecuta la función callback resolve cuando la promesa se cumple. |
+| .catch( FUNCTION reject) | Ejecuta la función callback reject cuando la promesa se rechaza. |
+| .then(resolve,reject) | Método equivalente a las dos anteriores en el mismo .then(). |
+| .finally( FUNCTION end)  | Ejecuta la función callback end tanto si se cumple como si se rechaza. |
+
+**Una promesa es un objeto que representa el resultado de una operación asíncrona.** Este resultado podría estar disponible ahora o en el futuro. Una promesa puede tener los siguientes estados:
+- A la espera de respuesta ⭢ PENDING
+- Finalizada ⭢ SETTLED. En este caso, puede terminar con 2 estados:
+   - Operación completada con éxito ⭢ FULFILLED or RESOLVED
+   - Operación rechazada con fallo o error ⭢ REJECTED
+
+Las promesas se basan en callbacks, pero son una evolución de estos, una mejora, que añade azúcar sintáctico para un mejor manejo.
 
 EJEMPLO: *Analogía de la pizza y el beeper*
 
@@ -94,7 +107,8 @@ Cuando llamamos a una función asíncrona implementada con Promesas, nos devolve
 - Uno para indicar 'qué se debe hacer en caso de que todo vaya bien' (resolución de la promesa o resolve).
 - Otro para indicar 'qué hacer en caso de fallo' (rechazo de la promesa o reject).
 
-Usamos una función llamada FETCH. **API FETCH** es un sencillo API que permite lanzar peticiones a un servidor. Api Fetch devuelve una promesa. Este objeto es un símbolo o una garantía de que hay una operación asíncrona en marcha y que en algún momento recibiremos una respuesa.
+> [!Important]
+> Usamos una función llamada FETCH. **API FETCH** es un sencillo API que permite lanzar peticiones a un servidor. Api Fetch devuelve una promesa. Este objeto es un símbolo o una garantía de que hay una operación asíncrona en marcha y que en algún momento recibiremos una respuesa.
 
 La utilidad real del objeto Promise es usarlo para registrar los callbaks que queremos que se ejecuten cuando la promesa sea, o bien resuelta con éxito o bien, rechazada.
 
@@ -103,7 +117,7 @@ La utilidad real del objeto Promise es usarlo para registrar los callbaks que qu
 - .catch() ➝ Callback respuesta de fallo. Qué hacemos en caso de rechazo/error.
 
 
-```
+```js
 fetch("https://api.github.com/users/lemoncode")
   .then(response => console.log(response))
   .catch(error => console.error(error));
