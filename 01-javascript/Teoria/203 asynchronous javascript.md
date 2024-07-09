@@ -164,7 +164,7 @@ Una vez que la promesa se resuelve, el método .json() toma el texto del cuerpo 
 **Paso 5: Convertir JSON a un Objeto JavaScript**
 El resultado de este análisis no es una cadena JSON, sino un objeto o array de JavaScript. En otras palabras, .json() convierte la cadena JSON en una estructura de datos de JavaScript que se puede manipular directamente.
 
-```
+```js
 fetch('https://api.example.com/data')
   .then(response => response.json()) // Aquí se llama al método .json()
   .then(data => {
