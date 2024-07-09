@@ -289,6 +289,32 @@ new Promise (( resolve, reject )) => {
 }
 ```
 
+```js
+// Crear una nueva promesa
+const miPromesa = new Promise((resolve, reject) => {
+  // Realizar alguna operación asíncrona
+  setTimeout(() => {
+    const exito = true; // Cambiar a false para probar el rechazo
+
+    if (exito) {
+      resolve('La operación fue exitosa!');
+    } else {
+      reject('Hubo un error en la operación.');
+    }
+  }, 2000); // Esperar 2 segundos antes de resolver o rechazar la promesa
+});
+
+// Usar la promesa
+miPromesa
+  .then((mensaje) => {
+    console.log(mensaje); // Manejar la resolución de la promesa
+  })
+  .catch((error) => {
+    console.error(error); // Manejar el rechazo de la promesa
+  });
+```
+
+
 Modifiquemos el ejemplo anterior en el que haciamos un mock de llamada a servidor para adaptarlo al patrón de promesas (promise flavor):
 ```js
 const getDataWithPromise = () => {
