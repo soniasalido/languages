@@ -289,6 +289,7 @@ new Promise (( resolve, reject )) => {
 }
 ```
 
+Otro ejemplo:
 ```js
 // Crear una nueva promesa
 const miPromesa = new Promise((resolve, reject) => {
