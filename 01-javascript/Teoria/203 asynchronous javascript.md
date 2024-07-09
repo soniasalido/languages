@@ -103,6 +103,8 @@ EJEMPLO: *Analogía de la pizza y el beeper*
 
 
 ### 2.1 CONSUMIENDO PROMESAS
+La forma general de consumir una promesa es utilizando el .then() con un sólo parámetro, puesto que muchas veces lo único que nos interesa es realizar una acción cuando la promesa se cumpla:
+
 Cuando llamamos a una función asíncrona implementada con Promesas, nos devolverá inmediatamente un objeto promesa como garantía de que la operación asíncrona se ha puesto en marcha y finalizará en algún momento, ya sea con éxito o con fallo. Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para registrar 2 callbacks:
 - Uno para indicar 'qué se debe hacer en caso de que todo vaya bien' (resolución de la promesa o resolve).
 - Otro para indicar 'qué hacer en caso de fallo' (rechazo de la promesa o reject).
@@ -129,22 +131,82 @@ response => console.log(response) ⟵ Es una callback que captura la respuesta c
 ### 2.2 Encadenando promesas
 Sucede cuando nuestro callback de resolución vuelve a lanzar una nueva promesa. El resolveCallback de una promesa, podría devolver otra promesa, en cuyo caso pueden encadenarse. Solo será necesario especificar un rejectCallback (un único catch()) para cualquiera de las promesas encadenadas.
 
-```
+```js
 fetch("https://api.github.com/users/lemoncode")
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // Retornar algo o una nueva promesa para encadenar más .then()
+          return doSomethingWith(data);
+        })
+        .then(result => {
+          // Continuar la cadena de promesas
+          console.log('Continuar con el resultado después de manejar el error:', result);
+        })
+        .catch(error => {
+          console.error(error);
+          // Manejar el error y retornar algo para continuar la cadena de promesas
+          return handleError(error);
+        });
+
 ```
 
-Parseamos el Json --> Recibe un string y devuelve un objeto.
-```
-.then(response => response.json())
+
+> [!Important]  
+> Cuando trabajamos con promesas y deseamos encadenarlas, debemos asegurarnos devolver (return) la promesa en cada then(). Esto permite que la siguiente promesa en la cadena espere a que se resuelva la promesa devuelta.
+```js
+doSomething()
+        .then(result => {
+          return doSomethingElse(result);
+        })
+        .then(newResult => {
+          return doThirdThing(newResult);
+        })
+        .then(finalResult => {
+          console.log('Final result:', finalResult);
+        })
+        .catch(error => {
+          console.error('Something went wrong:', error);
+        });
 ```
 
-Data es el callback de resolve cuando se ejecuta el response.json(). Muestra el resultado de la promesa `response.json()`. Nuevo callback. Se resuelve cuando se resuelva el primer then:
+### Encadenar then() tras un catch():
+Tras un catch(), puedes encadenar otro then(). Esto permite continuar procesando la cadena de promesas incluso después de manejar un error.
+```js
+doSomething()
+        .then(result => {
+          return doSomethingElse(result);
+        })
+        .catch(error => {
+          console.error('Error occurred:', error);
+          // Handle the error and potentially return a value or a new promise
+          return handleError(error);
+        })
+        .then(newResult => {
+          return doThirdThing(newResult);
+        })
+        .then(finalResult => {
+          console.log('Final result:', finalResult);
+        });
 ```
-then(data => console.log(data)) 
+
+
+
+
+### Otro Ejemplo:
+```js
+fetch("https://api.github.com/users/lemoncode")
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
 ```
+
+**Explicación:**
+- fetch("https://api.github.com/users/lemoncode"): Realiza una solicitud HTTP GET a la URL especificada.
+- .then(response => response.json()): Cuando la promesa de fetch se resuelve, convierte la respuesta en formato JSON.
+- .then(data => console.log(data)): Cuando la promesa de .json() se resuelve, los datos JSON se registran en la consola.
+- .catch(error => console.error(error)): Si alguna de las promesas en la cadena falla (ya sea la de fetch o response.json()), el error se captura y se registra en la consola.
+
 
 #### El método .json():**
 **Es un método del objeto de respuesta (Response). Su propósito es leer el cuerpo de la respuesta y convertirlo en un objeto JavaScript.**
