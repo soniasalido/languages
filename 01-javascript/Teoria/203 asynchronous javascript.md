@@ -403,7 +403,7 @@ Callback de fallo. Llamamos al callback reject y le pasamos el error que se ha o
 
 
 ## 3. ASYNC / AWAIT 
-async y await son palabras clave en JavaScript introducidas en ECMAScript 2017 (ES8) que permiten manejar promesas de manera más simple y estructurada.
+En ES2017 se introducen las palabras clave async/await, que no son más que una forma de azúcar sintáctico que permiten manejar promesas de manera más simple y estructurada.
 
 **async: Convierte una función en una función asíncrona. Esto significa que dicha función siempre devolverá una promesa.**
 
@@ -436,6 +436,20 @@ async function ejemploAwait() {
 
 ejemploAwait();
 ```
+
+### 3.3 Async/await + .then()
+En algunos casos, como al usar un fetch(), donde tenemos que manejar dos promesas, es posible que nos interese utilizar .then() para la primera promesa y await para la segunda. De esta forma podemos manejarlo todo directamente, sin tener que guardarlo en constantes o variables temporales que no utilizaremos sino una sola vez:
+```js
+async function request() {
+  return await fetch("/robots.txt")
+          .then(response => response.text());
+}
+
+await request();
+```
+
+En este caso, observa que el fetch() devuelve una primera PROMISE que es manejada por el .then(). La segunda PROMISE, devuelta por el método response.text() se devuelve hacia fuera y es manejada por el await, que espera a que se cumpla, y una vez cumplida, se devuelve como valor de la función request().
+
 
 ### 3.3 Otro ejemplo de uso de async/await:
 Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
@@ -490,6 +504,126 @@ const getDataWithSugar = async () => {
 };
 ```
 
+# 4. Promesas en grupo (Promise API)
+Controlar la ejecución de grupos de promesas.
+
+Mediante la API Promise nativa de Javascript podemos realizar operaciones con grupos de promesas, tanto independientes como dependientes entre sí.
+
+## 4.1 Esperar varias promesas
+Utilizarremos el objeto Promise de Javascript, que incorpora varios métodos estáticos que podemos utilizar en nuestro código. Todos devuelven una promesa (son asíncronos) y son los que veremos a continuación:
+
+| Métodos                        | Descripción                                                         |
+|--------------------------------|---------------------------------------------------------------------|
+| Promise.all(ARRAY list)        | Acepta sólo si todas las promesas del ARRAY se cumplen.             |
+| Promise.allSettled(ARRAY list) | Acepta sólo si todas las promesas del  se cumplen o rechazan.       |
+| Promise.any(ARRAY list)        | Acepta con el valor de la primera promesa del ARRAY  que se cumpla. |
+| Promise.race(ARRAY list)       | Acepta con el valor de la primera promesa del ARRAY que se cumpla o rechace. |
+| Promise.resolve(OBJECT value)  | Devuelve una promesa cumplida directamente con el OBJECT dado.|
+| Promise.reject(OBJECT value)   | Devuelve una promesa rechazada directamente con el OBJECT dado.|
+
+
+
+## 4.2 El método Promise.all()
+El método Promise.all() funciona como un «todo o nada»: le pasas un grupo de varias promesas. El Promise.all() te devolverá una promesa que se cumplirá cuando todas las promesas del grupo se cumplan. Si alguna de ellas se rechaza, la promesa de Promise.all() también lo hará.
+```js
+const p1 = fetch("/robots.txt");
+const p2 = fetch("/index.css");
+const p3 = fetch("/index.js");
+
+const promises = [p1, p2, p3];
+
+// Utilizando async/await
+const responses = await Promise.all(promises);
+const codes = responses.map(response => response.status);
+console.log(codes); // [200, 200, 200]
+```
+
+1️⃣ Realizamos 3 fetch(), donde cada uno devuelve una promesa.  
+2️⃣ Almacenamos esas 3 promesas en un  promises.  
+3️⃣ Al hacer un Promise.all(promises) devolvemos una nueva promesa.  
+4️⃣ Dicha promesa se cumplirá, si todas las que pasamos en el array se cumplen invidiualmente.  
+5️⃣ En el caso de que alguna de las 3 se rechace, el Promise.all() la promesa se rechaza.
+
+También se podría realizar utilizando .then() en lugar de async/await:
+```js
+// Utilizando .then
+Promise.all(promises)
+        .then(responses => {
+          const codes = responses.map(response => response.status);
+          console.log(codes); // [200, 200, 200]
+        });
+```
+
+## 4.3 El método Promise.allSettled()
+El método Promise.allSettled() funciona como un «todas procesadas»: devuelve una promesa que se cumple cuando todas las promesas del ARARY se hayan procesado, independientemente de que se hayan cumplido o rechazado.
+```js
+const p1 = fetch("/robots.txt");
+const p2 = fetch("https://google.com/index.css");
+const p3 = fetch("/index.js");
+
+const promises = [p1, p2, p3];
+
+const results = await Promise.allSettled(promises);
+const objects = results.map(result => result);
+console.log(objects);
+```
+
+Esta operación nos devuelve un ARRAY de objetos (uno por cada promesa) donde cada objeto tiene dos propiedades:  
+1️⃣ La propiedad status, donde nos indica si cada promesa individual ha sido cumplida o rechazada.  
+2️⃣ La propiedad value, con los valores devueltos por la promesa si se cumple.  
+3️⃣ La propiedad reason, con la razón del rechazo de la promesa si no se cumple.  
+4️⃣ En este caso, obtendremos que la primera y última promesa se resuelven (fulfilled), mientras que la segunda nos da un error de CORS y se rechaza (rejected).
+
+
+## 4.4 El método Promise.any()
+El método Promise.any() funciona como «la primera que se cumpla»: Devuelve una promesa con el valor de la primera promesa individual del  que se cumpla. Si todas las promesas se rechazan, entonces devuelve una promesa rechazada.
+
+```js
+const p1 = fetch("/robots.txt");
+const p2 = fetch("/index.css");
+const p3 = fetch("/index.js");
+
+const promises = [p1, p2, p3];
+
+const response = await Promise.any(promises);
+console.log(response);
+```
+
+## 4.5 El método Promise.race()
+El método Promise.race() funciona como una «la primera que se procese»: la primera promesa del ARARY que sea procesada, independientemente de que se haya cumplido o rechazado, determinará la devolución de la promesa del Promise.race(). Si se cumple, devuelve una promesa cumplida, en caso negativo, devuelve una rechazada.
+```js
+const p1 = fetch("/robots.txt");
+const p2 = fetch("/index.css");
+const p3 = fetch("/index.js");
+
+const promises = [p1, p2, p3];
+
+const response = await Promise.race([p1, p2, p3]);
+console.log(response);
+```
+
+------
+# 5. Pomesas estáticas
+Mediante los métodos estáticos Promise.resolve() y Promise.reject() podemos devolver una promesa cumplida o rechazada respectivamente sin necesidad de crear una promesa con new Promise(), algo que podría ser interesante o cómodo en algunos casos.
+
+Observa que la siguiente función doTask() no es asíncrona:
+```js
+const doTask = () => {
+  const number = 1 + Math.floor(Math.random() * 6);
+  const isEven = number % 2 === 0;
+
+  return isEven ? Promise.resolve(number) : Promise.reject(number);
+}
+```
+En este caso, generamos un número aleatorio y se devuelve una promesa. Cuando el número generado es par se cumple la promesa, cuando es impar, se rechaza. Sin embargo, ten en cuenta que el problema en este caso es que la promesa no «envuelve» toda la función, por lo que si la tarea tardase algún tiempo en generar el número, no podríamos utilizar el .then() para consumir la promesa.
+
+> [!Important]
+> Estas funciones estáticas se suelen utilizar en muy pocos casos, para mantener cierta compatibilidad en funciones que se espera que devuelvan una promesa.
+
+
+
+------
+?
 ### 3.6 Manejo de Múltiples Promesas con Async / Await
 
 **OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!**
