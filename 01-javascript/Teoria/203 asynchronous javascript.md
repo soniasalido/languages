@@ -176,24 +176,24 @@ fetch('https://api.example.com/data')
 ```
 
 **Realizar una Solicitud con fetch.** Esto hace una solicitud HTTP a la URL especificada y devuelve una promesa que se resuelve con un objeto de respuesta (Response).:
-```
+```js
 fetch('https://api.example.com/data')
 ```
 
 **Usar .json() para Leer y Analizar la Respuesta.** Este código llama al método .json() en el objeto de respuesta. Este método lee el flujo de la respuesta hasta completarlo y analiza el texto del cuerpo como JSON. Devuelve una promesa que se resuelve con el objeto JavaScript resultante.:
-```
+```js
 .then(response => response.json())
 ```
 
 **Trabajar con el Objeto JavaScript.** Una vez que la promesa devuelta por .json() se resuelve, podemos trabajar con los datos convertidos a un objeto JavaScript. En este caso, simplemente los mostramos en la consola.:
-```
+```js
 .then(data => {
   console.log(data);
 })
 ```
 
 **Manejo de Errores:**
-```
+```js
 .catch(error => {
   console.error('Error:', error);
 });
@@ -203,7 +203,7 @@ fetch('https://api.example.com/data')
 ### 2.3 CREANDO PROMESAS
 
 **Una promesa se crea instanciando un nuevo Objeto Promise.** En el momento de la creación, en el constructor, debemos especificar un callback que contenga la carga de la promesa, aquello que la promesa debe hacer.
-```
+```js
 new Promise () => {
   // Carga de la promesa
   // Llamadas asíncronas
@@ -211,14 +211,14 @@ new Promise () => {
 ```
 
 **Este callback nos provee de dos argumentos: resolveCallback y rejectCallback.** Son los dos mismos callbacks que se registrarán al consumir la promesa. De este modo, depende de nosotros como desarrolladores llamar a resolveCallback y rejectCallback cuando sea necesario para señalizar que la promesa ha sido completada con éxito o con fallo.
-```
+```js
 new Promise (( resolve, reject )) => {
   // Llamadas asíncronas
 }
 ```
 
 Modifiquemos el ejemplo anterior en el que haciamos un mock de llamada a servidor para adaptarlo al patrón de promesas (promise flavor):
-```
+```js
 const getDataWithPromise = () => {
   return new Promise((resolve, _reject) => {
       try {
@@ -239,7 +239,7 @@ getDataWithPromise()
 ⚠ OPCIONALMENTE podríamos manejar de forma explícita la ejecución dentro de la promesa con un try catch, aunque NO ES NECESARIO obligatoriamente:
 - Si no ponemos el try..catch, la promesa nos envolverá la ejecución con uno por defecto y lo redirigirá por el 'reject' callback si se diese un error.
 - Si lo ponemos explícitamente, podremos nosotros mismos manejar y adornar dicho error antes de pasarlo por el reject.
-```
+```js
 const getDataWithPromise = () => {
   return new Promise((resolve, reject) => {
     try {
@@ -253,7 +253,7 @@ const getDataWithPromise = () => {
 ```
 
 Su utilización sería:
-```
+```js
 getDataWithPromise()
   .then(data => console.log(data))
   .catch(error => console.log(`ERROR CAPTURADO: ${error}`));
@@ -263,7 +263,7 @@ getDataWithPromise()
 A veces se necesita lanzar varias promesas asíncronas y poder manejar todos los resultados.
 
 Modifiquemos la función anterior ligeramente para, antes de resolver la promesa, loguear el dato por la consola.
-```
+```js
 const getDataWithPromise = (autolog = true) =>
   new Promise((resolve, _reject) => {
     getDataAsync(data => {
@@ -277,7 +277,7 @@ const getDataWithPromise = (autolog = true) =>
 Este método recibe un array de promesas y devuelve una nueva promesa que se resuelve o se rechaza tan pronto como una de las promesas del array se resuelva o se rechace, con el valor o razón de esa promesa.
 
 Devuelve una nueva promesa que se resuelve con el resultado o rechazo de la primera promesa que termine. Promise race tiene un array con todas las promesas que queramos. Promise race devuelve una promesa. Luego tendremos un resolveCallback. En este callback recibe el ganador, el dato ganador, el que terminó primero. Las demás promesas también se irán completando. Pero el promise race se quedó con la primera promesa que termina. Si alguna falla, entonces se invoca al rejectCallback de la PromiseRace.
-```
+```js
 Promise.race([
   getDataWithPromise(),
   getDataWithPromise(),
@@ -288,7 +288,7 @@ Promise.race([
 ```
 
 **Promise All:** devuelve una nueva promesa que se resuelve con el array de resultados de todas las promesas de entrada. Por tanto se resolverá cuando todas las promesas se completen. Si alguna promesa es rechazada, entonces Promise.all también se rechaza. Por tanto espera a que todas se cumplan o al primer rechazo. El array de resultados preserva el mismo orden que el array de promesas de entrada.
-```
+```js
 Promise.all([
   getDataWithPromise(),
   getDataWithPromise(),
@@ -300,7 +300,7 @@ Promise.all([
 
 ### 2.5 Ejemplo de Promise
 Función que le pasamos como parámetro un usuario y devuelve una promesa.
-```
+```js
 const getGithubUser = ( user ) => {
   return new Promise (( resolve, reject )) => {
     fetch(`https://api.github.com/users/${user}`)
@@ -315,17 +315,17 @@ getGithubUser("lemoncode".then(console.log));
 ```
 
 Es el callback re resolución que parsea a json. Devuelve una promesa:
-```
+```js
 .then(response => response.json())
 ```
 
 Llamamos al callback resolve y le pasamos como argumento data (la respusta).
-```
+```js
 .then(data => resolve(data))
 ```
 
 Callback de fallo. Llamamos al callback reject y le pasamos el error que se ha obtenido:
-```
+```js
 .catch(error => reject(error));
 ```
 
@@ -340,7 +340,7 @@ async y await son palabras clave en JavaScript introducidas en ECMAScript 2017 (
 ### 3.1 Función async
 Una función marcada con async siempre devuelve una promesa. Si la función devuelve un valor, ese valor es automáticamente envuelto en una promesa resuelta. Si la función arroja un error, ese error es envuelto en una promesa rechazada.
 
-```
+```js
 async function ejemploAsync() {
   return 'Hola, mundo!';
 }
@@ -352,7 +352,7 @@ ejemploAsync().then((mensaje) => {
 
 ### 3.2 Uso de await
 await sólo puede ser usado dentro de funciones async. Hace que el código espere a que una promesa se resuelva o se rechace antes de continuar con la ejecución.
-```
+```js
 async function ejemploAwait() {
   let promesa = new Promise((resolve, reject) => {
     setTimeout(() => resolve("¡Hecho!"), 1000);
@@ -367,7 +367,7 @@ ejemploAwait();
 
 ### 3.3 Otro ejemplo de uso de async/await:
 Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
-```
+```js
 const getDataWithSugar = async () => {
   const data = await getDataWithPromise(false);
   return data;
@@ -383,13 +383,13 @@ getDataWithSugar()
 ```
 
 Await: Espera a que esto termine, función síncrona y el resultado lo mete en Data:
-```
+```js
 const data = await getDataWithPromise(false);
 ```
 
 ### 3.4 Manejo de Errores try...catch
 Podemos usar try...catch para manejar errores en funciones asíncronas, de manera similar a cómo lo harías en el manejo de promesas con .catch().
-```
+```js
 async function ejemploError() {
   try {
     let promesa = new Promise((resolve, reject) => {
@@ -407,7 +407,7 @@ ejemploError();
 ```
 
 ### 3.5 Manejo de Errores throw new error
-```
+```js
 const getDataWithSugar = async () => {
   try {
     const data = await getDataWithPromise();
@@ -421,7 +421,7 @@ const getDataWithSugar = async () => {
 ### 3.6 Manejo de Múltiples Promesas con Async / Await
 
 **OPCION 1. Las promesas se lanzan y se esperan secuencialmente OJO!**
-```
+```js
 const getManyDataWithSugar = async () => {
   const data1 = await getDataWithPromise();
   const data2 = await getDataWithPromise();
@@ -434,7 +434,7 @@ getManyDataWithSugar().then(console.log);
 ```
 
 **OPCIÓN 2. Lanzamos todas las promesas primero, y hacemos la espera de todas a la vez, al estilo de Promise.all().**
-```
+```js
 const getManyDataWithSugar = async () => {
   const promise1 = getDataWithPromise();
   const promise2 = getDataWithPromise();
@@ -452,7 +452,7 @@ getManyDataWithSugar().then(console.log);
 ```
 
 **OPCIÓN 3. Posible implementación de Promise.race usando async await**
-```
+```js
 const myCustomPromiseRace = promises =>
   new Promise((resolve, reject) => {
     promises?.forEach(async promise => {
@@ -463,7 +463,7 @@ const myCustomPromiseRace = promises =>
 
 
 ### Consultar el estado de una promesa
-```
+```js
 function getState(promise) {
 
   return new Promise((resolve) => {
