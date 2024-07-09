@@ -1,9 +1,9 @@
-# Consultas a una API para obtener datos de un servidor:
+# 1.- Consultas a una API para obtener datos de un servidor:
 - **De manera síncrona:** En una llamada síncrona, tu aplicación enviaría la solicitud al servidor y esperaría a que el servidor responda antes de continuar. Durante esta espera, tu aplicación no puede hacer nada más (bloqueada).
 - **De manera asíncrona:** En una llamada asíncrona, tu aplicación envía la solicitud al servidor y continúa ejecutando otras tareas mientras espera la respuesta. Cuando el servidor responde, la respuesta es manejada por una función específica (callback) o se resuelve una promesa, permitiendo a tu aplicación procesar los datos recibidos sin haber estado bloqueada en ningún momento.
 
 
-# ASYNCHRONOUS JAVASCRIPT
+# 2.- ASYNCHRONOUS JAVASCRIPT
 
 Para dominar JavaScript es imprescindible tener unas buenas nociones de asincronía y conocer el "Event Loop" que implementa el lenguaje como solución para gestionar eventos y llamadas asíncronas. Recomendamos encarecidamente la lectura de la siguiente guía para profundizar en estos conceptos: https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 
@@ -18,13 +18,13 @@ Para dominar JavaScript es imprescindible tener unas buenas nociones de asincron
 | ❗ Nuestro programa lanza la llamada asíncrona, continúa su ejecución y en algún momento será notificado con la respuesta a dicha llamada. |
 | -----|
 
-# Patrones más comunes para el manejo de código asíncrono en Javascript
+# 2.2 Patrones más comunes para el manejo de código asíncrono en Javascript
 1. Callbacks. 
 2. Promesas (azúcar sintáctico alrededor de callbacks). 
 3. Async/await (azúcar sintáctico alrededor de promesas).
 
 
-## 1. CALLBACKS
+## 2.2.1. CALLBACKS
 El patrón más sencillo para manejar llamadas asíncronas son los CALLBACKS, es decir, **una función que se pasa como argumento de otra (ciudadanos de primer orden)**.
 
 **La finalidad del callback es registrar el código que debe ser ejecutado una vez tengamos la respuesta de dicha llamada asíncrona.** La función de respuesta (el callback) se ejecutará cuando la respuesta a la llamada asíncrona esté disponible.
@@ -77,7 +77,7 @@ getDataAsync(console.log); // Ejemplo de uso.
 ```
 
 
-## 2. PROMESAS
+## 2.2.2. PROMESAS
 
 ![](https://lenguajejs.com/javascript/asincronia/promesas/promises.png)
 
@@ -102,7 +102,7 @@ Las promesas se basan en callbacks, pero son una evolución de estos, una mejora
 EJEMPLO: *Analogía de la pizza y el beeper*
 
 
-### 2.1 CONSUMIENDO PROMESAS
+### A) CONSUMIENDO PROMESAS
 La forma general de consumir una promesa es utilizando el .then() con un sólo parámetro, puesto que muchas veces lo único que nos interesa es realizar una acción cuando la promesa se cumpla:
 
 Cuando llamamos a una función asíncrona implementada con Promesas, nos devolverá inmediatamente un objeto promesa como garantía de que la operación asíncrona se ha puesto en marcha y finalizará en algún momento, ya sea con éxito o con fallo. Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para registrar 2 callbacks:
@@ -128,7 +128,7 @@ fetch("https://api.github.com/users/lemoncode")
 response => console.log(response) ⟵ Es una callback que captura la respuesta como argumento.
 
 
-### 2.2 Encadenando promesas
+### B) Encadenando promesas
 Sucede cuando nuestro callback de resolución vuelve a lanzar una nueva promesa. El resolveCallback de una promesa, podría devolver otra promesa, en cuyo caso pueden encadenarse. Solo será necesario especificar un rejectCallback (un único catch()) para cualquiera de las promesas encadenadas.
 
 ```js
@@ -180,7 +180,7 @@ fetch("/robots.txt")
         .catch(error => console.error(data));
 ```
 
-### Encadenar then() tras un catch():
+### C) Encadenar then() tras un catch():
 Tras un catch(), puedes encadenar otro then(). Esto permite continuar procesando la cadena de promesas incluso después de manejar un error.
 ```js
 doSomething()
@@ -203,7 +203,7 @@ doSomething()
 
 
 
-### Otro Ejemplo:
+### D) Otro Ejemplo:
 ```js
 fetch("https://api.github.com/users/lemoncode")
         .then(response => response.json())
@@ -272,7 +272,7 @@ fetch('https://api.example.com/data')
 ```
 
 
-### 2.3 CREANDO PROMESAS
+### C) CREANDO PROMESAS
 
 **Una promesa se crea instanciando un nuevo Objeto Promise.** En el momento de la creación, en el constructor, debemos especificar un callback que contenga la carga de la promesa, aquello que la promesa debe hacer.
 ```js
@@ -370,7 +370,7 @@ Promise.all([
 ]).then(result => console.log("And the result is ...", result));
 ```
 
-### 2.5 Ejemplo de Promise
+### D) Ejemplo de Promise
 Función que le pasamos como parámetro un usuario y devuelve una promesa.
 ```js
 const getGithubUser = ( user ) => {
@@ -402,14 +402,14 @@ Callback de fallo. Llamamos al callback reject y le pasamos el error que se ha o
 ```
 
 
-## 3. ASYNC / AWAIT 
+## 2.2.3. ASYNC / AWAIT 
 En ES2017 se introducen las palabras clave async/await, que no son más que una forma de azúcar sintáctico que permiten manejar promesas de manera más simple y estructurada.
 
 **async: Convierte una función en una función asíncrona. Esto significa que dicha función siempre devolverá una promesa.**
 
 **await: Hace que la función asíncrona espere la resolución de una promesa antes de continuar con la ejecución.** Sólo puede ser usado dentro de funciones marcadas con async.
 
-### 3.1 Función async
+### A) Función async
 Una función marcada con async siempre devuelve una promesa. Si la función devuelve un valor, ese valor es automáticamente envuelto en una promesa resuelta. Si la función arroja un error, ese error es envuelto en una promesa rechazada.
 
 ```js
@@ -422,7 +422,7 @@ ejemploAsync().then((mensaje) => {
 });
 ```
 
-### 3.2 Uso de await
+### B) Uso de await
 await sólo puede ser usado dentro de funciones async. Hace que el código espere a que una promesa se resuelva o se rechace antes de continuar con la ejecución.
 ```js
 async function ejemploAwait() {
@@ -437,7 +437,7 @@ async function ejemploAwait() {
 ejemploAwait();
 ```
 
-### 3.3 Async/await + .then()
+### C) Async/await + .then()
 En algunos casos, como al usar un fetch(), donde tenemos que manejar dos promesas, es posible que nos interese utilizar .then() para la primera promesa y await para la segunda. De esta forma podemos manejarlo todo directamente, sin tener que guardarlo en constantes o variables temporales que no utilizaremos sino una sola vez:
 ```js
 async function request() {
@@ -451,7 +451,7 @@ await request();
 En este caso, observa que el fetch() devuelve una primera PROMISE que es manejada por el .then(). La segunda PROMISE, devuelta por el método response.text() se devuelve hacia fuera y es manejada por el await, que espera a que se cumpla, y una vez cumplida, se devuelve como valor de la función request().
 
 
-### 3.3 Otro ejemplo de uso de async/await:
+### D)  Otro ejemplo de uso de async/await:
 Async / Await son 2 palabras clave que surgieron para simpificar el manejo de las promesas. Son azúcar sinctáctico para reducir el anidamiento y manejar código asíncrono como si de código síncrono se tratara.
 ```js
 const getDataWithSugar = async () => {
@@ -473,7 +473,7 @@ Await: Espera a que esto termine, función síncrona y el resultado lo mete en D
 const data = await getDataWithPromise(false);
 ```
 
-### 3.4 Manejo de Errores try...catch
+### E) Manejo de Errores try...catch
 Podemos usar try...catch para manejar errores en funciones asíncronas, de manera similar a cómo lo harías en el manejo de promesas con .catch().
 ```js
 async function ejemploError() {
@@ -492,7 +492,7 @@ async function ejemploError() {
 ejemploError();
 ```
 
-### 3.5 Manejo de Errores throw new error
+### F) Manejo de Errores throw new error
 ```js
 const getDataWithSugar = async () => {
   try {
@@ -504,12 +504,12 @@ const getDataWithSugar = async () => {
 };
 ```
 
-# 4. Promesas en grupo (Promise API)
+# 3. Promesas en grupo (Promise API)
 Controlar la ejecución de grupos de promesas.
 
 Mediante la API Promise nativa de Javascript podemos realizar operaciones con grupos de promesas, tanto independientes como dependientes entre sí.
 
-## 4.1 Esperar varias promesas
+## 3.1 Esperar varias promesas
 Utilizarremos el objeto Promise de Javascript, que incorpora varios métodos estáticos que podemos utilizar en nuestro código. Todos devuelven una promesa (son asíncronos) y son los que veremos a continuación:
 
 | Métodos                        | Descripción                                                         |
@@ -523,7 +523,7 @@ Utilizarremos el objeto Promise de Javascript, que incorpora varios métodos est
 
 
 
-## 4.2 El método Promise.all()
+## 3.2 El método Promise.all()
 El método Promise.all() funciona como un «todo o nada»: le pasas un grupo de varias promesas. El Promise.all() te devolverá una promesa que se cumplirá cuando todas las promesas del grupo se cumplan. Si alguna de ellas se rechaza, la promesa de Promise.all() también lo hará.
 ```js
 const p1 = fetch("/robots.txt");
@@ -554,7 +554,7 @@ Promise.all(promises)
         });
 ```
 
-## 4.3 El método Promise.allSettled()
+## 3.3 El método Promise.allSettled()
 El método Promise.allSettled() funciona como un «todas procesadas»: devuelve una promesa que se cumple cuando todas las promesas del ARARY se hayan procesado, independientemente de que se hayan cumplido o rechazado.
 ```js
 const p1 = fetch("/robots.txt");
@@ -575,7 +575,7 @@ Esta operación nos devuelve un ARRAY de objetos (uno por cada promesa) donde ca
 4️⃣ En este caso, obtendremos que la primera y última promesa se resuelven (fulfilled), mientras que la segunda nos da un error de CORS y se rechaza (rejected).
 
 
-## 4.4 El método Promise.any()
+## 3.4 El método Promise.any()
 El método Promise.any() funciona como «la primera que se cumpla»: Devuelve una promesa con el valor de la primera promesa individual del  que se cumpla. Si todas las promesas se rechazan, entonces devuelve una promesa rechazada.
 
 ```js
@@ -589,7 +589,7 @@ const response = await Promise.any(promises);
 console.log(response);
 ```
 
-## 4.5 El método Promise.race()
+## 3.5 El método Promise.race()
 El método Promise.race() funciona como una «la primera que se procese»: la primera promesa del ARARY que sea procesada, independientemente de que se haya cumplido o rechazado, determinará la devolución de la promesa del Promise.race(). Si se cumple, devuelve una promesa cumplida, en caso negativo, devuelve una rechazada.
 ```js
 const p1 = fetch("/robots.txt");
@@ -603,7 +603,7 @@ console.log(response);
 ```
 
 ------
-# 5. Pomesas estáticas
+# 4. Pomesas estáticas
 Mediante los métodos estáticos Promise.resolve() y Promise.reject() podemos devolver una promesa cumplida o rechazada respectivamente sin necesidad de crear una promesa con new Promise(), algo que podría ser interesante o cómodo en algunos casos.
 
 Observa que la siguiente función doTask() no es asíncrona:
