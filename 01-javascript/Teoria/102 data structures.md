@@ -1523,7 +1523,7 @@ const elements = [4];
 const [first, second] = elements;  // first = 4, second = undefined
 ```
 
-Destructuramos el primer elemento en una variable y el resto en una variable array:
+Destructuramos el primer elemento en una variable y el resto en una variable array usando el operador rest:
 ```
 const str = '[head, ...tail] = [1, 2, 3, 4]'
 //head = "1"
