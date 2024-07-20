@@ -1531,7 +1531,22 @@ const str = '[head, ...tail] = [1, 2, 3, 4]'
 ```
 
 
-### 2. Intercambio de variables
+### 2. Destructuración profunda de arrays
+```const arr = ["cars", "planes", ["trains", ["motorcycles"]]]
+
+// Fix the following using es6 destructuring
+// Only edit what's inside of [ trans1, trans2, trans3, trans4 ]
+let [ trans1, trans2, [trans3, [trans4]]] = arr
+
+/*
+console.log(trans1) // should output "cars"
+console.log(trans2) // should output "planes"
+console.log(trans3) // should output "trains"
+console.log(trans4) // should output "motorcycles"
+*/
+```
+
+### 3. Intercambio de variables
 Veamos otro ejemplo donde utilizamos la desestructuración. En este caso, haremos un clásico intercambio de variables, donde el valor inicial de a debe estar en b y viceversa. Sin utilizar desestructuración, debemos utilizar una variable auxiliar aux donde guardar uno de los valores temporalmente, mientras hacemos el cambio de variables:
 ```
 // Sin desestructuración
@@ -1552,7 +1567,7 @@ let b = 5;
 [a, b] = [b, a];
 ```
 
-### 3. Spread (Expandir | Soltar | Esparcir | Extender | Agrupar)
+### 4. Spread (Expandir | Soltar | Esparcir | Extender | Agrupar)
 El operador spread (...) se utiliza para descomponer un array en sus elementos individuales. Se puede utilizar en cualquier lugar donde se esperen argumentos o elementos, como en la definición de una función o en la creación de un nuevo array.
 
 ```js
@@ -1613,7 +1628,7 @@ console.log(miArray === nuevoArray); // FALSE
 ```
 
 
-### 4. Rest (Agrupar)
+### 5. Rest (Agrupar)
 Ubicación: Se utiliza en la definición de funciones, específicamente en la lista de parámetros.
 
 Función: "Recoge" los argumentos restantes y los agrupa en un array.
@@ -1626,7 +1641,7 @@ miFuncion(1, 2, 3, 4); // Output: [1, 2, 3, 4]
 ```
 
 
-### 5. Operador ...
+### 6. Operador ...
 El operador ... en JavaScript puede significar tanto rest (agrupar) como spread (expandir), dependiendo del contexto en el que se utilice. 
 
 **1. Rest (Agrupar)**
