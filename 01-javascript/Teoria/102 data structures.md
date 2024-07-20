@@ -1523,6 +1523,14 @@ const elements = [4];
 const [first, second] = elements;  // first = 4, second = undefined
 ```
 
+Destructuramos el primer elemento en una variable y el resto en una variable array:
+```
+const str = '[head, ...tail] = [1, 2, 3, 4]'
+//head = "1"
+//tail = [ 2, 3, 4]
+```
+
+
 ### 2. Intercambio de variables
 Veamos otro ejemplo donde utilizamos la desestructuración. En este caso, haremos un clásico intercambio de variables, donde el valor inicial de a debe estar en b y viceversa. Sin utilizar desestructuración, debemos utilizar una variable auxiliar aux donde guardar uno de los valores temporalmente, mientras hacemos el cambio de variables:
 ```
