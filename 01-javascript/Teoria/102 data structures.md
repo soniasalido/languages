@@ -1524,7 +1524,7 @@ const [first, second] = elements;  // first = 4, second = undefined
 ```
 
 Destructuramos el primer elemento en una variable y el resto en una variable array usando el operador rest:
-```
+```js
 const str = '[head, ...tail] = [1, 2, 3, 4]'
 //head = "1"
 //tail = [ 2, 3, 4]
@@ -1532,18 +1532,15 @@ const str = '[head, ...tail] = [1, 2, 3, 4]'
 
 
 ### 2. Destructuración profunda de arrays
-```const arr = ["cars", "planes", ["trains", ["motorcycles"]]]
+```js
+const arr = ["cars", "planes", ["trains", ["motorcycles"]]]
 
-// Fix the following using es6 destructuring
-// Only edit what's inside of [ trans1, trans2, trans3, trans4 ]
 let [ trans1, trans2, [trans3, [trans4]]] = arr
 
-/*
 console.log(trans1) // should output "cars"
 console.log(trans2) // should output "planes"
 console.log(trans3) // should output "trains"
 console.log(trans4) // should output "motorcycles"
-*/
 ```
 
 ### 3. Intercambio de variables
