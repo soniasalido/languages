@@ -1413,6 +1413,16 @@ const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
 names.find((name) => name.length == 5);       // 'Pablo'
 names.findIndex((name) => name.length == 5);  // 1
 ```
+Otro Ejemplo: 
+```
+const check = (arr, el) => {
+	let result = arr.find( element => element === el);
+	return result != undefined ? true : false;
+}
+
+check([1, 2, 3, 4, 5], 3) // true
+```
+
 
 Otro Ejemplo: 
 ```
