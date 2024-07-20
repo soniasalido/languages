@@ -1414,6 +1414,15 @@ names.find((name) => name.length == 5);       // 'Pablo'
 names.findIndex((name) => name.length == 5);  // 1
 ```
 
+Otro Ejemplo: 
+```
+let numbers = [5, 12, 8, 130, 44];
+
+let index = numbers.findIndex(element => element > 10);
+
+console.log(index); // 1
+```
+
 ### 2. El método .findLast() y .findLastIndex()
 De la misma forma, tenemos findLastIndex() y findLast(), que son las funciones equivalentes a findIndex() y find(), pero buscando elementos desde derecha a izquierda, en lugar de izquierda a derecha:
 ```
