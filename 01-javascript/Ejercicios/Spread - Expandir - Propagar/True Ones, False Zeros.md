@@ -19,7 +19,7 @@ Se declara una función flecha que recibe un número n, se convierte el número 
 El spread operator se utiliza para expandir elementos de un iterable (como un array o una cadena de texto) en lugares donde se esperan cero o más argumentos (para llamadas de función) o elementos (para arrays o literales de objeto). En este caso, se está utilizando para convertir la cadena n en un array de caracteres.
 
 
-Operador de propagación (SPREAD) y conversión a array: Se utiliza el spread operator para convertir el argumento n en un array de caracteres.:
+Usaremos el operador de propagación (SPREAD) para convertir el argumento n en un array de caracteres:
 ```js
 [...n]
 ```
