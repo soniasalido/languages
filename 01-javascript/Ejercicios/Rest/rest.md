@@ -1,0 +1,2 @@
+# Rest Operator
+El rest operator, por otro lado, se utiliza para agrupar múltiples elementos en un solo array. Es útil para manejar un número indefinido de argumentos como una sola entidad. Se utiliza en la definición de funciones y en la desestructuración de arrays u objetos.
