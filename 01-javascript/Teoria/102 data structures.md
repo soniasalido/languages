@@ -131,6 +131,7 @@ const person = { name, 43: true, "3dots": true };
 console.log(person[43]); // true
 console.log(person["43"]); // true
 console.log(person["3dots"]); // true
+console.log(person[3dots]); // ERROR
 ```
 
 ## Añadiendo nuevas propiedades:
