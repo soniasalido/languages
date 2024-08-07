@@ -164,9 +164,9 @@ person["greet"](); // logs "Hello!"
 
 Esto resulta muy similar a un concepto que veremos más adelante llamado Clase. 
 
-## 1. Iterar un Objeto
+## Iterar un Objeto
 
-### 1.1 Iterar un Objeto por sus propiedades con For...in
+### 1. Iterar un Objeto por sus propiedades con For...in
 ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
 ```js
 for (const prop in person) {
@@ -180,7 +180,7 @@ for (const prop in person) {
 ```
 
 
-### 1.2. Iterar un objeto con Object.values()
+### 2. Iterar un objeto con Object.values()
 El método Object.values() devuelve un array de los valores de las propiedades enumerables de un objeto.
 ```js
 const obj = { a: 1, b: 2, c: 3 };
@@ -190,7 +190,7 @@ Object.values(obj).forEach(value => {
 });
 ```
 
-### 1.3. Iterar un objeto con Object.keys()
+### 3. Iterar un objeto con Object.keys()
 El método Object.keys() devuelve un array de las propias propiedades enumerables de un objeto, y luego podemos usar forEach o un bucle for...of para iterar sobre ellas.```js
 ```js
 const obj = { a: 1, b: 2, c: 3 };
@@ -200,7 +200,7 @@ Object.keys(obj).forEach(key => {
 });
 ```
 
-### 1.4. Iterar un objeto con For...of
+### 4. Iterar un objeto con For...of
 El bucle for...of se utiliza para recorrer objetos iterables (como arrays, strings, maps, sets, etc.) y también se puede utilizar para recorrer las propiedades de un objeto si se utiliza Object.entries() para convertir el objeto en un array de pares clave-valor.
 ```js
 const obj = { a: 1, b: 2, c: 3 };
