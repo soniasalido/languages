@@ -165,6 +165,17 @@ person["greet"](); // logs "Hello!"
 Esto resulta muy similar a un concepto que veremos más adelante llamado Clase. 
 
 ## Iterar un Objeto
+Iterador es un término que se suele referir a algo que te permite recorrer una estructura de datos por todos sus apartados o miembros. En muchos casos, se presenta la situación en la que necesitamos recorrer un objeto, a través de las propiedades de su estructura, como si fueran los elementos de un array.
+
+Existen unos **métodos denominados Object.keys(), Object.values() y Object.entries()** que nos van a permitir realizar esta tarea. En primer lugar, observa que son métodos de una Clase estática, por lo que tienes que escribir siempre el Object. y no ejecutar el método sobre el objeto en sí, como solemos hacerlo.
+
+| Método |	Descripción |
+| ---- | ---- |
+| Object.keys(obj)  | Itera el objeto y **devuelve un array con las claves (propiedades) del objeto.** |
+| Object.values(obj) | Itera el objeto y **devuelve un array con los valores de sus propiedades.**  |
+| Object.entries(obj) | Itera el objeto y **devuelve un array con los pares [key, valor].**  |
+| Object.fromEntries(array)  | Itera el objeto y **devuelve un objeto con un array de pares [key, valor].**  |
+
 
 ### 1. Iterar un Objeto por sus propiedades con For...in
 ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
@@ -619,18 +630,6 @@ En principio, en estructuras de datos no deberían existir elementos del DOM ni 
 
 Ten en cuenta que aunque puede ser atractivo el método _.cloneDeep() por soportar todos los tipos de datos, también hay que tener en cuenta que no se trata de un método nativo del navegador, sino que se trata de una librería externa, que debe cargarse, parsearse y ejecutarse y que con estructuras muy complejas puede ser lenta o pesada.
 
-
-## Iteradores de Objetos
-Iterador es un término que se suele referir a algo que te permite recorrer una estructura de datos por todos sus apartados o miembros. En muchos casos, se presenta la situación en la que necesitamos recorrer un objeto, a través de las propiedades de su estructura, como si fueran los elementos de un array. 
-
-Existen unos **métodos denominados Object.keys(), Object.values() y Object.entries()** que nos van a permitir realizar esta tarea. En primer lugar, observa que son métodos de una Clase estática, por lo que tienes que escribir siempre el Object. y no ejecutar el método sobre el objeto en sí, como solemos hacerlo.
-
-| Método |	Descripción |
-| ---- | ---- |
-| Object.keys(obj)  | Itera el objeto y **devuelve un array con las claves (propiedades) del objeto.** |
-| Object.values(obj) | Itera el objeto y **devuelve un array con los valores de sus propiedades.**  |
-| Object.entries(obj) | Itera el objeto y **devuelve un array con los pares [key, valor].**  |
-| Object.fromEntries(array)  | Itera el objeto y **devuelve un objeto con un array de pares [key, valor].**  |
 
 
 ## Convertir un objeto a array
