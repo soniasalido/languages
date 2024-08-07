@@ -632,7 +632,7 @@ Ten en cuenta que aunque puede ser atractivo el método _.cloneDeep() por soport
 
 
 
-## Convertir un objeto a array
+## Convertir un Objeto a Array
 ```js
 const user = {
   name: "Manz",
