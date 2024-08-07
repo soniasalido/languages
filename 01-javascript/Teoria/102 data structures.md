@@ -84,32 +84,32 @@ Los objetos son datos estructurados siguiendo el formato clave-valor. A cada cla
 
 ## Declaración de un Objeto
 Los literales de los objetos en Javascript son las llaves {}. Inicialización de objetos de forma literal, "object literals"
-```
+```js
 let objeto = { clave: "valor" };
 const person = { name: "John" }; // {} => inicializador de objetos
 ```
 
 ## Propiedades de un Objeto
 Las propiedades de un objeto también pueden inicializarse a partir de variables existentes
-```
+```js
 const name = "John";
 const person = { name: name };
 ```
 
 Si los nombres de la propiedad y la variable coinciden, se puede expresar de forma corta:
-```
+```js
 const person = { name };
 ```
 
 ## Accediendo a propiedades de un objeto:
 Podemos acceder a sus propiedades de dos formas diferentes:
   - A través de la notación con puntos.
-    ```
+    ```js
     console.log(person.name); // "John"
     console.log(person.lastname); // undefined
     ```
   - A través de la notación con corchetes, útil cuando la propiedad nos viene dada por una variable.
-    ```
+    ```js
     const propName = "name";
     console.log(person[propName]); // John
 
@@ -126,7 +126,7 @@ El programador puede utilizar la notación que más le guste. La más utilizada 
 **Inciso "" para acceder a una propiedad**: console.log(player[name]);  // Dara ERROR. La notación de corchetes en JavaScript requiere que la clave sea una cadena de texto o una variable que contenga una cadena de texto. Si intentamos acceder a una propiedad de un objeto usando una variable sin comillas alrededor de su nombre, JavaScript buscará una variable con ese nombre. Si no la encuentra, generará un error.
 
 **INCISO:** Acceso con corchetes + literal, útil para acceder a propiedades numéricas
-```
+```js
 const person = { name, 43: true, "3dots": true };
 console.log(person[43]); // true
 console.log(person["43"]); // true
@@ -135,7 +135,7 @@ console.log(person["3dots"]); // true
 
 ## Añadiendo nuevas propiedades:
 También podemos añadir propiedades al objeto después de haberlo creado, y no sólo en el momento de crear el objeto.
-```
+```js
 person.lastname = "Smith";
 console.log(person.lastname); // "Smith"
 person[21] = "twenty one";
@@ -144,14 +144,14 @@ console.log(person["21"]); // "twenty one"
 
 ## Objetos anidados:
 Las propiedades pueden ser a su vez otros objetos que llamaremos objetos anidados
-```
+```js
 person.country = { id: 5, name: "Spain" };
 console.log(person.country); // { id: 5, name: "Spain" }
 ```
 
 ## Y también pueden ser funciones ⟶ Métodos de un Objeto
 Si dentro de una variable del objeto metemos una función (o una variable que contiene una función), tendríamos lo que se denomina un método de un objeto:
-```
+```js
 person.greet = function () {
   console.log("Hello!");
 };
@@ -165,7 +165,7 @@ Esto resulta muy similar a un concepto que veremos más adelante llamado Clase.
 
 ## 1. Iterar un Objeto por sus propiedades con For...in
 ⚠ Orden de aparición === orden de asignación/creación, excepto para propiedades puramente numéricas que aparecerán primero por orden ascendente.
-```
+```js
 for (const prop in person) {
   console.log(prop, person[prop]); 
 } 
