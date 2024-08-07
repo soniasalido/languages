@@ -789,7 +789,7 @@ letters[5];       // undefined
 
  Las posiciones empiezan a contar desde 0 y que si intentamos acceder a una posición que no existe (mayor del tamaño del array), nos devolverá un Undefined.
 
-El operador [] no sólo nos **permite obtener o acceder a un elemento del array, sino que también nos permite modificar un elemento específico del array,** si utilizamos la asignación:
+El operador [ ] no sólo nos **permite obtener o acceder a un elemento del array, sino que también nos permite modificar un elemento específico del array,** si utilizamos la asignación:
 ```js
 const letters =  ["a", "b", "c"];
 
@@ -799,7 +799,7 @@ letters[5] = "A";  // Devuelve "A" y modifica letters a ["a", "Z", "c", "D", und
 ```
 
 ### 2. El método .at()
-Además del clásico operador [], también podemos utilizar el método .at(), añadido en Javascript ES2022. Con él, se puede hacer exactamente lo mismo que con [pos], sólo que además permite valores negativos, mediante los cuales se puede obtener elementos en orden inverso, es decir, empezando a contar desde el último elemento:
+Además del clásico operador [ ], también podemos utilizar el método .at(), añadido en Javascript ES2022. Con él, se puede hacer exactamente lo mismo que con [pos], sólo que además permite valores negativos, mediante los cuales se puede obtener elementos en orden inverso, es decir, empezando a contar desde el último elemento:
 ```js
 const letters = ["a", "b", "c"];
 
@@ -1002,7 +1002,7 @@ De la misma forma que tenemos .find() también tenemos .findIndex() que devuelve
 ## Alterar fragmento con .copyWithin()
 Es posible tener un array al que queremos hacer ciertas modificaciones donde .slice() y .splice() se quedan cortos (o no resultan cómodos). Veamos algunos métodos introducidos en ECMAScript  que nos permiten crear una versión modificada de un array:
 
-C  ON copyWithin(pos, start, end) nos permite alterar el array, de modo que, empezando en la posición pos, copiará los elementos que están desde la posición start hasta la posición end. El parámetro end es opcional, de modo que si no se indica, se asume que end es el tamaño del array.
+Con copyWithin(pos, start, end) nos permite alterar el array, de modo que, empezando en la posición pos, copiará los elementos que están desde la posición start hasta la posición end. El parámetro end es opcional, de modo que si no se indica, se asume que end es el tamaño del array.
 
 
 ## Reducir el tamaño de un array
@@ -1161,7 +1161,7 @@ const newArray = array.map(element => element * 2);
 console.log(newArray); // [2, 4, 6, 8, 10]
 ```
 
-### 5. for...in Loop
+### 5. Bucle for...in
 El bucle for...in se usa para iterar sobre las propiedades de un objeto. Aunque se puede usar con arrays, no es recomendable ya que itera sobre las propiedades enumerables, lo cual puede incluir propiedades no numéricas.
 ```js
 const array = [1, 2, 3, 4, 5];
@@ -1172,7 +1172,7 @@ for (const index in array) {
 ```
 
 
-### 6. while Loop
+### 6. Bucle while
 El bucle while ejecuta su bloque de código siempre que una condición especificada sea verdadera.
 ```js
 const array = [1, 2, 3, 4, 5];
@@ -1184,7 +1184,7 @@ while (i < array.length) {
 }
 ```
 
-### 7. do...while Loop
+### 7. Bucle do...while
 El bucle do...while es similar a while, pero garantiza que el bloque de código se ejecute al menos una vez.
 ```js
 const array = [1, 2, 3, 4, 5];
