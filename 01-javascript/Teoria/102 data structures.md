@@ -654,7 +654,7 @@ Object.entries(user);     // [["name", "Manz"], ["life", 99], ["power", 10], ["t
 
 
 
-## Agrupar datos por criterio
+## Agrupar datos de un Objeto por criterio
 En principio, tenemos dos métodos apropiados para esta tarea. Ambos son idénticos, la diferencia es que uno crea un Objeto y otro crea un Map:
 | Método |	Descripción |
 | ---- | ----|
