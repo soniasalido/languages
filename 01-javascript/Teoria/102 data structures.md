@@ -915,6 +915,33 @@ elements.shift();      // Devuelve 'Z'. Ahora elements = ['a', 'b', 'c']
 | STRING .join(sep)	 |	Une los elementos del array mediante separadores sep en un STRING. |
 
 
+El método Array.from es una función estática en JavaScript que se usa para crear una nueva instancia de Array a partir de un objeto iterable o de un objeto similar a un array. Veamos en detalle cómo funciona y sus posibles usos.
+Sintaxtis básica:
+```js
+Array.from(arrayLike, mapFn, thisArg)
+```
+
+Parámetros
+- arrayLike: Es un objeto similar a un array o iterable que se quiere convertir en un array. Por ejemplo, puede ser un objeto arguments, un NodeList, un Set, un Map, o incluso un string. 
+- mapFn (opcional):Es una función que se llama para cada elemento del nuevo array. Permite mapear cada elemento a un nuevo valor (similar a Array.prototype.map). 
+- thisArg (opcional): Valor para usar como this cuando se ejecuta mapFn.
+
+
+```js
+const arrayOfMultiples = (num, length) =>
+        Array.from({ length }, (_, i) => num * (i + 1));
+
+arrayOfMultiples(7, 5); // [7, 14, 21, 28, 35]
+```
+
+En este ejemplo, la función arrayOfMultiples toma dos argumentos: num y length. Utiliza Array.from para crear un nuevo array de longitud length, donde cada elemento es el resultado de multiplicar num por el índice del elemento más uno. Por ejemplo, si num es 7 y length es 5, la función devolverá [7, 14, 21, 28, 35].
+
+{ length } --> Aquí, se crea un objeto con una propiedad length que define la longitud del nuevo array. Por ejemplo, { length: 4 } creará un array de 4 elementos.
+
+Función de mapeo: (_, i) => num * (i + 1) --> Esta función se llama para cada elemento del nuevo array. El primer argumento (_) se ignora, ya que no se utiliza en la función. El segundo argumento (i) es el índice del elemento actual. La función devuelve el resultado de multiplicar num por (i + 1), que es el valor deseado para ese elemento del array.
+
+
+
 ## Separar y unir strings
 Además, también tenemos otro método con el que es posible crear un ARRAY a partir de un STRING. Se trata del método .split(). En este caso, el método .join() es su contrapartida. Con .join() podemos crear un STRING con todos los elementos del array, separándolo por el texto que le pasemos por parámetro:
 ```
