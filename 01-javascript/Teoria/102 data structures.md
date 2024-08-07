@@ -944,7 +944,7 @@ Función de mapeo: (_, i) => num * (i + 1) --> Esta función se llama para cada 
 
 ## Separar y unir strings
 Además, también tenemos otro método con el que es posible crear un ARRAY a partir de un STRING. Se trata del método .split(). En este caso, el método .join() es su contrapartida. Con .join() podemos crear un STRING con todos los elementos del array, separándolo por el texto que le pasemos por parámetro:
-```
+```js
 const letters = ["a", "b", "c"];
 
 // Une elementos del array por el separador indicado
@@ -958,7 +958,7 @@ letters.join(".");        // Devuelve 'a.b.c'
 Ten en cuenta que, como se puede ver en los ejemplos, .join() siempre devolverá los elementos como STRING, mientras que .split() devolverá un ARRAY.
 
 Observa un caso especial, en el que pasamos un cadena de texto  vacía al .split():
-```
+```js
 "Hola a todos".split("");   // ['H', 'o', 'l', 'a', ' ', 'a', ' ', 't', 'o', 'd', 'o', 's']
 ```
 En este caso, le hemos pedido dividir el  sin indicar ningún separador, por lo que Javascript toma la unidad mínima como separador: nos devuelve un  con cada carácter del  original. Ten en cuenta que los espacios en blanco también cuentan como carácter.
@@ -976,7 +976,7 @@ En este caso, le hemos pedido dividir el  sin indicar ningún separador, por lo 
 
 ## Buscar un elemento en un array con una función imperativa
 Esta función tiene una implementación imperativa ya que se indican los pasos que se deben hacer:
-```
+```js
 const names = [
   { name: "María", age: 20 },
   { name: "Bernardo", age: 28 },
@@ -1007,7 +1007,7 @@ findElement(names, 33);     // -1
 
 ## Buscar un elemento en un array con una función declarativa
 Indicamos lo que quieres obtener, para ello, usaremos la función .find():
-```
+```js
 const findElement = (array, searchedAge) => {
   return array.find(element => element.age === searchedAge) ?? -1;
 }
@@ -1042,7 +1042,7 @@ C  ON copyWithin(pos, start, end) nos permite alterar el array, de modo que, emp
 
 ## Reducir el tamaño de un array
 También, en ciertos casos, nos podría interesar reducir el tamaño de un array para quedarnos con sus primeros elementos y descartar el resto. En el siguiente ejemplo, creamos un nuevo  con .slice(). Dicho array es una versión reducida del array original que teníamos en un principio:
-```
+```js
 // Mediante slice()
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 const newNumbers = numbers.slice(0, 4);
@@ -1052,7 +1052,7 @@ newNumbers    // [1, 2, 3, 4], numbers no cambia
 
 
 Sin embargo, hay una forma muy sencilla y rápida de hacer lo mismo, que es modificar directamente el tamaño del array mediante la propiedad .length. Por ejemplo, hacer un numbers.length = 4 en un array de 8 elementos, reducirá el array a los primeros 4 elementos:
-```
+```js
 // Mediante .length
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 numbers.length = 4;
@@ -1066,7 +1066,7 @@ En este último caso no estamos creando un nuevo array, sino que reutilizamos el
 El método .fill() se utiliza para rellenar todos los elementos de una matriz con un valor estático, desde un índice inicial hasta un índice final (opcional). **Este método modifica la matriz original.**
 
 Sintaxis básica:
-```
+```js
 array.fill(value, start, end)
 
 // value es el valor que se utilizará para rellenar la matriz.
@@ -1080,7 +1080,7 @@ Donde:
 
 
 ⚠️ Ten en cuenta que con .fill() estamos alterando el ARRAY.
-```
+```js
 const letters = ["a", "b", "c", "d", "e", "f"];
 
 // Estos métodos modifican el array original
@@ -1095,11 +1095,11 @@ new Array(5).fill(5);                // [5, 5, 5, 5, 5]
 El método .map() en JavaScript se utiliza para crear un nuevo array a partir de un array existente, aplicando una función a cada uno de sus elementos. No se utiliza directamente para "rellenar" un array, pero puedes usarlo para transformar y generar un nuevo array con los valores que necesitas.
 
 Sintaxis básica:
-```
+```js
 const nuevoArray = arrayOriginal.map(funcionDeTransformacion);
 ```
 
-```
+```js
 function invertArray(arr) {
     return arr.map(element => element !== 0 ? -element : element);
 }
@@ -1113,7 +1113,7 @@ console.log(result); // [-1, 2, -3, 0, 5]
 
 ### 1. Usando .map() para transformar un array
 Supongamos que tienes un array de números y quieres crear un nuevo array donde cada número se incrementa en 1.
-```
+```js
 const numbers = [1, 2, 3, 4, 5];
 const incrementedNumbers = numbers.map(number => number + 1);
 
@@ -1125,13 +1125,13 @@ Donde, la funcionDeTransformacion es una función que se aplica a cada elemento 
 
 ### 2. Rellenar un array usando .map()
 Aunque .map() se utiliza principalmente para transformar elementos existentes, también puedes usarlo para crear un nuevo array y rellenarlo con valores específicos.
-```
+```js
 const indices = [0, 1, 2, 3, 4];
 const cuadrados = indices.map(indice => indice * indice); // [0, 1, 4, 9, 16]
 ```
 
 Rellenar con valores de otro array:
-```
+```js
 const nombres = ["Ana", "Juan", "María"];
 const saludos = nombres.map(nombre => `Hola, ${nombre}!`); // ["Hola, Ana!", "Hola, Juan!", "Hola, María!"]
 ```
@@ -1140,7 +1140,7 @@ const saludos = nombres.map(nombre => `Hola, ${nombre}!`); // ["Hola, Ana!", "Ho
 El método .with() es una adición reciente a JavaScript que permite crear una copia de un array, pero con un cambio en un elemento específico. La característica principal de este método es que no modifica el array original, sino que devuelve una nueva copia del array con el cambio aplicado. Esto es especialmente útil en programación funcional e inmutable.
 
 Permite encadenar múltiples operaciones, pero debemos de tener en cuenta que **sólo modifica, no se pueden añadir elementos que no existen antes en el array**:
-```
+```js
 const fruits = ['apple', 'banana', 'cherry', 'date'];
 
 // Usando el método .with() para cambiar 'banana' por 'blueberry'
@@ -1148,13 +1148,12 @@ const newFruits = fruits.with(1, 'blueberry');
 
 console.log(fruits); // ['apple', 'banana', 'cherry', 'date']
 console.log(newFruits); // ['apple', 'blueberry', 'cherry', 'date']
-
 ```
 
 ## Iterar sobre los elementos de un Array
 ### 1. forEach()
 El método forEach es un método de los arrays que ejecuta una función dada en cada uno de sus elementos.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 array.forEach((element) => {
@@ -1164,27 +1163,25 @@ array.forEach((element) => {
 ```
 
 ### 2. for(...)
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 for (let i = 0; i < array.length; i++) {
   console.log(array[i]);
 }
-
 ```
 
 ### 3. for..of (azúcar sintáctico para objetos iterables)
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 for (const element of array) {
   console.log(element);
 }
-
 ```
 
 Un string, por ejemplo, implementa el patrón iterable y puede ser recorrido con for..of
-```
+```js
 for (const char of "javi") {
   console.log(char); // "j", "a", "v", "i"
 }
@@ -1192,7 +1189,7 @@ for (const char of "javi") {
 
 ### 4. map Method
 El método map crea un nuevo array con los resultados de la llamada a la función indicada aplicados a cada uno de sus elementos. No se usa típicamente solo para iterar, sino para transformar los elementos del array.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 const newArray = array.map(element => element * 2);
 
@@ -1201,19 +1198,18 @@ console.log(newArray); // [2, 4, 6, 8, 10]
 
 ### 5. for...in Loop
 El bucle for...in se usa para iterar sobre las propiedades de un objeto. Aunque se puede usar con arrays, no es recomendable ya que itera sobre las propiedades enumerables, lo cual puede incluir propiedades no numéricas.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 for (const index in array) {
   console.log(array[index]);
 }
-
 ```
 
 
 ### 6. while Loop
 El bucle while ejecuta su bloque de código siempre que una condición especificada sea verdadera.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 let i = 0;
 
@@ -1225,7 +1221,7 @@ while (i < array.length) {
 
 ### 7. do...while Loop
 El bucle do...while es similar a while, pero garantiza que el bloque de código se ejecute al menos una vez.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 let i = 0;
 
@@ -1237,7 +1233,7 @@ do {
 
 ### 8. reduce Method
 El método reduce se usa para acumular valores a través del array, pero también se puede usar para iterar.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 array.reduce((accumulator, currentValue) => {
@@ -1248,7 +1244,7 @@ array.reduce((accumulator, currentValue) => {
 
 ### 9. entries Method with for...of
 Puedes usar el método entries junto con for...of para iterar tanto sobre el índice como sobre el valor del array.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 for (const [index, element] of array.entries()) {
@@ -1258,7 +1254,7 @@ for (const [index, element] of array.entries()) {
 
 ### 10. every Method
 El método every ejecuta una función en cada elemento del array hasta que la función devuelve un valor false.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 array.every(element => {
@@ -1269,7 +1265,7 @@ array.every(element => {
 
 ### 11. some Method
 El método some ejecuta una función en cada elemento del array hasta que la función devuelve un valor true.
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 array.some(element => {
@@ -1282,7 +1278,7 @@ array.some(element => {
 
 ## Excluir elementos de un array con la función _.drop de Lodash
 La función _.dropRight de Lodash se utiliza para crear una nueva matriz que excluye un número específico de elementos desde el final de la matriz original. Esto es útil cuando necesitas eliminar los últimos elementos de una matriz. Aquí tienes una explicación detallada de cómo funciona _.dropRight y algunos ejemplos de su uso.
-```
+```js
 const _ = require("lodash");
 _.dropRight(array, [n=1])
 // n (opcional): El número de elementos a excluir desde el final de la matriz.
@@ -1310,7 +1306,7 @@ console.log(result); // Salida: [1, 2]
 
 ## El método de la burbuja para ordenar un array
 El algoritmo recorre el array varias veces. En cada pasada, compara elementos adyacentes y los intercambia si están en el orden incorrecto. Después de cada pasada, el siguiente elemento más grande está en su posición correcta. Este proceso se repite hasta que no se necesiten más intercambios, lo que significa que el array está ordenado.
-```
+```js
 function bubbleSort(arr) {
   let n = arr.length;
   let swapped;
@@ -1366,7 +1362,7 @@ Estas son las Array functions que podemos encontrarnos en Javascript:
 
 ## Bucles .forEach() en Arrays
 Como se puede ver, el método forEach() no devuelve nada y espera que se le pase por parámetro una FUNCTION que se ejecutará por cada elemento del array. Esa función, puede ser pasada en cualquiera de los formatos que hemos visto: como función tradicional o como función flecha:
-```
+```js
 const letters = ["a", "b", "c", "d"];
 
 // Con funciones por expresión
@@ -1388,7 +1384,7 @@ Sin embargo, este ejemplo no tiene demasiada utilidad. A la FUNCTION callback se
 - Si se le pasa un primer parámetro, este será el elemento del array.
 - Si se le pasa un segundo parámetro, este será la posición en el array.
 - Si se le pasa un tercer parámetro, este será el array en cuestión.
-```
+```js
 const letters = ["a", "b", "c", "d"];
 
 letters.forEach((element) => console.log(element));
@@ -1404,7 +1400,7 @@ letters.forEach((element, index, array) => console.log(array[0]));
 En este ejemplo, he nombrado element al parámetro que hará referencia al elemento, index al parámetro que hará referencia al índice (posición del array) y array al parámetro que hará referencia al propio array en cuestión. En algunos ejemplos los abreviaré como (e, i, a).
 
 Por ejemplo, una buena estrategia sería utilizar letters (plural) para el array y letter (singular) en lugar de element para el elemento que se va recorriendo. Como se puede ver, realmente forEach() es otra forma de hacer un bucle (sobre un array), sin tener que recurrir a bucles tradicionales como for o while.
-```
+```js
 const letters = ["a", "b", "c", "d"];
 
 letters.forEach((letter) => console.log(letter));
@@ -1416,14 +1412,14 @@ Existen dos métodos para realizar comprobaciones: el método .every() y el mét
 
 ### 1. El método .every() (Todos)
 El método every() permite comprobar si todos y cada uno de los elementos de un array cumplen la condición que se especifique en la FUNCTION  callback:
-```
+```js
 const letters = ["a", "b", "c", "d"];
 letters.every((letter) => letter.length === 1); // true
 ```
 
 ### 2. El método .some() (Al menos uno)
 De la misma forma que el método anterior sirve para comprobar si todos los elementos del array cumplen una determinada condición, con some() podemos comprobar si al menos uno de los elementos del array, cumplen dicha condición definida por el callback.
-```
+```js
 const letters = ["a", "bb", "c", "d"];
 letters.some((element) => element.length == 2);   // true
 ```
@@ -1432,7 +1428,7 @@ letters.some((element) => element.length == 2);   // true
 ## Transformadores y filtros en Arrays
 ### 1. El método .map()
 El método map() es un método muy potente y útil para trabajar con arrays, puesto que su objetivo es devolver un nuevo array donde cada uno de sus elementos será lo que devuelva la función callback por cada uno de los elementos del array original:
-```
+```js
 const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
 const nameSizes = names.map((name) => name.length);
 
@@ -1441,7 +1437,7 @@ nameSizes; // Devuelve [3, 5, 5, 9, 9]
 
 ### 2. El método .filter()
 El método filter() nos permite filtrar los elementos de un array y devolver un nuevo array con sólo los elementos que queramos. Para ello, utilizaremos la función callback para establecer una condición que devuelve true sólo en los elementos que nos interesen:
-```
+```js
 const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
 const filteredNames = names.filter((name) => name.startsWith("P"));
 
@@ -1451,7 +1447,7 @@ filteredNames; // Devuelve ['Pablo', 'Pedro', 'Pancracio']
 
 ### 3. El método .flatMap()
 Un método que puede resultar interesante es .flat(level). Se trata de un método que revisa todos los elementos del array en busca de arrays anidados, y los aplana hasta el nivel level indicado por parámetro.
-```
+```js
 const values = [10, 15, 20, [25, 30], 35, [40, 45, [50, 55], 60]];
 
 values.flat(0);         // [10, 15, 20, [25, 30], 35, [40, 45, [50, 55], 60]];
@@ -1466,14 +1462,14 @@ values.flat(Infinity);
 ## Búsquedas en un Array
 ### 1. El método .find() y .findIndex()
 Dentro de las Array functions, existen dos métodos interesantes: find() y findIndex(). Ambos se utilizan para buscar elementos de un array mediante una condición, la diferencia es que el primero devuelve el elemento mientras que el segundo devuelve su posición en el array original. Veamos como funcionan:
-```
+```js
 const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
 
 names.find((name) => name.length == 5);       // 'Pablo'
 names.findIndex((name) => name.length == 5);  // 1
 ```
 Otro Ejemplo: 
-```
+```js
 const check = (arr, el) => {
 	let result = arr.find( element => element === el);
 	return result != undefined ? true : false;
@@ -1484,7 +1480,7 @@ check([1, 2, 3, 4, 5], 3) // true
 
 
 Otro Ejemplo: 
-```
+```js
 let numbers = [5, 12, 8, 130, 44];
 
 let index = numbers.findIndex(element => element > 10);
@@ -1494,7 +1490,7 @@ console.log(index); // 1
 
 ### 2. El método .findLast() y .findLastIndex()
 De la misma forma, tenemos findLastIndex() y findLast(), que son las funciones equivalentes a findIndex() y find(), pero buscando elementos desde derecha a izquierda, en lugar de izquierda a derecha:
-```
+```js
 const names = ["Ana", "Pablo", "Pedro", "Pancracio", "Heriberto"];
 
 names.findLast((name) => name.length == 5);       // 'Pedro'
@@ -1512,7 +1508,7 @@ Los métodos denominados reduce() y reduceRight() se encargan de recorrer todos 
 En este par de métodos, encontraremos una primera diferencia en su función callback, puesto que en lugar de tener los clásicos parámetros opcionales (element, index, array) que hemos utilizado hasta ahora, tiene (first, second, iteration, array), que funciona de forma muy similar, pero adaptado a este tipo de acumuladores.
 
 En la primera iteración, first contiene el valor del primer elemento del array y second del segundo. En siguientes iteraciones, first es el acumulador que contiene lo que devolvió el callback en la iteración anterior, mientras que second es el siguiente elemento del array, y así sucesivamente. Veamos un ejemplo para entenderlo:
-```
+```js
 const numbers = [95, 5, 25, 10, 25];
 numbers.reduce((first, second) => {
   console.log(`F=${first} S=${second}`);
@@ -1529,7 +1525,7 @@ numbers.reduce((first, second) => {
 
 ### 2. El método .reduceRight()
 Gracias a esto, podemos utilizar el método reduce() como acumulador de elementos de izquierda a derecha y reduceRight() como acumulador de elementos de derecha a izquierda. Veamos un ejemplo de cada uno, realizando una resta en lugar de una suma:
-```
+```js
 const numbers = [95, 5, 25, 10, 25];
 
 numbers.reduce((first, second) => first - second);
@@ -1541,7 +1537,7 @@ numbers.reduceRight((first, second) => first - second);
 
 ### 3. Parámetro inicial
 Es posible indicar un segundo parámetro opcional en el .reduce(). Este parámetro es el valor inicial que quieres tomar en el reduce, lo que puede facilitar bastante la implementación. Observa que en el primer ejemplo anterior, se realizan 4 iteraciones. Sin embargo, al indicar este valor inicial de cero se realizan 5 iteraciones:
-```
+```js
 const numbers = [95, 5, 25, 10, 25];
 numbers.reduce((accumulator, nextElement) => {
   console.log(`F=${accumulator} S=${nextElement}`);
@@ -1568,7 +1564,7 @@ La desestructuración de arrays se realiza mediante la asignación de variables 
 
 
 ### 1. Destructuración básica
-```
+```js
 const elements = [5, 2];
 const [first, last] = elements;    // first = 5, last = 2
 
@@ -1604,7 +1600,7 @@ console.log(trans4) // should output "motorcycles"
 
 ### 3. Intercambio de variables
 Veamos otro ejemplo donde utilizamos la desestructuración. En este caso, haremos un clásico intercambio de variables, donde el valor inicial de a debe estar en b y viceversa. Sin utilizar desestructuración, debemos utilizar una variable auxiliar aux donde guardar uno de los valores temporalmente, mientras hacemos el cambio de variables:
-```
+```js
 // Sin desestructuración
 let a = 10;
 let b = 5;
@@ -1615,7 +1611,7 @@ b = aux;
 ```
 
 Sin embargo, si utilizamos desestructuración, este ejemplo es mucho más sencillo:
-```
+```js
 // Con desestructuración
 let a = 10;
 let b = 5;
@@ -1665,7 +1661,7 @@ El operador spread (...) se puede utilizar junto con la desestructuración para 
 > [!IMPORTANT]
 > Spread suelta | esparce los elementos pero no hace una copia en profundidad.
 
-```
+```js
 const array = [1, 2, 3, 4, 5];
 
 const [first, , third, ...rest] = array;
@@ -1677,7 +1673,7 @@ console.log(rest); // [4, 5]
 ```
 
 En el siguiente ejemplo, veremos que con el operador Spread, se hace un nuevo array, soltando los elementos de miArray y su orden en el nuevo array creado. Pero no es el mismo Array. Los objetos se comparan por referencias y como son arrays diferentes, no tienen igual referencia, aunque tengan los mismos elementos:
-```
+```js
 const miArray = [ "uno", "dos", "tres"];
 const nuevo Array = ...miArray;
 console.log(miArray === nuevoArray); // FALSE
@@ -1688,7 +1684,7 @@ console.log(miArray === nuevoArray); // FALSE
 Ubicación: Se utiliza en la definición de funciones, específicamente en la lista de parámetros.
 
 Función: "Recoge" los argumentos restantes y los agrupa en un array.
-```
+```js
 function miFuncion(...args) {
   console.log(args); // args es un array que contiene todos los argumentos pasados a la función
 }
@@ -1703,7 +1699,7 @@ El operador ... en JavaScript puede significar tanto rest (agrupar) como spread 
 **1. Rest (Agrupar)**
 El operador ... actúa como rest cuando se utiliza en la declaración de funciones o en la desestructuración de arrays y objetos. En este caso, agrupa múltiples elementos en una sola variable.
 - En Parámetros de Función: Cuando se utiliza en los parámetros de una función, ... agrupa el resto de los argumentos en un array. Todos los argumentos cuando se utilice y se llame a esta función, se agrupan en un array que se llamará numbers. Esto es algo parecedo al concepto arguments en las funciones normales. Recuerda que en las arrow function no existe el concepto arguments.
-  ```
+  ```js
   function sum(...numbers) { // Aquí, ... significa rest
     return numbers.reduce((total, number) => total + number, 0);
   }
@@ -1713,7 +1709,7 @@ El operador ... actúa como rest cuando se utiliza en la declaración de funcion
   ```
 
 - En Desestructuración de Arrays: Cuando se utiliza en la desestructuración de arrays, ... agrupa los elementos restantes en un nuevo array.
-  ```
+  ```js
   const array = [1, 2, 3, 4, 5];
   const [first, second, ...rest] = array; // Aquí, ... significa rest
 
@@ -1723,7 +1719,7 @@ El operador ... actúa como rest cuando se utiliza en la declaración de funcion
   ```
 
 - En Desestructuración de Objetos: Cuando se utiliza en la desestructuración de objetos, ... agrupa las propiedades restantes en un nuevo objeto.
-  ```
+  ```js
   const person = {
     name: 'John',
     age: 30,
@@ -1741,14 +1737,14 @@ El operador ... actúa como rest cuando se utiliza en la declaración de funcion
 **2. Spread (Expandir)**
 El operador ... actúa como spread cuando se utiliza en el contexto de una llamada a función, arrays o objetos para expandir un iterable en lugares donde se esperan múltiples elementos.
 - En Llamadas a Función: Cuando se utiliza en la llamada a una función, ... expande un array en múltiples argumentos.
-  ```
+  ```js
   const numbers = [1, 2, 3];
   console.log(Math.max(...numbers)); // Aquí, ... significa spread
   // Es equivalente a Math.max(1, 2, 3)
   ```
 
 - En Literales de Arrays: Cuando se utiliza en literales de arrays, ... expande un iterable en elementos individuales.
-  ```
+  ```js
   const array1 = [1, 2, 3];
   const array2 = [...array1, 4, 5]; // Aquí, ... significa spread
   
@@ -1756,7 +1752,7 @@ El operador ... actúa como spread cuando se utiliza en el contexto de una llama
   ```
 
 - En Literales de Objetos: Cuando se utiliza en literales de objetos, ... copia las propiedades de un objeto a otro.
-  ```
+  ```js
   const obj1 = { a: 1, b: 2 };
   const obj2 = { ...obj1, c: 3 }; // Aquí, ... significa spread
   
@@ -1779,7 +1775,7 @@ El operador ... actúa como spread cuando se utiliza en el contexto de una llama
 
 ## Reestructuración de arrays
 Tenemos un array de 2 elementos [3, 4] y queremos aprovecharlo para crear un nuevo array del 1 al 5. Vamos a hacer uso de la desestructuración para reaprovecharlo:
-```
+```js
 const pair = [3, 4];
 
 // Usando desestructuración + spread
@@ -1795,7 +1791,7 @@ En este caso, tendríamos que complete es el nuevo array [1, 2, 3, 4, 5] que bus
 
 ## Comparando arrays
 ⚠ Los arrays son objetos y por tanto implementan la misma comparación que éstos:
-```
+```js
 const collection = [3];
 console.log(collection === [3]); // false. Different object.
 console.log(collection === collection); // true
@@ -1814,13 +1810,13 @@ UN ERROR COMÚN es pensar que "const" hace "constante" cualquier variable. Es de
 
 El motivo principal para pensar así suele venir de los valores primitivos. Al declararlos con "const" solemos pensar: "ya no puedo cambiarlo nunca más". Pero realmente, lo que no podemos es RE-ASIGNAR la variable declarada con "const". Los primitivos ya son no-mutables por naturaleza, "const" no les confiere ningún superpoder para 'congelarse'.
 
-```
+```js
 const primitive = true;
 primitive = false; // TypeError: Assignment to constant variable
 ```
 
 SIN EMBARGO, cuando declaramos con "const" estructuras de datos, si que podemos mutarlas puesto que "const" no nos previene de ello, simplemente evita que reasignemos la variable.
-```
+```js
 const list = ["hey", "ho", "let's go"];
 list[2] = "yay";
 console.log(list); // ["hey", "ho", "yay"]
@@ -1841,14 +1837,14 @@ user = {}; // TypeError: Assignment to constant variable
 Código que mejore todos los arrays de tal manera que puedas llamar al método array.last() en cualquier array y este devuelva el último elemento. Si no hay elementos en el array, debería devolver -1.
 
 Este bloque de comentario es un comentario de JSDoc que describe lo que hace la función last que se va a definir. Indica que la función puede devolver varios tipos de datos: null, boolean, number, string, Array, u Object.
-```
+```js
 /**
  * @return {null|boolean|number|string|Array|Object}
  */
 ```
 
 Añadiendo un nuevo método llamado last al prototipo del objeto Array. Esto significa que todas las instancias de Array tendrán acceso a este método.
-```
+```js
 Array.prototype.last = function() {
   ......
 };
@@ -1856,7 +1852,7 @@ Array.prototype.last = function() {
 
 
 
-```
+```js
 /**
  * @return {null|boolean|number|string|Array|Object}
  */
@@ -1871,7 +1867,7 @@ Array.prototype.last = function() {
 ```
 
 Ejemplo:
-```
+```js
 function getLastItem(arr) {
     if (arr.length === 0) {
         return undefined; // O cualquier valor que consideres apropiado para matrices vacías
@@ -1887,7 +1883,7 @@ function getLastItem(arr) {
 ## Encontrar el menor elemento de un array:
 **Combinación de Math.min y el Operador de Propagación ... operador de propagación (spread operator)**
 Para encontrar el menor elemento en un array, puedes combinar Math.min con el operador de propagación para expandir el array en una lista de argumentos individuales:
-```
+```js
 let arr1 = [3, 1, 4, 1, 5, 9];
 let min1 = Math.min(...arr1);
 console.log(min1); // Salida: 1
@@ -1899,7 +1895,7 @@ Función Math.min: Math.min(3, 1, 4, 1, 5, 9) encuentra el menor valor entre los
 ---------------------
 # 3. Set - Conjuntos
 Set es una estructura de datos no repetidos. Representa conjuntos de datos. La característica principal es que los datos insertados no se pueden repetir.
-```
+```js
 const set = new Set();                    // Set({})               (Conjunto vacío)
 const set = new Set([5, 6, 7, 8, 9]);     // Set({5, 6, 7, 8, 9})  (Conjunto con 5 elementos)
 const set = new Set([5, 5, 7, 8, 9]);     // Set({5, 7, 8, 9})     (Conjunto con 4 elementos)
@@ -1919,7 +1915,7 @@ Un Map es una colección de pares clave-valor, donde cada clave está asociada a
 - Orden de inserción: Un Map mantiene el orden de inserción de los elementos. Esto significa que puedes iterar sobre los elementos en el mismo orden en que fueron agregados.
 - Métodos útiles: Los Map ofrecen una variedad de métodos para manipular y acceder a sus elementos, como set(), get(), has(), delete(), size, keys(), values() y entries().
 
-```
+```js
 const map = new Map();                                        // Map({}) (Mapa vacío)
 const map = new Map([[1, "uno"]]);                            // Map({ 1=>"uno" })
 const map = new Map([[1, "uno"], [2, "dos"], [3, "tres"]]);   // Map({ 1=>"uno", 2=>"dos", 3=>"tres" })
@@ -1986,7 +1982,7 @@ Debemos tener mucho cuidado con las comillas mal cerradas o las comas sobrantes 
 - Almacenamiento de Datos: JSON se usa para almacenar datos estructurados en bases de datos NoSQL como MongoDB.
 
 ## Ejemplo de JSON:
-```
+```js
 {
   "name": "Manz",
   "life": 3,
@@ -2023,7 +2019,7 @@ Si **comparamos un JSON con un objeto Javascript, aparecen algunas ligeras difer
 
 ## Métodos para convertir JSON a objeto
 La acción de convertir JSON a objeto Javascript se le suele denominar parsear. Es una acción que analiza un sting que contiene un JSON válido y devuelve un objeto Javascript con dicha información correctamente estructurada. Para ello, utilizaremos el mencionado método JSON.parse():
-```
+```js
 const json = `{
   "name": "Manz",
   "life": 99
@@ -2038,7 +2034,7 @@ Como se puede ver,  user es un objeto generado a partir del JSON almacenado en l
 
 
 ## Métodos para convertir objeto a JSON
-```
+```js
 const user = {
   name: "Manz",
   life: 99,
@@ -2053,7 +2049,7 @@ JSON.stringify(user);       // '{"name":"Manz","life":99}'
 Como las funciones no están soportadas por JSON,si intentamos convertir un objeto que contiene métodos o funciones, JSON.stringify() no fallará, pero simplemente devolverá un Sting  omitiendo las propiedades que contengan funciones (u otros tipos de datos no soportados).
 
 Además, se le puede pasar un segundo parámetro al método .stringify(), que será un Array que actuará de filtro a la hora de generar el objeto. Observaremos el siguiente ejemplo:
-```
+```js
 const user = {
   name: "Manz",
   life: 99,
@@ -2071,7 +2067,7 @@ Por último, también podemos añadir un tercer parámetro en el método .string
 
 
 Veamos lo que ocurre en los siguientes casos:
-```
+```js
 const user = {
   name: "Manz",
   life: 99
