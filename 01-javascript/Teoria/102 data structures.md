@@ -268,18 +268,18 @@ console.log(role, life);
 ```
 
 En lugar de hacer varios console.log() como tenemos en las dos últimas líneas, podemos **«volver a estructurar» en un objeto**, uniendo las diferentes variables en un objeto a la hora de mostrarlo por consola.:
-```
+```js
 console.log({ name, role, life });
 ```
 
 También es posible **renombrar las propiedades** si lo deseamos:
-```
+```js
 const { name, role: type, life } = user;
 console.log({ name, type, life });
 ```
 
 **Establecer un valor por defecto de una propiedad:** Para los casos en los que una de esas propiedades no exista (o tenga un valor undefined), también podemos establecerle un valor por defecto como solemos hacer en los parámetros de una función:
-```
+```js
 const { name, role = "normal user", life = 100 } = user;
 console.log({ name, role, life });
 ```
@@ -288,7 +288,7 @@ Esto hará que, si no existe la propiedad role en el objeto user, se cree la var
 
 ## Reestructurando nuevos objetos
 Esta característica de desestructuración podemos aprovecharla a nuestro favor, para reutilizar objetos y recrear nuevos objetos a partir de otros, basándonos en objetos ya existentes, añadiéndole nuevas propiedades o incluso sobreescribiendo antiguas.
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -308,7 +308,7 @@ Hemos creado un nuevo objeto fullUser con las mismas propiedades de user, sin em
 
 ## Haciendo copias de Objetos
 Los valores primitivos (números, strings, booleanos...), se pasan por valor. Sin embargo, valores más complejos (no primitivos: objetos, arrays, etc...) se pasan por referencia.
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -326,7 +326,7 @@ Vemos que ahora tenemos en user una propiedad features que contiene un Array, el
 
 Todas las propiedades originales se pasan por valor (se copia el valor en el nuevo objeto), sin embargo, el array es un tipo de dato complejo, y Javascript lo que hace es poner una **referencia al valor original. En resumen, los tipos de datos complejos no son copias, son referencias (algo así como accesos directos).**
 
-```
+```js
 console.log(user.features);       // ["learn", "code", "paint"]
 console.log(fullUser.features);   // ["learn", "code", "paint"]
 
@@ -339,7 +339,7 @@ console.log(user.features);       // ["program", "code", "paint"]
 Como se puede ver, hemos cambiado el primer elemento del array features del objeto fullUser, sin embargo, **si comprobamos el contenido del objeto user, comprobaremos que también ha cambiado.** Esto ocurre porque realmente **la propiedad features del objeto fullUser es una referencia a la propiedad features del objeto user, y es realmente la que se está modificando, alterando así ambos objetos.**
 
 ### Solución: 
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -357,7 +357,7 @@ Vemos que la diferencia es que, en lugar de hacer el ...user, **utilizamos la fu
 
 
 ## Estruturas anidadas
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -369,7 +369,7 @@ const user = {
 }
 ```
 Extraer la propiedad attributes:
-```
+```js
 // Extraemos propiedad attributes (objeto con 3 propiedades)
 const { attributes } = user;
 console.log(attributes);
@@ -385,7 +385,7 @@ console.log(size);
 
 
 ## Desestructuración de Objetos (rest)
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -398,7 +398,7 @@ En este caso, la propiedad name la desestructuramos como variable y en el caso d
 
 ## Parámetros desestructurados
 La desestructuración de parámetros es algo muy interesante a la hora de simplificar código, ya que podemos separar en variables individuales un objeto que en un ámbito específico es muy complejo de utilizar, y sería mucho más sencillo usarlo como variable.
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -413,7 +413,7 @@ function show(data) {
 show(user);   // "Nombre: Manz (streamer) ⭐⭐⭐⭐"
 ```
 El punto clave en este ejemplo es el parámetro data de la función show(). Localiza donde se define y donde lo utilizamos en el interior de la función show. Ahora, lo que vamos a hacer es desestructurar los parámetros para que sea más fácil de escribir:
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
@@ -439,7 +439,7 @@ Si lo necesitasemos, también podríamos usar rest en este caso.
 
 ## Comparación de Objetos con la función _.isEqual:
 La función _.isEqual es muy útil para realizar comparaciones profundas entre objetos, asegurando que todas las propiedades y subpropiedades (incluyendo matrices y objetos anidados) sean equivalentes. Esta función simplifica la verificación de igualdad en estructuras de datos complejas en JavaScript.
-```
+```js
 const isEqual_myVersion3= (a, b) => {
     const _ = require("lodash");
     const result = _.isEqual(a, b);
@@ -450,7 +450,7 @@ const isEqual_myVersion3= (a, b) => {
 
 ## Encontrar propiedades en un Objeto con _.find
 En Lodash, la función .find se utiliza para iterar sobre los elementos de una colección (matriz u objeto) y devolver el primer elemento que satisfaga la condición proporcionada en la función de predicado.
-```
+```js
 _.find(collection, [predicate=_.identity], [fromIndex=0])
 ```
 - collection (Array|Object): La colección a iterar.
@@ -458,7 +458,7 @@ _.find(collection, [predicate=_.identity], [fromIndex=0])
 - fromIndex: El índice inicial para comenzar la búsqueda. Es opcional
 
 Ejemplo:
-```
+```js
 const users = [
   { id: 1, name: "John", age: 25 },
   { id: 2, name: "Jane", age: 30 },
@@ -482,7 +482,7 @@ Javascript tiene dos mecanismos para copiar elementos:
 Se realiza con los tipos de datos más básicos, es decir, los tipos de datos primitivos, es decir: Number, String, Boolean, etc. Esto ocurre así porque son estructuras simples y rápidas de copiar.
 
 La copia por valor significa que simplemente se crea una nueva variable o constante y se asigna el mismo valor que tiene la variable original. Lo que a efectos prácticos cualquiera imaginaría como una copia:
-```
+```js
 let originalValue = 42;
 
 // Creamos una copia del valor de originalValue
@@ -506,7 +506,7 @@ En Javascript, como en otros lenguajes, al almacenar la información en una vari
 Con estructuras de datos más complejas como **Array, Object u otros, esta información no se copia por valor,** puesto que podríamos tener estructuras muy complejas donde pueden haber muchos niveles de profundidad (array que contiene arrays, que a su vez cada uno de ellos contienen arrays y a su vez cada uno de ellos contienen arrays...).
 
 Para simplificar el proceso, lo que se hace con estos tipos de datos más complejos, es que la copia será una referencia al elemento original, algo que es mucho más práctico y rápido, pero con lo que hay que tener mucho cuidado:
-```
+```js
 let originalValue = { name: "ManzDev" };
 
 // Creamos una supuesta copia del valor de originalValue
@@ -531,7 +531,7 @@ Dos conceptos importantes:
 🎈 **Clonación superficial (Shallow clone):** Se llama así cuando realizamos una clonación de una estructura de datos y sólo se copia su primer nivel, mientras que segundo y niveles más profundos, se crean referencias.
 
 🧨 **Clonación profunda (Deep clone):** Se llama así cuando realizamos una clonación de una estructura de datos a todos sus niveles.
-```
+```js
 const data = {
   name: "ManzDev",        // Se clona en superficial y en profundidad
   tired: false,           // Se clona en superficial y en profundidad
@@ -556,7 +556,7 @@ Tradicionalmente, hay varias aproximaciones, vamos a explicarlas, junto a sus ve
 | Usar structuredClone()		| ✅ Sí		| ✅ Sí		| ✅ Tipos avanzados <br> ⚠️ No funciones/DOM		| ✅ Sí |
 
 
-```
+```js
 // ❌ Esto no realiza una clonación, es una referencia al original
 const copy = data;
 
@@ -572,7 +572,7 @@ const copy = { ...data };
 **El ... (spread) o el Object.assign()** pueden interesarnos si necesitamos un mecanismo rápido de clonación, tenemos estructuras de un solo nivel y no nos interesan tipos de datos avanzados, sino datos primitivos.
 
 Ahora veamos las formas donde podemos realizar clonación profunda y copiar los elementos incluso a niveles de profundidad mayores y no sólo el primer nivel (como ocurre en la clonación superficial):
-```
+```js
 // ✅ El truco de JSON funciona, ❌ pero estamos limitados a los tipos de JSON
 const string = JSON.stringify(data);
 const copy = JSON.parse(string);
@@ -633,7 +633,7 @@ Existen unos **métodos denominados Object.keys(), Object.values() y Object.entr
 
 
 ## Convertir un objeto a array
-```
+```js
 const user = {
   name: "Manz",
   life: 99,
@@ -655,7 +655,7 @@ Object.entries(user);     // [["name", "Manz"], ["life", 99], ["power", 10], ["t
 
 ## Iterar un Array con los métodos de iterar Objetos
 Como un Array también es un Object, podemos utilizar estos métodos también para recorrerlos, sólo que en este caso los índices del array son las posiciones (0, 1, 2, 3...).
-```
+```js
 const animals = ["Gato", "Perro", "Burro", "Gallo", "Ratón"];
 
 Object.keys(animals);     // [0, 1, 2, 3, 4]
@@ -668,7 +668,7 @@ Object.entries(animals);  // [[0, "Gato"], [1, "Perro"], [2, "Burro"], [3, "Gall
 También se puede hacer la operación inversa, convertir un array en un objeto. Para ello, usaremos el método Object.fromEntries(). En esta ocasión, vamos a partir de dos Array keys y values, donde el primero tiene la lista de propiedades en String y el segundo tiene la lista de valores.
 
 El objetivo es, a partir de esos dos arrays (que deben ser del mismo tamaño), generar el objeto inicial user que teníamos antes:
-```
+```js
 const keys = ["name", "life", "power", "talk"];
 const values = ["Manz", 99, 10, function() { return "Hola" }];
 
@@ -689,7 +689,7 @@ De esta forma, en cada iteración del bucle generamos un par key, value, que met
 
 ## Convertir un array a objeto. Forma 2. Utilizando método .map()
 Otra forma, más compacta:
-```
+```js
 const keys = ["name", "life", "power", "talk"];
 const values = ["Manz", 99, 10, function() { return "Hola" }];
 
@@ -710,7 +710,7 @@ Por parámetro, pasaremos la estructura de datos Array y en el segundo parámetr
 ### 1. El método Object.groupBy()
 El método Object.groupBy() es una utilidad de JavaScript que permite agrupar los elementos de un array en un objeto, donde las claves del objeto son los valores obtenidos de aplicar una función de agrupamiento a cada elemento del array. Este método es muy útil para organizar datos en categorías de manera sencilla.
 Dado el array de usuarios:
-```
+```js
 const users = [
   { name: "ManzDev", type: "streamer", color: "indigo" },
   { name: "afor_digital", type: "streamer", color: "blue" },
@@ -724,13 +724,13 @@ const users = [
 ```
 
 Queremos agrupar estos usuarios por su type (tipo).
-```
+```js
 const usersByType = Object.groupBy(users, user => user.type);
 ```
 
 
 Resultado: El resultado es un objeto donde las claves son los diferentes tipos de usuarios (streamer, moderator, viewer) y los valores son arrays de objetos de usuarios correspondientes a cada tipo:
-```
+```js
 {
   streamer: [
     { name: "ManzDev", type: "streamer", color: "indigo" },
@@ -750,7 +750,7 @@ Resultado: El resultado es un objeto donde las claves son los diferentes tipos d
 ```
 
 **Nota: Object.groupBy() no es una función nativa de JavaScript.** Si quieremos implementar algo similar, podemos usar el siguiente código:
-```
+```js
 const groupBy = (array, keyFn) => {
   return array.reduce((result, item) => {
     const key = keyFn(item);
@@ -767,7 +767,7 @@ const usersByType = groupBy(users, user => user.type);
 
 ### 2. El método Map.groupBy()
 Hay que tener presente que aunque hemos creado objetos a partir de la agrupación, también podemos hacerlo con una estructura de datos similar llamada Map. Para ello, en lugar de Object usamos Map:
-```
+```js
 const usersByType = Map.groupBy(users, user => user.type);
 
 // usersByType:
@@ -819,7 +819,7 @@ Al igual que los String, para saber el número elementos que tiene un array se a
 
 ### 1. El operador []
 Por otro lado, si lo que queremos es acceder a un elemento específico del array, no hay más que utilizar el operador [], al igual que lo podríamos hacer con los String para acceder a un carácter concreto.
-```
+```js
 const letters = ["a", "b", "c"];
 
 letters.length;   // 3
@@ -831,7 +831,7 @@ letters[5];       // undefined
  Las posiciones empiezan a contar desde 0 y que si intentamos acceder a una posición que no existe (mayor del tamaño del array), nos devolverá un Undefined.
 
 El operador [] no sólo nos **permite obtener o acceder a un elemento del array, sino que también nos permite modificar un elemento específico del array,** si utilizamos la asignación:
-```
+```js
 const letters =  ["a", "b", "c"];
 
 letters[1] = "Z";  // Devuelve "Z" y modifica letters a ["a", "Z", "c"]
@@ -841,7 +841,7 @@ letters[5] = "A";  // Devuelve "A" y modifica letters a ["a", "Z", "c", "D", und
 
 ### 2. El método .at()
 Además del clásico operador [], también podemos utilizar el método .at(), añadido en Javascript ES2022. Con él, se puede hacer exactamente lo mismo que con [pos], sólo que además permite valores negativos, mediante los cuales se puede obtener elementos en orden inverso, es decir, empezando a contar desde el último elemento:
-```
+```js
 const letters = ["a", "b", "c"];
 
 letters.at(0);    // "a"
@@ -856,7 +856,7 @@ letters.at(-2);   // "b"
 El método .with() es una adición reciente a JavaScript que permite crear una copia de un array, pero con un cambio en un elemento específico. La característica principal de este método es que no modifica el array original, sino que devuelve una nueva copia del array con el cambio aplicado. Esto es especialmente útil en programación funcional e inmutable.
 
 Permite encadenar múltiples operaciones, pero debemos de tener en cuenta que **sólo modifica, no se pueden añadir elementos que no existen antes en el array**:
-```
+```js
 const fruits = ['apple', 'banana', 'cherry', 'date'];
 
 // Usando el método .with() para cambiar 'banana' por 'blueberry'
@@ -881,7 +881,7 @@ Existen varias formas de añadir elementos a un array ya existente. Ten en cuent
 ## Eliminar elementos con la función _.drop de Lodash
 La función _.drop() de Lodash es una función que permite eliminar un número determinado de elementos al principio de un array. Es una función muy útil para **eliminar elementos no deseados de un array sin tener que modificar el array original.**
 Esta función  crea una nueva matriz excluyendo un número específico de elementos desde el inicio de la matriz original. La sintaxis básica de .drop es:
-```
+```js
 _.drop(array, [n=1])
 
 // n es opcional. El número de elementos a eliminar del principio del array. Por defecto, es 1.
@@ -890,7 +890,7 @@ _.drop(array, [n=1])
 
 ## Añadir o eliminar elementos con el método .push() y .pop()
 El método .push() añade uno o varios elementos al final del array, mientras que el método .pop() elimina el último elemento del array. Ambos métodos devuelven el elemento añadido o eliminado, respectivamente. **⚠️ Recuerda que estos métodos sirven para modificar (mutar) el array original.**
-```
+```js
 const elements = ["a", "b", "c"]; // Array inicial
 
 elements.push("d");    // Devuelve 4.   Ahora elements = ['a', 'b', 'c', 'd']
@@ -900,7 +900,7 @@ elements.pop();        // Devuelve 'd'. Ahora elements = ['a', 'b', 'c']
 
 
 **⚠️ Recuerda que estos métodos sirven para modificar (mutar) el array original.**
-```
+```js
 const elements = ["a", "b", "c"]; // Array inicial
 
 elements.push("d");    // Devuelve 4.   Ahora elements = ['a', 'b', 'c', 'd']
