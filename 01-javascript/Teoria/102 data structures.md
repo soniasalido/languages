@@ -191,7 +191,7 @@ Object.values(obj).forEach(value => {
 ```
 
 ### 3. Iterar un objeto con Object.keys()
-El método Object.keys() devuelve un array de las propias propiedades enumerables de un objeto, y luego podemos usar forEach o un bucle for...of para iterar sobre ellas.```js
+El método Object.keys() devuelve un array de las propias propiedades enumerables de un objeto, y luego podemos usar forEach o un bucle for...of para iterar sobre ellas.
 ```js
 const obj = { a: 1, b: 2, c: 3 };
 
@@ -229,7 +229,7 @@ console.log(boy.toString()); // [object Object]
 ```
 
 
-## El método .toString()
+## El método .toString() de un objeto
 Simplemente por generar una variable de tipo OBJECT, esa variable «hereda» una serie de métodos que existen en cualquier variable que sea de tipo object. Un buen ejemplo, sería el método .toString(), un método que intenta representar la información de ese objeto en un String.
 
 Si creamos un objeto vacío y ejecutamos dicho método, comprobaremos que ocurre lo siguiente:
@@ -238,7 +238,7 @@ const objeto = {};
 objeto.toString();    // Devuelve "[object Object]"
                       // (representación textual de un objeto genérico)
 ```
-Observa que en ningún momento hemos añadido una función .toString() al objeto, pero aún así existe y la podemos ejecutar. Esto ocurre también con otros tipos de dato que a priori no son object, sino por ejemplo number,  boolean o regexp.
+Observamos que en ningún momento hemos añadido una función .toString() al objeto, pero aún así existe y la podemos ejecutar. Esto ocurre también con otros tipos de dato que a priori no son object, sino por ejemplo number,  boolean o regexp.
 
 
 
@@ -247,11 +247,14 @@ Al crear una variable de un determinado tipo de dato, la variable será siempre 
 - Los métodos heredados de su propio tipo de dato.
 - Los métodos heredados del tipo objetct.
 
+Cuando se dice que "todas las variables heredan del tipo Object", se refiere a que todos los objetos y tipos compuestos en JavaScript tienen Object como su prototipo base. Sin embargo, esto no aplica directamente a los tipos primitivos de la misma manera. Los objetos (Object, Array, Function, etc.) son tipos de datos que realmente heredan de Object.
+
+En JavaScript, no todas las variables son objetos, pero todas las variables pueden interactuar con métodos de objetos gracias a los wrappers temporales que JavaScript proporciona para tipos primitivos y la herencia prototípica para objetos. Esta es una poderosa característica de JavaScript que permite tratar casi todo como un objeto cuando es necesario.
 
 ## Desestructuración de Objetos
 La desestructuración de objetos es, probablemente, una de las estrategias más utilizadas al trabajar en Javascript nativo (o en frameworks como React) debido a que en Javascript se utilizan muchísimo las estructuras de datos de objetos y es muy interesante simplificar lo máximo posible. **Separamos las propiedades name, role y life en variables individuales, «sacándolas» de user.**
 
-```
+```js
 const user = {
   name: "Manz",
   role: "streamer",
