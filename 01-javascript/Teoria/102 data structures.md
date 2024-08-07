@@ -757,7 +757,10 @@ Datos estructurados siguiendo un orden. Cada dato se identifica con un índice q
 | ARRAY new Array(e1, e2...)	| Crea un array con los elementos indicados.|
 | ARRAY [e1, e2...]	| Simplemente, los elementos dentro de corchetes: []. Notación preferida.|
 
-Al contrario que muchos otros lenguajes de programación, **Javascript permite que se puedan realizar arrays de tipo mixto**, no siendo obligatorio que todos los elementos sean del mismo tipo de dato.
+
+> [!TIP]
+> Al contrario que muchos otros lenguajes de programación, **Javascript permite que se puedan realizar arrays de tipo mixto**, no siendo obligatorio que todos los elementos sean del mismo tipo de dato.
+
 
 OJO: Al crear un array con new Array(size) hay varios matices que merece la pena mencionar. Lo primero, si sólo se indica un parámetro numérico size, Javascript creará un array vacío de size elementos. Es decir, no es lo mismo que const a = [3], donde creamos un array con un elemento 3. Por otro lado, new Array(size) realmente crea un array vacío que aún no ha sido rellenado con nada (esto hace que sea más óptimo para arrays grandes) y aunque es equivalente, no es exactamente igual new Array(3) que [undefined, undefined, undefined].
 
