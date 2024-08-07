@@ -303,8 +303,9 @@ const fullUser = {
 ```
 Hemos creado un nuevo objeto fullUser con las mismas propiedades de user, sin embargo, además de poseer las anteriores, añadimos la nueva propiedad power y sobreescribimos la propiedad life con el valor 50.
 
-**OJO:** En el caso de hacer ...user al final (en lugar de al principio), le estamos dando preferencia a las propiedades de user, que sobreescribirían las propiedades definidas anteriormente en el caso de coincidir.
 
+> [!IMPORTANT]
+> **En el caso de hacer ...user al final (en lugar de al principio)**, le estamos dando preferencia a las propiedades de user, que sobreescribirían las propiedades definidas anteriormente en el caso de coincidir.
 
 ## Haciendo copias de Objetos
 Los valores primitivos (números, strings, booleanos...), se pasan por valor. Sin embargo, valores más complejos (no primitivos: objetos, arrays, etc...) se pasan por referencia.
