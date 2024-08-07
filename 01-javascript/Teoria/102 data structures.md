@@ -653,50 +653,6 @@ Object.entries(user);     // [["name", "Manz"], ["life", 99], ["power", 10], ["t
 - Con el método Object.entries() obtenemos un Array de entradas. Cada entrada es un Array del par clave-valor, es decir, la propiedad del objeto original y su valor correspondiente.
 
 
-## Iterar un Array con los métodos de iterar Objetos
-Como un Array también es un Object, podemos utilizar estos métodos también para recorrerlos, sólo que en este caso los índices del array son las posiciones (0, 1, 2, 3...).
-```js
-const animals = ["Gato", "Perro", "Burro", "Gallo", "Ratón"];
-
-Object.keys(animals);     // [0, 1, 2, 3, 4]
-Object.values(animals);   // ["Gato", "Perro", "Burro", "Gallo", "Ratón"]
-Object.entries(animals);  // [[0, "Gato"], [1, "Perro"], [2, "Burro"], [3, "Gallo"], [4, "Ratón"]]
-```
-
-
-## Convertir un array a objeto. Forma 1. Usando el método Object.keys(keys)
-También se puede hacer la operación inversa, convertir un array en un objeto. Para ello, usaremos el método Object.fromEntries(). En esta ocasión, vamos a partir de dos Array keys y values, donde el primero tiene la lista de propiedades en String y el segundo tiene la lista de valores.
-
-El objetivo es, a partir de esos dos arrays (que deben ser del mismo tamaño), generar el objeto inicial user que teníamos antes:
-```js
-const keys = ["name", "life", "power", "talk"];
-const values = ["Manz", 99, 10, function() { return "Hola" }];
-
-// Partimos de un  vacío entries
-const entries = [];
-for (let i of Object.keys(keys)) {
-  const key = keys[i];
-  const value = values[i];
-  entries.push([key, value]);
-}
-
-const user = Object.fromEntries(entries);     // {name: 'Manz', life: 99, power: 10, talk: ƒ}
-```
-Con Object.keys(keys) obtenemos una lista de números de 0 al tamaño del array keys. Esto nos servirá de posición para ir recorriendo los arrays keys y values en el interior del bucle for..of.
-
-De esta forma, en cada iteración del bucle generamos un par key, value, que meteremos en un array e insertaremos en entries. De esta forma, regeneramos la estructura de entradas de Object.entries() que es la que necesitamos para que, mediante Object.fromEntries() podamos regenerar el objeto user con las keys de keys y los valores de values.
-
-
-## Convertir un array a objeto. Forma 2. Utilizando método .map()
-Otra forma, más compacta:
-```js
-const keys = ["name", "life", "power", "talk"];
-const values = ["Manz", 99, 10, function() { return "Hola" }];
-
-const entries = values.map((value, index) => [keys[index], value]);
-const user = Object.fromEntries(entries);
-```
-
 
 ## Agrupar datos por criterio
 En principio, tenemos dos métodos apropiados para esta tarea. Ambos son idénticos, la diferencia es que uno crea un Objeto y otro crea un Map:
@@ -1280,6 +1236,53 @@ array.some(element => {
 });
 
 ```
+
+
+
+### 12. Iterar un Array con los métodos de iterar Objetos
+Como un Array también es un Object, podemos utilizar estos métodos también para recorrerlos, sólo que en este caso los índices del array son las posiciones (0, 1, 2, 3...).
+```js
+const animals = ["Gato", "Perro", "Burro", "Gallo", "Ratón"];
+
+Object.keys(animals);     // [0, 1, 2, 3, 4]
+Object.values(animals);   // ["Gato", "Perro", "Burro", "Gallo", "Ratón"]
+Object.entries(animals);  // [[0, "Gato"], [1, "Perro"], [2, "Burro"], [3, "Gallo"], [4, "Ratón"]]
+```
+
+
+## Convertir un array a objeto. Forma 1. Usando el método Object.keys(keys)
+También se puede hacer la operación inversa, convertir un array en un objeto. Para ello, usaremos el método Object.fromEntries(). En esta ocasión, vamos a partir de dos Array keys y values, donde el primero tiene la lista de propiedades en String y el segundo tiene la lista de valores.
+
+El objetivo es, a partir de esos dos arrays (que deben ser del mismo tamaño), generar el objeto inicial user que teníamos antes:
+```js
+const keys = ["name", "life", "power", "talk"];
+const values = ["Manz", 99, 10, function() { return "Hola" }];
+
+// Partimos de un  vacío entries
+const entries = [];
+for (let i of Object.keys(keys)) {
+  const key = keys[i];
+  const value = values[i];
+  entries.push([key, value]);
+}
+
+const user = Object.fromEntries(entries);     // {name: 'Manz', life: 99, power: 10, talk: ƒ}
+```
+Con Object.keys(keys) obtenemos una lista de números de 0 al tamaño del array keys. Esto nos servirá de posición para ir recorriendo los arrays keys y values en el interior del bucle for..of.
+
+De esta forma, en cada iteración del bucle generamos un par key, value, que meteremos en un array e insertaremos en entries. De esta forma, regeneramos la estructura de entradas de Object.entries() que es la que necesitamos para que, mediante Object.fromEntries() podamos regenerar el objeto user con las keys de keys y los valores de values.
+
+
+## Convertir un array a objeto. Forma 2. Utilizando método .map()
+Otra forma, más compacta:
+```js
+const keys = ["name", "life", "power", "talk"];
+const values = ["Manz", 99, 10, function() { return "Hola" }];
+
+const entries = values.map((value, index) => [keys[index], value]);
+const user = Object.fromEntries(entries);
+```
+
 
 
 ## Excluir elementos de un array con la función _.drop de Lodash
